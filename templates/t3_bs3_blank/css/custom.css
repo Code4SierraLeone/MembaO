@@ -1,0 +1,26 @@
+.t3-mainnav {
+
+}
+
+.navbar-default {
+    background-color: #f1a25a;
+    border-color: #e7e7e7;
+}
+.btn-primary {
+    background-color: #982420;
+}
+
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #555555;
+    background-color: #d7d5d4;
+}
+
+.t3-footer {
+    
+    /*
+	border-top: 1px solid #eeeeee;
+	background: #f8f8f8;
+	*/
+	border-top: 1px solid #982420;
+	background: #fff2db;
+}

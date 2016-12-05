@@ -34,6 +34,8 @@ defined('_JEXEC') or die;
   <?php $this->loadBlock('mainnav') ?>
 
   <?php $this->loadBlock('spotlight-1') ?>
+  
+  <?php $this->loadBlock('utility') ?>
 
   <?php $this->loadBlock('mainbody') ?>
 

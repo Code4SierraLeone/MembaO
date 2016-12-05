@@ -58,6 +58,7 @@
 		<position>head-search</position>
 		<position>mainnav</position>
 		<position>navhelper</position>
+		<position>linestrip</position>
 		<position>breadcrumbs</position>
 		<position>off-canvas</position>
 		<position>sidebar-1</position>
@@ -75,10 +76,26 @@
 		<position>position-2</position>
 		<position>position-3</position>
 		<position>position-4</position>
+		<position>top1</position>
+		<position>top2</position>
+		<position>top3</position>
+		<position>top4</position>
+		<position>utility1</position>
+		<position>utility2</position>
+		<position>utility3</position>
+		<position>utility4</position>
+		<position>top-position-1</position>
+		<position>top-position-2</position>
+		<position>top-position-3</position>
+		<position>top-position-4</position>
 		<position>position-5</position>
 		<position>position-6</position>
 		<position>position-7</position>
 		<position>position-8</position>
+		<position>abovefooter1</position>
+		<position>abovefooter2</position>
+		<position>abovefooter3</position>
+		<position>abovefooter4</position>
 		<position>position-9</position>
 		<position>position-10</position>
 		<position>position-11</position>

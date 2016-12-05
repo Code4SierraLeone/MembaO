@@ -32,13 +32,21 @@ defined('_JEXEC') or die;
   <?php $this->loadBlock('header') ?>
 
   <?php $this->loadBlock('mainnav') ?>
+  
+  <?php $this->loadBlock('linestrip') ?>
+  
+  <?php $this->loadBlock('top') ?>
 
   <?php $this->loadBlock('spotlight-1') ?>
+  
+  <?php $this->loadBlock('utility') ?>
 
   <?php $this->loadBlock('mainbody-content-left') ?>
 
   <?php $this->loadBlock('spotlight-2') ?>
-
+  
+  <?php $this->loadBlock('abovefooter') ?>
+ 
   <?php $this->loadBlock('navhelper') ?>
 
   <?php $this->loadBlock('footer') ?>
