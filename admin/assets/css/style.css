@@ -1,0 +1,231 @@
+html,
+body {
+  font-size: 14px;
+}
+body {
+  font-family: "Open Sans", ​"Helvetica Neue", ​Helvetica, ​Arial, ​sans-serif, sans-serif;
+  margin: 0px;
+  padding: 0px;
+  color: #6E7C9E;
+  text-rendering: optimizeLegibility;
+  font-weight: 400;
+  background:#fff;
+}
+a {
+  cursor: pointer;
+  color: #5AB1EF;
+  text-decoration: none;
+  -webkit-transition: all .35s ease;
+  -moz-transition: all .35s ease;
+  -o-transition: all .35s ease;
+  transition: all .35s ease;
+  outline: none;
+}
+a:hover,
+a.hover,
+a:focus {
+  color: #F5994E;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -o-transition: all .35s ease;
+  transition: all .55s ease;
+  outline: none;
+  text-decoration: none
+}
+h1,
+h2.h3.h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+}
+.corporato-content {
+  padding: 1em;
+}
+.tablebox {
+  overflow: hidden;
+  background-color: #364760;
+  border-radius: 0;
+  padding-top: 0;
+  padding-right: 200px;
+  padding-bottom: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+.tablebox:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+#leftpanel,
+#rightpanel {
+  margin-bottom: -99999px;
+  padding-bottom: 99999px;
+}
+#leftpanel {
+  float: left;
+  width: 200px;
+  background-color: #364760;
+  border-radius: .325em 0 0 .325em;
+}
+#rightpanel {
+  float: right;
+  margin-right: -200px;
+  width: 100%;
+  border-radius: 0 .425em .325em 0;
+  background-color: #D6DBE7;
+}
+header {
+  background-color: #364760;
+  border-radius: 0 .325em 0 0;
+  padding: 1em 0;
+  position: relative;
+  vertical-align: middle;
+}
+.logo {
+  font-size: 2em;
+  font-weight: 100;
+  display: inline-block;
+}
+.id-handle .icon.reorder {
+  cursor: move
+}
+nav {
+  margin-top: 1em;
+}
+nav ul,
+nav li {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+nav li a {
+  display: block;
+  color: #F1F5F7;
+  padding: 1em;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: 'Oswald';
+}
+nav li a i.icon {
+  color: #6383AA;
+  margin-right: 1em;
+}
+nav li ul,
+nav li.active {
+  background-color: #2A394F;
+}
+nav li ul a {
+  padding: .5em 1em;
+  text-transform: none;
+  text-shadow: none;
+}
+nav li.parent {
+  border-bottom: 1px solid #2A394F
+}
+nav li.active {
+  box-shadow: inset 4px 0 0 0 #15A5FB;
+}
+nav ul.sublist li:not(.active) {
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
+}
+nav ul.sublist li:last-child:not(.active) {
+  box-shadow: none;
+}
+#suggestions {
+  position: absolute;
+  width: 100%;
+  z-index: 100
+}
+/* == Menu Tree == */
+ul.sortMenu,
+.widgetlist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.sortMenu ul {
+  margin-left: 1.5em;
+}
+#menusort li {
+  margin: 5px 0 0;
+  padding: 0;
+  list-style-type: none;
+  color: rgba(0,0,0,0.4);
+}
+#menusort li a.delete {
+  float: right;
+  color: #BF5A68
+}
+#menusort li .icon.reorder {
+  margin-right: 1em;
+  cursor: move;
+  float: left;
+  vertical-align: middle;
+  line-height: 1.5;
+  color: #fff;
+}
+#menusort li div {
+  margin-bottom: 5px;
+  background-color: #364760;
+  border-image: none;
+  border-radius: .225em;
+  box-shadow: inset 0 -2px 0 0 rgba(255,255,255,0.5);
+  padding: .75em 1.2em
+}
+/* == Scrollbox == */
+.scrollbox {
+  border: 2px solid #dbe0eb;
+  max-height: 300px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 0.3125em;
+}
+.scrollbox .active {
+  background: #F1F5F7;
+}
+.scrollbox.borderless {
+  border: 0;
+  border-radius: none;
+}
+.scrollbox.padded {
+  padding: .5em
+}
+.scrollbox.custom {
+  border-radius: 0 0 .3125em .3125em
+}
+footer {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  color: #fff
+}
+
+@media screen and (max-width:1024px) {
+}
+
+@media screen and (max-width:769px) {
+nav li a span {
+  display: none
+}
+nav li a i.icon:not(.triangle) {
+  margin-right: 0;
+  font-size: 2em;
+}
+nav li a i.icon.down {
+  margin: 0;
+}
+nav li a {
+  text-align: center
+}
+.tablebox {
+  padding-right: 60px;
+  margin-top: 0;
+}
+#leftpanel {
+  width: 60px;
+}
+#rightpanel {
+  margin-right: -60px;
+}
+}

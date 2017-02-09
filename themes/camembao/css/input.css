@@ -1,0 +1,227 @@
+/* == Inputs == */
+.corporato.input {
+  display: inline-block;
+  position: relative;
+  color: rgba(0,0,0,0.7)
+}
+.corporato.input input {
+  width: 100%;
+  font-family: inherit;
+  margin: 0;
+  padding: .8em 1.2em;
+  font-size: 1rem;
+  background-color: #FFF;
+  border: 1px solid #fff;
+  outline: none;
+  color: rgba(0,0,0,0.7);
+  -webkit-transition: background-color .3s ease-out, 0 .2s ease, border-color .2s ease;
+  transition: background-color .3s ease-out, box-shadow .2s ease, border-color .2s ease;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box
+}
+.corporato.menu .corporato.input input{
+  padding-left:0;
+}
+.corporato.inverted.input input {
+  border:0;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  background-color: transparent;
+  border-radius:none;
+  font-weight:700;
+  color:rgba(0,0,0,0.45)
+}
+/* == Placeholder == */
+.corporato.input::-webkit-input-placeholder {
+color:#BBB
+}
+ .corporato.input::-moz-placeholder {
+color:#BBB
+}
+/* == States == */
+.corporato.input input:active,
+.corporato.input.down input {
+  border-color: rgba(0,0,0,0.3);
+  background-color: #FAFAFA
+}
+.corporato.inverted.input input:active,
+.corporato.inverted.input.down input {
+  border-color: rgba(255,255,255,0.3);
+  background-color: rgba(0,0,0,0.3)
+}
+/* == Loading == */
+.corporato.loading.input > .icon {
+  background: url(../images/loader-mini.gif) no-repeat 50% 50%
+}
+.corporato.loading.input > .icon:before,
+.corporato.loading.input > .icon:after {
+  display: none
+}
+/* == Focus == */
+.corporato.input.focus input,
+.corporato.input input:focus {
+  border-color: rgba(0,0,0,0.2);
+  color: rgba(0,0,0,0.85)
+}
+.corporato.inverted.input.focus input,
+.corporato.inverted.input input:focus {
+  border-color: rgba(255,255,255,0.2);
+}
+.corporato.input.focus input input::-webkit-input-placeholder, 
+.corporato.input input:focus input::-webkit-input-placeholder {
+  color:#AAA
+}
+.corporato.input.focus input input::-moz-placeholder, 
+.corporato.input input:focus input::-moz-placeholder {
+  color:#AAA
+}
+/* == Error == */
+.corporato.input.error input {
+  background-color: #FFFAFA;
+  border-color: #E7BEBE;
+  color: #D95C5C
+}
+ .corporato.input.error input ::-webkit-input-placeholder {
+color:rgba(255,80,80,0.4)
+}
+ .corporato.input.error input ::-moz-placeholder {
+color:rgba(255,80,80,0.4)
+}
+ .corporato.input.error input :focus::-webkit-input-placeholder {
+color:rgba(255,80,80,0.7)
+}
+ .corporato.input.error input :focus::-moz-placeholder {
+color:rgba(255,80,80,0.7)
+}
+.corporato.transparent.input input {
+  border: none;
+  background-color: transparent
+}
+/* == Icon == */
+.corporato.icon.input > .icon {
+  cursor: default;
+  position: absolute;
+  opacity: 0.5;
+  top: 0;
+  right: 0;
+  margin: 0;
+  width: 2.6em;
+  height: 100%;
+  padding-top:1rem;
+  text-align: center;
+  border-radius: 0 .3125em .3125em 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: opacity .3s ease-out;
+  transition: opacity .3s ease-out
+}
+.corporato.inverted.icon.input > .icon {
+  padding-top:.6em;
+}
+.corporato.icon.input > .link.icon {
+  cursor: pointer
+}
+.corporato.icon.input input {
+  padding-right: 3em
+}
+.corporato.icon.input > .circular.icon {
+  top: .35em;
+  right: .5em
+}
+.corporato.left.icon.input > .icon {
+  right: auto;
+  left: 1px;
+  border-radius: .3125em 0 0 .3125em
+}
+.corporato.left.icon.input > .circular.icon {
+  right: auto;
+  left: .5em
+}
+.corporato.left.icon.input > input {
+  padding-left: 3em;
+  padding-right: 1.2em
+}
+.corporato.icon.input > input:focus ~ .icon {
+  opacity: 1
+}
+/* == Labeled == */
+.corporato.labeled.input .corner.label {
+  font-size: .7em;
+  border-top-right-radius: .3125em
+}
+.corporato.labeled.input input {
+  padding-right: 2.5em
+}
+.corporato.labeled.icon.input:not(.left) > input {
+  padding-right: 3.25em
+}
+.corporato.labeled.icon.input:not(.left) > .icon {
+  margin-right: 1.25em
+}
+/* == Action == */
+.corporato.action.input {
+  display: table
+}
+.corporato.action.input > input {
+  display: table-cell;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none
+}
+.corporato.action.input > .button,
+.corporato.action.input > .buttons {
+  display: table-cell;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  white-space: nowrap;
+  /*background-color: #C6C6BF;*/
+}
+.corporato.action.input > .button:hover,
+.corporato.action.input > .buttons:hover {
+ opacity:.75
+}
+.corporato.action.input > .button > .icon,
+.corporato.action.input > .buttons > .button > .icon {
+  display: inline;
+  vertical-align: top
+}
+.corporato.fluid.action.input {
+  display: table;
+  width: 100%
+}
+.corporato.fluid.action.input > .button {
+  width: .01%
+}
+/* == Fluid == */
+.corporato.fluid.input {
+  display: block
+}
+/* == Size == */
+.corporato.small.form .icon.input > .icon{
+  padding-top: .95em;
+}
+.corporato.mini.input {
+font-size:.8125rem
+}
+.corporato.small.input {
+font-size:.875rem
+}
+.corporato.input {
+  font-size: 1rem
+}
+.corporato.large.input {
+  font-size: 1.125rem
+}
+.corporato.big.input {
+  font-size: 1.25rem
+}
+.corporato.huge.input {
+  font-size: 1.375rem
+}
+.corporato.massive.input {
+  font-size: 1.5rem
+}

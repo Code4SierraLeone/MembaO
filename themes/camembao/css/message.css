@@ -1,0 +1,309 @@
+/* == Messge == */
+.corporato.message {
+  position: relative;
+  min-height: 18px;
+  margin: 1em 0 1em;
+  height: auto;
+  padding: 1em;
+  line-height: 1.33;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* == Notices == */
+#corporato-overlay {
+  position: fixed;
+  top: 45%;
+  right: 10px;
+  max-width: 350px;
+  z-index: 9999;
+}
+.corporato.message.notice {
+  margin-top: 1px;
+  margin-bottom: 0;
+}
+.corporato.message.notice span {
+  
+}
+.corporato.message.notice p {
+  margin-top: 0;
+}
+.corporato.message.notice a.notice-close {
+  opacity:0;
+}
+.corporato.message.notice:hover a.notice-close{
+  opacity: 1;
+}
+.corporato.message.notice i.icon.close {
+  position: absolute;
+  right: 1em;
+  top: .5em;
+  color: rgba(255,255,255,0.8)
+}
+.corporato.message.notice.success {
+  background-color: #444;
+  color: #B2D280;
+}
+.corporato.message.notice.info {
+  background-color: #444;
+  color: #BED3EA
+}
+.corporato.message.notice.warning {
+  background-color: #444;
+  color: #FEDD8C
+}
+.corporato.message.notice.error {
+  background-color: #444;
+  color: #d6909a
+}
+.corporato.message:first-child {
+  margin-top: 0
+}
+.corporato.message:last-child {
+  margin-bottom: 0
+}
+.corporato.message.basic.notice {
+  box-shadow:inset 5px 0 0 0 rgba(0,0,0,0.3);
+}
+.corporato.message.basic {
+  padding:0;
+  background-color: transparent;
+  box-shadow:none;
+  border-radius:0;
+}
+.corporato.inverted.message.basic > .icon:not(.close) {
+  font-size:2.286em;
+  opacity: 0.35;
+}
+.corporato.inverted.message.basic {
+  color: rgba(255,255,255,0.7);
+}
+/* == Content == */
+.corporato.message .header {
+  margin: 0;
+  font-size: 1.15em;
+}
+.corporato.message p {
+  margin: 1em 0
+}
+.corporato.message p:first-child {
+  margin-top: 0
+}
+.corporato.message p:last-child {
+  margin-bottom: 0
+}
+.corporato.message .header + p {
+  margin-top: .3em
+}
+.corporato.message > :first-child {
+  margin-top: 0
+}
+.corporato.message > :last-child {
+  margin-bottom: 0
+}
+.corporato.message ul.list {
+  list-style-position: inside;
+  margin: .2em 0;
+  padding: 0
+}
+.corporato.message ul.list li:first-child{
+  margin-top:.5em
+}
+.corporato.message ul.list li {
+  position: relative;
+  list-style-type: none;
+  margin: 0 0 .3em 1em;
+  padding: 0;
+}
+.corporato.message ul.list li:before {
+  position: absolute;
+  content: '\2022';
+  top: -.05em;
+  left: -.8em;
+  height: 100%;
+  vertical-align: baseline;
+  opacity: 0.5
+}
+/* == Dismissable == */
+.corporato.message > .close.icon {
+  cursor: pointer;
+  position: absolute;
+  top: 1em;
+  right: 1em;
+  opacity: 0.7;
+  -webkit-transition: opacity .1s linear;
+  transition: opacity .1s linear
+}
+.corporato.message > .close.icon:hover {
+  opacity: 1
+}
+/* == Variations == */
+.corporato.compact.message {
+  display: inline-block
+}
+.corporato.attached.message {
+  margin-left: -1px;
+  margin-right: -1px;
+  margin-bottom: -1px;
+  border-radius: .325em .325em 0 0;
+  -webkit-box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1) inset
+}
+.corporato.attached + .corporato.attached.message:not(.top):not(.bottom) {
+  margin-top: -1px;
+  border-radius: 0
+}
+.corporato.bottom.attached.message {
+  margin-top: -1px;
+  border-radius: 0 0 .325em .325em
+}
+.corporato.bottom.attached.message:not(:last-child) {
+  margin-bottom: 1em
+}
+.corporato.attached.icon.message {
+  display: block;
+  width: auto
+}
+.corporato.icon.message {
+  display: table;
+  width: 100%
+}
+.corporato.icon.heading.message {
+  margin: 0;
+  box-shadow: none;
+  background-color: #F7F6F2;
+  border-bottom: 1px solid #CCCBBF;
+  border-radius:0
+}
+.corporato.icon.heading.message.green {
+  box-shadow:inset 0 6px 0 0 #6EC586;
+}
+.corporato.icon.heading.message.purple {
+  box-shadow:inset 0 6px 0 0 #9F5ED6;
+}
+.corporato.icon.heading.message.orange {
+  box-shadow:inset 0 6px 0 0 #DBA766;
+}
+.corporato.icon.heading.message.dust {
+  box-shadow:inset 0 6px 0 0 #71716F;
+}
+.corporato.icon.heading.message.blue {
+  box-shadow:inset 0 6px 0 0 #676BD9;
+}
+.corporato.icon.heading.message.sky {
+  box-shadow:inset 0 6px 0 0 #62A8DB;
+}
+.corporato.icon.heading.message.coral {
+  box-shadow:inset 0 6px 0 0 #A46E70;
+}
+.corporato.icon.heading.message.teal {
+  box-shadow:inset 0 6px 0 0 #70A49B;
+}
+.corporato.icon.heading.message.mortar {
+  box-shadow:inset 0 6px 0 0 #4F3F50;
+}
+.corporato.icon.heading.message:before, .corporato.icon.heading.message:after {
+	content: "";
+	position: absolute;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	top: 100%;
+	left: 50px;
+	margin-left: -10px;
+}
+
+.corporato.icon.heading.message:before {
+	border-top: 10px solid #CCCBBF;
+	border-top: 10px solid #CCCBBF;
+	margin-top:0px;
+}
+
+.corporato.icon.heading.message:after{
+	border-top: 10px solid #F7F6F2;
+	margin-top: -1px;
+	z-index: 1;
+}
+.corporato.icon.heading.message > .icon:not(.close) {
+  font-size:2em;
+  opacity: 0.75;
+  vertical-align: top;
+}
+.corporato.icon.message > .icon:not(.close) {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 4em;
+  opacity: 0.75;
+}
+.corporato.icon.basic.message > .icon:not(.close) {
+  color: #222;
+}
+.corporato.icon.message a.helper{
+  font-size:2em;
+  line-height:1
+}
+.corporato.icon.message > .icon + .content {
+  padding-left: 1em
+}
+.corporato.icon.message > .content {
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+}
+.corporato.inverted.message {
+  color: rgba(255,255,255,0.95)
+}
+.corporato.floating.message {
+  -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05) inset;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 0 0 1px rgba(0,0,0,0.05) inset
+}
+/* == Colors == */
+.corporato.black.message {
+  background-color: #5C6166;
+  color: rgba(255,255,255,0.95);
+}
+.corporato.info.message {
+  background-color: #bed3ea;
+  color: #3a6da2;
+}
+.corporato.warning.message {
+  background-color: #fedd8c;
+  color: #ba8505;
+}
+.corporato.success.message,
+.corporato.positive.message {
+  background-color: #a9d5be;
+  color: #3e7558;
+}
+.corporato.error.message,
+.corporato.negative.message {
+  background-color: #d6909a;
+  color: #6d2d36;
+  margin-top:1.8em
+}
+.corporato.inverted.message .header,
+.corporato.black.message .header {
+}
+.corporato.info.message .header,
+.corporato.warning.message .header,
+.corporato.success.message .header,
+.corporato.positive.message .header,
+.corporato.error.message .header,
+.corporato.negative.message .header {
+}
+/* == Size == */
+.corporato.small.message {
+  font-size: .875em
+}
+.corporato.message {
+  font-size: 1em
+}
+.corporato.large.message {
+  font-size: 1.125em
+}
+.corporato.huge.message {
+  font-size: 1.5em
+}
+.corporato.massive.message {
+  font-size: 2em
+}

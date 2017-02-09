@@ -1,0 +1,961 @@
+/* == Buttons == */
+.corporato.button {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 1em;
+  outline: none;
+  border: none;
+  background-color: #8D98B3;
+  color: inherit;
+  font-family: 'Oswald';
+  color:#fff;
+  margin: 0em;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  line-height: 1;
+  font-weight: 400;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.35em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease, -webkit-box-shadow 0.25s ease;
+  transition: opacity 0.25s ease, background-color 0.25s ease, color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+  white-space: nowrap;
+}
+/* == Active == */
+.corporato.buttons .active.button,
+.corporato.active.button {
+  background-color: #364760;
+}
+/* == Hover == */
+.corporato.button:hover {
+  background-color: #364760;
+  outline: none;
+  text-decoration: none;
+}
+.corporato.button.active:hover {
+
+}
+.corporato.button:hover .icon,
+.corporato.button.hover .icon {
+  opacity: 0.85;
+}
+/* == Down == */
+.corporato.button:active,
+.corporato.active.button:active {
+  background-color: #2A394F;
+  color: #fff;
+}
+/* == Loading == */
+.corporato.loading.button,
+.corporato.loading.button.positive,
+.corporato.loading.button.success,
+.corporato.loading.button.black,
+.corporato.loading.button.warning,
+.corporato.loading.button.negative,
+.corporato.loading.button.danger {
+  position: relative;
+  cursor: default;
+  color: transparent;
+  -webkit-transition: all 0s linear;
+  transition: all 0s linear;
+  box-shadow:none;
+}
+.corporato.loading.button:after,
+.corporato.loading.button.positive:after,
+.corporato.loading.button.success:after,
+.corporato.loading.button.black:after,
+.corporato.loading.button.warning:after,
+.corporato.loading.button.negative:after,
+.corporato.loading.button.danger:after  {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  width: 100%;
+  height: 100%;
+  content: '';
+  background-image: url(../images/loader-mini.gif);
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.corporato.loading.button.danger:after  {
+  background-color: #BF5A67;
+  background: transparent url(../images/loader-mini-danger.gif) no-repeat 50% 50%;
+}
+.corporato.labeled.icon.loading.button .icon {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* == Disabled == */
+.corporato.disabled.button,
+.corporato.disabled.button:hover,
+.corporato.disabled.button.active {
+  background-color: #DDDDDD;
+  cursor: default;
+  color: rgba(0, 0, 0, 0.5);
+  opacity: 0.3;
+  background-image: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+/* == Animated == */
+.corporato.animated.button {
+  position: relative;
+  overflow: hidden;
+}
+.corporato.animated.button .visible.content {
+  position: relative;
+}
+.corporato.animated.button .hidden.content {
+  position: absolute;
+  width: 100%;
+}
+.corporato.animated.button .visible.content,
+.corporato.animated.button .hidden.content {
+  -webkit-transition: right 0.3s ease 0s;
+  transition: right 0.3s ease 0s;
+}
+.corporato.animated.button .visible.content {
+  left: auto;
+  right: 0%;
+}
+.corporato.animated.button .hidden.content {
+  top: 50%;
+  left: auto;
+  right: -100%;
+  margin-top: -0.55em;
+}
+.corporato.animated.button:hover .visible.content {
+  left: auto;
+  right: 200%;
+}
+.corporato.animated.button:hover .hidden.content {
+  left: auto;
+  right: 0%;
+}
+.corporato.vertical.animated.button .visible.content,
+.corporato.vertical.animated.button .hidden.content {
+  -webkit-transition: top 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  transition: top 0.3s ease 0s, transform 0.3s ease 0s;
+}
+.corporato.vertical.animated.button .visible.content {
+  -webkit-transform: translateY(0%);
+  -ms-transform: translateY(0%);
+  transform: translateY(0%);
+  right: auto;
+}
+.corporato.vertical.animated.button .hidden.content {
+  top: -100%;
+  left: 0%;
+  right: auto;
+}
+.corporato.vertical.animated.button:hover .visible.content {
+  -webkit-transform: translateY(200%);
+  -ms-transform: translateY(200%);
+  transform: translateY(200%);
+  right: auto;
+}
+.corporato.vertical.animated.button:hover .hidden.content {
+  top: 50%;
+  right: auto;
+}
+.corporato.fade.animated.button .visible.content,
+.corporato.fade.animated.button .hidden.content {
+  -webkit-transition: opacity 0.3s ease 0s, -webkit-transform 0.3s ease 0s;
+  transition: opacity 0.3s ease 0s, transform 0.3s ease 0s;
+}
+.corporato.fade.animated.button .visible.content {
+  left: auto;
+  right: auto;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+.corporato.fade.animated.button .hidden.content {
+  opacity: 0;
+  left: 0%;
+  right: auto;
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+.corporato.fade.animated.button:hover .visible.content {
+  left: auto;
+  right: auto;
+  opacity: 0;
+  -webkit-transform: scale(0.7);
+  -ms-transform: scale(0.7);
+  transform: scale(0.7);
+}
+.corporato.fade.animated.button:hover .hidden.content {
+  left: 0%;
+  right: auto;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  transform: scale(1);
+}
+/* == Primary == */
+.corporato.primary.buttons .button,
+.corporato.primary.button {
+  background-color: #D95C5C;
+  color: #FFFFFF;
+}
+.corporato.primary.buttons .button:hover,
+.corporato.primary.button:hover,
+.corporato.primary.buttons .active.button,
+.corporato.primary.button.active {
+  background-color: #E75859;
+  color: #FFFFFF;
+}
+.corporato.primary.buttons .button:active,
+.corporato.primary.button:active {
+  background-color: #D24B4C;
+  color: #FFFFFF;
+}
+/* == Secondary == */
+.corporato.secondary.buttons .button,
+.corporato.secondary.button {
+  background-color: #3CC9CA;
+  color: #FFFFFF;
+}
+.corporato.secondary.buttons .button:hover,
+.corporato.secondary.button:hover,
+.corporato.secondary.buttons .active.button,
+.corporato.secondary.button.active {
+  background-color: #2EA5A5;
+  color: #FFFFFF;
+}
+.corporato.secondary.buttons .button:active,
+.corporato.secondary.button:active {
+  background-color: #00847E;
+  color: #FFFFFF;
+}
+/* == Social == */
+.corporato.facebook.button {
+  background-color: #3B579D;
+  color: #FFFFFF;
+}
+.corporato.facebook.button:hover {
+  background-color: #3A59A9;
+  color: #FFFFFF;
+}
+.corporato.facebook.button:active {
+  background-color: #334F95;
+  color: #FFFFFF;
+}
+.corporato.twitter.button {
+  background-color: #4092CC;
+  color: #FFFFFF;
+}
+.corporato.twitter.button:hover {
+  background-color: #399ADE;
+  color: #FFFFFF;
+}
+.corporato.twitter.button:active {
+  background-color: #3283BC;
+  color: #FFFFFF;
+}
+.corporato.google.plus.button {
+  background-color: #D34836;
+  color: #FFFFFF;
+}
+.corporato.google.plus.button:hover {
+  background-color: #E3432E;
+  color: #FFFFFF;
+}
+.corporato.google.plus.button:active {
+  background-color: #CA3A27;
+  color: #FFFFFF;
+}
+.corporato.linkedin.button {
+  background-color: #1F88BE;
+  color: #FFFFFF;
+}
+.corporato.linkedin.button:hover {
+  background-color: #1394D6;
+  color: #FFFFFF;
+}
+.corporato.linkedin.button:active {
+  background-color: #1179AE;
+  color: #FFFFFF;
+}
+.corporato.youtube.button {
+  background-color: #CC181E;
+  color: #FFFFFF;
+}
+.corporato.youtube.button:hover {
+  background-color: #DF0209;
+  color: #FFFFFF;
+}
+.corporato.youtube.button:active {
+  background-color: #A50006;
+  color: #FFFFFF;
+}
+.corporato.instagram.button {
+  background-color: #49769C;
+  color: #FFFFFF;
+}
+.corporato.instagram.button:hover {
+  background-color: #4781B1;
+  color: #FFFFFF;
+}
+.corporato.instagram.button:active {
+  background-color: #38658A;
+  color: #FFFFFF;
+}
+.corporato.pinterest.button {
+  background-color: #00ACED;
+  color: #FFFFFF;
+}
+.corporato.pinterest.button:hover {
+  background-color: #00B9FF;
+  color: #FFFFFF;
+}
+.corporato.pinterest.button:active {
+  background-color: #009EDA;
+  color: #FFFFFF;
+}
+.corporato.vk.button {
+  background-color: #4D7198;
+  color: #FFFFFF;
+}
+.corporato.vk.button:hover {
+  background-color: #537AA5;
+  color: #FFFFFF;
+}
+.corporato.vk.button:active {
+  background-color: #405E7E;
+  color: #FFFFFF;
+}
+/* == Floated == */
+.corporato.left.floated.buttons,
+.corporato.left.floated.button {
+  float: left;
+  margin-right: 0.25em;
+}
+.corporato.right.floated.buttons,
+.corporato.right.floated.button {
+  float: right;
+  margin-left: 0.25em;
+}
+/* == Size == */
+.corporato.buttons .button,
+.corporato.button {
+  font-size:inherit;
+}
+.corporato.mini.buttons .button,
+.corporato.mini.buttons .or,
+.corporato.mini.button {
+  font-size: 0.8rem;
+}
+.corporato.mini.buttons .button,
+.corporato.mini.button {
+  padding: 0.3em 0.5em;
+  box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.3) inset;
+}
+.corporato.mini.icon.buttons .button,
+.corporato.mini.buttons .icon.button {
+  padding: 0.3em 0.5em;
+}
+.corporato.tiny.buttons .button,
+.corporato.tiny.buttons .or,
+.corporato.tiny.button {
+  font-size: 0.875em;
+}
+.corporato.tiny.buttons .button,
+.corporato.tiny.button {
+  padding: 0.4em 0.6em;
+  box-shadow: 0 -2px 0 rgba(255, 255, 255, 0.3) inset;
+}
+.corporato.tiny.icon.buttons .button,
+.corporato.tiny.buttons .icon.button {
+  padding: 0.4em 0.6em;
+}
+.corporato.small.buttons .button,
+.corporato.small.buttons .or,
+.corporato.small.button {
+  font-size: 0.975rem;
+  padding: 0.6em 1em;
+}
+.corporato.large.buttons .button,
+.corporato.large.buttons .or,
+.corporato.large.button {
+  font-size: 1.125rem;
+}
+.corporato.big.buttons .button,
+.corporato.big.buttons .or,
+.corporato.big.button {
+  font-size: 1.25rem;
+}
+.corporato.huge.buttons .button,
+.corporato.huge.buttons .or,
+.corporato.huge.button {
+  font-size: 1.375rem;
+}
+.corporato.massive.buttons .button,
+.corporato.massive.buttons .or,
+.corporato.massive.button {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.corporato.tiny.buttons .or:before,
+.corporato.mini.buttons .or:before {
+  width: 1.45em;
+  height: 1.55em;
+  line-height: 1.4;
+  margin-left: -0.725em;
+  margin-top: -0.25em;
+}
+.corporato.tiny.buttons .or:after,
+.corporato.mini.buttons .or:after {
+  height: 1.45em;
+}
+/* == Loading == */
+.corporato.huge.loading.button:after {
+  background-image: url(../images/loader-small.gif);
+}
+.corporato.massive.buttons .loading.button:after,
+.corporato.gigantic.buttons .loading.button:after,
+.corporato.massive.loading.button:after,
+.corporato.gigantic.loading.button:after {
+  background-image: url(../images/loader-medium.gif);
+}
+.corporato.huge.loading.button:after,
+.corporato.huge.loading.button.active:after {
+  background-image: url(../images/loader-small.gif);
+}
+.corporato.massive.buttons .loading.button:after,
+.corporato.gigantic.buttons .loading.button:after,
+.corporato.massive.loading.button:after,
+.corporato.gigantic.loading.button:after,
+.corporato.massive.buttons .loading.button.active:after,
+.corporato.gigantic.buttons .loading.button.active:after,
+.corporato.massive.loading.button.active:after,
+.corporato.gigantic.loading.button.active:after {
+  background-image: url(../images/loader-medium.gif);
+}
+/* == Icon Only == */
+.corporato.button > .icon {
+  margin-right: 0.6em;
+  line-height: 1;
+  -webkit-transition: opacity 0.1s ease;
+  transition: opacity 0.1s ease;
+}
+.corporato.icon.buttons .button,
+.corporato.icon.button {
+  padding: 0.8em;
+}
+.corporato.icon.buttons .button > .icon,
+.corporato.icon.button > .icon {
+  opacity: 0.9;
+  margin: 0em;
+  vertical-align: middle;
+}
+/* == Basic == */
+.corporato.basic.buttons .button,
+.corporato.basic.button {
+  background-color: transparent;
+  background-image: none;
+  color: #68718A;
+  text-transform: none;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+}
+.corporato.basic.buttons {
+  border-radius: 0.25em;
+}
+.corporato.basic.buttons .button:hover,
+.corporato.basic.button:hover {
+  color: #68718A;
+  background-color: rgba(0, 0, 0, 0.02);
+
+}
+.corporato.basic.buttons .button:active,
+.corporato.basic.button:active {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #68718A;
+}
+.corporato.basic.buttons .button.active,
+.corporato.basic.button.active {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #68718A;
+}
+.corporato.basic.buttons .button.active:hover,
+.corporato.basic.button.active:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* == Inverted == */
+.corporato.basic.inverted.buttons .button,
+.corporato.basic.inverted.button {
+  color: #FAFAFA;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.3) inset;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.3) inset;
+}
+.corporato.basic.inverted.buttons .button:hover,
+.corporato.basic.inverted.button:hover {
+  background-image: none;
+  color: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.5) inset;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.5) inset;
+}
+.corporato.basic.inverted.buttons .button:active,
+.corporato.basic.inverted.button:active {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.8) inset;
+  box-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.8) inset;
+}
+.corporato.basic.inverted.buttons .button.active,
+.corporato.basic.inverted.button.active {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #FFFFFF;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.corporato.basic.inverted.buttons .button.active:hover,
+.corporato.basic.inverted.button.active:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.corporato.basic.buttons .button {
+  box-shadow: -1px 0 0 0 rgba(0, 0, 0, 0.1);
+}
+.corporato.basic.buttons .button:hover,
+.corporato.basic.buttons .button:active {
+
+}
+.corporato.basic.buttons .button.active,
+.corporato.basic.buttons .button.active:hover {
+
+}
+/* == Labeled Icon == */
+.corporato.labeled.icon.buttons .button,
+.corporato.labeled.icon.button {
+  position: relative;
+  padding-left: 4em;
+  padding-right: 1.4em;
+}
+.corporato.labeled.icon.buttons > .button > .icon,
+.corporato.labeled.icon.button > .icon {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  right:0;
+  height:100%;
+  line-height:100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 2.75em;
+  padding: .8em 0;
+  background-color: rgba(0, 0, 0, 0.05);
+  text-align: center;
+  border-radius: 0.25em 0px 0px 0.25em;
+  line-height: 1;
+  -webkit-box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.05) inset;
+  box-shadow: -1px 0px 0px 0px rgba(0, 0, 0, 0.05) inset;
+}
+.corporato.labeled.icon.buttons .button > .icon {
+  border-radius: 0em;
+}
+.corporato.labeled.icon.buttons .button:first-child > .icon {
+  border-top-left-radius: 0.25em;
+  border-bottom-left-radius: 0.25em;
+}
+.corporato.labeled.icon.buttons .button:last-child > .icon {
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+}
+.corporato.vertical.labeled.icon.buttons .button:first-child > .icon {
+  border-radius: 0em;
+  border-top-left-radius: 0.25em;
+}
+.corporato.vertical.labeled.icon.buttons .button:last-child > .icon {
+  border-radius: 0em;
+  border-bottom-left-radius: 0.25em;
+}
+.corporato.right.labeled.icon.button {
+  padding-left: 1.4em;
+  padding-right: 4em;
+}
+.corporato.left.fluid.labeled.icon.button,
+.corporato.right.fluid.labeled.icon.button {
+  padding-left: 1.4em;
+  padding-right: 1.4em;
+}
+.corporato.right.labeled.icon.button .icon {
+  left: auto;
+  right: 0em;
+  border-radius: 0em 0.25em 0.25em 0em;
+  -webkit-box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.05) inset;
+  box-shadow: 1px 0px 0px 0px rgba(0, 0, 0, 0.05) inset;
+}
+/* == Toggle == */
+.corporato.toggle.buttons .active.button,
+.corporato.buttons .button.toggle.active,
+.corporato.button.toggle.active {
+  background-color: #B2D280;
+  color: rgba(255, 255, 255, 0.8);
+}
+.corporato.button.toggle.active:hover {
+  background-color: #A6CB6E;
+  color: rgba(255, 255, 255,1);
+}
+/* == Circular == */
+.corporato.circular.button {
+  border-radius: 10em;
+}
+/* == OR Buttons == */
+.corporato.buttons .or {
+  position: relative;
+  float: left;
+  width: 0.3em;
+  height: 1.1em;
+  z-index: 3;
+}
+.corporato.buttons .or:before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: 'or';
+  background-color: #FFFFFF;
+  margin-top: -0.1em;
+  margin-left: -0.9em;
+  width: 1.8em;
+  height: 1.8em;
+  line-height: 1.55;
+  color: #AAAAAA;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  border-radius: 500px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.corporato.buttons .or[data-text]:before {
+  content: attr(data-text);
+}
+.corporato.buttons .or:after {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  content: ' ';
+  width: 0.3em;
+  height: 1.7em;
+  background-color: transparent;
+  border-top: 0.5em solid #FFFFFF;
+  border-bottom: 0.5em solid #FFFFFF;
+}
+.corporato.fluid.buttons .or {
+  width: 0em;
+}
+.corporato.fluid.buttons .or:after {
+  display: none;
+}
+/* == Fluid == */
+.corporato.fluid.buttons,
+.corporato.button.fluid,
+.corporato.fluid.buttons > .button {
+  display: block;
+  width: 100%;
+}
+.corporato.\32.buttons > .button,
+.corporato.two.buttons > .button {
+  width: 50%;
+}
+.corporato.\33.buttons > .button,
+.corporato.three.buttons > .button {
+  width: 33.333%;
+}
+.corporato.\34.buttons > .button,
+.corporato.four.buttons > .button {
+  width: 25%;
+}
+.corporato.\35.buttons > .button,
+.corporato.five.buttons > .button {
+  width: 20%;
+}
+.corporato.\36.buttons > .button,
+.corporato.six.buttons > .button {
+  width: 16.666%;
+}
+.corporato.\37.buttons > .button,
+.corporato.seven.buttons > .button {
+  width: 14.285%;
+}
+.corporato.\38.buttons > .button,
+.corporato.eight.buttons > .button {
+  width: 12.500%;
+}
+.corporato.\39.buttons > .button,
+.corporato.nine.buttons > .button {
+  width: 11.11%;
+}
+.corporato.\31\30.buttons > .button,
+.corporato.ten.buttons > .button {
+  width: 10%;
+}
+.corporato.\31\31.buttons > .button,
+.corporato.eleven.buttons > .button {
+  width: 9.09%;
+}
+.corporato.\31\32.buttons > .button,
+.corporato.twelve.buttons > .button {
+  width: 8.3333%;
+}
+.corporato.fluid.vertical.buttons,
+.corporato.fluid.vertical.buttons > .button {
+  display: block;
+  width: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.corporato.\32.vertical.buttons > .button,
+.corporato.two.vertical.buttons > .button {
+  height: 50%;
+}
+.corporato.\33.vertical.buttons > .button,
+.corporato.three.vertical.buttons > .button {
+  height: 33.333%;
+}
+.corporato.\34.vertical.buttons > .button,
+.corporato.four.vertical.buttons > .button {
+  height: 25%;
+}
+.corporato.\35.vertical.buttons > .button,
+.corporato.five.vertical.buttons > .button {
+  height: 20%;
+}
+.corporato.\36.vertical.buttons > .button,
+.corporato.six.vertical.buttons > .button {
+  height: 16.666%;
+}
+.corporato.\37.vertical.buttons > .button,
+.corporato.seven.vertical.buttons > .button {
+  height: 14.285%;
+}
+.corporato.\38.vertical.buttons > .button,
+.corporato.eight.vertical.buttons > .button {
+  height: 12.500%;
+}
+.corporato.\39.vertical.buttons > .button,
+.corporato.nine.vertical.buttons > .button {
+  height: 11.11%;
+}
+.corporato.\31\30.vertical.buttons > .button,
+.corporato.ten.vertical.buttons > .button {
+  height: 10%;
+}
+.corporato.\31\31.vertical.buttons > .button,
+.corporato.eleven.vertical.buttons > .button {
+  height: 9.09%;
+}
+.corporato.\31\32.vertical.buttons > .button,
+.corporato.twelve.vertical.buttons > .button {
+  height: 8.3333%;
+}
+/* == Colors == */
+.corporato.black.buttons .button,
+.corporato.black.button {
+  background-color: #5C6166;
+  color:#fff
+}
+.corporato.black.buttons .button:hover,
+.corporato.black.button:hover,
+.corporato.black.buttons .active.button,
+.corporato.black.button.active {
+  background-color: #4C4C4C;
+}
+.corporato.black.buttons .button:active,
+.corporato.black.button:active {
+  background-color: #333333;
+}
+.corporato.warning.buttons,
+.corporato.warning.buttons .button,
+.corporato.warning.button {
+  background-color: #F0B174;
+  color:#fff
+}
+.corporato.warning.buttons .button:hover,
+.corporato.warning.button:hover,
+.corporato.warning.buttons .active.button,
+.corporato.warning.button.active {
+  background-color: #EEA45D;
+}
+.corporato.warning.buttons .button:active,
+.corporato.warning.button:active {
+  background-color: #EA9747;
+  color: rgba(255, 255, 255,1);
+}
+.corporato.info.buttons,
+.corporato.info.buttons .button,
+.corporato.info.button {
+  background-color: #5AB1EF;
+  color:#fff
+}
+.corporato.info.buttons .button:hover,
+.corporato.info.button:hover,
+.corporato.info.buttons .active.button,
+.corporato.info.button.active {
+  background-color: #198fe3;
+}
+.corporato.info.buttons .button:active,
+.corporato.info.button:active {
+  background-color: #198fe3;
+  color: rgba(255, 255, 255,1);
+}
+.corporato.purple.buttons .button,
+.corporato.purple.button {
+  background-color: #8A3ECA;
+  color:#fff
+}
+.corporato.purple.buttons .button:hover,
+.corporato.purple.button:hover,
+.corporato.purple.buttons .active.button,
+.corporato.purple.button.active {
+  background-color: #7D34BA;
+}
+.corporato.purple.buttons .button:active,
+.corporato.purple.button:active {
+  background-color: #702FA6;
+  color: rgba(255, 255, 255,1);
+}
+.corporato.teal.buttons .button,
+.corporato.teal.button {
+  background-color: #3CC9CA;
+  color:#fff
+}
+.corporato.teal.buttons .button:hover,
+.corporato.teal.button:hover,
+.corporato.teal.buttons .active.button,
+.corporato.teal.button.active {
+  background-color: #2EA5A5;
+}
+.corporato.teal.buttons .button:active,
+.corporato.teal.button:active {
+  background-color: #00847E;
+  color: rgba(255, 255, 255,1);
+}
+.corporato.positive.buttons,
+.corporato.positive.buttons .button,
+.corporato.positive.button {
+  background-color: #B2D280;
+  color:#fff
+}
+.corporato.positive.buttons .button:hover,
+.corporato.positive.button:hover,
+.corporato.positive.buttons .active.button,
+.corporato.positive.button.active {
+  background-color: #A6CB6E;
+}
+.corporato.positive.buttons .button:active,
+.corporato.positive.button:active {
+  background-color: #9AC45C;
+  color: rgba(255, 255, 255,1);
+}
+.corporato.negative.buttons,
+.corporato.negative.buttons .button,
+.corporato.negative.button,
+.corporato.danger.buttons,
+.corporato.danger.buttons .button,
+.corporato.danger.button  {
+  background-color: #D87A80;
+  color:#fff
+}
+.corporato.negative.buttons .button:hover,
+.corporato.negative.button:hover,
+.corporato.negative.buttons .active.button,
+.corporato.negative.button.active,
+.corporato.danger.buttons .button:hover,
+.corporato.danger.button:hover,
+.corporato.danger.buttons .active.button,
+.corporato.danger.button.active  {
+  background-color: #D87A80;
+  
+}
+.corporato.negative.buttons .button:active,
+.corporato.negative.button:active,
+.corporato.danger.buttons .button:active,
+.corporato.danger.button:active {
+  background-color: #F7301E;
+  color: rgba(255, 255, 255,1);
+}
+
+/* == Groups == */
+.corporato.buttons {
+  display: inline-block;
+  vertical-align: middle;
+  /*border: 1px solid rgba(0, 0, 0, 0.1);*/
+  border-radius: 0.25em;
+}
+.corporato.buttons:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.corporato.buttons .button:first-child {
+
+}
+.corporato.buttons .button {
+  float: left;
+  border-radius: 0em;
+  border:none;
+  box-shadow: -1px 0 0 0 rgba(0, 0, 0, 0.1),inset 1px 0 0 0 rgba(255, 255, 255, 0.2);
+}
+.corporato.buttons .button:first-child {
+  margin-left: 0em;
+  border-top-left-radius: 0.25em;
+  border-bottom-left-radius: 0.25em;
+  box-shadow:none;
+}
+.corporato.buttons .button:last-child {
+  border-top-right-radius: 0.25em;
+  border-bottom-right-radius: 0.25em;
+
+}
+.corporato.vertical.buttons {
+  display: inline-block;
+}
+.corporato.vertical.buttons .button {
+  display: block;
+  float: none;
+  -webkit-box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1) inset;
+}
+.corporato.vertical.buttons .button:first-child,
+.corporato.vertical.buttons .mini.button:first-child,
+.corporato.vertical.buttons .tiny.button:first-child,
+.corporato.vertical.buttons .small.button:first-child,
+.corporato.vertical.buttons .massive.button:first-child,
+.corporato.vertical.buttons .huge.button:first-child {
+  margin-top: 0px;
+  border-radius: 0.25em 0.25em 0px 0px;
+}
+.corporato.vertical.buttons .button:last-child,
+.corporato.vertical.buttons .mini.button:last-child,
+.corporato.vertical.buttons .tiny.button:last-child,
+.corporato.vertical.buttons .small.button:last-child,
+.corporato.vertical.buttons .massive.button:last-child,
+.corporato.vertical.buttons .huge.button:last-child,
+.corporato.vertical.buttons .gigantic.button:last-child {
+  border-radius: 0px 0px 0.25em 0.25em;
+}

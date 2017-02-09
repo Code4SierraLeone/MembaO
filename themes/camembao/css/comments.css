@@ -1,0 +1,151 @@
+/* == Comments == */
+.corporato.comments{
+  position:relative;
+}
+.corporato.comments a {
+  cursor: pointer;
+}
+.corporato.comments .comment {
+  position: relative;
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+}
+.corporato.comments .comment:first-child {
+  margin-top: 0em;
+  padding-top: 0em;
+}
+/* == Avatar == */
+.corporato.comments .comment .avatar {
+  display: block;
+  float: left;
+  width: 4em;
+}
+.corporato.comments .comment .avatar img {
+  display: block;
+  margin: 0em auto;
+  width: 3em;
+  height: 3em;
+  border-radius: 500px;
+}
+/* == Content == */
+.corporato.comments .comment > .content,
+.corporato.comments .comment > .avatar {
+  display: block;
+}
+.corporato.comments .comment .avatar ~ .content {
+  padding: 0em 1em;
+}
+.corporato.comments .comment > .avatar ~ .content {
+  padding-top: 0.25em;
+  margin-left: 3.5em;
+}
+.corporato.comments .comment .metadata {
+  display: inline-block;
+  margin-left: 0.3em;
+  color: rgba(0, 0, 0, 0.4);
+}
+.corporato.comments .comment .metadata > * {
+  display: inline-block;
+  margin: 0em 0.3em 0em 0em;
+}
+/* == Text == */
+.corporato.comments .comment .text {
+  margin: 0.25em 0em 0.5em;
+  word-wrap: break-word;
+  position: relative;
+}
+/* == Actions == */
+.corporato.comments .comment .actions {
+  font-size: 0.9em;
+}
+.corporato.comments .comment .actions a {
+  display: inline-block;
+  margin: 0em 0.3em 0em 0em;
+  color: rgba(0, 0, 0, 0.3);
+}
+.corporato.comments .comment .actions a.active,
+.corporato.comments .comment .actions a:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+/* == Reply == */
+.corporato.comments .reply.form {
+  margin-top: 0.75em;
+  width: 100%;
+  max-width: 30em;
+}
+.corporato.comments .comment .reply.form {
+  margin-left: 2em;
+}
+.corporato.comments > .reply.form {
+  margin-top: 1.5em;
+  max-width: 40em;
+}
+.corporato.comments .reply.form textarea {
+  height: 12em;
+}
+/* == Nested == */
+.corporato.comments .comment .comments {
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+  padding-bottom: 1em;
+}
+.corporato.comments .comment .comments:before {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.corporato.comments > .comment .comments {
+  margin-left: 2em;
+}
+.corporato.comments > .comment > .comments > .comment > .comments {
+  margin-left: 1.75em;
+}
+.corporato.comments > .comment > .comments > .comment > .comments > .comment > .comments {
+  margin-left: 1.5em;
+}
+.corporato.comments > .comment > .comments > .comment > .comments > .comment > .comments > .comment .comments {
+  margin-left: 0.5em;
+}
+/* == Threaded == */
+.corporato.threaded.comments .comment .comments {
+  margin-left: 2em;
+  padding-left: 2em;
+  -webkit-box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.05);
+  box-shadow: -1px 0px 0px rgba(0, 0, 0, 0.05);
+}
+.corporato.threaded.comments .comment {
+  border-radius: 0.225em;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05);
+  padding: 1em;
+  background-color:rgba(255, 255, 255, 0.85);
+  margin-top: 1.5em;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.corporato.threaded.comments .comment:before {
+  background: rgba(0,0,0,0.05);
+  bottom: 0;
+  content: "";
+  left: 2.8em;
+  position: absolute;
+  top: 80%;
+  width: 2px
+}
+.corporato.comments .comment a.delete {
+  float: right
+}
+/* == Variations == */
+.corporato.minimal.comments .comment .actions {
+  opacity: 0;
+  -webkit-transition: opacity 0.1s ease-out;
+  -moz-transition: opacity 0.1s ease-out;
+  transition: opacity 0.1s ease-out;
+  -webkit-transition-delay: 0.1s;
+  -moz-transition-delay: 0.1s;
+  transition-delay: 0.1s;
+}
+.corporato.minimal.comments .comment > .content:hover > .actions {
+  opacity: 1;
+}
+.corporato.small.comments {
+  font-size: 0.875em;
+}
