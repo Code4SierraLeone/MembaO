@@ -1,0 +1,547 @@
+/* == List == */
+ul.corporato.list,
+ol.corporato.list,
+.corporato.list {
+  list-style-type: none;
+  margin: 1em 0;
+  padding: 0
+}
+ul.corporato.list ul,
+ol.corporato.list ol,
+.corporato.list .list {
+  margin: 0;
+  padding: .5em 0 .5em 1em
+}
+ul.corporato.list:first-child,
+ol.corporato.list:first-child,
+.corporato.list:first-child {
+  margin-top: 0
+}
+ul.corporato.list:last-child,
+ol.corporato.list:last-child,
+.corporato.list:last-child {
+  margin-bottom: 0
+}
+/* == Content == */
+ul.corporato.list li,
+ol.corporato.list li,
+.corporato.list .item {
+  display: list-item;
+  list-style-type: none;
+  list-style-position: inside;
+  padding: .3em 0;
+  line-height: 1.2
+}
+.corporato.list .item:after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden
+}
+.corporato.list .list {
+  clear: both
+}
+/* == Icon == */
+.corporato.list .item > .icon {
+  display: block;
+  float: left;
+  margin: 0 1em 0 0;
+  padding: .1em 0 0
+}
+.corporato.list .item > .icon:only-child {
+  display: inline-block
+}
+.corporato.horizontal.list .item > .icon {
+  margin: 0;
+  padding: 0 .25em 0 0
+}
+.corporato.horizontal.list .item > .icon,
+.corporato.horizontal.list .item > .icon + .content {
+  float: none;
+  display: inline-block
+}
+/* == Image == */
+.corporato.list .item > img {
+  display: block;
+  float: left;
+  margin-right: 1em;
+  vertical-align: middle
+}
+.corporato.list .item > .content {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.2
+}
+.corporato.list .item > .icon + .content {
+  display: table-cell;
+  vertical-align: top
+}
+.corporato.list a {
+  cursor: pointer
+}
+.corporato.list a .icon {
+  color: rgba(0,0,0,0.6);
+  -webkit-transition: color .2s ease;
+  transition: color .2s ease
+}
+.corporato.list .header {
+  font-weight: 700
+}
+.corporato.list .description {
+  color: rgba(0,0,0,0.5)
+}
+.corporato.list .item > .left.floated {
+  margin-right: 1em;
+  float: left
+}
+.corporato.list .item > .right.floated {
+  margin-left: 1em;
+  float: right
+}
+/* == Types == */
+.corporato.horizontal.list {
+  display: inline-block;
+  font-size: 0
+}
+.corporato.horizontal.list > .item {
+  display: inline-block;
+  margin-left: 1em;
+  font-size: 1rem
+}
+.corporato.horizontal.list > .item:first-child {
+  margin-left: 0
+}
+.corporato.horizontal.list .list {
+  padding-left: 0;
+  padding-bottom: 0
+}
+.corporato.list a:hover .icon {
+  color: rgba(0,0,0,0.8)
+}
+/* == Link == */
+.corporato.link.list .item {
+  color: rgba(0,0,0,0.3)
+}
+.corporato.link.list a.item,
+.corporato.link.list .item a {
+  color: rgba(0,0,0,0.5)
+}
+.corporato.link.list a.item:hover,
+.corporato.link.list .item a:hover {
+  color: rgba(0,0,0,0.8)
+}
+.corporato.link.list a.item:active,
+.corporato.link.list .item a:active {
+  color: rgba(0,0,0,0.8)
+}
+.corporato.link.list a.active.item,
+.corporato.link.list .active.item a {
+  color: rgba(0,0,0,0.8)
+}
+/* == Selection == */
+.corporato.selection.list .item {
+  cursor: pointer;
+  color: rgba(0,0,0,0.4);
+  padding: .5em;
+  -webkit-transition: .2s color ease, .2s padding-left ease, .2s background-color ease;
+  transition: .2s color ease, .2s padding-left ease, .2s background-color ease
+}
+.corporato.selection.list .item:hover {
+  background-color: rgba(0,0,0,0.02);
+  color: rgba(0,0,0,0.7)
+}
+.corporato.selection.list .item:active {
+  background-color: rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.7)
+}
+.corporato.selection.list .item.active,
+.corporato.divided.list .item.active {
+  background-color: rgba(0,0,0,0.04);
+  color: rgba(0,0,0,0.7)
+}
+.corporato.animated.list .item {
+  -webkit-transition: .2s color ease, .2s padding-left ease, .2s background-color ease;
+  transition: .2s color ease, .2s padding-left ease, .2s background-color ease
+}
+.corporato.animated.list:not(.horizontal) .item:hover {
+  padding-left: 1em
+}
+.corporato.animated.list:not(.horizontal) .item:hover .item:hover {
+  padding-left: .5em
+}
+/* == Bulleted == */
+ul.corporato.list,
+.corporato.bulleted.list {
+  margin-left: 1.5em
+}
+ul.corporato.list li,
+.corporato.bulleted.list .item {
+  position: relative
+}
+ul.corporato.list li:before,
+.corporato.bulleted.list .item:before {
+  position: absolute;
+  left: -1.5em;
+  content: '•';
+  line-height: 1.2rem;
+  vertical-align: top
+}
+ul.corporato.list ul,
+.corporato.bulleted.list .list {
+  padding-left: 1.5em
+}
+ul.corporato.horizontal.bulleted.list,
+.corporato.horizontal.bulleted.list {
+  margin-left: 0
+}
+ul.corporato.horizontal.bulleted.list li,
+.corporato.horizontal.bulleted.list .item {
+  margin-left: 1.5em
+}
+ul.corporato.horizontal.bulleted.list li:before,
+.corporato.horizontal.bulleted.list .item:before {
+  left: -.9em
+}
+ul.corporato.horizontal.bulleted.list li:first-child,
+.corporato.horizontal.bulleted.list .item:first-child {
+  margin-left: 0
+}
+ul.corporato.horizontal.bulleted.list li:first-child::before,
+.corporato.horizontal.bulleted.list .item:first-child::before {
+  display: none
+}
+/* == Ordered == */
+ol.corporato.list,
+.corporato.ordered.list {
+  counter-reset: ordered;
+  margin-left: 2em;
+  list-style-type: none
+}
+ol.corporato.list li,
+.corporato.ordered.list .item {
+  list-style-type: none;
+  position: relative
+}
+ol.corporato.list li:before,
+.corporato.ordered.list .item:before {
+  position: absolute;
+  left: -2em;
+  counter-increment: ordered;
+  content: counters(ordered, ".");
+  text-align: right;
+  vertical-align: top;
+  opacity: 0.75
+}
+ol.corporato.list ol,
+.corporato.ordered.list .list {
+  counter-reset: ordered;
+  padding-left: 2.5em
+}
+ol.corporato.list ol li:before,
+.corporato.ordered.list .list .item:before {
+  left: -2.5em
+}
+ol.corporato.horizontal.list,
+.corporato.ordered.horizontal.list {
+  margin-left: 0
+}
+ol.corporato.horizontal.list li:before,
+.corporato.ordered.horizontal.list .item:before {
+  position: static;
+  margin: 0 .5em 0 0
+}
+/* == Divided == */
+.corporato.divided.list > .item,
+.corporato.divided.list:not(.horizontal) > .list {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-left: .5em;
+  padding-right: .5em
+}
+.corporato.divided.list .item .menu .item {
+  border-width: 0
+}
+.corporato.divided.list .item:first-child {
+  border-top-width: 0
+}
+.corporato.divided.list:not(.horizontal) .list {
+  margin-left: -.5em;
+  margin-right: -.5em
+}
+.corporato.divided.list:not(.horizontal) .list .item {
+  padding-left: 1em;
+  padding-right: 1em
+}
+.corporato.divided.list:not(.horizontal) .list .item:first-child {
+  border-top-width: 1px
+}
+.corporato.divided.bulleted.list {
+  margin-left: 0
+}
+.corporato.divided.bulleted.list .item {
+  padding-left: 1.5em
+}
+.corporato.divided.bulleted.list .item:before {
+  left: .5em
+}
+.corporato.divided.ordered.list {
+  margin-left: 0
+}
+.corporato.divided.ordered.list > .item {
+  padding-left: 2em;
+  padding-right: 2em
+}
+.corporato.divided.ordered.list > .item:before {
+  left: .5em
+}
+.corporato.divided.ordered.list .item .list {
+  margin-left: -2em;
+  margin-right: -2em
+}
+.corporato.divided.horizontal.list {
+  margin-left: 0
+}
+.corporato.divided.horizontal.list > .item {
+  border-top: none;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  margin: 0;
+  padding-left: .75em;
+  padding-right: .75em;
+  line-height: 0.6
+}
+.corporato.horizontal.divided.list > .item:first-child {
+  border-left: none;
+  padding-left: 0
+}
+/* == Celled == */
+.corporato.celled.list > .item,
+.corporato.celled.list > .list {
+  border-top: 1px solid rgba(0,0,0,0.1);
+  padding-left: .5em;
+  padding-right: .5em
+}
+.corporato.celled.list > .item:last-child {
+  border-bottom: 1px solid rgba(0,0,0,0.1)
+}
+.corporato.celled.list .item .list {
+  margin-left: -.5em;
+  margin-right: -.5em
+}
+.corporato.celled.list .item .list .item {
+  border-width: 0
+}
+.corporato.celled.list .list .item:first-child {
+  border-top-width: 0
+}
+.corporato.celled.bulleted.list {
+  margin-left: 0
+}
+.corporato.celled.bulleted.list > .item {
+  padding-left: 1.5em
+}
+.corporato.celled.bulleted.list > .item:before {
+  left: .5em
+}
+.corporato.celled.ordered.list {
+  margin-left: 0
+}
+.corporato.celled.ordered.list .item {
+  padding-left: 2em;
+  padding-right: 2em
+}
+.corporato.celled.ordered.list .item:before {
+  left: .5em
+}
+.corporato.celled.ordered.list .item .list {
+  margin-left: -2em;
+  margin-right: -2em
+}
+.corporato.horizontal.celled.list {
+  margin-left: 0
+}
+.corporato.horizontal.celled.list .item {
+  border-top: none;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  margin: 0;
+  padding-left: .75em;
+  padding-right: .75em;
+  line-height: 0.6
+}
+.corporato.horizontal.celled.list .item:last-child {
+  border-bottom: none;
+  border-right: 1px solid rgba(0,0,0,0.1)
+}
+/* == Grid List == */	
+.corporato.grid {
+  position: relative;
+  overflow: hidden;
+  width: 100%/*
+  position: relative;
+  z-index: 1;
+  left: 0;
+  width: 100%;
+  top: 0;
+  */
+}
+.corporato.grid > .item {
+  background-color: #eff2f8;
+  -webkit-box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.05);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #d8dde9;
+  padding: 0.5em;
+}
+.corporato.grid > .item img {
+  padding: 1px;
+}
+.corporato.grid.fitted > .item {
+  padding: 0;
+}
+.corporato.grid > .item > .corporato.label {
+  font-size: 1.4em
+}
+/* == Relaxed == */
+.corporato.relaxed.list:not(.horizontal) .item {
+  padding-top: .5em;
+  padding-bottom: .5em
+}
+.corporato.relaxed.list .header {
+  margin-bottom: .25em
+}
+.corporato.horizontal.relaxed.list .item {
+  padding-left: 1.25em;
+  padding-right: 1.25em
+}
+.corporato.very.relaxed.list:not(.horizontal) .item {
+  padding-top: 1em;
+  padding-bottom: 1em
+}
+.corporato.very.relaxed.list .header {
+  margin-bottom: .5em
+}
+.corporato.horizontal.very.relaxed.list .item {
+  padding-left: 2em;
+  padding-right: 2em
+}
+/* == Sortable == */
+ul.corporato.sortable {
+  min-height: 100px;
+}
+ul.corporato.sortable,
+ul.corporato.sortable li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul.corporato.sortable li,
+.corporato.sortable > .list {
+  margin-bottom: 5px;
+  padding: .5em 1em;
+  list-style-type: none;
+  color: rgba(0,0,0,0.4);
+  background-color: rgba(0,0,0,0.05);
+  box-shadow:0 -.2rem 0 rgba(0,0,0,0.1) inset;
+  text-shadow: 0 1px 0 #fff;
+  border-radius: .225em;
+}
+ul.corporato.sortable li:before {
+    content: "";
+    left: 0;
+}
+ul.corporato.sortable li:last-child,
+.corporato.sortable list:last-child {
+  margin-bottom: 0
+}
+ul.corporato.sortable li a {
+  display: inline-block;
+}
+.corporato.sortable a.list {
+  display: block;
+}
+.corporato.sortable a.list:hover {
+  background-color: #F0B174;
+  text-shadow: none;
+  color: #fff;
+}
+ul.corporato.sortable li .icon.reorder {
+  opacity: .75;
+  margin-right: .5em;
+  cursor: move;
+}
+.placeholder {
+  background-color: #FFC!important;
+  border: 1px solid #FC9;
+}
+
+.corporato.item.grid .item{
+  text-align:center;
+  margin:.5em;
+  padding:.5em;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.1);
+}
+
+/* == Sizes == */
+.corporato.mini.list .item {
+font-size:.7rem
+}
+.corporato.tiny.list .item {
+font-size:.8125rem
+}
+.corporato.small.list .item {
+font-size:.875rem
+}
+.corporato.list .item {
+  font-size: 1em
+}
+.corporato.large.list .item {
+  font-size: 1.125rem
+}
+.corporato.big.list .item {
+  font-size: 1.25rem
+}
+.corporato.huge.list .item {
+  font-size: 1.375rem
+}
+.corporato.massive.list .item {
+  font-size: 1.5rem
+}
+/* == Modal Filegrid == */
+.filegrid {
+  position: relative
+}
+.filegrid,
+.filegrid li {
+  margin: 0px;
+  padding: 0px;
+  list-style-type: none;
+}
+.filegrid li a {
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+  line-height: 0;
+  padding: .25em;
+  margin: .25em;
+  display: block;
+}
+
+.filegrid.alt li  {
+  float: left;
+  width: 146px;
+  height: 121px;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: middle;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+  margin:2px;
+}
+.filegrid.alt li a {
+  box-shadow:none;
+  padding:0;
+  margin:0;
+  line-height:125px
+}
+.filegrid li a img{
+  vertical-align: middle;
+}

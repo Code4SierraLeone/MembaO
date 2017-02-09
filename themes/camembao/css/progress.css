@@ -1,0 +1,189 @@
+/* == Progress == */
+.corporato.progress {
+  width: 100%;
+  height: 26px;
+  background-color: #F5F5F5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box
+}
+.corporato.thin.progress {
+  height: 6px;
+  background-color: #F5F5F5;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+  margin-bottom: 1em;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.corporato.progress .bar,
+.corporato.thin.progress .bar {
+  display: inline-block;
+  height: 100%;
+  line-height: 24px;
+  font-size: .85em;
+  text-align: center;
+  color: #FFFFFF;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
+  -webkit-transition: width 1s ease-in-out, background-color 1s ease-out;
+  transition: width 1s ease-in-out, background-color 1s ease-out;
+}
+.corporato.thin.progress .bar {
+  line-height: 20px;
+  height: 5px;
+  text-align: center;
+  border-radius: 0;
+  font-size: 1em;
+  float: left;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.15) inset;
+}
+.corporato.successful.progress .bar {
+  background-color: #61A270;
+}
+.corporato.successful.progress .bar,
+.corporato.successful.progress .bar::after {
+  -webkit-animation: none;
+  animation: none
+}
+.corporato.negative.progress .bar {
+  background-color: #A26161
+}
+.corporato.negative.progress .bar,
+.corporato.negative.progress .bar::after {
+  -webkit-animation: none;
+  animation: none
+}
+.corporato.active.progress .bar {
+  position: relative
+}
+.corporato.active.progress .bar::after {
+  content: '';
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-radius: 3px;
+  -webkit-animation: progress-active 2s ease-out infinite;
+  animation: progress-active 2s ease-out infinite
+}
+@-webkit-keyframes progress-active {
+0 {
+opacity:0;
+width:0
+}
+50% {
+opacity:.3
+}
+100% {
+opacity:0;
+width:95%
+}
+}
+@keyframes progress-active {
+0 {
+opacity:0;
+width:0
+}
+50% {
+opacity:.3
+}
+100% {
+opacity:0;
+width:100%
+}
+}
+.corporato.disabled.progress {
+  opacity: .35
+}
+.corporato.disabled.progress .bar,
+.corporato.disabled.progress .bar::after {
+  -webkit-animation: none;
+  animation: none
+}
+.corporato.progress.attached {
+  position: relative;
+  border: 0
+}
+.corporato.progress.attached,
+.corporato.progress.attached .bar {
+  display: block;
+  height: 3px;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 0 0 .3125em .3125em
+}
+.corporato.progress.attached .bar {
+  border-radius: 0
+}
+.corporato.progress.top.attached,
+.corporato.progress.top.attached .bar {
+  top: -2px;
+  border-radius: .3125em .3125em 0 0
+}
+.corporato.progress.top.attached .bar {
+  border-radius: 0
+}
+.corporato.info.progress .bar {
+  background-color: #5795AF
+}
+.corporato.black.progress .bar {
+  background-color: #5C6166
+}
+.corporato.success.progress .bar {
+  background-color: #61A270
+}
+.corporato.danger.progress .bar {
+  background-color: #A26161
+}
+.corporato.purple.progress .bar {
+  background-color: #7A6591
+}
+.corporato.warning.progress .bar {
+  background-color: #EDAA10
+}
+.corporato.teal.progress .bar {
+  background-color: #61A299
+}
+.corporato.progress.striped .bar {
+  -webkit-background-size: 40px 40px;
+  background-size: 40px 40px;
+  background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.15) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent);
+  background-size: 40px 40px;
+}
+.corporato.progress.active.striped .bar:after {
+  -webkit-animation: none;
+  -ms-animation: none;
+  animation: none
+}
+.corporato.progress.active.striped .bar {
+  -webkit-animation: progress-striped 3s linear infinite;
+  animation: progress-striped 3s linear infinite
+}
+@-webkit-keyframes progress-striped {
+0 {
+background-position:0 0
+}
+100% {
+background-position:60px 0
+}
+}
+@keyframes progress-striped {
+0 {
+background-position:0 0
+}
+100% {
+background-position:60px 0
+}
+}
+.corporato.small.progress .bar {
+  height: 14px
+}

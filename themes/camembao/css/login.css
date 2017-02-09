@@ -1,0 +1,211 @@
+html,
+body {
+  font-size: 14px;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  margin: 0px;
+  padding: 0px;
+  color: #666;
+  text-rendering: optimizeLegibility;
+  font-weight: 400;
+  background-color: #32323A;
+}
+a {
+  cursor: pointer;
+  color: #77BB97;
+  text-decoration: none;
+  -webkit-transition: all .35s ease;
+  -moz-transition: all .35s ease;
+  -o-transition: all .35s ease;
+  transition: all .35s ease;
+  outline: none
+}
+a:hover,
+a.hover,
+a:focus {
+  color: #564F8A;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -o-transition: all .35s ease;
+  transition: all .55s ease;
+  outline: none;
+  text-decoration: none
+}
+.wrapper {
+  max-width: 400px;
+  margin-top: 120px;
+  margin-right: auto;
+  margin-left: auto;
+}
+#loginform {
+  background-color: #EAEAEC;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 0 0 rgba(0,0,0,0.2);
+}
+h1 {
+  font-size: 1.4em;
+  background-color: #77BB97;
+  margin: 0px;
+  padding: 0px;
+  font-weight: 500;
+  text-align: center;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  box-shadow: inset 0 -10px 0 0 rgba(0,0,0,0.1);
+  -webkit-border-radius: 5px 5px 0 0;
+  border-radius: 5px 5px 0 0;
+  color: #FFF;
+}
+.fields {
+  padding: 1.5em;
+}
+.footer {
+  background-color: #FFF;
+  -webkit-border-radius: 0 0 5px 5px;
+  border-radius: 0 0 5px 5px;
+  padding: 1.5em;
+}
+.footer p,
+.fields p {
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+.fields p, p.copy{
+  font-size: .95em;
+  text-shadow: 0 1px 0 #fff
+}
+.fields input[type=text],
+.fields input[type=password] {
+  font-family: "Open Sans", sans-serif;
+  color: rgba(0,0,0,0.5);
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: .65em 1.2em;
+  font-size: 1em;
+  background-color: #FFF;
+  border: 0;
+  margin-bottom: 1em;
+  outline: none;
+  border-radius:5px;
+  -webkit-transition: background-color .3s ease-out, 0 .2s ease, border-color .2s ease;
+  transition: background-color .3s ease-out, box-shadow .2s ease, border-color .2s ease;
+  -webkit-box-shadow: 0 0 0 0 rgba(0,0,0,0.3) inset;
+  box-shadow: 0 0 0 0 rgba(0,0,0,0.3) inset;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: rgba(255,255,255,0);
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+.button {
+  font-family: "Open Sans Condensed", sans-serif;
+  color: #fff;
+  display: block;
+  width: 100%;
+  background: #564F8A;
+  border: 0;
+  font-size: 1.2em;
+  font-weight: 600;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1em;
+  margin-right: 0px;
+  margin-bottom: 1em;
+  margin-left: 0px;
+  padding-top: 0.65em;
+  padding-right: 1.2em;
+  padding-bottom: 0.65em;
+  padding-left: 1.2em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -o-transition: all .35s ease;
+  transition: all .55s ease;
+  outline: none;
+  text-decoration: none
+}
+.button:hover,
+.button:focus {
+  background-color: #3E3773;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -o-transition: all .35s ease;
+  transition: all .55s ease;
+  outline: none;
+  text-decoration: none
+}
+#backto {
+  float: right
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  zoom: 1
+}
+#message-box {
+  margin: 0 auto;
+  max-width: 400px;
+  margin-top: 1em;
+}
+.corporato.error.message,
+.corporato.success.message {
+  position: relative;
+  min-height: 18px;
+  margin: 1em 0em;
+  height: auto;
+  padding: 1em;
+  line-height: 1.33;
+  -webkit-transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease, -webkit-box-shadow 0.1s ease;
+  transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease, box-shadow 0.1s ease;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 0.325em 0.325em 0.325em 0.325em;
+  -webkit-box-shadow: 0em -0.2rem 0em rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow: 0em -0.2rem 0em rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0em -0.2rem 0em rgba(0, 0, 0, 0.1) inset;
+  background-color: #BD362F;
+  color: #FFFFFF;
+  opacity: 0.8;
+}
+.corporato.success.message {
+  background-color: #51A351;
+  color: #FFFFFF;
+  opacity: 0.8;
+}
+.corporato.message .header {
+  margin: 0em;
+  font-size: 1em;
+  font-weight: bold;
+}
+.corporato.message ul.list {
+  opacity: 0.85;
+  list-style-position: inside;
+  margin: 0.2em 0em;
+  padding: 0em;
+}
+.corporato.message ul.list li {
+  position: relative;
+  list-style-type: none;
+  margin: 0em 0em 0.3em 1em;
+  padding: 0em;
+}
