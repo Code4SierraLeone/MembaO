@@ -14,10 +14,10 @@
 	* Database Constants - these constants refer to 
 	* the database configuration settings. 
 	*/
-	 define('DB_SERVER', ''); 
-	 define('DB_USER', ''); 
+	 define('DB_SERVER', 'localhost'); 
+	 define('DB_USER', 'root'); 
 	 define('DB_PASS', ''); 
-	 define('DB_DATABASE', '');
+	 define('DB_DATABASE', 'membao2017');
  
 	/** 
 	* Show MySql Errors. 
