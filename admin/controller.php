@@ -765,6 +765,7 @@
   /* == Export Transactions PDF == */
   if (isset($_GET['exportTransactionsPDF'])):
        $item->exportTransactionsPDF();
+   
   endif;
   
 ?>

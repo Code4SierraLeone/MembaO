@@ -259,7 +259,7 @@
 	   */
 	  public static function langIcon()
 	  {
-		  return "<div class=\"wojo black bottom right attached special label\">" . strtoupper(self::$language) . "</div>"; 
+		  return "<div class=\"corporato black bottom right attached special label\">" . strtoupper(self::$language) . "</div>"; 
 	  }
 	   	 
       /**

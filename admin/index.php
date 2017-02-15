@@ -43,7 +43,7 @@
     <div id="rightpanel">
       <header>
         <div class="columns">
-          <div class="screen-40 tablet-30 hide-phone"><div class="wojo avatar image">
+          <div class="screen-40 tablet-30 hide-phone"><div class="corporato avatar image">
           <?php if($user->avatar):?>
           <img src="<?php echo UPLOADURL;?>avatars/<?php echo $user->avatar;?>" alt="<?php echo $user->username;?>">
           <?php else:?>
@@ -52,32 +52,32 @@
         </div>
         <p class="hide-phone"><?php echo Lang::$word->WELCOME;?>, <?php echo $user->username;?>!</p>  </div>
           <div class="screen-60 tablet-70 phone-100">
-            <div class="wojo secondary menu"> <a class="item" href="../"> <i class="home icon"></i> <?php echo Lang::$word->ADM_M_FRONT;?> </a> <a class="item" href="index.php?do=users&amp;action=edit&amp;id=<?php echo $user->uid;?>"> <i class="user icon"></i> <?php echo Lang::$word->ADM_PROFILE;?> </a>
-              <div class="wojo dropdown item"> <i class="language icon"></i> <?php echo Lang::$word->ADM_M_LANG;?> <i class="dropdown icon"></i>
+            <div class="corporato secondary menu"> <a class="item" href="../"> <i class="home icon"></i> <?php echo Lang::$word->ADM_M_FRONT;?> </a> <a class="item" href="index.php?do=users&amp;action=edit&amp;id=<?php echo $user->uid;?>"> <i class="user icon"></i> <?php echo Lang::$word->ADM_PROFILE;?> </a>
+              <div class="corporato dropdown item"> <i class="language icon"></i> <?php echo Lang::$word->ADM_M_LANG;?> <i class="dropdown icon"></i>
                 <div class="inverted menu">
                   <?php foreach(Lang::fetchLanguage() as $lang):?>
                   <?php if(Core::$language == $lang):?>
                   <a class="item active">
-                  <div class="wojo label"><?php echo strtoupper($lang);?></div>
+                  <div class="corporato label"><?php echo strtoupper($lang);?></div>
                   <?php echo Lang::$word->ADM_M_LANG;?></a>
                   <?php else:?>
                   <a class="item langchange" href="index.php?<?php echo $_SERVER['QUERY_STRING'];?>" data-lang="<?php echo $lang;?>">
-                  <div class="wojo label"><?php echo strtoupper($lang);?></div>
+                  <div class="corporato label"><?php echo strtoupper($lang);?></div>
                   <?php echo Lang::$word->ADM_M_LANG_C;?></a>
                   <?php endif?>
                   <?php endforeach;?>
                 </div>
               </div>
-              <div class="right menu"> <a class="wojo item" href="logout.php"> <i class="sign out icon"></i> <?php echo Lang::$word->LOGOUT;?> </a> </div>
+              <div class="right menu"> <a class="corporato item" href="logout.php"> <i class="sign out icon"></i> <?php echo Lang::$word->LOGOUT;?> </a> </div>
             </div>
           </div>
         </div>
       </header>
-      <div class="wojo breadcrumb relative">
+      <div class="corporato breadcrumb relative">
         <?php include_once("helper.php");?>
         <?php include_once("crumbs.php");?>
       </div>
-      <div class="wojo-content">
+      <div class="corporato-content">
         <?php (Filter::$do && file_exists(Filter::$do.".php")) ? include(Filter::$do.".php") : include("main.php");?>
       </div>
     </div>

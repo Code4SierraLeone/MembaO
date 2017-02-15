@@ -12,9 +12,9 @@
 <?php switch(Filter::$action): case "edit": ?>
 <?php $row = $core->getRowById(Leaders::lTable, Filter::$id);?>
 
-<div class="wojo form segment">
-  <div class="wojo top right attached label">Editing / Hon. <?php echo $row->last_name;?></div>
-  <form id="wojo_form" name="wojo_form" method="post">
+<div class="corporato form segment">
+  <div class="corporato top right attached label">Editing / Hon. <?php echo $row->last_name;?></div>
+  <form id="corporato_form" name="corporato_form" method="post">
     <div class="three fields">
       <div class="field">
         <label>First name</label>
@@ -71,7 +71,7 @@
       	</div>       
     </div>
     
-    <div class="wojo divider"></div>
+    <div class="corporato divider"></div>
     <div class="two fields">
       <div class="field">
         <label>Upload profile picture</label>
@@ -81,7 +81,7 @@
       </div>
       <div class="field">
         <label>Profile picture</label>
-        <div class="wojo avatar image">
+        <div class="corporato avatar image">
           <?php if($row->thumb):?>
           <img src="<?php echo UPLOADURL;?>leaders/<?php echo $row->thumb;?>" alt="<?php echo $row->thumb;?>">
           <?php else:?>
@@ -91,7 +91,7 @@
       </div>
     </div>
     
-    <div class="wojo divider"></div>
+    <div class="corporato divider"></div>
     <div class="field">
       <textarea class="bodypost" name="bio"><?php echo $row->bio;?></textarea>
     </div>
@@ -121,9 +121,9 @@
         </div>
 	</div>
         
-    <div class="wojo fitted divider"></div>
-    <button type="button" name="dosubmit" class="wojo button">Update leader profile</button>
-    <a href="index.php?do=leaders" class="wojo basic button">Cancel edit</a>
+    <div class="corporato fitted divider"></div>
+    <button type="button" name="dosubmit" class="corporato button">Update leader profile</button>
+    <a href="index.php?do=leaders" class="corporato basic button">Cancel edit</a>
     <input name="processLeader" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
@@ -150,9 +150,9 @@ $(document).ready(function () {
 <?php break;?>
 <?php case"add": ?>
 
-<div class="wojo form segment">
-	<div class="wojo top right attached label">Add a leader</div>
-  	<form id="wojo_form" name="wojo_form" method="post">
+<div class="corporato form segment">
+	<div class="corporato top right attached label">Add a leader</div>
+  	<form id="corporato_form" name="corporato_form" method="post">
     <div class="three fields">
     	<div class="field">
         	<label>First name</label>
@@ -196,7 +196,7 @@ $(document).ready(function () {
         
     </div>   
     
-    <div class="wojo divider"></div>
+    <div class="corporato divider"></div>
     <div class="three fields">
       <div class="field">
         <label>Profile picture</label>
@@ -219,7 +219,7 @@ $(document).ready(function () {
       	</div>
     </div>
 
-    <div class="wojo divider"></div>
+    <div class="corporato divider"></div>
     <div class="field">
       <textarea class="bodypost" name="bio"></textarea>
     </div>
@@ -248,9 +248,9 @@ $(document).ready(function () {
           </div>
         </div>
 	</div>    
-    <div class="wojo fitted divider"></div>
-    <button type="button" name="dosubmit" class="wojo button">Add Leader</button>
-    <a href="index.php?do=leaders" class="wojo basic button">Cancel</a>
+    <div class="corporato fitted divider"></div>
+    <button type="button" name="dosubmit" class="corporato button">Add Leader</button>
+    <a href="index.php?do=leaders" class="corporato basic button">Cancel</a>
     <input name="processLeader" type="hidden" value="1">
   </form>
 </div>
@@ -277,12 +277,12 @@ $(document).ready(function () {
 
 <?php default: ?>
 <?php $leadersrow = $leader->getLeaders();?>
-<div class="wojo basic segment">
-  <div class="header"><a class="wojo button push-right" href="index.php?do=leaders&amp;action=add"><i class="icon add"></i> Add Leader</a><span>Viewing Members of Parliament</span> </div>
-  <div class="wojo small segment form">
+<div class="corporato basic segment">
+  <div class="header"><a class="corporato button push-right" href="index.php?do=leaders&amp;action=add"><i class="icon add"></i> Add Leader</a><span>Viewing Members of Parliament</span> </div>
+  <div class="corporato small segment form">
     <div class="two fields">
       <div class="field">
-        <div class="wojo icon input">
+        <div class="corporato icon input">
           <input type="text" name="serachprod" placeholder="Search by name" id="searchfield"  />
           <i class="search icon"></i>
           <div id="suggestions"> </div>
@@ -297,7 +297,7 @@ $(document).ready(function () {
     </div>
     <div class="content-center"> <?php echo alphaBits('index.php?do=leaders', "letter");?> </div>
   </div>
-  <table class="wojo basic sortable table">
+  <table class="corporato basic sortable table">
     <thead>
       <tr>
         <th data-sort="string">Names</th>
@@ -317,9 +317,9 @@ $(document).ready(function () {
       <?php foreach ($leadersrow as $row):?>
       <tr>
         <td><?php if($row->thumb):?>
-          <img src="<?php echo UPLOADURL;?>leaders/<?php echo $row->thumb;?>" alt="<?php echo $row->title;?>" class="wojo avatar image"/>
+          <img src="<?php echo UPLOADURL;?>leaders/<?php echo $row->thumb;?>" alt="<?php echo $row->title;?>" class="corporato avatar image"/>
           <?php else:?>
-          <img src="<?php echo UPLOADURL;?>leaders/blank.png" alt="<?php echo $row->name;?>" class="wojo avatar image"/>
+          <img src="<?php echo UPLOADURL;?>leaders/blank.png" alt="<?php echo $row->name;?>" class="corporato avatar image"/>
           <?php endif;?>
           <?php echo $row->fullname;?></td>
         <td><?php echo $row->constituency;?></td>
@@ -334,9 +334,9 @@ $(document).ready(function () {
     </tbody>
   </table>
 </div>
-<div class="wojo divider"></div>
+<div class="corporato divider"></div>
 <div class="two columns">
-  <div class="row"> <span class="wojo label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </div>
+  <div class="row"> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </div>
   <div class="row">
     <div class="push-right"><?php echo $pager->display_pages();?></div>
   </div>

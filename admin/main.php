@@ -14,36 +14,36 @@
   $color = array("5AB1EF","B6A2DE","2EC7C9","D87A80","F5994E");
   $number = array(90,80,70,60,50);
 ?>
-<div class="wojo basic segment">
+<div class="corporato basic segment">
   <div class="header"><span>Welcome to the admin section</span> </div>
-  <div class="wojo segment">
+  <div class="corporato segment">
     <div class="four columns small-gutters">
       <div class="row">
-        <div class="wojo info message content-center"><?php echo Lang::$word->REGD . ' ' . Lang::$word->USERS;?>
-          <p class="wojo big font"> <?php echo countEntries(Users::uTable);?></p>
+        <div class="corporato info message content-center"><?php echo Lang::$word->REGD . ' ' . Lang::$word->USERS;?>
+          <p class="corporato big font"> <?php echo countEntries(Users::uTable);?></p>
         </div>
       </div>
       <div class="row">
-        <div class="wojo warning message content-center"><?php echo Lang::$word->ACTIVE . ' ' . Lang::$word->USERS;?>
-          <p class="wojo big font"> <?php echo countEntries(Users::uTable, "active", "y");?></p>
+        <div class="corporato warning message content-center"><?php echo Lang::$word->ACTIVE . ' ' . Lang::$word->USERS;?>
+          <p class="corporato big font"> <?php echo countEntries(Users::uTable, "active", "y");?></p>
         </div>
       </div>
       <div class="row">
-        <div class="wojo success message content-center"><?php echo Lang::$word->PENDING . ' ' . Lang::$word->USERS;?>
-          <p class="wojo big font"> <?php echo countEntries(Users::uTable, "active", "t");?></p>
+        <div class="corporato success message content-center"><?php echo Lang::$word->PENDING . ' ' . Lang::$word->USERS;?>
+          <p class="corporato big font"> <?php echo countEntries(Users::uTable, "active", "t");?></p>
         </div>
       </div>
       <div class="row">
-        <div class="wojo negative message content-center"><?php echo Lang::$word->BANNED . ' ' . Lang::$word->USERS;?>
-          <p class="wojo big font"> <?php echo countEntries(Users::uTable, "active", "b");?></p>
+        <div class="corporato negative message content-center"><?php echo Lang::$word->BANNED . ' ' . Lang::$word->USERS;?>
+          <p class="corporato big font"> <?php echo countEntries(Users::uTable, "active", "b");?></p>
         </div>
       </div>
     </div>
   </div>
-  <div class="wojo segment">
+  <div class="corporato segment">
     <div class="two columns small-gutters">
       <div class="row">
-        <div class="wojo huge pointing below label"><?php echo Lang::$word->ADM_SUB2;?> / <?php echo $core->year;?></div>
+        <div class="corporato huge pointing below label"><?php echo Lang::$word->ADM_SUB2;?> / <?php echo $core->year;?></div>
       </div>
       <div class="row">
         <select name="pid" onchange="getHitsChart(this.value)"  id="pfilter">
