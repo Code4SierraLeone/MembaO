@@ -5222,7 +5222,7 @@
                 columns = $('#redactor_table_columns').val(),
                 $table_box = $('<div></div>'),
                 tableId = Math.floor(Math.random() * 99999),
-                $table = $('<table id="table' + tableId + '" class="wojo table"><tbody></tbody></table>'),
+                $table = $('<table id="table' + tableId + '" class="corporato table"><tbody></tbody></table>'),
                 i, $row, z, $column;
 
             for (i = 0; i < rows; i++) {
@@ -6282,7 +6282,7 @@
 			   + '</section>',
 
                 modal_image_edit: String() 
-				+ '<section id="redactor-modal-image-edit" class="wojo form">' 
+				+ '<section id="redactor-modal-image-edit" class="corporato form">' 
 				  + '<div class="field"><label>' + this.opts.curLang.title + '</label>' 
 				  + '<input type="text" id="redactor_file_alt" class="redactor_input" /></div>' 
 				  + '<div class="field"><label>' + this.opts.curLang.link + '</label>' 
@@ -6296,10 +6296,10 @@
 					+ '</select></div>' 
 				  + '</section>' 
 				  + '<section class="footer">' 
-					+ '<div class="wojo three fluid buttons">' 
-					+ '<button class="redactor_btn_modal_close wojo negative button" id="redactor_image_delete_btn">' + this.opts.curLang.remove + '</button>' 
-					+ '<button class="redactor_btn_modal_close wojo warning button">' + this.opts.curLang.cancel + '</button>' 
-					+ '<button class="redactor_modal_action_btn wojo positive button" id="redactorSaveBtn">' + this.opts.curLang.save + '</button>' 
+					+ '<div class="corporato three fluid buttons">' 
+					+ '<button class="redactor_btn_modal_close corporato negative button" id="redactor_image_delete_btn">' + this.opts.curLang.remove + '</button>' 
+					+ '<button class="redactor_btn_modal_close corporato warning button">' + this.opts.curLang.cancel + '</button>' 
+					+ '<button class="redactor_modal_action_btn corporato positive button" id="redactorSaveBtn">' + this.opts.curLang.save + '</button>' 
 					+ '</div>' 
 				+ '</section>',
 
@@ -6318,7 +6318,7 @@
 					+ '</div>' 
 					+ '</form>' 
 				  + '<div id="redactor_tab3" class="redactor_tab" style="display: none;">' 
-					+ '<div class="wojo form">'
+					+ '<div class="corporato form">'
 					  + '<div class="field">'
 					  + '<label>' + this.opts.curLang.image_web_link + '</label>' 
 					  + '<input type="text" name="redactor_file_link" id="redactor_file_link" class="redactor_input">' 
@@ -6327,18 +6327,18 @@
 				  + '</div>' 
 				  + '</section>' 
 				  + '<section class="footer">' 
-					+ '<div class="wojo two fluid buttons">' 
-					+ '<button class="redactor_btn_modal_close wojo negative button">' + this.opts.curLang.cancel + '</button>' 
-					+ '<button class="redactor_modal_action_btn wojo positive button" id="redactor_upload_btn">' + this.opts.curLang.insert + '</button>' 
+					+ '<div class="corporato two fluid buttons">' 
+					+ '<button class="redactor_btn_modal_close corporato negative button">' + this.opts.curLang.cancel + '</button>' 
+					+ '<button class="redactor_modal_action_btn corporato positive button" id="redactor_upload_btn">' + this.opts.curLang.insert + '</button>' 
 					+ '</div>' 
 				+ '</section>',
 
-                modal_link: String() + '<section id="redactor-modal-link-insert" class="wojo form">'
-                    + '<div class="field"><label>URL</label>' + '<input type="text" class="redactor_input" id="redactor_link_url" /></div>' + '<div class="field"><label>' + this.opts.curLang.text + '</label>' + '<input type="text" class="redactor_input" id="redactor_link_url_text" /></div>' + '<div class="field"><label class="checkbox">' + '<input type="checkbox" id="redactor_link_blank"> <i></i>' + this.opts.curLang.link_new_tab + '</label></div>' + '</section>' + '<section class="footer">' + '<div class="wojo two fluid buttons">' + '<button class="redactor_btn_modal_close wojo negative button">' + this.opts.curLang.cancel + '</button>' + '<button class="redactor_modal_action_btn wojo positive button" id="redactor_insert_link_btn">' + this.opts.curLang.insert + '</button>' + '</div>' + '</section>',
+                modal_link: String() + '<section id="redactor-modal-link-insert" class="corporato form">'
+                    + '<div class="field"><label>URL</label>' + '<input type="text" class="redactor_input" id="redactor_link_url" /></div>' + '<div class="field"><label>' + this.opts.curLang.text + '</label>' + '<input type="text" class="redactor_input" id="redactor_link_url_text" /></div>' + '<div class="field"><label class="checkbox">' + '<input type="checkbox" id="redactor_link_blank"> <i></i>' + this.opts.curLang.link_new_tab + '</label></div>' + '</section>' + '<section class="footer">' + '<div class="corporato two fluid buttons">' + '<button class="redactor_btn_modal_close corporato negative button">' + this.opts.curLang.cancel + '</button>' + '<button class="redactor_modal_action_btn corporato positive button" id="redactor_insert_link_btn">' + this.opts.curLang.insert + '</button>' + '</div>' + '</section>',
 
-                modal_table: String() + '<section id="redactor-modal-table-insert" class="wojo form">' + '<div class="two fields">' + '<div class="field"><label>' + this.opts.curLang.rows + '</label>' + '<input type="text" size="5" value="2" id="redactor_table_rows"></div>' + '<div class="field"><label>' + this.opts.curLang.columns + '</label>' + '<input type="text" size="5" value="3" id="redactor_table_columns"</div>' + '</div>' + '</section>' + '<section class="footer">' + '<div class="wojo two fluid buttons">' + '<button class="redactor_btn_modal_close wojo negative button">' + this.opts.curLang.cancel + '</button>' + '<button class="redactor_modal_action_btn wojo positive button" id="redactor_insert_table_btn">' + this.opts.curLang.insert + '</button>' + '</div>' + '</section>',
+                modal_table: String() + '<section id="redactor-modal-table-insert" class="corporato form">' + '<div class="two fields">' + '<div class="field"><label>' + this.opts.curLang.rows + '</label>' + '<input type="text" size="5" value="2" id="redactor_table_rows"></div>' + '<div class="field"><label>' + this.opts.curLang.columns + '</label>' + '<input type="text" size="5" value="3" id="redactor_table_columns"</div>' + '</div>' + '</section>' + '<section class="footer">' + '<div class="corporato two fluid buttons">' + '<button class="redactor_btn_modal_close corporato negative button">' + this.opts.curLang.cancel + '</button>' + '<button class="redactor_modal_action_btn corporato positive button" id="redactor_insert_table_btn">' + this.opts.curLang.insert + '</button>' + '</div>' + '</section>',
 
-                modal_video: String() + '<section id="redactor-modal-video-insert">' + '<form id="redactorInsertVideoForm" class="wojo form">' + '<div class="field"><label>' + this.opts.curLang.video_html_code + '</label>' + '<textarea id="redactor_insert_video_area"></textarea></div>' + '</form>' + '</section>' + '<section class="footer">' + '<div class="wojo two fluid buttons">' + '<button class="redactor_btn_modal_close wojo negative button">' + this.opts.curLang.cancel + '</button>' + '<button class="redactor_modal_action_btn wojo positive button" id="redactor_insert_video_btn">' + this.opts.curLang.insert + '</button>' + '</div>' + '</section>',
+                modal_video: String() + '<section id="redactor-modal-video-insert">' + '<form id="redactorInsertVideoForm" class="corporato form">' + '<div class="field"><label>' + this.opts.curLang.video_html_code + '</label>' + '<textarea id="redactor_insert_video_area"></textarea></div>' + '</form>' + '</section>' + '<section class="footer">' + '<div class="corporato two fluid buttons">' + '<button class="redactor_btn_modal_close corporato negative button">' + this.opts.curLang.cancel + '</button>' + '<button class="redactor_modal_action_btn corporato positive button" id="redactor_insert_video_btn">' + this.opts.curLang.insert + '</button>' + '</div>' + '</section>',
 
             });
         },
