@@ -182,9 +182,9 @@
           $dump .= '-- --------------------------------------------------------------------------------' . self::nl;
           $dump .= '-- ' . self::nl;
           $dump .= '-- @version: ' . $database . '.sql ' . date('M j, Y') . ' ' . date('H:i') . ' gewa' . self::nl;
-          $dump .= '-- @package Freelance Manager' . self::nl;
-          $dump .= '-- @author wojoscripts.com.' . self::nl;
-          $dump .= '-- @copyright 2011' . self::nl;
+          $dump .= '-- @package Membao' . self::nl;
+          $dump .= '-- @author Alan Kawamara.' . self::nl;
+          $dump .= '-- @copyright 2017' . self::nl;
           $dump .= '-- ' . self::nl;
           $dump .= '-- --------------------------------------------------------------------------------' . self::nl;
           $dump .= '-- Host: ' . $server . self::nl;
@@ -276,7 +276,7 @@
       public static function optimizeDb()
       {
           $display = '';
-          $display .= '<table class="wojo table">';
+          $display .= '<table class="corporato table">';
           $display .= '<thead><tr>';
           $display .= '<th colspan="2">' . Lang::$word->SYS_DBREPAIRING . '... </th>';
           $display .= '<th colspan="2">' . Lang::$word->SYS_DBOPTIMIZING . '... </th>';

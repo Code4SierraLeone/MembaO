@@ -336,7 +336,7 @@
           
 		  $html = '';
           $charset = explode(",", Lang::$word->ALPHA);
-          $html .= "<div class=\"wojo small pagination menu\">\n";
+          $html .= "<div class=\"corporato small pagination menu\">\n";
           foreach ($charset as $key) {
 			  $active = ($key == get('letter')) ? ' active' : null;
               $html .= "<a class=\"item$active\" href=\"" . phpself() . "?letter=" . $key . $qs . "\">" . $key . "</a>\n";
@@ -407,19 +407,19 @@
   {
       switch ($status) {
           case "y":
-              $display = '<span class="wojo positive label">' . Lang::$word->ACTIVE . '</span>';
+              $display = '<span class="corporato positive label">' . Lang::$word->ACTIVE . '</span>';
               break;
 
           case "n":
-              $display = '<a data-id="' . $id . '" class="activate wojo info label"><i class="icon adjust"></i> ' . Lang::$word->INACTIVE . '</a>';
+              $display = '<a data-id="' . $id . '" class="activate corporato info label"><i class="icon adjust"></i> ' . Lang::$word->INACTIVE . '</a>';
               break;
 
           case "t":
-              $display = '<span class="wojo warning label">' . Lang::$word->PENDING . '</span>';
+              $display = '<span class="corporato warning label">' . Lang::$word->PENDING . '</span>';
               break;
 
           case "b":
-              $display = '<span class="wojo negative label">' . Lang::$word->BANNED . '</span>';
+              $display = '<span class="corporato negative label">' . Lang::$word->BANNED . '</span>';
               break;
       }
 

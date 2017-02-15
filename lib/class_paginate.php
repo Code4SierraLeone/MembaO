@@ -196,7 +196,7 @@
        */
       public function display_pages()
       {
-          return($this->items_total > $this->items_per_page) ? '<div class="wojo pagination menu">' . $this->retdata . '</div>' : "";
+          return($this->items_total > $this->items_per_page) ? '<div class="corporato pagination menu">' . $this->retdata . '</div>' : "";
       }
   }
 ?>

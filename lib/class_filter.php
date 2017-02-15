@@ -103,7 +103,7 @@
        */	  
       public static function msgAlert($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"wojo icon message warning\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ALERT . "</div><p>" . $msg . "</p></div></div>";
+          self::$showMsg = "<div class=\"corporato icon message warning\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ALERT . "</div><p>" . $msg . "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
 		  // <![CDATA[
@@ -133,7 +133,7 @@
        */
       public static function msgSingleAlert($msg, $print = true)
       {
-          self::$showMsg = "<div class=\"wojo warning message\"><i class=\"attention icon\"></i> " . $msg . "</div>";
+          self::$showMsg = "<div class=\"corporato warning message\"><i class=\"attention icon\"></i> " . $msg . "</div>";
 
           if ($print == true) {
               print self::$showMsg;
@@ -153,7 +153,7 @@
        */	  
       public static function msgOk($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"wojo icon message success\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->SUCCESS . "</div><p>" . $msg .
+          self::$showMsg = "<div class=\"corporato icon message success\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->SUCCESS . "</div><p>" . $msg .
               "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
@@ -183,7 +183,7 @@
        */
       public static function msgSingleOk($msg, $print = true)
       {
-          self::$showMsg = "<div class=\"wojo success message\"><i class=\"ok sign icon\"></i> " . $msg . "</div>";
+          self::$showMsg = "<div class=\"corporato success message\"><i class=\"ok sign icon\"></i> " . $msg . "</div>";
 
           if ($print == true) {
               print self::$showMsg;
@@ -203,7 +203,7 @@
        */
       public static function msgInfo($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"wojo icon message info\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->INFO . "</div><p>" . $msg . "</p></div></div>";
+          self::$showMsg = "<div class=\"corporato icon message info\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->INFO . "</div><p>" . $msg . "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
 		  // <![CDATA[
@@ -233,7 +233,7 @@
        */
       public static function msgSingleInfo($msg, $print = true)
       {
-          self::$showMsg = "<div class=\"wojo info message\"><i class=\"information icon\"></i> " . $msg . "</div>";
+          self::$showMsg = "<div class=\"corporato info message\"><i class=\"information icon\"></i> " . $msg . "</div>";
 
           if ($print == true) {
               print self::$showMsg;
@@ -253,7 +253,7 @@
        */	  
       public static function msgError($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"wojo icon message error\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ERROR . "</div><p>" . $msg .
+          self::$showMsg = "<div class=\"corporato icon message error\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ERROR . "</div><p>" . $msg .
               "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
@@ -283,7 +283,7 @@
        */
       public static function msgSingleError($msg, $print = true)
       {
-          self::$showMsg = "<div class=\"wojo error message\"><i class=\"ban circle icon\"></i> " . $msg . "</div>";
+          self::$showMsg = "<div class=\"corporato error message\"><i class=\"ban circle icon\"></i> " . $msg . "</div>";
 
           if ($print == true) {
               print self::$showMsg;
@@ -299,7 +299,7 @@
        */
       public static function msgStatus()
       {
-          self::$showMsg = "<div class=\"wojo error message\"><i class=\"close icon\"></i><div class=\"header\">" . Lang::$word->PROCCESS_ERR . "</div><div class=\"content\"><ul class=\"wojo list\">";
+          self::$showMsg = "<div class=\"corporato error message\"><i class=\"close icon\"></i><div class=\"header\">" . Lang::$word->PROCCESS_ERR . "</div><div class=\"content\"><ul class=\"corporato list\">";
           $i = count(self::$showMsg);
           foreach (self::$msgs as $msg) {
               self::$showMsg .= "<li>" . $msg . "</li>\n";
