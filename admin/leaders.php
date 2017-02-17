@@ -1,10 +1,10 @@
 <?php
   /**
-   * Parties
+   * Leaders
    *
-   * @package Visible Polls
+   * @package Membao
    * @author Alan Kawamara
-   * @copyright 2016
+   * @copyright 2017
    */
   if (!defined("_VALID_PHP"))
       die('Direct access to this location is not allowed.');
@@ -283,7 +283,7 @@ $(document).ready(function () {
     <div class="two fields">
       <div class="field">
         <div class="corporato icon input">
-          <input type="text" name="serachprod" placeholder="Search by name" id="searchfield"  />
+          <input type="text" name="serachprod" placeholder="Search by last name" id="searchfield"  />
           <i class="search icon"></i>
           <div id="suggestions"> </div>
         </div>
@@ -319,7 +319,7 @@ $(document).ready(function () {
         <td><?php if($row->thumb):?>
           <img src="<?php echo UPLOADURL;?>leaders/<?php echo $row->thumb;?>" alt="<?php echo $row->title;?>" class="corporato avatar image"/>
           <?php else:?>
-          <img src="<?php echo UPLOADURL;?>leaders/blank.png" alt="<?php echo $row->name;?>" class="corporato avatar image"/>
+          <img src="<?php echo UPLOADURL;?>leaders/blank.jpg" alt="<?php echo $row->name;?>" class="corporato avatar image"/>
           <?php endif;?>
           <?php echo $row->fullname;?></td>
         <td><?php echo $row->constituency;?></td>

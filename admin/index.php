@@ -28,18 +28,22 @@
       			<a href="index.php"><?php echo ($core->logo) ? '<img src="../uploads/'.$core->logo.'" alt="'.$core->site_name.'" class="logo"/>': '<span class="logo">' . $core->site_name . '</span>';?></a>       
       		</div>
       		
-            <nav>
+          <nav>
         		<ul>          
           			<li class="parent<?php if (!Filter::$do) echo ' active';?>"><a href="index.php"><i class="icon dashboard"></i> <span><?php echo Lang::$word->ADM_DASH;?></span></a></li>
           			<li class="parent <?php echo (Filter::$do == 'leaders') ? "active" : "normal";?>"><a href="index.php?do=leaders"><i class="icon user"></i> <span>Leaders</span></a></li>
                     <li class="parent <?php echo (Filter::$do == 'parties') ? "active" : "normal";?>"><a href="index.php?do=parties"><i class="icon user"></i> <span>Parties</span></a></li>
                     <li class="parent <?php echo (Filter::$do == 'constituencies') ? "active" : "normal";?>"><a href="index.php?do=constituencies"><i class="icon user"></i> <span>Constituencies</span></a></li>
-                    <li class="parent <?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>                              			
-          		
-                        
-        </ul>
-      </nav>
-    </div>
+                    <li class="parent <?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>
+                    <li class="parent <?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>                
+                    <li class="parent <?php echo (Filter::$do == 'config') ? "active" : "normal";?>"><a href="index.php?do=config"><i class="icon laptop"></i><span>Settings</span></a></li>          		                  
+            </ul>
+          </nav>
+        <!-- Footer -->
+        <footer id="footer" class="clearfix">
+          <div class="copyright">Copyright &copy;<?php echo date('Y');?></div>
+        </footer>
+      </div>
     <div id="rightpanel">
       <header>
         <div class="columns">
@@ -47,7 +51,7 @@
           <?php if($user->avatar):?>
           <img src="<?php echo UPLOADURL;?>avatars/<?php echo $user->avatar;?>" alt="<?php echo $user->username;?>">
           <?php else:?>
-          <img src="<?php echo UPLOADURL;?>avatars/blank.png" alt="<?php echo $user->username;?>">
+          <img src="<?php echo UPLOADURL;?>avatars/blank.jpg" alt="<?php echo $user->username;?>">
           <?php endif;?>
         </div>
         <p class="hide-phone"><?php echo Lang::$word->WELCOME;?>, <?php echo $user->username;?>!</p>  </div>

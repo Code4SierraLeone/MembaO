@@ -10,10 +10,7 @@
   if (!defined("_VALID_PHP"))
       die('Direct access to this location is not allowed.');
 ?>
-<!-- Footer -->
-<footer id="footer" class="clearfix">
-  <div class="copyright">Copyright &copy;<?php echo date('Y').' '.$core->company;?></div>
-</footer>
+
 <script src="../assets/fullscreen.js"></script>
 <script type="text/javascript"> 
 // <![CDATA[  
