@@ -1,12 +1,9 @@
 /* == Breadcrumb == */
 .corporato.breadcrumb {
   vertical-align: middle;
-  font-family: 'Oswald';
   font-weight: 400;
   margin: 0;
   padding:1em;
-  background-color: #EFF2F8;
-  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
   border-top:1px solid #F5F7FB;
   border-bottom:1px solid #C8CFDC;
   box-shadow: 0 1px 0 0 rgba(0,0,0,0.05);

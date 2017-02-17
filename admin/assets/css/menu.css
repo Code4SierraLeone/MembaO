@@ -502,7 +502,7 @@ font-size:.875rem
   transition: none
 }
 .corporato.secondary.menu .item {
-  color:rgba(255,255,255,0.85)
+  color:#000
 }
 .corporato.secondary.menu .header.item {
   border-right: .1em solid rgba(0,0,0,0.1);

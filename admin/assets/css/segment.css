@@ -4,13 +4,12 @@
   background-color: #fff;
   margin: 1em 0;
   padding: 1em;
-  border-radius: .325em;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
-  box-shadow: 1px 1px 0 1px #D1D7E3, inset 1px 1px 0 1px #fff;
 }
+
 .corporato.segment:first-child {
   margin-top: 0
 }
@@ -103,12 +102,8 @@
 }
 /* == Variations == */
 .corporato.segment > .header {
-  background-color:#EFF2F8;
   padding:1em;
-  border-radius: .325em .325em 0 0;
-  font-weight:400;
-  border-bottom:2px solid #D8DDE9;
-  font-family: "Oswald";
+  font-weight:700;
   }
 .corporato.segment > .header > span {
   font-size: 1.714em;

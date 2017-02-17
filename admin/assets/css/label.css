@@ -7,15 +7,15 @@
   border-color: #F0F3FA;
   padding: .3em .5em;
   color: inherit;
-  font-family: 'Oswald';
   font-weight: 400;
-  border-radius: .325em;
   white-space: nowrap;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-transition: background .1s linear;
+  font-size:.8rem;
+  line-height:1rem
   transition: background .1s linear
 }
 .corporato.label:first-child {
@@ -666,10 +666,7 @@ a.corporato.teal.label:hover:before {
   font-size:.75rem;
   line-height:.75rem
 }
-.corporato.label {
-  font-size:.95rem;
-  line-height:1rem
-}
+
 .corporato.large.labels .label,
 .corporato.large.label {
   font-size:1rem;

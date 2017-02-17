@@ -4,13 +4,13 @@ body {
   height: 100%;
 }
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   margin: 0px;
   padding: 0px;
   color: #fff;
   text-rendering: optimizeLegibility;
   font-weight: 400;
-  background:#fff;
+  background:#FBE2CC;
   display: table;
   margin: 0 auto;
 }
@@ -32,25 +32,20 @@ header {
   margin: 0;
   padding: 0;
   padding: 1em;
-  background-color: #52627C;
-  border-radius: .325em;
-  -webkit-box-shadow: 3px 3px 3px 2px rgba(0,0,0,0.1);
-  box-shadow: 3px 3px 3px 2px rgba(0,0,0,0.1);
 }
 .row {
-  background-color: #fff;
-  padding: .5em;
   border-radius: .325em;
 }
 input[type=text],
 input[type=password] {
   font-family: "Open Sans", sans-serif;
-  margin: 0;
+  margin: 0 0 5px;
   padding: .65em 1em;
   font-size: 1em;
   background-color: #fff;
   color: #666;
   border: 0;
+  border-radius: .325em;
   outline: none;
   -webkit-transition: background-color .3s ease-out, 0 .2s ease, border-color .2s ease;
   transition: background-color .3s ease-out, box-shadow .2s ease, border-color .2s ease;
@@ -76,7 +71,7 @@ input[type="password"]:focus {
 }
 input[type=submit] {
   border: 0;
-  background-color: #64CAFF;
+  background-color: #931A16;
   color: #fff;
   display: block;
   width: 100%;
@@ -106,7 +101,7 @@ input[type=submit] {
 }
 input[type=submit]:hover,
 input[type=submit]:focus {
-  background-color: #11ADFF;
+  background-color: #9D302C;
   -webkit-transition: all .55s ease;
   -moz-transition: all .55s ease;
   -o-transition: all .35s ease;

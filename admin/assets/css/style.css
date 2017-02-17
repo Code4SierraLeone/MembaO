@@ -1,15 +1,16 @@
-html,
+fhtml,
 body {
   font-size: 14px;
 }
 body {
-  font-family: "Open Sans", ​"Helvetica Neue", ​Helvetica, ​Arial, ​sans-serif, sans-serif;
+  font-family: "Roboto",  sans-serif;
   margin: 0px;
   padding: 0px;
   color: #6E7C9E;
   text-rendering: optimizeLegibility;
   font-weight: 400;
   background:#fff;
+  height: 100%
 }
 a {
   cursor: pointer;
@@ -64,21 +65,20 @@ h6 {
 }
 #leftpanel {
   float: left;
+  position: fixed;
+  min-height: 100%;
   width: 200px;
-  background-color: #364760;
-  border-radius: .325em 0 0 .325em;
+  background-color: #FBE2CC;
 }
 #rightpanel {
   float: right;
   margin-right: -200px;
   width: 100%;
-  border-radius: 0 .425em .325em 0;
-  background-color: #D6DBE7;
+  background-color: #fff;
 }
 header {
-  background-color: #364760;
-  border-radius: 0 .325em 0 0;
-  padding: 1em 0;
+  background-color: #fff;
+  padding: 1em;
   position: relative;
   vertical-align: middle;
 }
@@ -101,30 +101,40 @@ nav li {
 }
 nav li a {
   display: block;
-  color: #F1F5F7;
-  padding: 1em;
-  text-transform: uppercase;
+  color: #931A16;
   font-weight: 400;
-  font-family: 'Oswald';
+  padding: 1em;
 }
+
+
 nav li a i.icon {
-  color: #6383AA;
+  color: #931A16;
   margin-right: 1em;
 }
+
+nav li.active a i.icon {
+  color: #fff
+}
+
 nav li ul,
 nav li.active {
-  background-color: #2A394F;
+  background-color: #931A16;
 }
+
+nav li.active a {
+  color: #fff
+}
+
 nav li ul a {
   padding: .5em 1em;
   text-transform: none;
   text-shadow: none;
 }
 nav li.parent {
-  border-bottom: 1px solid #2A394F
+  border-bottom: 1px solid #fff
 }
 nav li.active {
-  box-shadow: inset 4px 0 0 0 #15A5FB;
+  box-shadow: inset 4px 0 0 0 #fff;
 }
 nav ul.sublist li:not(.active) {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
@@ -195,10 +205,8 @@ ul.sortMenu ul {
   border-radius: 0 0 .3125em .3125em
 }
 footer {
-  text-align: center;
-  margin-top: 2em;
-  margin-bottom: 2em;
-  color: #fff
+  padding: 2em 1em;
+  color: #921713;
 }
 
 @media screen and (max-width:1024px) {
