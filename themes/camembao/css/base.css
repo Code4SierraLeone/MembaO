@@ -357,6 +357,11 @@ table {
 .corporato-grid {
   padding: 0 2em;
 }
+
+.corporato-grid.home {
+  padding: 4em 8em;
+}
+
 .columns > [class*=screen-] {
   float: left;
   clear: none;
@@ -1006,6 +1011,11 @@ table {
 .corporato-grid {
   padding: 0 1.5em;
 }
+
+.corporato-grid.home {
+  padding: 3em 6em;
+}
+
 .columns > [class*=tablet-] {
   float: left;
   clear: none;
@@ -1654,6 +1664,11 @@ table {
 .corporato-grid {
   padding: 0 1.25em;
 }
+
+.corporato-grid.home {
+  padding: 2em 4em;
+}
+
 .columns > [class*=phone-] {
   float: left;
   clear: none;

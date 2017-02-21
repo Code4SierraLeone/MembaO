@@ -18,8 +18,17 @@ body {
 	vertical-align:middle;
 }
 
+.stat-desc {
+  font-size: .8em
+}
+
 .corporato.message.basic.itemheader {
 	padding:2em 0 1em
+}
+
+.corporato.description p {
+  font-size: 2em;
+  line-height: 1.3em
 }
 
 .av {
@@ -225,6 +234,16 @@ a.white:hover,
 a.white:focus {
   color: rgba(0,0,0,0.4);
 }
+
+a.item.menu {
+  color: #fff
+}
+
+.corporato.horizontal.list > .item.login {
+  color: #fff;
+  font-size: 12px
+}
+
 h1,
 h2,
 h2.h3.h4,
@@ -261,8 +280,12 @@ p:last-child {
   margin-top: 2em;
 }
 header {
-  border-bottom:1px solid #E5E5E5;
-  background:#982420
+  background:#982420;
+  padding: 5px 0
+}
+
+.corporato.tabular.segment .corporato.cell.logoset {
+  width: 20%
 }
 
 .topmenuwrap {
@@ -295,10 +318,6 @@ header {
 
 #topmenu .item {
 	font-size:12px
-}
-
-#middlemenu {
-  margin: .3em 0;
 }
 
 .slidersection {
@@ -751,8 +770,7 @@ footer {
   text-align: center;
   padding: 3em 0;
   margin-top:2em;
-  background:#fff;
-  border-top:5px solid #982420
+  background:#888;
 }
 
 #scrollUp {
@@ -1236,6 +1254,7 @@ header .logo img {
   float:right
 }
 header .submenu {}
+
 nav {
   display: none;
 }
