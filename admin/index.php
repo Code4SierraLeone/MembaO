@@ -35,7 +35,8 @@
                     <li class="parent <?php echo (Filter::$do == 'parties') ? "active" : "normal";?>"><a href="index.php?do=parties"><i class="icon user"></i> <span>Parties</span></a></li>
                     <li class="parent <?php echo (Filter::$do == 'constituencies') ? "active" : "normal";?>"><a href="index.php?do=constituencies"><i class="icon user"></i> <span>Constituencies</span></a></li>
                     <li class="parent <?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>
-                    <li class="parent <?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>                
+                    <li class="parent <?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>
+                    <li class="<?php echo (Filter::$do == 'pages') ? "active" : "normal";?>"><a href="index.php?do=pages"><i class="icon file text"></i> <span>Pages</span></a></li>                
                     <li class="parent <?php echo (Filter::$do == 'config') ? "active" : "normal";?>"><a href="index.php?do=config"><i class="icon laptop"></i><span>Settings</span></a></li>          		                  
             </ul>
           </nav>

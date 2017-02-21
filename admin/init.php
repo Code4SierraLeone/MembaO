@@ -54,6 +54,11 @@
   require_once(BASEPATH . "lib/class_user.php");
   Registry::set('Users',new Users());
   $user = Registry::get("Users");
+
+  //Load Content Class
+  require_once(BASEPATH . "lib/class_content.php");
+  Registry::set('Content',new Content());
+  $content = Registry::get("Content");
   
   //Load Leader Class
   require_once(BASEPATH . "lib/class_leaders.php");

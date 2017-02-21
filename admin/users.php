@@ -64,7 +64,7 @@
               <?php if($row->avatar):?>
               <img src="<?php echo UPLOADURL;?>avatars/<?php echo $row->avatar;?>" alt="<?php echo $row->username;?>">
               <?php else:?>
-              <img src="<?php echo UPLOADURL;?>avatars/blank.png" alt="<?php echo $row->username;?>">
+              <img src="<?php echo UPLOADURL;?>avatars/blank.jpg" alt="<?php echo $row->username;?>">
               <?php endif;?>
             </div>
           </div>
@@ -266,7 +266,7 @@
 <?php break;?>
 <?php default:?>
 <?php  $userrow = $user->getUsers();?>
-<div class="corporato corporato black message"><i class="icon pin"></i> <?php echo Core::langIcon();?><?php echo str_replace("[ICON]", "<i class=\"icon adjust\"></i>", Lang::$word->USR_INFO2);?></div>
+
 <div class="corporato basic segment">
   <div class="header"><a class="corporato button push-right" href="index.php?do=users&amp;action=add"><i class="icon add"></i> <?php echo Lang::$word->USR_ADD;?></a><span><?php echo Lang::$word->USR_SUB2;?></span> </div>
   <div class="corporato small segment form">
@@ -305,7 +305,6 @@
         <th data-sort="string"><?php echo Lang::$word->USERNAME;?></th>
         <th data-sort="string"><?php echo Lang::$word->USR_FULLNAME;?></th>
         <th data-sort="string"><?php echo Lang::$word->STATUS;?></th>
-        <th data-sort="int"># <?php echo Lang::$word->PURCHS;?></th>
         <th class="disabled"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
@@ -320,12 +319,11 @@
         <td><?php if($row->avatar):?>
           <img src="<?php echo UPLOADURL;?>avatars/<?php echo $row->avatar;?>" alt="<?php echo $row->username;?>" class="corporato image avatar"/>
           <?php else:?>
-          <img src="<?php echo UPLOADURL;?>avatars/blank.png" alt="<?php echo $row->username;?>" class="corporato image avatar"/>
+          <img src="<?php echo UPLOADURL;?>avatars/blank.jpg" alt="<?php echo $row->username;?>" class="corporato image avatar"/>
           <?php endif;?>
           <a href="index.php?do=newsletter&amp;emailid=<?php echo urlencode($row->email);?>"><?php echo $row->username;?></a></td>
         <td><?php echo $row->name;?></td>
-        <td><?php echo userStatus($row->active, $row->id);?></td>
-        <td><span class="corporato black label"><?php echo $row->totalitems;?></span></td>
+        <td><?php echo userStatus($row->active, $row->id);?></td>      
         <td><a href="index.php?do=users&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a>
           <?php if($row->id == 1):?>
           <a><i class="circular black inverted remove icon link"></i></a>
