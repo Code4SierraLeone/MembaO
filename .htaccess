@@ -1,0 +1,67 @@
+# Options:
+# -MultiViews: Turns off multiviews so it doesn't interfer with our rewrite rules
+# -Indexes: Stop directory listings
+# +FollowSymlinks: Let out rewrite rules work
+
+Options -MultiViews -Indexes +FollowSymlinks
+
+<IfModule mod_security.c>
+	# Turn off mod_security filtering.
+	# SecFilterEngine Off
+
+	# The below probably isn't needed, but better safe than sorry.
+	SecFilterScanPOST Off
+</IfModule>
+
+ErrorDocument 404 /code4africa/membao/404.php
+
+<IfModule mod_php5.c>
+	php_value register_globals 0
+	php_value magic_quotes_gpc 0
+	php_value session.auto_start 0
+	php_value safe_mode 0
+</IfModule>
+
+<IfModule sapi_apache2.c>
+	php_value register_globals 0
+	php_value magic_quotes_gpc 0
+	php_value session.auto_start 0
+	php_value safe_mode 0
+</IfModule>
+
+<IfModule mod_rewrite.c>
+
+	RewriteEngine On
+        RewriteBase /code4africa/membao/
+
+ 
+
+RewriteCond %{REQUEST_URI} ^(.*)/{2,}(.*)$
+RewriteRule . %1/%2 [R=301,L]
+
+#RewriteCond %{HTTP_HOST} ^www\.(.*) [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^leader/([^/]+)/?$ leader.php?itemname=$1 [L]
+RewriteRule ^category/([^/]+)/([^/]+) category.php?catname=$1&pg=$2 [L]
+RewriteRule ^category/([^/]+)/?$ category.php?catname=$1  [L]
+
+
+RewriteRule ^content/([^/]+)/?$ content.php?pagename=$1 [L]
+RewriteRule ^tags/([^/]+)/?$ tags.php?tagname=$1 [L]
+#RewriteRule ^tags/([^/]+)/([^/]+) tags.php?tagname=$1&pg=$2 [L]
+</IfModule>
+
+<ifModule mod_deflate.c>
+	<filesmatch "\.(js|css|html|jpg|png|gif|eot|woff|ttf|svg)$">
+		SetOutputFilter DEFLATE
+	</filesmatch>
+</ifModule>
+
+<FilesMatch "\.(htaccess|htpasswd|ini|log|sh|inc|bak|cache)$">
+	Order Allow,Deny
+	Deny from all
+</FilesMatch>
