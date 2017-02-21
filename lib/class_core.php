@@ -122,8 +122,7 @@
           Filter::checkPost('site_url', Lang::$word->CONF_URL);
           Filter::checkPost('site_email', Lang::$word->CONF_EMAIL);
           Filter::checkPost('thumb_w', Lang::$word->CONF_THUMBW);
-          Filter::checkPost('thumb_h', Lang::$word->CONF_THUMBH);
-          Filter::checkPost('currency',Lang::$word->CONF_CURRENCY);
+          Filter::checkPost('thumb_h', Lang::$word->CONF_THUMBH);         
 		  
 		  Filter::checkPost('file_dir', Lang::$word->CONF_FPATH);
 		  Filter::checkPost('featured', Lang::$word->CONF_FEATURED);
@@ -133,8 +132,7 @@
           switch($_POST['mailer']) {
 			  case "SMTP" :
 				  Filter::checkPost('smtp_host',Lang::$word->CONF_SMTP_HOST);
-				  Filter::checkPost('smtp_user',Lang::$word->CONF_SMTP_USER);
-				  Filter::checkPost('currency',Lang::$word->CONF_SMTP_PASS);
+				  Filter::checkPost('smtp_user',Lang::$word->CONF_SMTP_USER);				  
 				  Filter::checkPost('smtp_port',Lang::$word->CONF_SMTP_PORT);
 				  break;
 			  
@@ -175,33 +173,24 @@
 					  'file_dir' => sanitize($_POST['file_dir']),
 					  'short_date' => sanitize($_POST['short_date']),
 					  'long_date' => sanitize($_POST['long_date']),
-					  'time_format' => sanitize($_POST['time_format']),
-					  'dtz' => trim($_POST['dtz']),
-					  'locale' => sanitize($_POST['locale']),
-					  'currency' => sanitize($_POST['currency']),
-					  'cur_symbol' => sanitize($_POST['cur_symbol']),
+					  'time_format' => sanitize($_POST['time_format']),					  
+					  'locale' => sanitize($_POST['locale']),					  					  
 					  'offline' => intval($_POST['offline']),
 					  'offline_msg' => $_POST['offline_msg'],
 					  'offline_d' => sanitize($_POST['offline_d_submit']),
 					  'offline_t' => sanitize($_POST['offline_t_submit']),
 					  'theme' => sanitize($_POST['theme']),
-					  'lang' => sanitize($_POST['lang']),
-					  'tax' => intval($_POST['tax']),
-					  'psize' => sanitize($_POST['psize']),
-					  'inv_note' => $_POST['inv_note'],
-					  'inv_info' => $_POST['inv_info'],
+					  'lang' => sanitize($_POST['lang']),					  					  			 
 					  'show_home' => intval($_POST['show_home']),
 					  'show_slider' => intval($_POST['show_slider']),
 					  'featured' => intval($_POST['featured']),
 					  'hlayout' => intval($_POST['hlayout']),
 					  'homelist' => intval($_POST['homelist']),
-					  'popular' => intval($_POST['popular']),
-					  'free_allowed' => intval($_POST['free_allowed']),
+					  'popular' => intval($_POST['popular']),					  
 					  'reg_verify' => intval($_POST['reg_verify']),
 					  'auto_verify' => intval($_POST['auto_verify']),
 					  'reg_allowed' => intval($_POST['reg_allowed']),
-					  'notify_admin' => intval($_POST['notify_admin']),
-					  'user_limit' => intval($_POST['user_limit']),
+					  'notify_admin' => intval($_POST['notify_admin']),					  
 					  'analytics' => trim($_POST['analytics']),
 					  'metadesc' => trim($_POST['metadesc']),
 					  'metakeys' => trim($_POST['metakeys']),
