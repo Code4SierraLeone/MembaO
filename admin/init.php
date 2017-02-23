@@ -60,6 +60,11 @@
   Registry::set('Content',new Content());
   $content = Registry::get("Content");
   
+  //Load Bills Class
+  require_once(BASEPATH . "lib/class_bills.php");
+  Registry::set('Bills',new Bills());
+  $bill = Registry::get("Bills");  
+
   //Load Leader Class
   require_once(BASEPATH . "lib/class_leaders.php");
   Registry::set('Leaders',new Leaders());

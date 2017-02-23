@@ -2,9 +2,9 @@
   /**
    * Crumbs Navigation
    *
-   * @package Visible Polls
+   * @package Membao
    * @author Alan Kawamara
-   * @copyright 2016
+   * @copyright 2017
    */
 
   if (!defined("_VALID_PHP"))
@@ -36,31 +36,26 @@
 
       case "files":
 
-      default:
           echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->FLM_TITLE . '</div>';
           break;
 		  
       case "backup":
 
-      default:
           echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->DBM_TITLE . '</div>';
           break;
 
       case "maintenance":
 
-      default:
           echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->MTN_TITLE . '</div>';
           break;
 
       case "system":
 
-      default:
           echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->SYS_TITLE . '</div>';
           break;
 
       case "language":
 
-      default:
           echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->LMG_TITLE . '</div>';
           break;
 		    
@@ -118,7 +113,6 @@
 		  		  
       case "newsletter":
 
-      default:
           echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->NWL_TITLE . '</div>';
           break;
 
@@ -218,24 +212,40 @@
 
           break;
 		  
-      case "products";
+      case "leaders";
 
           switch (Filter::$action) {
               case "edit":
-                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=products" class="section">' . Lang::$word->PRD_TITLE . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->PRD_SUB1 . '</div>';
+                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=leaders" class="section">Leaders</a> <div class="divider"></div> <div class="active section">List of leaders</div>';
                   break;
               case "add":
-                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=products" class="section">' . Lang::$word->PRD_TITLE . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->PRD_SUB2 . '</div>';
+                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=leaders" class="section">Add Leaders</a> <div class="divider"></div> <div class="active section">Add new leaders here</div>';
                   break;
               case "gallery":
                   echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=products" class="section">' . Lang::$word->PRD_TITLE . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->GAL_TITLE . '</div>';
                   break;
               default:
-                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">' . Lang::$word->PRD_TITLE . '</div>';
+                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">Leaders</div>';
                   break;
           }
 
           break;
+
+      case "bills";
+
+          switch (Filter::$action) {
+              case "edit":
+                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=bills" class="section">Bills</a> <div class="divider"></div> <div class="active section">List of bills</div>';
+                  break;
+              case "add":
+                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div><a href="index.php?do=bills" class="section">Add Leaders</a> <div class="divider"></div> <div class="active section">Add new bills here</div>';
+                  break;
+              default:
+                  echo '<i class="icon home"></i> <a href="index.php" class="section">' . Lang::$word->ADM_DASH . '</a> <div class="divider"></div> <div class="active section">Bills</div>';
+                  break;
+          }
+
+          break;          
 		        
       case "transactions":
 
@@ -270,7 +280,6 @@
           break;
 		  
 
-      default:
           echo '<i class="icon home"></i> <div class="divider"></div> <div class="active section">' . Lang::$word->WELCOME . '</div>';
 
       break;

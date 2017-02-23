@@ -126,9 +126,6 @@
           }
 
           break;
-		  
-      default:
-              break;
           }
 
 ?>

@@ -147,7 +147,7 @@
               $this->query_id = $query_id;
           
           if (isset($this->query_id)) {
-              $record = ($type) ? mysqli_fetch_array($this->query_id, MYSQL_ASSOC) : mysqli_fetch_object($this->query_id);
+              $record = ($type) ? mysqli_fetch_array($this->query_id) : mysqli_fetch_object($this->query_id);
           } else
               $this->error("Invalid query_id: <b>" . $this->query_id . "</b>. Records could not be fetched.");
           

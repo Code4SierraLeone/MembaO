@@ -2,9 +2,9 @@
   /**
    * Leaders Class
    *
-   * @package Visible Polls
+   * @package Membao
    * @author Alan Kawamara
-   * @copyright 2016
+   * @copyright 2017
    */
   
   if (!defined("_VALID_PHP"))
@@ -679,7 +679,7 @@
 	   */
 	  public function getLeaderList()
 	  {
-		  $row = self::$db->fetch_all("SELECT id, CONCAT(first_name,' ',last_name) as fullname, slug FROM " . self::lTable . " WHERE active = 1 ORDER BY fullname");
+		  $row = self::$db->fetch_all("SELECT id, CONCAT(first_name,' ',last_name) as name, slug FROM " . self::lTable . " WHERE active = 1 ORDER BY name");
           return $row ? $row : 0;
 	  }
 

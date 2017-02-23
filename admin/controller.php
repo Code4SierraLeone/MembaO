@@ -116,7 +116,28 @@
 		  print json_encode($json);
 		  break;
 	  	 
+
+	 /* == Delete Bill == */
+	  case "deleteBill":		  
 		  
+		  $res = $db->delete(Bills::bTable, "id=" . Filter::$id);
+		  
+		  $title = sanitize($_POST['title']);		  		 		  
+		  
+		  if ($res):
+			  $json['type']    = 'success';
+			  $json['title']   = Lang::$word->SUCCESS;
+			  $json['message'] = str_replace("BILL: ", $title, "Bill record deleted");
+		  else:
+			  $json['type']    = 'warning';
+			  $json['title']   = Lang::$word->ALERT;
+			  $json['message'] = Lang::$word->NOPROCCESS;
+		  endif;
+		  
+		  print json_encode($json);
+		  break;
+
+
 	 /* == Delete Leader == */
 	  case "deleteLeader":
 		  if ($thumb = getValueById("thumb", Leaders::lTable, Filter::$id)):
@@ -381,6 +402,11 @@
           $res = $db->update(Content::cTable, $data, "id=" . (int)$k);
       endforeach;
       print ($res) ? Filter::msgSingleOk(Lang::$word->CAT_SORTED) : Filter::msgSingleAlert(Lang::$word->NOPROCCESS);
+  endif;
+
+  /* == Proccess Leader == */
+  if (isset($_POST['processBill'])):
+      $leader->processBill();
   endif;
 
   /* == Proccess Leader == */
