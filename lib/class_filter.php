@@ -103,7 +103,7 @@
        */	  
       public static function msgAlert($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"corporato icon message warning\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ALERT . "</div><p>" . $msg . "</p></div></div>";
+          self::$showMsg = "<div class=\"corporato icon message warning\"><i class=\"exclamation icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ALERT . "</div><p>" . $msg . "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
 		  // <![CDATA[
@@ -153,7 +153,7 @@
        */	  
       public static function msgOk($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"corporato icon message success\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->SUCCESS . "</div><p>" . $msg .
+          self::$showMsg = "<div class=\"corporato icon message success\"><i class=\"checked icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->SUCCESS . "</div><p>" . $msg .
               "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
@@ -203,7 +203,7 @@
        */
       public static function msgInfo($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"corporato icon message info\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->INFO . "</div><p>" . $msg . "</p></div></div>";
+          self::$showMsg = "<div class=\"corporato icon message info\"><i class=\"information icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->INFO . "</div><p>" . $msg . "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 
 		  // <![CDATA[
@@ -253,7 +253,7 @@
        */	  
       public static function msgError($msg, $print = true, $fader = false, $altholder = false)
       {
-          self::$showMsg = "<div class=\"corporato icon message error\"><i class=\"flag icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ERROR . "</div><p>" . $msg .
+          self::$showMsg = "<div class=\"corporato icon message error\"><i class=\"exclamation icon\"></i><i class=\"close icon\"></i><div class=\"content\"><div class=\"header\"> " . Lang::$word->ERROR . "</div><p>" . $msg .
               "</p></div></div>";
           if ($fader == true)
               self::$showMsg .= "<script type=\"text/javascript\"> 

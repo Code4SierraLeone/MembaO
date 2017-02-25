@@ -63,7 +63,12 @@
   //Load Bills Class
   require_once(BASEPATH . "lib/class_bills.php");
   Registry::set('Bills',new Bills());
-  $bill = Registry::get("Bills");  
+  $bill = Registry::get("Bills"); 
+
+  //Load Committees Class
+  require_once(BASEPATH . "lib/class_committees.php");
+  Registry::set('Committees',new Committees());
+  $committee = Registry::get("Committees");   
 
   //Load Leader Class
   require_once(BASEPATH . "lib/class_leaders.php");

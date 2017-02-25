@@ -1,51 +1,63 @@
 <?php
-  /**
-   * Index
-   *
-   * @package Membao
-   * @author Alan Kawamara
-   * @copyright 2017
-   */
-  define("_VALID_PHP", true);
-  require_once("init.php");
+/**
+* Index
+*
+* @package Membao
+* @author Alan Kawamara
+* @copyright 2017
+*/
 
-  if (is_dir("../setup"))
-      : die("<div style='text-align:center'>" 
-		  . "<span style='padding: 5px; border: 1px solid #999; background-color:#EFEFEF;" 
-		  . "font-family: Verdana; font-size: 11px; margin-left:auto; margin-right:auto'>" 
-		  . "<b>Warning:</b> Please delete setup directory!</div>");
-  endif;
+define("_VALID_PHP", true);
+require_once("init.php");
+
+if (is_dir("../setup"))
+  : die("<div style='text-align:center'>" 
+	. "<span style='padding: 5px; border: 1px solid #999; background-color:#EFEFEF;" 
+	. "font-family: Verdana; font-size: 11px; margin-left:auto; margin-right:auto'>" 
+	. "<b>Warning:</b> Please delete setup directory!</div>");
+endif;
   
-  if (!$user->is_Admin())
-      redirect_to("login.php");
+if (!$user->is_Admin())
+  redirect_to("login.php");
 ?>
+
 <?php include("header.php");?>
 <!-- Start Content-->
 <div class="clearfix">
 	<div class="tablebox">
-    	<div id="leftpanel">
-      		<div class="content-center vspace">
-      			<a href="index.php"><?php echo ($core->logo) ? '<img src="../uploads/'.$core->logo.'" alt="'.$core->site_name.'" class="logo"/>': '<span class="logo">' . $core->site_name . '</span>';?></a>       
-      		</div>
+   	<div id="leftpanel">
+   		<div class="content-center vspace">
+   			<a href="index.php"><?php echo ($core->logo) ? '<img src="../uploads/'.$core->logo.'" alt="'.$core->site_name.'" class="logo"/>': '<span class="logo">' . $core->site_name . '</span>';?></a>       
+   		</div>
       		
-          <nav>
-        		<ul>          
-          			<li class="parent<?php if (!Filter::$do) echo ' active';?>"><a href="index.php"><i class="icon dashboard"></i> <span><?php echo Lang::$word->ADM_DASH;?></span></a></li>
-          			<li class="parent <?php echo (Filter::$do == 'leaders') ? "active" : "normal";?>"><a href="index.php?do=leaders"><i class="icon user"></i> <span>Leaders</span></a></li>
-                <li class="parent <?php echo (Filter::$do == 'bills') ? "active" : "normal";?>"><a href="index.php?do=bills"><i class="icon user"></i> <span>Bills</span></a></li>
-                <li class="parent <?php echo (Filter::$do == 'parties') ? "active" : "normal";?>"><a href="index.php?do=parties"><i class="icon user"></i> <span>Parties</span></a></li>
-                <li class="parent <?php echo (Filter::$do == 'constituencies') ? "active" : "normal";?>"><a href="index.php?do=constituencies"><i class="icon user"></i> <span>Constituencies</span></a></li>
-                <li class="parent <?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>
-                <li class="parent <?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>
-                <li class="<?php echo (Filter::$do == 'pages') ? "active" : "normal";?>"><a href="index.php?do=pages"><i class="icon file text"></i> <span>Pages</span></a></li>                
-                <li class="parent <?php echo (Filter::$do == 'config') ? "active" : "normal";?>"><a href="index.php?do=config"><i class="icon laptop"></i><span>Settings</span></a></li>          		                  
+      <nav>
+     		<ul>          
+     			<li class="parent<?php if (!Filter::$do) echo ' active';?>"><a href="index.php"><i class="icon dashboard"></i> <span><?php echo Lang::$word->ADM_DASH;?></span></a></li>
+     			<li class="parent <?php echo (Filter::$do == 'leaders') ? "active" : "normal";?>"><a href="index.php?do=leaders"><i class="icon user"></i> <span>Leaders</span></a></li>
+          <li class="parent <?php echo (Filter::$do == 'bills') ? "active" : "normal";?>"><a href="index.php?do=bills"><i class="icon user"></i> <span>Bills</span></a></li>
+
+          <li class="parent"><a class="<?php echo (Filter::$do == 'committees' or Filter::$do == 'committeestypes') ? "expanded" : "collapsed";?>"><i class="icon send"></i><span>Committees</span><i class="icon triangle down"></i></a>
+            <ul class="sublist<?php if (in_array(Filter::$do, array('committees','committeestypes'))) echo ' active';?>">
+              <li class="<?php echo (Filter::$do == 'committees') ? "active" : "normal";?>"><a href="index.php?do=committees"><i class="icon briefcase"></i> <span>Committees</span></a></li>
+              <li class="<?php echo (Filter::$do == 'committeestypes') ? "active" : "normal";?>"><a href="index.php?do=committees-type"><i class="icon briefcase"></i> <span>Committee Types</span></a></li>              
             </ul>
-          </nav>
-        <!-- Footer -->
-        <footer id="footer" class="clearfix">
-          <div class="copyright">Copyright &copy;<?php echo date('Y');?></div>
-        </footer>
-      </div>
+          </li>
+
+          <li class="parent <?php echo (Filter::$do == 'parties') ? "active" : "normal";?>"><a href="index.php?do=parties"><i class="icon user"></i> <span>Parties</span></a></li>
+          <li class="parent <?php echo (Filter::$do == 'constituencies') ? "active" : "normal";?>"><a href="index.php?do=constituencies"><i class="icon user"></i> <span>Constituencies</span></a></li>
+          <li class="parent <?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>
+          <li class="parent <?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>
+          <li class="<?php echo (Filter::$do == 'pages') ? "active" : "normal";?>"><a href="index.php?do=pages"><i class="icon file text"></i> <span>Pages</span></a></li>                
+          <li class="parent <?php echo (Filter::$do == 'config') ? "active" : "normal";?>"><a href="index.php?do=config"><i class="icon laptop"></i><span>Settings</span></a></li>          		                  
+        </ul>
+      </nav>
+      
+      <!-- Footer -->
+      <footer id="footer" class="clearfix">
+        <div class="copyright">Copyright &copy;<?php echo date('Y');?></div>
+      </footer>
+    </div>
+    
     <div id="rightpanel">
       <header>
         <div class="columns">

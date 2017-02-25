@@ -404,10 +404,21 @@
       print ($res) ? Filter::msgSingleOk(Lang::$word->CAT_SORTED) : Filter::msgSingleAlert(Lang::$word->NOPROCCESS);
   endif;
 
-  /* == Proccess Leader == */
+  /* == Proccess Bill == */
   if (isset($_POST['processBill'])):
-      $leader->processBill();
+      $bill->processBill();
   endif;
+
+
+ /* == Proccess Committee == */
+ 	if (isset($_POST['processCommittee'])):
+    	$committee->processCommittee();
+  	endif;
+
+ /* == Proccess Committee == */
+ 	if (isset($_POST['processCommitteeType'])):
+    	$committee->processCommitteeType();
+  	endif; 	
 
   /* == Proccess Leader == */
   if (isset($_POST['processLeader'])):
