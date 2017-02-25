@@ -32,7 +32,7 @@
       }
 
 	  /**
-	   * Bills::getLeaderSlug()
+	   * Bills::getCommitteeSlug()
 	   * 
 	   * @return
 	   */
@@ -46,7 +46,7 @@
 	  }
 	  
 	  /**
-	   * Bills::getLeaders()
+	   * Bills::getBills()
 	   * 
 	   * @param bool $sort
 	   * @return
@@ -169,7 +169,7 @@
 	   */
 	  public function renderBill()
 	  {
-		  $is_admin = Registry::get("Users")->is_Admin() ? null : "AND b.active = 1";
+		  $is_admin = Registry::get("Users")->is_Admin();
 		  
 		  $sql = "SELECT b.*, b.id as bid," 		  
 		  . "\n (SELECT SUM(hits) FROM " . self::sTable . " WHERE bid = b.id) as hits"

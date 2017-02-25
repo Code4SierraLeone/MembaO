@@ -1,69 +1,77 @@
 <?php
-  /**
-   * Bills
-   *
-   * @package Membao
-   * @author Alan Kawamara
-   * @copyright 2017
-   */
-  if (!defined("_VALID_PHP"))
-      die('Direct access to this location is not allowed.');
+/**
+* Bills
+*
+* @package Membao
+* @author Alan Kawamara
+* @copyright 2017
+*/
+
+if (!defined("_VALID_PHP"))
+  die('Direct access to this location is not allowed.');
 ?>
+
 <?php switch(Filter::$action): case "edit": ?>
 <?php $row = $core->getRowById(Bills::bTable, Filter::$id);?>
 
 <div class="corporato form segment">
   <div class="corporato top right attached label">Editing <?php echo $row->title;?></div>
-    <form id="corporato_form" name="corporato_form" method="post">
+  <form id="corporato_form" name="corporato_form" method="post">
+
+    <div class="field">
+      <label>Title of bill</label>
+      <label class="input"><i class="icon-append icon asterisk"></i>
+        <input type="text" name="title" value="<?php echo $row->title;?>">
+      </label>
+    </div>      
+
+
+    <div class="two fields">        
       <div class="field">
-        <label>Title of bill</label>
-        <label class="input"><i class="icon-append icon asterisk"></i>
-          <input type="text" name="title" value="<?php echo $row->title;?>">
-        </label>
-      </div>      
-
-
-      <div class="two fields">        
-        <div class="field">
-    	    <label>Date of introduction</label>               
-	        <input type="date" value="<?php echo $row->year_introduced;?>" name="year_introduced">      	
-        </div>
+        <label>Date of introduction</label>               
+	      <input type="date" value="<?php echo $row->year_introduced;?>" name="year_introduced">      	
+      </div>
         
-        <div class="field">
+      <div class="field">
         <label>Mover of bill</label>
         <?php echo $core->getDropList($leader->getLeaderList(), "mover", $row->mover, "Select Mover of Bill");?>
-      	</div>       
+      </div>       
     </div>
     
     <div class="corporato divider"></div>
+    
     <div class="field">
       <label>About the bill</label>
       <textarea class="bodypost" name="description"><?php echo $row->description;?></textarea>
     </div>
     
     <div class="three fields">
-        <div class="field">
-          <label>Featured</label>
-          <div class="inline-group">
-            <label class="radio">
-              <input type="radio" name="featured" value="1" <?php getChecked($row->featured, 1); ?>>
-              <i></i><?php echo Lang::$word->YES;?></label>
-            <label class="radio">
-              <input type="radio" name="featured" value="0" <?php getChecked($row->featured, 0); ?>>
-              <i></i><?php echo Lang::$word->NO;?></label>
-          </div>
-        </div>
-	</div>
+      <div class="field">
+        <label>Featured</label>
+        <div class="inline-group">
+          <label class="radio">
+            <input type="radio" name="featured" value="1" <?php getChecked($row->featured, 1); ?>>
+            <i></i><?php echo Lang::$word->YES;?></label>
+          <label class="radio">
+            <input type="radio" name="featured" value="0" <?php getChecked($row->featured, 0); ?>>
+            <i></i><?php echo Lang::$word->NO;?></label>
+         </div>
+      </div>
+    </div>
         
     <div class="corporato fitted divider"></div>
+    
     <button type="button" name="dosubmit" class="corporato button">Update Bill Data</button>
     <a href="index.php?do=bills" class="corporato basic button">Cancel Edit</a>
     <input name="processBill" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
 </div>
+
 <div id="msgholder"></div>
+
 <script type="text/javascript"> 
+
 // <![CDATA[
 $(document).ready(function () {
 	$("#filter").on("keyup", function() {
@@ -86,56 +94,60 @@ $(document).ready(function () {
 
 <div class="corporato form segment">
 	<div class="corporato top right attached label">Add a bill</div>
-  	<form id="corporato_form" name="corporato_form" method="post">
+  <form id="corporato_form" name="corporato_form" method="post">
 
+    <div class="field">
+      <label>Bill title</label>
+      <label class="input"><i class="icon-append icon asterisk"></i>
+      	<input type="text" name="title" placeholder="Name of bill">
+      </label>
+    </div>
+
+      
+    <div class="two fields">        
       <div class="field">
-        <label>Bill title</label>
-        <label class="input"><i class="icon-append icon asterisk"></i>
-          	<input type="text" name="first_name" placeholder="First name">
-        </label>
+        <label>Date of introduction</label>               
+  	    <input type="date" name="year_introduced" placeholder="Date of introduction">      	
       </div>
-
-    
-      <div class="two fields">        
-        <div class="field">
-    	    <label>Date of introduction</label>               
-	        <input type="date" name="year_introduced" placeholder="Date of introduction">      	
-        </div>
-        
-        <div class="field">
+          
+      <div class="field">
         <label>Mover of bill</label>
         <?php echo $core->getDropList($leader->getLeaderList(), "mover", "", "Select mover of bill");?>
-      	</div>
-        
+      </div>    
     </div>   
-        
+          
 
     <div class="corporato divider"></div>
+    
     <div class="field">
       <label>About the bill</label>
       <textarea class="bodypost" name="description"></textarea>
     </div>
 
     <div class="three fields">
-        <div class="field">
-          <label>Featured</label>
-          <div class="inline-group">
-            <label class="radio">
-              <input type="radio" name="featured" value="1" checked="checked">
-              <i></i><?php echo Lang::$word->YES;?></label>
-            <label class="radio">
-              <input type="radio" name="featured" value="0" >
-              <i></i><?php echo Lang::$word->NO;?></label>
-          </div>
+      <div class="field">
+        <label>Featured</label>
+        <div class="inline-group">
+          <label class="radio">
+            <input type="radio" name="featured" value="1" checked="checked">
+            <i></i><?php echo Lang::$word->YES;?></label>
+          <label class="radio">
+            <input type="radio" name="featured" value="0" >
+            <i></i><?php echo Lang::$word->NO;?></label>
         </div>
-	</div>    
+      </div>
+  	</div>    
+    
     <div class="corporato fitted divider"></div>
+    
     <button type="button" name="dosubmit" class="corporato button">Add Bill</button>
     <a href="index.php?do=bills" class="corporato basic button">Return to list of bills</a>
     <input name="processBill" type="hidden" value="1">
   </form>
 </div>
+
 <div id="msgholder"></div>
+
 <script type="text/javascript"> 
 // <![CDATA[
 $(document).ready(function () {
@@ -154,10 +166,12 @@ $(document).ready(function () {
 });
 // ]]>
 </script>
+
 <?php break;?>
 
 <?php default: ?>
 <?php $billsrow = $bill->getBills();?>
+
 <div class="corporato basic segment">
   <div class="header"><a class="corporato button push-right" href="index.php?do=bills&amp;action=add"><i class="icon add"></i> Add Bill</a><span>Viewing Bills</span> </div>
   <div class="corporato small segment form">
@@ -215,6 +229,7 @@ $(document).ready(function () {
     <div class="push-right"><?php echo $pager->display_pages();?></div>
   </div>
 </div>
+
 <script type="text/javascript"> 
 // <![CDATA[
 $(document).ready(function () {
