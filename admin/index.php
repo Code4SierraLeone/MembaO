@@ -32,23 +32,23 @@ if (!$user->is_Admin())
       		
       <nav>
      		<ul>          
-     			<li class="parent<?php if (!Filter::$do) echo ' active';?>"><a href="index.php"><i class="icon dashboard"></i> <span><?php echo Lang::$word->ADM_DASH;?></span></a></li>
-     			<li class="parent <?php echo (Filter::$do == 'leaders') ? "active" : "normal";?>"><a href="index.php?do=leaders"><i class="icon user"></i> <span>Leaders</span></a></li>
-          <li class="parent <?php echo (Filter::$do == 'bills') ? "active" : "normal";?>"><a href="index.php?do=bills"><i class="icon user"></i> <span>Bills</span></a></li>
+     			<li class="<?php if (!Filter::$do) echo ' active';?>"><a href="index.php"><i class="icon dashboard"></i> <span><?php echo Lang::$word->ADM_DASH;?></span></a></li>
+     			<li class="<?php echo (Filter::$do == 'leaders') ? "active" : "normal";?>"><a href="index.php?do=leaders"><i class="icon user"></i> <span>Leaders</span></a></li>
+          <li class="<?php echo (Filter::$do == 'bills') ? "active" : "normal";?>"><a href="index.php?do=bills"><i class="icon user"></i> <span>Bills</span></a></li>
 
-          <li class="parent"><a class="<?php echo (Filter::$do == 'committees' or Filter::$do == 'committeestypes') ? "expanded" : "collapsed";?>"><i class="icon send"></i><span>Committees</span><i class="icon triangle down"></i></a>
-            <ul class="sublist<?php if (in_array(Filter::$do, array('committees','committeestypes'))) echo ' active';?>">
+          <li class="parent"><a class="<?php echo (Filter::$do == 'committees' or Filter::$do == 'committees-type') ? "expanded" : "collapsed";?>"><i class="icon send"></i><span>Committees</span><i class="icon triangle down"></i></a>
+            <ul class="sublist<?php if (in_array(Filter::$do, array('committees','committees-type'))) echo ' active';?>">
               <li class="<?php echo (Filter::$do == 'committees') ? "active" : "normal";?>"><a href="index.php?do=committees"><i class="icon briefcase"></i> <span>Committees</span></a></li>
-              <li class="<?php echo (Filter::$do == 'committeestypes') ? "active" : "normal";?>"><a href="index.php?do=committees-type"><i class="icon briefcase"></i> <span>Committee Types</span></a></li>              
+              <li class="<?php echo (Filter::$do == 'committees-type') ? "active" : "normal";?>"><a href="index.php?do=committees-type"><i class="icon briefcase"></i> <span>Committee Types</span></a></li>              
             </ul>
           </li>
 
-          <li class="parent <?php echo (Filter::$do == 'parties') ? "active" : "normal";?>"><a href="index.php?do=parties"><i class="icon user"></i> <span>Parties</span></a></li>
-          <li class="parent <?php echo (Filter::$do == 'constituencies') ? "active" : "normal";?>"><a href="index.php?do=constituencies"><i class="icon user"></i> <span>Constituencies</span></a></li>
-          <li class="parent <?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>
-          <li class="parent <?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>
+          <li class="<?php echo (Filter::$do == 'parties') ? "active" : "normal";?>"><a href="index.php?do=parties"><i class="icon user"></i> <span>Parties</span></a></li>
+          <li class="<?php echo (Filter::$do == 'constituencies') ? "active" : "normal";?>"><a href="index.php?do=constituencies"><i class="icon user"></i> <span>Constituencies</span></a></li>
+          <li class="<?php echo (Filter::$do == 'calendar') ? "active" : "normal";?>"><a href="index.php?do=calendar"><i class="icon user"></i> <span>Calendar</span></a></li>
+          <li class="<?php echo (Filter::$do == 'users') ? "active" : "normal";?>"><a href="index.php?do=users"><i class="icon user"></i><span>Users</span></a></li>
           <li class="<?php echo (Filter::$do == 'pages') ? "active" : "normal";?>"><a href="index.php?do=pages"><i class="icon file text"></i> <span>Pages</span></a></li>                
-          <li class="parent <?php echo (Filter::$do == 'config') ? "active" : "normal";?>"><a href="index.php?do=config"><i class="icon laptop"></i><span>Settings</span></a></li>          		                  
+          <li class="<?php echo (Filter::$do == 'config') ? "active" : "normal";?>"><a href="index.php?do=config"><i class="icon laptop"></i><span>Settings</span></a></li>          		                  
         </ul>
       </nav>
       

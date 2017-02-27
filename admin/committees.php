@@ -95,6 +95,23 @@ $(document).ready(function () {
     </div>     
     
     <div class="corporato fitted divider"></div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Committee Chairperson</label>
+        <label class="input"><i class="icon-append icon asterisk"></i>
+          <input type="text" name="chairperson" placeholder="Name of committee">
+        </label>
+      </div>
+
+      <div class="field">
+        <label>Committee Deputy Chairperson</label>
+        <label class="input"><i class="icon-append icon asterisk"></i>
+          <input type="text" name="deputy-chairperson" placeholder="Name of committee">
+        </label>
+      </div>
+
+    </div>    
     
     <button type="button" name="dosubmit" class="corporato button">Add Committee</button>
     <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
@@ -166,8 +183,8 @@ $(document).ready(function () {
       <?php foreach ($committeesrow as $row):?>
       <tr>
         <td><?php echo $row->name;?></td>
-        <td><?php echo $row->committees_type;?></td>
-        <td><?php echo $row->created;?></td>        
+        <td><?php echo $row->committees_name;?></td>
+        <td><?php echo Filter::dodate("short_date", $row->created);?></td>        
         <td class="push-right"><a href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
       </tr>
       <?php endforeach;?>

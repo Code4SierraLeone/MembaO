@@ -80,8 +80,9 @@ class Committees
 				  
 			  		} elseif(isset($_GET['letter'])) {
 				  		$letter = sanitize($_GET['letter'], 2);
-				  		$where = "WHERE name REGEXP '^" . self::$db->escape($letter) . "'";
+				  		$where = "WHERE c.name REGEXP '^" . self::$db->escape($letter) . "'";
 				  		$q = "SELECT COUNT(*) FROM " . self::cTable . " WHERE name REGEXP '^" . self::$db->escape($letter) . "' LIMIT 1"; 
+
 			  		} else {
 				  		$q = "SELECT COUNT(*) FROM " . self::cTable . " LIMIT 1";
 				  		$where = null;
@@ -96,8 +97,9 @@ class Committees
 				$pager->default_ipp = Registry::get("Core")->perpage;
 				$pager->paginate();
 				  
-				$sql = "SELECT c.*" 
+				$sql = "SELECT c.*, ct.name as committees_name" 
 				. "\n FROM " . self::cTable . " as c"
+				. "\n LEFT JOIN " . self::ctTable . " as ct ON ct.id = c.committees_type"
 				. "\n $where"
 				. "\n ORDER BY c.created DESC" . $pager->limit;
 		        
@@ -172,8 +174,9 @@ class Committees
 	  		{
 		  		$is_admin = Registry::get("Users")->is_Admin();
 		  
-		  		$sql = "SELECT c.*, c.id as cid," 		  		
-		  		. "\n FROM " . self::cTable . " as c"		  
+		  		$sql = "SELECT c.*, c.id as cid, ct.name as committees_name" 		  		
+		  		. "\n FROM " . self::cTable . " as c"	
+		  		. "\n LEFT JOIN " . self::ctTable . " as ct ON ct.id = c.committees_type"	  
 		  		. "\n WHERE c.slug = '".$this->committeeslug."'"
 		  		. "\n $is_admin";
           		$row = self::$db->first($sql);		           
