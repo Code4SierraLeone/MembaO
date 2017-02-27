@@ -98,6 +98,7 @@ nav li {
   margin: 0px;
   padding: 0px;
   list-style-type: none;
+  border-bottom:1px solid #fff 
 }
 nav li a {
   display: block;
@@ -130,12 +131,26 @@ nav li ul a {
   text-transform: none;
   text-shadow: none;
 }
-nav li.parent {
-  border-bottom: 1px solid #fff
+
+
+
+nav li.parent .expanded, nav li.parent .expanded i.icon {
+  background-color: #931A16;
+  color: #fff
 }
+
 nav li.active {
   box-shadow: inset 4px 0 0 0 #fff;
 }
+
+nav ul.sublist, nav ul.sublist li.active  {
+  background: #fff
+}
+
+nav ul.sublist li.active a, nav ul.sublist li.active a i.icon {
+  color: #F5994E
+}
+
 nav ul.sublist li:not(.active) {
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.04);
 }
