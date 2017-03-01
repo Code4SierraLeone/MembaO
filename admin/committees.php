@@ -99,20 +99,100 @@ $(document).ready(function () {
     <div class="two fields">
       <div class="field">
         <label>Committee Chairperson</label>
-        <label class="input"><i class="icon-append icon asterisk"></i>
-          <input type="text" name="chairperson" placeholder="Name of committee">
-        </label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "chair", "", "Select committee chair");?>
       </div>
 
       <div class="field">
         <label>Committee Deputy Chairperson</label>
-        <label class="input"><i class="icon-append icon asterisk"></i>
-          <input type="text" name="deputy-chairperson" placeholder="Name of committee">
-        </label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "deputy-chair", "", "Select committee deputy chair");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member3", "", "Select 3rd committee member");?>
       </div>
 
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member4", "", "Select 4th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member5", "", "Select 5th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member6", "", "Select 6th committee member");?>
+      </div>
     </div>    
     
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member7", "", "Select 7th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member8", "", "Select 8th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member9", "", "Select 9th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member10", "", "Select 10th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member11", "", "Select 11th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member12", "", "Select 12th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member13", "", "Select 13th committee member");?>
+      </div>
+    
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member14", "", "Select 14th committee member");?>
+      </div>
+    </div>  
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member15", "", "Select 15th committee member");?>
+      </div>
+    
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member16", "", "Select 16th committee member");?>
+      </div>
+    </div>
+    
+
     <button type="button" name="dosubmit" class="corporato button">Add Committee</button>
     <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
     <input name="processCommittee" type="hidden" value="1">
