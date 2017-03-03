@@ -69,6 +69,139 @@ $(document).ready(function () {
 // ]]>
 </script>
 <?php break;?>
+
+<?php case"members": ?>
+
+<div class="corporato form segment">
+  <div class="corporato top right attached label">Add or edit committee members</div>
+  <form id="corporato_form" name="corporato_form" method="post">
+
+    <div class="two fields">
+      <div class="field">
+        <label>Committee Chairperson</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "chair", "", "Select committee chair");?>
+      </div>
+
+      <div class="field">
+        <label>Committee Deputy Chairperson</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "deputy-chair", "", "Select committee deputy chair");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member3", "", "Select 3rd committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member4", "", "Select 4th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member5", "", "Select 5th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member6", "", "Select 6th committee member");?>
+      </div>
+    </div>    
+    
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member7", "", "Select 7th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member8", "", "Select 8th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member9", "", "Select 9th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member10", "", "Select 10th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member11", "", "Select 11th committee member");?>
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member12", "", "Select 12th committee member");?>
+      </div>
+    </div>
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member13", "", "Select 13th committee member");?>
+      </div>
+    
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member14", "", "Select 14th committee member");?>
+      </div>
+    </div>  
+
+    <div class="two fields">
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member15", "", "Select 15th committee member");?>
+      </div>
+    
+      <div class="field">
+        <label>Member</label>
+        <?php echo $core->getDropList($leader->getLeaderList(), "member16", "", "Select 16th committee member");?>
+      </div>
+    </div>
+    
+
+    <button type="button" name="dosubmit" class="corporato button">Update Committee Members</button>
+    <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
+    <input name="processCommitteeMembers" type="hidden" value="1">
+  </form>
+</div>
+
+<div id="msgholder"></div>
+
+<script type="text/javascript"> 
+// <![CDATA[
+$(document).ready(function () {
+  $("#filter").on("keyup", function() {
+    var filter = $(this).val(),
+      count = 0;
+    $("#fsearch .row").each(function() {
+      if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+        $(this).fadeOut();
+      } else {
+        $(this).show();
+        count++;
+      }
+    });
+  });
+});
+// ]]>
+</script>
+
+<?php break;?>
+
 <?php case"add": ?>
 
 <div class="corporato form segment">
@@ -265,7 +398,7 @@ $(document).ready(function () {
         <td><?php echo $row->name;?></td>
         <td><?php echo $row->committees_name;?></td>
         <td><?php echo Filter::dodate("short_date", $row->created);?></td>        
-        <td class="push-right"><a href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right"><a href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo $row->id;?>"><i class="circular inverted info icon user link"></i></a> <a class="delete" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>
