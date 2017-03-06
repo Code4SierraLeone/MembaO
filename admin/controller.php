@@ -415,10 +415,15 @@
     	$committee->processCommittee();
   	endif;
 
- /* == Proccess Committee == */
+ /* == Proccess Committee Type == */
  	if (isset($_POST['processCommitteeType'])):
     	$committee->processCommitteeType();
-  	endif; 	
+  	endif; 
+
+  /* == Proccess Committee Members == */
+ 	if (isset($_POST['processCommitteeMembers'])):
+    	$committee->processCommitteeMembers();
+  	endif;  		
 
   /* == Proccess Leader == */
   if (isset($_POST['processLeader'])):

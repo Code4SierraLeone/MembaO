@@ -14,6 +14,7 @@ class Committees
 	{
     	const cTable = "committees";
       	const ctTable = "committees_type";
+      	const cmTable = "committees_members";
 	  
 	  	public $committeeslug = null;
 	  	private static $db;
@@ -240,5 +241,105 @@ class Committees
 		  		$row = self::$db->fetch_all("SELECT id, name FROM " . self::ctTable . " ORDER BY name");
           		return $row ? $row : 0;
 	  		}	
+
+		/**
+		* Committees:::processCommitteeMembers()
+		* 
+		* @return
+		*/
+	
+		public function processCommitteeMembers()
+	  		{		  
+				Filter::checkPost('chair', "Please select committee chair name");
+				Filter::checkPost('deputy-chair', "Please select committee deputy chair name");
+				Filter::checkPost('member3', "Please select committee member name");
+				Filter::checkPost('member4', "Please select committee member name");			  		  		 
+				Filter::checkPost('member5', "Please select committee member name");
+				Filter::checkPost('member6', "Please select committee member name");
+				Filter::checkPost('member7', "Please select committee member name");
+				Filter::checkPost('member8', "Please select committee member name");
+				Filter::checkPost('member9', "Please select committee member name");
+				Filter::checkPost('member10', "Please select committee member name");
+				Filter::checkPost('member11', "Please select committee member name");
+				Filter::checkPost('member12', "Please select committee member name");
+				Filter::checkPost('member13', "Please select committee member name");
+				Filter::checkPost('member14', "Please select committee member name");
+				Filter::checkPost('member15', "Please select committee member name");
+				Filter::checkPost('member16', "Please select committee member name");
+		    		  
+		  		if (empty(Filter::$msgs)) {
+		  			$members = array($_POST['chair'], $_POST['deputy-chair'], $_POST['member3'], $_POST['member4'], $_POST['member5'], $_POST['member6'], $_POST['member7'], $_POST['member8'], $_POST['member9'], $_POST['member10'], $_POST['member11'], $_POST['member12'], $_POST['member13'], $_POST['member14'], $_POST['member15'], $_POST['member16']);
+
+		  			$i = 0;
+
+		  			//delete existing members list for this committee
+		  			self::$db->delete(self::cmTable, "committee=" . Filter::$id);
+
+		  			foreach ($members as $val):
+			  			$memberid = intval($val);			  		
+
+			  			$data = array(
+				  			'committee' => Filter::$id,
+				  			'member' => $memberid
+			  			);
+
+			  			//echo $data['member'];
+
+			  			if ($i==0) {
+			  				$data['role'] = 1;
+			  			}
+
+			  			elseif ($i==1) {
+			  				$data['role'] = 2;
+			  			}			  		
+			  			else {
+			  				$data['role'] = 3;
+			  			}	  	
+			                   
+						//insert record in car-campaign table
+						self::$db->insert(self::cmTable, $data);
+
+						$i++;
+
+					endforeach;
+
+					if (self::$db->affected()) {
+						$json['type'] = 'success';
+					  	$json['title'] = Lang::$word->SUCCESS;
+					  	$json['message'] = Filter::msgSingleOk("Members of this committee have been updated", false);
+			  		
+			  		} else {
+				  		$json['type'] = 'success';
+				  		$json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
+			  		}
+			  		
+			  		print json_encode($json);
+
+		  		} else {
+			  		$json['message'] = Filter::msgStatus();
+			  		print json_encode($json);
+		  		}
+	  		} 	
+
+	  	/**
+	   	* Committees::getCommitteeMembers()
+	  	* 
+	   	* @param bool $sort
+	   	* @return
+	   	*/
+	  
+	  	public function getCommitteeMembers($committee)
+	  		{		  		
+				  
+				$sql = "SELECT cm.*, CONCAT(l.first_name,' ',l.last_name) as name, l.constituency as constituencyid" 
+				. "\n FROM " . self::cmTable . " as cm"
+				. "\n LEFT JOIN " . Leaders::lTable . " as l ON l.id = cm.member"
+				. "\n WHERE cm.committee = " . $committee
+				. "\n ORDER BY cm.role ASC";
+		        
+		         $row = self::$db->fetch_all($sql);
+				  
+		        return ($row) ? $row : 0;
+	  		}	  		
   	}
 ?>

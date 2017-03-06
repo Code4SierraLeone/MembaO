@@ -73,6 +73,53 @@ $(document).ready(function () {
 <?php case"members": ?>
 
 <div class="corporato form segment">
+  <?php $committeemembersrow = $committee->getCommitteeMembers(Filter::$id);?>
+
+<div class="corporato basic segment">
+  <div class="header"><a class="corporato button push-right" href="index.php?do=committees&amp;action=update-members&amp;id=<?php echo Filter::$id;?>"><i class="icon add"></i> Update Committee Members</a><span>Viewing Committee Members</span> </div>
+
+  <table class="corporato basic sortable table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Constituency</th>
+        <th>Role</th>                
+      </tr>
+    </thead>
+    <tbody>
+      <?php if(!$committeemembersrow):?>
+      <tr>
+        <td colspan="6"><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></td>
+      </tr>
+      <?php else:?>
+      <?php $i = 1; foreach ($committeemembersrow as $row):?>
+        <tr>
+          <td><?php echo $i;?></td>
+          <td><?php echo $row->name;?></td>
+          <td><?php echo $row->constituencyid;?></td>
+          <td><?php echo $row->role;?></td>                
+        </tr>
+      <?php $i++; endforeach;?>
+      <?php unset($row);?>
+      <?php endif;?>
+    </tbody>
+  </table>
+</div>
+<div class="corporato divider"></div>
+
+<a href="index.php?do=committees&amp;action=members&amp;id=<?php echo Filter::$id;?>" class="corporato info button">Update Committee Members</a>
+<a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
+
+
+</div>
+
+
+<?php break;?>
+
+<?php case"update-members": ?>
+
+<div class="corporato form segment">
   <div class="corporato top right attached label">Add or edit committee members</div>
   <form id="corporato_form" name="corporato_form" method="post">
 
@@ -176,6 +223,7 @@ $(document).ready(function () {
     <button type="button" name="dosubmit" class="corporato button">Update Committee Members</button>
     <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
     <input name="processCommitteeMembers" type="hidden" value="1">
+    <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
 </div>
 
