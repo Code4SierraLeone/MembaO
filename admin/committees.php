@@ -98,7 +98,7 @@ $(document).ready(function () {
           <td><?php echo $i;?></td>
           <td><?php echo $row->name;?></td>
           <td><?php echo $row->constituencyid;?></td>
-          <td><?php echo $row->role;?></td>                
+          <td><?php echo getCommitteeMemberRole($row->role);?></td>                
         </tr>
       <?php $i++; endforeach;?>
       <?php unset($row);?>

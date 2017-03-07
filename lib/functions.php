@@ -441,6 +441,24 @@
           case 2:
               return "Female";
       }
+  }
+
+    /**
+   * getCommitteeMemberRole()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
+  function getCommitteeMemberRole($role)
+  {
+      switch ($role) {
+          case 1:
+              return "Chairperson";
+          case 2:
+              return "Deputy Chairperson";
+          case 3:
+              return "Member";    
+      }
   }  
 
   /**
