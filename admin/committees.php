@@ -48,23 +48,192 @@ if (!defined("_VALID_PHP"))
 </div>
 
 <div id="msgholder"></div>
+<?php break;?>
+
+<?php case"edit-meeting": ?>
+<?php $row = $core->getRowById(Committees::cmsTable, Filter::$id);?>
+
+<div class="corporato form segment">
+  <div class="corporato top right attached label">Editing <?php echo $row->name;?></div>
+  <form id="corporato_form" name="corporato_form" method="post">    
+    
+    <div class="three fields">
+      <div class="field">
+        <label class="input"><i class="icon-append icon asterisk"></i>
+          <input type="text" name="name" value="<?php echo $row->name;?>">
+        </label>
+      </div>
+      <div class="field">
+        <div class="corporato input"> <i class="icon-prepend icon calendar"></i>
+          <input name="meeting_date" type="date" data-datepicker="true" value="<?php echo $row->meeting_date;?>" />
+        </div>
+      </div>
+      <div class="field">        
+        <select name="meeting_type">
+          <option value="0">--- Select meeting type ---</option>
+          <option value="1"<?php if ($row->meeting_type == 1) echo " selected=\"selected\"";?>>In camera</option>
+          <option value="2"<?php if ($row->meeting_type == 2) echo " selected=\"selected\"";?>>Public</option>          
+        </select>
+      </div>
+    </div>
+    
+    <div class="corporato divider"></div>
+    
+    <div class="field">
+      <label>About the meeting</label>
+      <textarea class="bodypost" name="description"><?php echo $row->description;?></textarea>
+    </div>
+        
+    <div class="corporato fitted divider"></div>
+    
+    <button type="button" name="dosubmit" class="corporato button">Update Committee Meeting Data</button>
+    <a href="index.php?do=committees" class="corporato basic button">Cancel Edit</a>
+    <input name="processCommitteeMeeting" type="hidden" value="1">
+    <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
+    <input name="committee" type="hidden" value="<?php echo $row->committee;?>" />
+  </form>
+</div>
+
+<div id="msgholder"></div>
+
+<?php break;?>
+
+<?php case"add-meeting": ?>
+
+<div class="corporato form segment">
+  <div class="header"><span>Add Meeting</span> </div>
+  <form id="corporato_form" name="corporato_form" method="post">      
+    
+    <div class="three fields">
+      <div class="field">      
+        <label class="input"><i class="icon-append icon asterisk"></i>
+          <input type="text" name="name" placeholder="Meeting title">
+        </label>
+      </div>
+      <div class="field">
+        <div class="corporato input"> <i class="icon-prepend icon calendar"></i>
+          <input name="meeting_date" type="date" data-datepicker="true" placeholder="Select meeting date" />
+        </div>
+      </div>
+      <div class="field">        
+        <select name="meeting_type">
+          <option value="0">--- Select meeting type ---</option>
+          <option value="1">In camera</option>
+          <option value="2">Public</option>
+        </select>
+      </div>        
+    </div>
+    
+    <div class="corporato divider"></div>
+    
+    <div class="field">
+      <label>About the meeting</label>
+      <textarea class="bodypost" name="description"></textarea>
+    </div>
+        
+    <div class="corporato fitted divider"></div>
+    
+    <button type="button" name="dosubmit" class="corporato button">Add Committee Meeting</button>
+    <a href="index.php?do=committees" class="corporato basic button">Cancel Edit</a>
+    <input name="processCommitteeMeeting" type="hidden" value="1">
+    <input name="committee" type="hidden" value="<?php echo Filter::$id;?>" />
+    
+  </form>
+</div>
+
+<div id="msgholder"></div>
+
+<?php break;?>
+
+
+<?php case"meetings": ?>
+<?php $committeemeetingsrow = $committee->getCommitteeMeetings();?>
+
+<div class="corporato basic segment">
+  <div class="header"><a class="corporato button push-right" href="index.php?do=committees&amp;action=add-meeting&amp;id=<?php echo Filter::$id;?>"><i class="icon add"></i> Add Committee Meeting</a><span>Viewing Committee Meetings</span> </div>
+  <div class="corporato small segment form">
+    <form method="post" id="corporato_form" name="corporato_form">
+      <div class="three fields">
+        <div class="field">
+          <div class="corporato input"> <i class="icon-prepend icon calendar"></i>
+            <input name="fromdate" type="text" data-datepicker="true" placeholder="<?php echo Lang::$word->FROM;?>" id="fromdate" />
+          </div>
+        </div>
+        <div class="field">
+          <div class="corporato action input"> <i class="icon-prepend icon calendar"></i>
+            <input name="enddate" type="text" data-datepicker="true" placeholder="<?php echo Lang::$word->TO;?>" id="enddate" />
+            <a id="doDates" class="corporato icon button"><?php echo Lang::$word->FIND;?></a> </div>
+        </div>
+        <div class="field">
+          <div class="corporato icon input">
+            <input type="text" name="usersearchfield" placeholder="Search by meeting name" id="searchfield"  />
+            <i class="search icon"></i>
+            <div id="suggestions"> </div>
+          </div>
+        </div>
+        
+      </div>
+    </form>
+
+  </div>
+  <table class="corporato basic sortable table">
+    <thead>
+      <tr>
+        <th data-sort="string">Date</th> 
+        <th data-sort="string">Name</th>
+        <th data-sort="string">Type</th>       
+        <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if(!$committeemeetingsrow):?>
+      <tr>
+        <td colspan="6"><?php echo Filter::msgSingleAlert("No committee meetings listed on the platform yet.");?></td>
+      </tr>
+      <?php else:?>
+      <?php foreach ($committeemeetingsrow as $row):?>
+      <tr>
+        <td><?php echo Filter::dodate("short_date", $row->meeting_date);?></td>
+        <td><?php echo $row->name;?></td>
+        <td><?php echo getCommitteeMeetingType($row->meeting_type);?></td>                
+        <td class="push-right"><a href="index.php?do=committees&amp;action=edit-meeting&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete meeting" data-option="deleteCommitteeMeeting" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+      </tr>
+      <?php endforeach;?>
+      <?php unset($row);?>
+      <?php endif;?>
+    </tbody>
+  </table>
+</div>
+
+<div class="corporato divider"></div>
+<div class="two columns">
+  <div class="row"> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </div>
+  <div class="row">
+    <div class="push-right"><?php echo $pager->display_pages();?></div>
+  </div>
+</div>
 
 <script type="text/javascript"> 
-
 // <![CDATA[
 $(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
+    $("#searchfield").on('keyup', function () {
+        var srch_string = $(this).val();
+        var data_string = 'leaderSearch=' + srch_string;
+        if (srch_string.length > 4) {
+            $.ajax({
+                type: "post",
+                url: "controller.php",
+                data: data_string,
+                success: function (res) {
+                    $('#suggestions').html(res).show();
+                    $("input").blur(function () {
+                        $('#suggestions').fadeOut();
+                    });
+                }
+            });
+        }
+        return false;
+    });
 });
 // ]]>
 </script>
@@ -75,43 +244,42 @@ $(document).ready(function () {
 <div class="corporato form segment">
   <?php $committeemembersrow = $committee->getCommitteeMembers(Filter::$id);?>
 
-<div class="corporato basic segment">
-  <div class="header"><a class="corporato button push-right" href="index.php?do=committees&amp;action=update-members&amp;id=<?php echo Filter::$id;?>"><i class="icon add"></i> Update Committee Members</a><span>Viewing Committee Members</span> </div>
+  <div class="corporato basic segment">
+    <div class="header"><a class="corporato button push-right" href="index.php?do=committees&amp;action=update-members&amp;id=<?php echo Filter::$id;?>"><i class="icon add"></i> Update Committee Members</a><span>Viewing Committee Members</span> </div>
 
-  <table class="corporato basic sortable table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Constituency</th>
-        <th>Role</th>                
-      </tr>
-    </thead>
-    <tbody>
-      <?php if(!$committeemembersrow):?>
-      <tr>
-        <td colspan="6"><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></td>
-      </tr>
-      <?php else:?>
-      <?php $i = 1; foreach ($committeemembersrow as $row):?>
+    <table class="corporato basic sortable table">
+      <thead>
         <tr>
-          <td><?php echo $i;?></td>
-          <td><?php echo $row->name;?></td>
-          <td><?php echo $row->constituencyid;?></td>
-          <td><?php echo getCommitteeMemberRole($row->role);?></td>                
+          <th>#</th>
+          <th>Name</th>
+          <th>Constituency</th>
+          <th>Role</th>                
         </tr>
-      <?php $i++; endforeach;?>
-      <?php unset($row);?>
-      <?php endif;?>
-    </tbody>
-  </table>
-</div>
-<div class="corporato divider"></div>
+      </thead>
+      <tbody>
+        <?php if(!$committeemembersrow):?>
+        <tr>
+          <td colspan="6"><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></td>
+        </tr>
+        <?php else:?>
+        <?php $i = 1; foreach ($committeemembersrow as $row):?>
+          <tr>
+            <td><?php echo $i;?></td>
+            <td><?php echo $row->name;?></td>
+            <td><?php echo $row->constituencyid;?></td>
+            <td><?php echo getCommitteeMemberRole($row->role);?></td>                
+          </tr>
+        <?php $i++; endforeach;?>
+        <?php unset($row);?>
+        <?php endif;?>
+      </tbody>
+    </table>
+  </div>
 
-<a href="index.php?do=committees&amp;action=members&amp;id=<?php echo Filter::$id;?>" class="corporato info button">Update Committee Members</a>
-<a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
+  <div class="corporato divider"></div>
 
-
+  <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo Filter::$id;?>" class="corporato info button">Update Committee Members</a>
+  <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
 </div>
 
 
@@ -276,102 +444,6 @@ $(document).ready(function () {
     </div>     
     
     <div class="corporato fitted divider"></div>
-
-    <div class="two fields">
-      <div class="field">
-        <label>Committee Chairperson</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "chair", "", "Select committee chair");?>
-      </div>
-
-      <div class="field">
-        <label>Committee Deputy Chairperson</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "deputy-chair", "", "Select committee deputy chair");?>
-      </div>
-    </div>
-
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member3", "", "Select 3rd committee member");?>
-      </div>
-
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member4", "", "Select 4th committee member");?>
-      </div>
-    </div>
-
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member5", "", "Select 5th committee member");?>
-      </div>
-
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member6", "", "Select 6th committee member");?>
-      </div>
-    </div>    
-    
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member7", "", "Select 7th committee member");?>
-      </div>
-
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member8", "", "Select 8th committee member");?>
-      </div>
-    </div>
-
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member9", "", "Select 9th committee member");?>
-      </div>
-
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member10", "", "Select 10th committee member");?>
-      </div>
-    </div>
-
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member11", "", "Select 11th committee member");?>
-      </div>
-
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member12", "", "Select 12th committee member");?>
-      </div>
-    </div>
-
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member13", "", "Select 13th committee member");?>
-      </div>
-    
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member14", "", "Select 14th committee member");?>
-      </div>
-    </div>  
-
-    <div class="two fields">
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member15", "", "Select 15th committee member");?>
-      </div>
-    
-      <div class="field">
-        <label>Member</label>
-        <?php echo $core->getDropList($leader->getLeaderList(), "member16", "", "Select 16th committee member");?>
-      </div>
-    </div>
     
 
     <button type="button" name="dosubmit" class="corporato button">Add Committee</button>
@@ -446,7 +518,7 @@ $(document).ready(function () {
         <td><?php echo $row->name;?></td>
         <td><?php echo $row->committees_name;?></td>
         <td><?php echo Filter::dodate("short_date", $row->created);?></td>        
-        <td class="push-right"><a href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo $row->id;?>"><i class="circular inverted info icon user link"></i></a> <a class="delete" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right"><a href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo $row->id;?>"><i class="circular inverted info icon user link"></i></a>  <a href="index.php?do=committees&amp;action=meetings&amp;id=<?php echo $row->id;?>"><i class="circular inverted info icon calendar link"></i></a> <a class="delete" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>
@@ -454,6 +526,7 @@ $(document).ready(function () {
     </tbody>
   </table>
 </div>
+
 <div class="corporato divider"></div>
 <div class="two columns">
   <div class="row"> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </div>
