@@ -15,6 +15,7 @@
       const bTable = "bills";
       const brTable = "bills_recent";
       const bsTable = "bills_stats";
+      const btTable = "bills_status";
 	  
 	  public $billslug = null;
 	  private static $db;
@@ -92,8 +93,9 @@
 		  $pager->default_ipp = Registry::get("Core")->perpage;
 		  $pager->paginate();
 		  
-		  $sql = "SELECT b.*" 
+		  $sql = "SELECT b.*, c.name as committee" 
 		  . "\n FROM " . self::bTable . " as b"
+		  . "\n LEFT JOIN " . Committees::cTable . " as c ON c.id = b.committee"
 		  . "\n $where"
 		  . "\n ORDER BY b.created DESC" . $pager->limit;
           $row = self::$db->fetch_all($sql);
@@ -112,22 +114,31 @@
 		  
 		  Filter::checkPost('title', "Enter bill name");
 		  Filter::checkPost('description', "Enter bill description");
-		  Filter::checkPost('year_introduced', "Select year introduced");
-		  Filter::checkPost('mover', "Select MP who moved this bill");
+		  Filter::checkPost('date_introduced', "Select date introduced");
+		  Filter::checkPost('bill_type', "Select bill type");		  
 		  Filter::checkPost('committee', "Assign this bill to a committee");		  
 		  
 		    		  
 		  if (empty(Filter::$msgs)) {
+
+		  		$date_introduced = $_POST['date_introduced'];
+				$fdate = DateTime::createFromFormat('d F, Y', $date_introduced);
+				$fdate = $fdate->format("Y-m-d");
+
 			  $data = array(
 				  'title' => sanitize($_POST['title']),				  
 				  'slug' => doSeo($_POST['title']),
 				  'description' => $_POST['description'],
-				  'year_introduced' => $_POST['year_introduced'],
-				  'mover' => $_POST['mover'],
+				  'bill_type' => $_POST['bill_type'],
+				  'date_introduced' => $fdate,				  
 				  'committee' => $_POST['committee'],				  				  
 				  'featured' => intval($_POST['featured'])
 			  );
 			  
+			  if (!empty($_POST['mover'])) {
+				  $data['mover'] = $_POST['mover'];
+			  }
+
 			  if (!Filter::$id) {
 				  $data['created'] = "NOW()";
 			  }
@@ -148,6 +159,12 @@
 			  $message = (Filter::$id) ? "Bill updated" : "Bill added";
 
 			  if (self::$db->affected()) {
+					$btdata = array(				  	
+				  	'bill' => $lastid,
+				  	'status_date' => $fdate,
+				  	'status' => 1
+			  		);
+			  		self::$db->insert(self::btTable, $btdata);
 				  $json['type'] = 'success';
 				  $json['message'] = Filter::msgOk($message, false);
 			  } else {
@@ -263,6 +280,48 @@
            return ($row) ? $row : 0;
 
 	  }
+
+	  /**
+	   	* Committees:::processBillStatus()
+	   	* 
+	   	* @return
+	   	*/
+	  	public function processBillStatus()
+	  		{		  
+		  		Filter::checkPost('status_date', "Enter date");
+		  		Filter::checkPost('bill_status', "Select new status");		 
+		    		  
+		  		if (empty(Filter::$msgs)) {
+
+		  			$status_date = $_POST['status_date'];
+					$sdate = DateTime::createFromFormat('d F, Y', $status_date);
+					$sdate = $sdate->format("Y-m-d");
+
+			  		$data = array(				  	
+				  	'bill' => $_POST['bill'],
+				  	'status_date' => $sdate,
+				  	'status' => $_POST['bill_status']
+			  		);				  				  					  
+			                              
+
+				  	$lastid = self::$db->insert(self::btTable, $data);
+				  	$message = "Bill status added";
+
+				  	if (self::$db->affected()) {
+						$json['type'] = 'success';
+					  	$json['message'] = Filter::msgOk($message, false);
+				  	} else {
+						$json['type'] = 'success';
+					  	$json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
+				  	}
+				  	
+				  	print json_encode($json);			  	  			  
+			  
+			  	} else {
+					$json['message'] = Filter::msgStatus();
+				  	print json_encode($json);
+			  	}
+	  		}
 	  	     
 	  	
 	  

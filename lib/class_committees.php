@@ -15,6 +15,7 @@ class Committees
     	const cTable = "committees";
       	const ctTable = "committees_type";
       	const cmTable = "committees_members";
+      	const cmsTable = "committees_meetings";
 	  
 	  	public $committeeslug = null;
 	  	private static $db;
@@ -340,6 +341,181 @@ class Committees
 		         $row = self::$db->fetch_all($sql);
 				  
 		        return ($row) ? $row : 0;
+	  		}	
+
+	  			/**
+		* Committee::getCommitteeMeetingsSlug()
+		* 
+		* @return
+		*/
+	
+		private function getCommitteeMeetingsSlug()
+	  		{		  
+		  		if (isset($_GET['committeemeetingname'])) {
+				  	$this->committeemeetingslug = sanitize($_GET['committeemeetingname'],100);
+				  	return self::$db->escape($this->committeemeetingslug);
+			  	}
+		  	}
+	  
+	  	/**
+	   	* Committees::getCommitteeMeetings()
+	  	* 
+	   	* @param bool $sort
+	   	* @return
+	   	*/
+	  
+	  	public function getCommitteeMeetings($from = '')
+	  		{
+		  		if (isset($_GET['letter']) and (isset($_POST['fromdate']) && $_POST['fromdate'] <> "" || isset($from) && $from != '')) {
+			  		$enddate = date("Y-m-d");
+			  		$letter = sanitize($_GET['letter'], 2);
+			  		$fromdate = (empty($from)) ? $_POST['fromdate'] : $from;
+			  		
+			  		if (isset($_POST['enddate']) && $_POST['enddate'] <> "") {
+				  		$enddate = $_POST['enddate'];
+			  		}
+			  		
+			  		$q = "SELECT COUNT(*) FROM " . self::cmsTable . " WHERE date BETWEEN '" . trim($fromdate) . "' AND '" . trim($enddate) . " 23:59:59'"
+			  		. "\n AND name REGEXP '^" . self::$db->escape($letter) . "'";
+			  		$where = " WHERE cms.date BETWEEN '" . trim($fromdate) . "' AND '" . trim($enddate) . " 23:59:59' AND name REGEXP '^" . self::$db->escape($letter) . "'";
+			  
+			  		} elseif (isset($_POST['fromdate']) && $_POST['fromdate'] <> "" || isset($from) && $from != '') {
+				  		$enddate = date("Y-m-d");
+				  		$fromdate = (empty($from)) ? $_POST['fromdate'] : $from;
+				  		
+				  		if (isset($_POST['enddate']) && $_POST['enddate'] <> "") {
+					  		$enddate = $_POST['enddate'];
+				  		}
+				  		
+				  		$q = "SELECT COUNT(*) FROM " . self::cmsTable . " WHERE date BETWEEN '" . trim($fromdate) . "' AND '" . trim($enddate) . " 23:59:59'";
+				  		$where = " WHERE cms.date BETWEEN '" . trim($fromdate) . "' AND '" . trim($enddate) . " 23:59:59'";
+				  
+			  		} elseif(isset($_GET['letter'])) {
+				  		$letter = sanitize($_GET['letter'], 2);
+				  		$where = "WHERE cms.name REGEXP '^" . self::$db->escape($letter) . "'";
+				  		$q = "SELECT COUNT(*) FROM " . self::cmsTable . " WHERE name REGEXP '^" . self::$db->escape($letter) . "' LIMIT 1"; 
+
+					} elseif(isset(Filter::$id)) {
+				  		$where = "WHERE cms.committee = " . Filter::$id ."";
+				  		$q = "SELECT COUNT(*) FROM " . self::cmsTable . " WHERE committee = " . Filter::$id . ""; 
+
+			  		
+			  		} else {
+				  		$q = "SELECT COUNT(*) FROM " . self::cmsTable . " LIMIT 1";
+				  		$where = null;
+			  		}
+			  
+		        $record = self::$db->query($q);
+		        $total = self::$db->fetchrow($record);
+		        $counter = $total[0];
+				 
+				$pager = Paginator::instance();
+				$pager->items_total = $counter;
+				$pager->default_ipp = Registry::get("Core")->perpage;
+				$pager->paginate();
+				  
+				$sql = "SELECT cms.*, c.name as committees_name" 
+				. "\n FROM " . self::cmsTable . " as cms"
+				. "\n LEFT JOIN " . self::cTable . " as c ON c.id = cms.committee"
+				. "\n $where"
+				. "\n ORDER BY cms.created DESC" . $pager->limit;
+		        
+		         $row = self::$db->fetch_all($sql);
+				  
+		        return ($row) ? $row : 0;
+	  		}
+
+	  	/**
+	   	* Committees:::processCommitteeMeeting()
+	   	* 
+	   	* @return
+	   	*/
+	  	public function processCommitteeMeeting()
+	  		{		  
+		  		Filter::checkPost('name', "Enter meeting title");
+		  		Filter::checkPost('description', "Enter committee description");
+		  		Filter::checkPost('meeting_date', "Select meeting date");		
+		    		  
+		  		if (empty(Filter::$msgs)) {
+
+		  			$meeting_date = $_POST['meeting_date'];
+					$fdate = DateTime::createFromFormat('d F, Y', $meeting_date);
+					$fdate = $fdate->format("Y-m-d");
+
+			  		$data = array(
+				  	'name' => sanitize($_POST['name']),				  
+				  	'slug' => doSeo($_POST['name']),
+				  	'description' => $_POST['description'],
+				  	'meeting_date' => $fdate,
+				  	'meeting_type' => $_POST['meeting_type'],
+				  	'committee' => $_POST['committee']
+			  		);	
+			  
+				  	if (!Filter::$id) {
+						$data['created'] = "NOW()";
+				  	}
+
+				  	if (empty($_POST['metakeys' . Lang::$lang]) or empty($_POST['metadesc'])) {
+						include (BASEPATH . 'lib/class_meta.php');
+					  	parseMeta::instance($_POST['description']);
+					  	
+					  	if (empty($_POST['metakeys'])) {
+							$data['metakeys'] = parseMeta::get_keywords();
+					  	}
+					  
+					  	if (empty($_POST['metadesc'])) {
+							$data['metadesc'] = parseMeta::metaText($_POST['description']);
+					  	}
+				  	}
+			                              
+
+				  	(Filter::$id) ? self::$db->update(self::cmsTable, $data, "id=" . Filter::$id) : $lastid = self::$db->insert(self::cmsTable, $data);
+				  	$message = (Filter::$id) ? "Committee meeting updated" : "Committee meeting added";
+
+				  	if (self::$db->affected()) {
+						$json['type'] = 'success';
+					  	$json['message'] = Filter::msgOk($message, false);
+				  	} else {
+						$json['type'] = 'success';
+					  	$json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
+				  	}
+				  	
+				  	print json_encode($json);			  	  			  
+			  
+			  	} else {
+					$json['message'] = Filter::msgStatus();
+				  	print json_encode($json);
+			  	}
+	  		}
+
+	  	/**
+	   	* Committees::renderCommitteeMeeting()
+	   	* 
+	   	* @return
+	   	*/
+	  	
+	  	public function renderCommitteeMeeting()
+	  		{
+		  		$is_admin = Registry::get("Users")->is_Admin();
+		  
+		  		$sql = "SELECT cms.*, cms.id as cmsid, c.name as committees_name" 		  		
+		  		. "\n FROM " . self::cmsTable . " as cms"	
+		  		. "\n LEFT JOIN " . self::cTable . " as c ON c.id = cms.committee"	  
+		  		. "\n WHERE c.slug = '".$this->committeeslug."'"
+		  		. "\n $is_admin";
+          		$row = self::$db->first($sql);		           
+	  		}
+	  	  	     	  
+	  
+	  	/**
+	   	* Committees::getCommitteesList()
+	   	* 
+	   	* @return
+	   	*/
+	  	public function getCommitteeMeetingsList()
+	  		{
+		  		$row = self::$db->fetch_all("SELECT id, name, slug FROM " . self::cmsTable . " ORDER BY date");
+          		return $row ? $row : 0;
 	  		}	  		
   	}
 ?>

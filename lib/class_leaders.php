@@ -96,7 +96,7 @@
 		  $pager->default_ipp = Registry::get("Core")->perpage;
 		  $pager->paginate();
 		  
-		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as fullname, CONCAT(co.name,', ',co.district) as constituency, pa.name as partyname, pa.abbr," 
+		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, CONCAT(co.name,', ',co.district) as constituency, pa.name as partyname, pa.abbr," 
 		  . "\n (SELECT COUNT(lid) FROM " . self::saTable . " WHERE lid = l.id) as attendance"
 		  . "\n FROM " . self::lTable . " as l"
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency" 
@@ -118,8 +118,7 @@
 	  {
 		  
 		  Filter::checkPost('first_name', "Enter first name");
-		  Filter::checkPost('last_name', "Enter last name");
-		  Filter::checkPost('party', "Select party");
+		  Filter::checkPost('last_name', "Enter last name");		  
 		  Filter::checkPost('gender', "Select gender");		  
 		  
 		  if (!empty($_FILES['thumb']['name'])) {
@@ -134,8 +133,7 @@
 				  'last_name' => sanitize($_POST['last_name']), 
 				  'slug' => (empty($_POST['slug'])) ? doSeo($_POST['first_name'].$_POST['other_name'].$_POST['last_name']) : doSeo($_POST['slug']),
 				  'gender' => $_POST['gender'],
-				  'dob' => $_POST['dob'],
-				  'bio' => $_POST['bio'],
+				  'dob' => $_POST['dob'],				  
 				  'party' => $_POST['party'],
 				  'office' => $_POST['office'],
 				  'constituency' => $_POST['constituency'],
@@ -149,12 +147,12 @@
 
 			  if (empty($_POST['metakeys' . Lang::$lang]) or empty($_POST['metadesc'])) {
 				  include (BASEPATH . 'lib/class_meta.php');
-				  parseMeta::instance($_POST['bio']);
+				  parseMeta::instance($_POST['first_name'] .' '.$_POST['last_name']);
 				  if (empty($_POST['metakeys'])) {
 					  $data['metakeys'] = parseMeta::get_keywords();
 				  }
 				  if (empty($_POST['metadesc'])) {
-					  $data['metadesc'] = parseMeta::metaText($_POST['bio']);
+					  $data['metadesc'] = parseMeta::metaText($_POST['first_name'] .' '.$_POST['last_name']);
 				  }
 			  }
 			  
