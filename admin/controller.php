@@ -409,6 +409,11 @@
       $bill->processBill();
   endif;
 
+  /* == Proccess Bill Status == */
+  if (isset($_POST['processBillStatus'])):
+      $bill->processBillStatus();
+  endif;
+
 
  /* == Proccess Committee == */
  	if (isset($_POST['processCommittee'])):
@@ -423,7 +428,12 @@
   /* == Proccess Committee Members == */
  	if (isset($_POST['processCommitteeMembers'])):
     	$committee->processCommitteeMembers();
-  	endif;  		
+  	endif; 
+
+  /* == Proccess Committee Meeting == */
+ 	if (isset($_POST['processCommitteeMeeting'])):
+    	$committee->processCommitteeMeeting();
+  	endif; 	 		
 
   /* == Proccess Leader == */
   if (isset($_POST['processLeader'])):
