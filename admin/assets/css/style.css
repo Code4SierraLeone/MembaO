@@ -40,8 +40,14 @@ h6 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
 }
+
+.small {
+  font-size: .7em
+}
+
 .corporato-content {
   padding: 1em;
+  min-height: 450px
 }
 .tablebox {
   overflow: hidden;
@@ -104,7 +110,7 @@ nav li a {
   display: block;
   color: #931A16;
   font-weight: 400;
-  padding: 1em;
+  padding: .6em;
 }
 
 
