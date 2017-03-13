@@ -50,7 +50,7 @@
           <option value="0">--- Reset Leader  ---</option>
           <?php if($prodrow):?>
           <?php foreach($prodrow as $prow):?>
-          <option value="<?php echo $prow->id;?>"><?php echo $prow->fullname;?></option>
+          <option value="<?php echo $prow->id;?>"><?php echo $prow->name;?></option>
           <?php endforeach;?>
           <?php unset($prow);?>
           <?php endif;?>

@@ -47,7 +47,7 @@
       	</div>
         <div class="field">
     	    <label>Date of birth</label>               
-	        <input type="date" value="<?php echo $row->dob;?>" name="dob">      	
+	        <input type="date" data-datepicker="true" placeholder="Select date" value="<?php echo $row->dob;?>" name="dob">      	
         </div>
         
         <div class="field">
@@ -91,10 +91,7 @@
       </div>
     </div>
     
-    <div class="corporato divider"></div>
-    <div class="field">
-      <textarea class="bodypost" name="bio"><?php echo $row->bio;?></textarea>
-    </div>
+    <div class="corporato divider"></div>    
     
     <div class="three fields">
         <div class="field">
@@ -129,24 +126,7 @@
   </form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
+
 <?php break;?>
 <?php case"add": ?>
 
@@ -186,7 +166,7 @@ $(document).ready(function () {
       	</div>
         <div class="field">
     	    <label>Date of birth</label>               
-	        <input type="date" name="dob" placeholder="Date of birth">      	
+	        <input type="date" data-datepicker="true" placeholder="Select date" name="dob">      	
         </div>
         
         <div class="field">
@@ -212,17 +192,14 @@ $(document).ready(function () {
           <option value="1">Ordinary Member of Parliament</option>
           <option value="2">Paramount Chief Member of Parliament</option>
         </select>
-      	</div>
-        <div class="field">
+      </div>
+      <div class="field">
         <label>Constituency</label>
         <?php echo $core->getDropList($leader->getConstituencyList(), "constituency", "", "Select Constituency");?>
       	</div>
     </div>
 
-    <div class="corporato divider"></div>
-    <div class="field">
-      <textarea class="bodypost" name="bio"></textarea>
-    </div>
+    <div class="corporato divider"></div>    
 
     <div class="three fields">
         <div class="field">
@@ -240,10 +217,10 @@ $(document).ready(function () {
           <label>Featured</label>
           <div class="inline-group">
             <label class="radio">
-              <input type="radio" name="featured" value="1" checked="checked">
+              <input type="radio" name="featured" value="1">
               <i></i><?php echo Lang::$word->YES;?></label>
             <label class="radio">
-              <input type="radio" name="featured" value="0" >
+              <input type="radio" name="featured" value="0" checked="checked">
               <i></i><?php echo Lang::$word->NO;?></label>
           </div>
         </div>
@@ -255,24 +232,7 @@ $(document).ready(function () {
   </form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
+
 <?php break;?>
 
 <?php default: ?>
@@ -280,22 +240,15 @@ $(document).ready(function () {
 <div class="corporato basic segment">
   <div class="header"><a class="corporato button push-right" href="index.php?do=leaders&amp;action=add"><i class="icon add"></i> Add Leader</a><span>Viewing Members of Parliament</span> </div>
   <div class="corporato small segment form">
-    <div class="two fields">
-      <div class="field">
-        <div class="corporato icon input">
-          <input type="text" name="serachprod" placeholder="Search by last name" id="searchfield"  />
-          <i class="search icon"></i>
-          <div id="suggestions"> </div>
-        </div>
+    
+    <div class="field">
+      <div class="corporato icon input">
+        <input type="text" name="serachprod" placeholder="Search by last name" id="searchfield"  />
+        <i class="search icon"></i>
+        <div id="suggestions"> </div>
       </div>
-      <div class="field">
-        <div class="two fields">
-          <div class="field"> <?php echo $pager->items_per_page();?> </div>
-          <div class="field"> <?php echo $pager->jump_menu();?> </div>
-        </div>
-      </div>
-    </div>
-    <div class="content-center"> <?php echo alphaBits('index.php?do=leaders', "letter");?> </div>
+    </div>      
+
   </div>
   <table class="corporato basic sortable table">
     <thead>
@@ -321,9 +274,14 @@ $(document).ready(function () {
           <?php else:?>
           <img src="<?php echo UPLOADURL;?>leaders/blank.jpg" alt="<?php echo $row->name;?>" class="corporato avatar image"/>
           <?php endif;?>
-          <?php echo $row->fullname;?></td>
+          <?php echo $row->name;?></td>
         <td><?php echo $row->constituency;?></td>
-        <td><?php echo $row->partyname;?> (<?php echo $row->abbr;?>)</td>
+        <td><?php if($row->partyname): ?>
+          <?php echo $row->partyname.' ('. $row->abbr;?>)
+          <?php else: ?>
+            N/A
+          <?php endif; ?>  
+        </td>
         <td><?php echo getGender($row->gender);?></td>
         <td><?php echo getAge($row->dob);?></td>                
         <td><a href="index.php?do=leaders&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete leader listing" data-option="deleteLeader" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="circular danger inverted remove icon link"></i></a></td>

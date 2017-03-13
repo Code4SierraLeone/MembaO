@@ -40,7 +40,7 @@
       <?php if ($core->logo):?>
       <div> <img src="../uploads/<?php echo $core->logo;?>" alt="" class="logo"/></div>
       <?php endif;?>
-      Admin Panel - Login </header>
+    </header>
     <div class="row">
       <input type="text" placeholder="<?php echo Lang::$word->USERNAME;?>" name="username">
       <input type="password" placeholder="<?php echo Lang::$word->PASSWORD;?>" name="password">
