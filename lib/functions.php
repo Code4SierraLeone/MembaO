@@ -443,6 +443,23 @@
       }
   }
 
+
+   /**
+   * getGender()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
+  function getCommitteeMeetingType($mtype)
+  {
+      switch ($mtype) {
+          case 1:
+              return "In camera";
+          case 2:
+              return "Public";
+      }
+  }
+
     /**
    * getCommitteeMemberRole()
    * 
@@ -467,6 +484,22 @@
    * @param mixed $pos
    * @return
    */  
+  function getBillType($type)
+  {
+      switch ($type) {
+          case 1:
+              return "Private Member's";
+          case 2:
+              return "Govermment";		  
+      }
+  }
+
+  /**
+   * getSType()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
   function getSType($type)
   {
       switch ($type) {
@@ -474,22 +507,27 @@
               return "House session";
           case 2:
               return "Committee session";
-		  case 3:
-              return "Budget session";	  
+      case 3:
+              return "Budget session";    
       }
   }  
   
 	 /**
-       * Leader::getLeaderAge()
+       * getAge()
        * 
        * @return
        */
       function getAge($dob = false)
       {         		 
-		 $diff = abs(strtotime(date("Y-m-d")) - strtotime($dob));
-		 $age = floor($diff / (365*60*60*24));		 
-		 return ($age) ? $age : "Age not given";		 
-      }  
+		    if($dob == '0000-00-00'){
+          $age = "Age not given";
+        } else {
+          $diff = abs(strtotime(date("Y-m-d")) - strtotime($dob));
+          $age = floor($diff / (365*60*60*24));      
+        }
+        
+		    return $age;		 
+      }     
 
   /**
    * isActive()
