@@ -116,7 +116,10 @@ $(document).ready(function () {
       	</div>
       	<div class="field">
         	<label>Sitting date</label>
-            <input type="date" name="date" placeholder="Sitting date">        	
+          <div class="corporato input"> <i class="icon-prepend icon calendar"></i>
+            <input name="date" type="text" data-datepicker="true" placeholder="Meeting date" />
+          </div>
+          
       </div> 
       <div class="field">
         <label>Sitting type</label>
