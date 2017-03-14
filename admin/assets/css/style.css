@@ -45,6 +45,11 @@ h6 {
   font-size: .7em
 }
 
+.checkers {
+  padding: 10px 0;
+  border-bottom: 1px solid #e8e8e8
+}
+
 .corporato-content {
   padding: 1em;
   min-height: 450px
