@@ -612,7 +612,7 @@
 				  } else {
 					  $checked = (in_array($data->id, $sel)) ? ' checked' : '';					  
 				  }
-				  $html .= '<div class="checkers"><input name="'.$name.'[]" type="checkbox" value="' . $data->id . '"' . $checked . '/>' . $data->first_name .' ' . $data->last_name .'</div>';
+				  $html .= '<div class="checkers"><input name="'.$name.'[]" type="checkbox" value="' . $data->id . '"' . $checked . '/>' . $data->name .'</div>';
 			  }
 			  return $html;
 		  }

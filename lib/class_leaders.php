@@ -677,7 +677,7 @@
 	   */
 	  public function getLeaderList()
 	  {
-		  $row = self::$db->fetch_all("SELECT id, CONCAT(first_name,' ',last_name) as name, slug FROM " . self::lTable . " WHERE active = 1 ORDER BY name");
+		  $row = self::$db->fetch_all("SELECT id, CONCAT(first_name,' ',last_name) as name, slug FROM " . self::lTable . " WHERE active = 1 ORDER BY id");
           return $row ? $row : 0;
 	  }
 
