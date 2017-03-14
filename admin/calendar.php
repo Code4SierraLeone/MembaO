@@ -2,50 +2,72 @@
   /**
    * Calendar
    *
-   * @package Visible Polls
+   * @package MembaO
    * @author Alan Kawamara
-   * @copyright 2016
+   * @copyright 2017
    */
   if (!defined("_VALID_PHP"))
       die('Direct access to this location is not allowed.');
 ?>
 <?php switch(Filter::$action): case "attendance": ?>
 <?php $row = $core->getRowById(Leaders::scTable, Filter::$id);?>
+<?php $listrow = $leader->getLeaders();?>
 
 <div class="corporato form segment">
 	<div class="corporato top right attached label">Attendance Records / <?php echo Filter::dodate("short_date", $row->date);?></div>
   	<form id="corporato_form" name="corporato_form" method="post">
-    	<div class="field">
-      		<label>Check names of members present on <?php echo Filter::dodate("short_date", $row->date);?></label>
-      		<?php echo $core->getCheckBoxList($leader->getLeaders(), "leader_id", "");?>
-     	</div>    
+    	
+      <table class="corporato basic sortable table">
+        <thead>
+          <tr>
+            <th class="disabled"> <label class="checkbox">
+              <input type="checkbox" name="masterCheckbox" id="masterCheckbox">
+              <i></i></label>
+            </th>
+            <th>MP</th>
+            <th class="push-right">Attendance</th>            
+          </tr>
+        </thead>
+
+        <tbody>
+        <?php if(!$listrow):?>
+          <tr>
+            <td colspan="3"><?php Filter::msgSingleAlert("Sorry, no MPs listed on the application yet.");?></td>
+          </tr>
+        <?php else:?>
+        <?php foreach($listrow as $row):?>
+          <tr>
+            <td class="hide-tablet"><label class="checkbox">
+              <input name="listid[<?php echo $row->id;?>]" type="checkbox" value="<?php echo $row->id;?>">
+              <i></i></label></td>
+            
+            <td><strong><?php echo $row->name;?></strong> <br />
+              <div><small><?php echo $row->constituency;?></small></div>
+            </td>
+            
+            <td></td>          
+          </tr>
+        <?php endforeach;?>
         
-    	<div class="corporato fitted divider"></div>
-    	<button type="button" name="dosubmit" class="corporato button">Update attendance register</button>
-    	<a href="index.php?do=calendar" class="corporato basic button">Cancel edit</a>
-    	<input name="processAttendance" type="hidden" value="1">
-    	<input name="sitting_id" type="hidden" value="<?php echo Filter::$id;?>" />
+        <tr>
+        <div class="corporato fitted divider"></div>
+        <button type="button" name="dosubmit" class="corporato button">Update attendance register</button>
+        <a href="index.php?do=calendar" class="corporato basic button">Cancel edit</a>
+        <input name="processAttendance" type="hidden" value="1">
+        <input name="sitting_id" type="hidden" value="<?php echo Filter::$id;?>" />
+        </tr>
+
+        <?php endif;?>
+        </tbody>        
+      
+      </table>
+      
+        
+    	
   	</form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
+
 <?php break;?>
 <?php case "edit": ?>
 <?php $row = $core->getRowById(Leaders::scTable, Filter::$id);?>
