@@ -62,7 +62,17 @@
   //Load Leader Class
   require_once(BASEPATH . "lib/class_leaders.php");
   Registry::set('Leaders',new Leaders());
-  $leader = Registry::get("Leaders");  
+  $leader = Registry::get("Leaders"); 
+
+  //Load Leader Class
+  require_once(BASEPATH . "lib/class_bills.php");
+  Registry::set('Bills',new Bills());
+  $bill = Registry::get("Bills"); 
+
+  //Load Leader Class
+  require_once(BASEPATH . "lib/class_committees.php");
+  Registry::set('Committees',new Committees());
+  $committee = Registry::get("Committees");  
   
   //Start Paginator Class 
   require_once(BASEPATH . "lib/class_paginate.php");
