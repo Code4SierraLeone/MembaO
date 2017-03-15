@@ -1,6 +1,8 @@
 html,
 body {
   font-size: 15px;
+  height: 100%;
+  margin: 0
 }
 body {
 	font-family: "Roboto",sans-serif!important;
@@ -11,6 +13,13 @@ body {
   	font-weight: 400!important;
   	background-color: #FBE4D1;
 }
+
+.page-container {
+  min-height: 100%;
+  /* equal to footer height */
+  margin-bottom: -50px; 
+}
+
 
 .names {
 	display:inline-block;
@@ -766,12 +775,14 @@ section.listmode .footer div.price {
   visibility: visible;
   z-index: 5000;
 }
+
 footer {
+  height: 50px;
   text-align: center;
   padding: 3em 0;
-  margin-top:2em;
-  background:#888;
+  background:#fff;
 }
+
 
 #scrollUp {
   bottom: 20px;

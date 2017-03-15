@@ -29,8 +29,8 @@
   color: rgba(0,0,0,0.5);
   padding: .8em 1em;
   vertical-align: middle;
-  text-shadow: 0 1px 0 #fff;
-  font-weight: 400;
+  font-weight: 700;
+  font-size: 1em
 }
 .corporato.table thead th:first-child {
 
@@ -380,11 +380,14 @@
 }
 /* == Basic == */
 .corporato.basic.table th {
-  background-color: transparent;
-  padding: .5em;
+  padding: .8em .5em .8em;
+      border-top: 0;
+    box-shadow: none;
+    vertical-align: top;
 }
 .corporato.basic.table thead {
 border-bottom: 2px solid #E9EDF3;
+ background-color: #F0F3FA;
 }
 .corporato.basic.table tbody tr {
   border-bottom: 1px solid #E9EDF3;
@@ -393,9 +396,10 @@ border-bottom: 2px solid #E9EDF3;
   border-bottom: none;
 }
 .corporato.basic.table td {
-  padding: .8em .5em;
+  padding: .8em .5em .8em;
   border-top:0;
-  box-shadow:none
+  box-shadow:none;
+  vertical-align: top;
 }
 .corporato.basic.table tbody tr:nth-child(2n) {
   background-color: transparent;
