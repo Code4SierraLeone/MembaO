@@ -60,6 +60,8 @@ var SITEURL = "<?php echo SITEURL; ?>";
               <?php if($menu):?>
                 <div class="corporato horizontal divided list"> 
                   <a href="<?php echo SITEURL ?>/leaders" class="item menu">MPs</a>
+                  <a href="<?php echo SITEURL ?>/bills" class="item menu">Bills</a>
+                  
                   <?php foreach($menu as $mrow):?>
                   <?php $url = (Registry::get("Core")->seo == 1) ? SITEURL . '/content/' . $mrow->slug . '/' : SITEURL . '/content.php?pagename=' . $mrow->slug;?>
                   <?php $mainurl = ($mrow->home_page) ?  SITEURL : $url;?>
