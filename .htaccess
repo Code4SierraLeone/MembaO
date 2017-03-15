@@ -45,6 +45,9 @@ RewriteRule . %1/%2 [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+RewriteRule ^bills$ bills.php [L]
+RewriteRule ^bills/([^/]+)/?$ bills.php?billname=$1 [L]
+
 RewriteRule ^leader/([^/]+)/?$ leader.php?itemname=$1 [L]
 RewriteRule ^category/([^/]+)/([^/]+) category.php?catname=$1&pg=$2 [L]
 RewriteRule ^category/([^/]+)/?$ category.php?catname=$1  [L]
