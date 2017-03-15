@@ -186,13 +186,12 @@
 	   */
 	  public function renderBill()
 	  {
-		  $is_admin = Registry::get("Users")->is_Admin();
 		  
 		  $sql = "SELECT b.*, b.id as bid," 		  
-		  . "\n (SELECT SUM(hits) FROM " . self::sTable . " WHERE bid = b.id) as hits"
+		  . "\n (SELECT SUM(hits) FROM " . self::bsTable . " WHERE bid = b.id) as hits"
 		  . "\n FROM " . self::bTable . " as b"		  
-		  . "\n WHERE b.slug = '".$this->billslug."'"
-		  . "\n $is_admin";
+		  . "\n WHERE b.slug = '".$this->billslug."'";
+		  //. "\n $is_admin";
           $row = self::$db->first($sql);
 		  
           if ($row) {

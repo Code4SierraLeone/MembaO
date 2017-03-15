@@ -677,8 +677,19 @@
 	   */
 	  public function getLeaderList()
 	  {
-		  $row = self::$db->fetch_all("SELECT id, CONCAT(first_name,' ',last_name) as name, slug FROM " . self::lTable . " WHERE active = 1 ORDER BY id");
-          return $row ? $row : 0;
+//		  $row = self::$db->fetch_all("SELECT id, CONCAT(first_name,' ',last_name) as name, slug FROM " . self::lTable . " WHERE active = 1 ORDER BY id");
+//          return $row ? $row : 0;
+
+		$sql = "SELECT l.*, CONCAT(l.first_name,' ',l.last_name) as name, co.name as constituency" 
+		  . "\n FROM " . self::lTable . " as l"
+		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency"
+		  . "\n WHERE active = 1"
+		  . "\n ORDER BY name";
+
+          $row = self::$db->fetch_all($sql);
+
+          return ($row) ? $row : 0;
+
 	  }
 
 	  /**
