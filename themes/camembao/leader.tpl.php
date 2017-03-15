@@ -25,7 +25,7 @@
               </aside>
               <aside>
                 <div class="description">
-                  <div class="bodycontent"><?php echo $body = cleanOut($row->bio);?> </div>
+              
                   <div class="corporato divider"></div>
                   <div class="corporato divided horizontal list">                   
                     <div class="item"><?php echo $row->attendance;?> sittings</div>
