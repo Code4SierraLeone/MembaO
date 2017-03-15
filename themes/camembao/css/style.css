@@ -6,18 +6,41 @@ body {
 }
 body {
 	font-family: "Roboto",sans-serif!important;
-  	margin: 0px;
+  	
   	padding: 0px;
+    margin: 0 0 50px;
   	color: #666666;
   	text-rendering: optimizeLegibility;
-  	font-weight: 400!important;
-  	background-color: #FBE4D1;
+  	font-weight: 400;
+  	background-color: #f8f8f8;
+    min-height: 100%;
+    margin-bottom: -50px
+    /* equal to footer height */
 }
 
 .page-container {
-  min-height: 100%;
-  /* equal to footer height */
-  margin-bottom: -50px; 
+  max-width: 73.33333em;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #f4f4f4
+}
+
+.corporato-grid.crumbs {
+  max-width: 73.33333em;
+  padding: 0
+}
+
+footer {
+  text-align: center;
+  color: #fff;
+  font-weight: 300;
+  padding: 2em 0 3em;
+  background:#545454;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
 }
 
 
@@ -198,6 +221,10 @@ div#slider figure {
 	margin:2em auto
 }
 
+.padded-60 {
+  padding: 60px 0
+}
+
 .corporato.tabular.segment aside.nopadding {
 	padding:10px 0!important
 }
@@ -260,8 +287,8 @@ h3,
 h5,
 h6 {
   font-family: 'Montserrat', sans-serif;
-  font-weight:700;
-  margin-bottom: 1rem;
+  font-weight:300;
+  margin: 1rem 0 0rem;
 }
 p {
   margin-bottom: 1em;
@@ -606,6 +633,15 @@ section.gridmode .inner,
 section.listmode .inner {
 	
 }
+
+.inner img {
+  width: 50px!important;
+  float: left;
+  border: 2px solid #e8e8e8;
+  margin-right: 10px
+}
+
+
 section.gridmode {
   background-color: #fff;
   overflow: hidden;
@@ -774,13 +810,6 @@ section.listmode .footer div.price {
   background: rgba(255,255,255,0.9) url(../images/loader-large.gif) no-repeat 50% 50%;
   visibility: visible;
   z-index: 5000;
-}
-
-footer {
-  height: 50px;
-  text-align: center;
-  padding: 3em 0;
-  background:#fff;
 }
 
 
