@@ -102,7 +102,7 @@
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency" 
 		  . "\n LEFT JOIN " . self::paTable . " as pa ON pa.id = l.party" 
 		  . "\n $where"
-		  . "\n ORDER BY l.created DESC" . $pager->limit;
+		  . "\n ORDER BY name ASC" . $pager->limit;
           $row = self::$db->fetch_all($sql);
 		  
            return ($row) ? $row : 0;
