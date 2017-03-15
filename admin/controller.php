@@ -14,6 +14,8 @@
 	  
   $delete = (isset($_POST['delete']))  ? $_POST['delete'] : null;
 ?>
+
+
 <?php
   switch ($delete):
 	  
