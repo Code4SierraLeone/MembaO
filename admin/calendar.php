@@ -11,13 +11,13 @@
 ?>
 <?php switch(Filter::$action): case "attendance": ?>
 <?php $row = $core->getRowById(Leaders::scTable, Filter::$id);?>
-<?php $listrow = $leader->getLeaders();?>
+<?php $listrow = $leader->getLeaderList();?>
 
 <div class="corporato form segment">
 	<div class="corporato top right attached label">Attendance Records / <?php echo Filter::dodate("short_date", $row->date);?></div>
   	<form id="corporato_form" name="corporato_form" method="post">
     	
-      <table class="corporato basic sortable table">
+      <table class="corporato basic table celled">
         <thead>
           <tr>
             <th class="disabled"> <label class="checkbox">
@@ -25,7 +25,7 @@
               <i></i></label>
             </th>
             <th>MP</th>
-            <th class="push-right">Attendance</th>            
+                    
           </tr>
         </thead>
 
@@ -38,32 +38,26 @@
         <?php foreach($listrow as $row):?>
           <tr>
             <td class="hide-tablet"><label class="checkbox">
-              <input name="listid[<?php echo $row->id;?>]" type="checkbox" value="<?php echo $row->id;?>">
+              <input name="leader_id[<?php echo $row->id;?>]" type="checkbox" value="<?php echo $row->id;?>">
               <i></i></label></td>
             
             <td><strong><?php echo $row->name;?></strong> <br />
               <div><small><?php echo $row->constituency;?></small></div>
             </td>
-            
-            <td></td>          
+                      
           </tr>
-        <?php endforeach;?>
-        
-        <tr>
-        <div class="corporato fitted divider"></div>
-        <button type="button" name="dosubmit" class="corporato button">Update attendance register</button>
-        <a href="index.php?do=calendar" class="corporato basic button">Cancel edit</a>
-        <input name="processAttendance" type="hidden" value="1">
-        <input name="sitting_id" type="hidden" value="<?php echo Filter::$id;?>" />
-        </tr>
+        <?php endforeach;?>      
 
         <?php endif;?>
-        </tbody>        
-      
-      </table>
-      
-        
+        </tbody>              
+      </table>              
     	
+      <div class="corporato divider"></div>
+
+      <button type="button" name="dosubmit" class="corporato button">Update attendance register</button>
+      <a href="index.php?do=calendar" class="corporato basic button">Go back to Parliamentary Calendar</a>
+      <input name="processAttendance" type="hidden" value="1">
+      <input name="sitting_id" type="hidden" value="<?php echo Filter::$id;?>" />
   	</form>
 </div>
 <div id="msgholder"></div>
