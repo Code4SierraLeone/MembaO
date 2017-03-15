@@ -82,7 +82,7 @@ var SITEURL = "<?php echo SITEURL; ?>";
   	</div>    
 </header>
 
-<div class="corporato-grid">
+<div class="corporato-grid crumbs">
 	<div class="crumbs">
     	<div class="corporato breadcrumb">
       		<div class="section"><?php echo Lang::$word->CRB_HERE;?></div>
