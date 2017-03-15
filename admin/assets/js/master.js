@@ -216,6 +216,15 @@
             $('#corporato_form').ajaxForm(options).submit();
         });
 
+        
+
+        /* == Check all == */
+
+        $('#masterCheckbox').click(function (e) {
+            var $checkBoxes = $("input[type=checkbox]");
+            $($checkBoxes).prop("checked",$(this).prop("checked"))
+        });
+
         /* == Delete Multiple == */
         $('body').on('click', 'button[name=mdelete]', function() {
             function showResponse(json) {
