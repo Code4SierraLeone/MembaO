@@ -20,7 +20,7 @@
 	  const rTable = "recent";
 	  const sTable = "stats";
 	  
-	  public $itemslug = null;
+	  public $leaderslug = null;
 	  private static $db;
       public static $gfileext = array("jpg","jpeg","png");
       /**
@@ -43,9 +43,9 @@
 	  private function getLeaderSlug()
 	  {
 		  
-		  if (isset($_GET['itemname'])) {
-			  $this->itemslug = sanitize($_GET['itemname'],100);
-			  return self::$db->escape($this->itemslug);
+		  if (isset($_GET['leadername'])) {
+			  $this->leaderslug = sanitize($_GET['leadername'],100);
+			  return self::$db->escape($this->leaderslug);
 		  }
 	  }
 	  
@@ -197,12 +197,13 @@
 	  {
 		  $is_admin = Registry::get("Users")->is_Admin() ? null : "AND l.active = 1";
 		  
-		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as fullname, co.id as coid,co.name as coname," 
+		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, co.id as coid,co.name as coname, pa.name as pparty," 
 		  . "\n (SELECT COUNT(leader_id) FROM " . self::saTable . " WHERE leader_id = l.id) as attendance,"
 		  . "\n (SELECT SUM(hits) FROM " . self::sTable . " WHERE lid = l.id) as hits"
 		  . "\n FROM " . self::lTable . " as l"
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency"
-		  . "\n WHERE l.slug = '".$this->itemslug."'"
+		  . "\n LEFT JOIN " . self::paTable . " as pa ON pa.id = l.party"
+		  . "\n WHERE l.slug = '".$this->leaderslug."'"
 		  . "\n $is_admin";
           $row = self::$db->first($sql);
 		  

@@ -1780,7 +1780,7 @@
 		  
 		  if ($this->catslug and $row) {
 			  $meta .= $sep . $row->name;
-		  } elseif (Registry::get("Leaders")->itemslug and $row) {
+		  } elseif (Registry::get("Leaders")->leaderslug and $row) {
 			  $meta .= $sep . $row->first_name .' '.$row->last_name;
 		  } elseif ($this->pageslug and $row) {
 			  $meta .= $sep . $row->title;
@@ -1796,7 +1796,7 @@
 				  $meta .= Registry::get("Core")->metakeys;
 			  }
 				  
-		  } elseif (Registry::get("Leaders")->itemslug and $row) {
+		  } elseif (Registry::get("Leaders")->leaderslug and $row) {
 			  if ($row->metakeys) {
 				  $meta .= $row->metakeys;
 			  } else {
@@ -1814,7 +1814,7 @@
 				  $meta .= Registry::get("Core")->metakeys;
 			  }
 				  
-		  } elseif (Registry::get("Leaders")->itemslug and $row) {
+		  } elseif (Registry::get("Leaders")->leaderslug and $row) {
 			  if ($row->metadesc and $row) {
 				  $meta .= $row->metadesc;
 			  } else {
