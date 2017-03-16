@@ -48,6 +48,9 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^bills$ bills.php [L]
 RewriteRule ^bills/([^/]+)/?$ bills.php?billname=$1 [L]
 
+RewriteRule ^committees$ committees.php [L]
+RewriteRule ^committees/([^/]+)/?$ committees.php?committeename=$1 [L]
+
 RewriteRule ^leaders$ leaders.php [L]
 RewriteRule ^leaders/([^/]+)/?$ leaders.php?leadername=$1 [L]
 
