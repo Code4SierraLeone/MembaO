@@ -443,9 +443,25 @@
       }
   }
 
+  /**
+   * getGenderForm()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
+  function getGenderForm($gender)
+  {
+      switch ($gender) {
+          case 1:
+              return "him";
+          case 2:
+              return "her";
+      }
+  }
+
 
    /**
-   * getGender()
+   * getCommitteeMeetingType()
    * 
    * @param mixed $pos
    * @return
@@ -488,9 +504,9 @@
   {
       switch ($type) {
           case 1:
-              return "Private Member's";
+              return "Private Member's Bill";
           case 2:
-              return "Govermment";		  
+              return "Govermment Bill";		  
       }
   }
 
@@ -527,7 +543,19 @@
         }
         
 		    return $age;		 
-      }     
+      }
+
+  /**
+       * getAge()
+       * 
+       * @return
+       */
+      function getLeaderAttendancePc($lsittings, $tsittings)
+      {              
+        $leaderattendancepc = ($lsittings / $tsittings)*100;
+        
+        return round($leaderattendancepc,1);     
+      }         
 
   /**
    * isActive()
