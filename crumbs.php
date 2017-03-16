@@ -56,10 +56,10 @@
           break;
 
       case "committees":
-          if(isset($allcommmittees)):
-            $html = "committees";
+          if(isset($allcommittees)):
+            $html = "Committees";
           else:
-            $html = ($committeesrow) ? "Committees  /  ".$committeesrow->name : "";
+            $html = ($committeerow) ? "Committees  /  ".$committeerow->name : "";
           endif;
           break;     
 
