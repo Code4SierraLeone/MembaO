@@ -174,14 +174,13 @@ class Committees
 	  	
 	  	public function renderCommittee()
 	  		{
-		  		$is_admin = Registry::get("Users")->is_Admin();
 		  
-		  		$sql = "SELECT c.*, c.id as cid, ct.name as committees_name" 		  		
+		  		$sql = "SELECT c.*, c.id as cid, ct.name as committees_type_name" 		  		
 		  		. "\n FROM " . self::cTable . " as c"	
 		  		. "\n LEFT JOIN " . self::ctTable . " as ct ON ct.id = c.committees_type"	  
-		  		. "\n WHERE c.slug = '".$this->committeeslug."'"
-		  		. "\n $is_admin";
-          		$row = self::$db->first($sql);		           
+		  		. "\n WHERE c.slug = '".$this->committeeslug."'";
+          		$row = self::$db->first($sql);
+          		return $row ? $row : 0;	           
 	  		}
 	  	  	     	  
 	  
