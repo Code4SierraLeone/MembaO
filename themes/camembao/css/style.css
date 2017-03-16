@@ -11,7 +11,7 @@ body {
     margin: 0 0 50px;
   	color: #666666;
   	text-rendering: optimizeLegibility;
-  	font-weight: 400;
+  	font-weight: 300;
   	background-color: #f8f8f8;
     min-height: 100%;
     margin-bottom: -50px
@@ -22,7 +22,8 @@ body {
   max-width: 73.33333em;
   margin: 0 auto;
   background: #fff;
-  border: 1px solid #f4f4f4
+  border: 1px solid #f4f4f4;
+  min-height: 100%
 }
 
 .corporato-grid.crumbs {
@@ -36,7 +37,6 @@ footer {
   font-weight: 300;
   padding: 2em 0 3em;
   background:#545454;
-  position: relative;
   left: 0;
   bottom: 0;
   height: 50px;
@@ -225,12 +225,16 @@ div#slider figure {
   padding: 60px 0
 }
 
+.padded-30 {
+  padding: 30px 0
+}
+
 .corporato.tabular.segment aside.nopadding {
 	padding:10px 0!important
 }
 
 aside img {
-	border:10px solid #fff
+	
 }
 
 a,
@@ -619,26 +623,36 @@ ul.sm {
 }
 #gridview {
 }
+
 #listview section {
-  margin-bottom: 1em;
+  margin-bottom: 2em;
   position: relative;
 }
+
 #listview section:last-child {
   margin-bottom: 0;
 }
+
 #listview section .corporato.tabular.segment aside.top {
   width: 250px
 }
+
+#listview section .corporato.tabular.segment aside.top.small {
+  width: 150px
+}
+
+
 section.gridmode .inner,
 section.listmode .inner {
 	
 }
 
 .inner img {
-  width: 50px!important;
+  width: 60px!important;
   float: left;
-  border: 2px solid #e8e8e8;
-  margin-right: 10px
+  border: 4px solid #F2A35D;
+  margin-right: 10px;
+  padding: 1px
 }
 
 
