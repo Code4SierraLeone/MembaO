@@ -12,7 +12,7 @@
   if (isset($_GET['billname'])):
     $billrow = $bill->renderBill();    
     if(!$billrow):
-      //redirect_to(SITEURL . '/404.php');
+      redirect_to(SITEURL . '/404.php');
     endif;
   else:
     $allbills = $bill->getBills();
