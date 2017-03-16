@@ -10,7 +10,8 @@
   require_once("init.php");
   
   if (isset($_GET['leadername'])):
-    $leaderrow = $leader->renderLeader();    
+    $leaderrow = $leader->renderLeader();
+    $totalSittings = $leader->totalSittings();    
     if(!$leaderrow):
       redirect_to(SITEURL . '/404.php');
     endif;
