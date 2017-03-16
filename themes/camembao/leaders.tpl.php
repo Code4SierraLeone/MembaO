@@ -58,38 +58,49 @@
 <div class="corporato-grid">
   <div class="columns horizontal-gutters">
     <div class="screen-70 tablet-60 phone-100">
-      <div class="corporato basic message">
-        <h2><?php echo $row->fullname;?><small class="push-right">representing <?php echo $row->coname;?></small></h2>
-      </div>
+      <h2><?php echo $leaderrow->name;?></h2>
+      <div>Representing <strong><?php echo $leaderrow->coname;?></strong> on <strong><?php echo $leaderrow->pparty;?></strong> ticket</div>
+
+      <div class="corporato divider"></div>
+
       <div id="listview">
-        <section class="listmode" data-id="<?php echo $row->pid;?>">
+        <section class="listmode" data-id="<?php echo $leaderrow->lid;?>">
           <div>
             <div class="corporato tabular segment">
-              <aside class="top center"><a href="<?php echo UPLOADURL;?>leaders/<?php echo $row->thumb;?>" class="lightbox" title="<?php echo $row->fullname;?>"><img src="<?php echo SITEURL;?>/thumbmaker.php?src=<?php echo UPLOADURL;?>leaders/<?php echo ($row->thumb) ? $row->thumb : "blank.png";?>&amp;w=<?php echo round($core->thumb_w);?>&amp;h=<?php echo round($core->thumb_h);?>&amp;s=1&amp;a=t1" alt=""/></a>                
+              <aside class="top small nopadding"><a href="<?php echo UPLOADURL;?>leaders/<?php echo $leaderrow->thumb;?>" class="lightbox" title="<?php echo $leaderrow->name;?>"><img src="<?php echo SITEURL;?>/thumbmaker.php?src=<?php echo UPLOADURL;?>leaders/<?php echo ($leaderrow->thumb) ? $leaderrow->thumb : "blank.png";?>&amp;w=<?php echo round($core->thumb_w);?>&amp;h=<?php echo round($core->thumb_h);?>&amp;s=1&amp;a=t1" alt=""/></a>                
               </aside>
               <aside>
-                <div class="description">
-              
+                <div class="description">                  
+                  <h5>Attendance overview</h5>
+                  <div class="item">Has been recorded present for <strong><?php echo $leaderrow->attendance;?></strong> sittings out of a possible total of <strong><?php echo $totalSittings;?></strong> this term.</div>
+                  <div class="item">That gives <?php echo getGenderForm($leaderrow->gender);?> an <strong>above-average</strong> attendance rate of <strong><?php echo getLeaderAttendancePc($leaderrow->attendance,$totalSittings);?>%</strong>.</div>
                   <div class="corporato divider"></div>
                   <div class="corporato divided horizontal list">                   
-                    <div class="item"><?php echo $row->attendance;?> sittings</div>
-                    <div class="item"><i class="icon bullseye"></i> <?php echo $row->hits;?></div>
+                    <div class="item"><?php echo $leaderrow->attendance;?> sittings</div>
+                    <div class="item"><i class="icon bullseye"></i> <?php echo $leaderrow->hits;?></div>
                     <div class="item">
-                      <?php Leaders::getLeaderRating($row->lid, $row->rating, $row->ratingc);?>
+                      <?php Leaders::getLeaderRating($leaderrow->lid, $leaderrow->rating, $leaderrow->ratingc);?>
                     </div>
-                    <div class="item"> <a class="like toggle" data-content="<?php echo Lang::$word->LIKE;?>" data-total="<?php echo $row->vote_up;?>" data-id="<?php echo $row->lid;?>"><i class="icon danger heart"></i> <small><?php echo $row->vote_up;?></small></a></div>
+                    <div class="item"> <a class="like toggle" data-content="<?php echo Lang::$word->LIKE;?>" data-total="<?php echo $leaderrow->vote_up;?>" data-id="<?php echo $leaderrow->lid;?>"><i class="icon danger heart"></i> <small><?php echo $leaderrow->vote_up;?></small></a></div>
                   </div>
                   <div class="corporato divider"></div>                                    
                 </div>
               </aside>
             </div>
+
+            <div>
+              <h3>Attendance records</h3>
+
+            </div>
+
           </div>
         </section>
       </div>
     </div>
     <div class="screen-30 tablet-40 phone-100">
-      <div class="corporato small space divider"></div>
-      
+      <div class="padded-30 pull-right">
+        <button type="submitfollow" class="corporato large black button">Follow this MP for updates</button>
+      </div>      
     </div>
   </div>
 </div>
