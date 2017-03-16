@@ -15,11 +15,13 @@
   $pages = array(
       'account',
       'activate',
+      'bills',      
       'category',
-      'checkout',
+      'committees',
       'content',
       'item',
       'login',
+      'leaders',
       'profile',
       'register',
       'search',
@@ -41,13 +43,25 @@
           print Lang::$word->_UA_TITLE3;
           break;
 
+      case "bills":
+          if(isset($allbills)):
+            $html = "Bills";
+          else:
+            $html = ($billrow) ? "Bills  /  ".$billrow->title : "";
+          endif;
+          break;    
+
       case "category":
           $html = ($row) ? $row->name : "";
           break;
 
-      case "checkout":
-          $html = Lang::$word->CKO_TITLE;
-          break;
+      case "committees":
+          if(isset($allcommmittees)):
+            $html = "committees";
+          else:
+            $html = ($committeesrow) ? "Committees  /  ".$committeesrow->name : "";
+          endif;
+          break;     
 
       case "content":
           $html = ($row) ? $row->title : "";
@@ -56,6 +70,14 @@
       case "item":
           $html = ($row) ? $row->title : "";
           break;
+
+      case "leaders":
+          if(isset($allleaders)):
+            $html = "Leaders";
+          else:
+            $html = ($leaderrow) ? "Leaders  /  ".$leaderrow->name : "";
+          endif;
+          break;          
 
       case "login":
           $html = Lang::$word->_UA_TITLE;
