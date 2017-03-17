@@ -331,7 +331,7 @@ class Committees
 	  	public function getCommitteeMembers($committee)
 	  		{		  		
 				  
-				$sql = "SELECT cm.*, CONCAT(l.first_name,' ',l.last_name) as name, l.constituency as constituencyid" 
+				$sql = "SELECT cm.*, CONCAT(l.first_name,' ',l.last_name) as name, l.constituency as constituencyid, l.slug as slug" 
 				. "\n FROM " . self::cmTable . " as cm"
 				. "\n LEFT JOIN " . Leaders::lTable . " as l ON l.id = cm.member"
 				. "\n WHERE cm.committee = " . $committee
@@ -511,9 +511,9 @@ class Committees
 	   	* 
 	   	* @return
 	   	*/
-	  	public function getCommitteeMeetingsList()
+	  	public function getCommitteeMeetingsList($committee)
 	  		{
-		  		$row = self::$db->fetch_all("SELECT id, name, slug FROM " . self::cmsTable . " ORDER BY date");
+		  		$row = self::$db->fetch_all("SELECT * FROM " . self::cmsTable . " WHERE committee = 1 ORDER BY meeting_date");
           		return $row ? $row : 0;
 	  		}	  		
   	}
