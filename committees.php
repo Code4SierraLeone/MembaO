@@ -11,7 +11,8 @@
     
   if (isset($_GET['committeename'])):
     $committeerow = $committee->renderCommittee();  
-    $committeemembersrow = $committee->getCommitteeMembers($committeerow->id); 
+    $committeemembersrow = $committee->getCommitteeMembers($committeerow->id);
+    $committeemeetingsrow = $committee->getCommitteeMeetingsList($committeerow->id); 
     if(!$committeerow):
       redirect_to(SITEURL . '/404.php');
     endif;
