@@ -70,34 +70,21 @@
       <div class="corporato divider"></div>
       <div><?php echo cleanOut($committeerow->description);?></div>
       <div class="corporato divider"></div>
-      <h4>Committee Members</h4>
-      <table class="corporato basic table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Constituency</th>
-          <th>Role</th>                
-        </tr>
-      </thead>
-      <tbody>
-        <?php if(!$committeemembersrow):?>
-        <tr>
-          <td colspan="6"><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></td>
-        </tr>
+      <h4>Committee Meetings</h4>
+
+      <?php if(!$committeemeetingsrow):?>
+        <div><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></div>
         <?php else:?>
-        <?php $i = 1; foreach ($committeemembersrow as $row):?>
-          <tr>
-            <td><?php echo $i;?></td>
-            <td><?php echo $row->name;?></td>
-            <td><?php echo $row->constituencyid;?></td>
-            <td><?php echo getCommitteeMemberRole($row->role);?></td>                
-          </tr>
-        <?php $i++; endforeach;?>
-        <?php unset($row);?>
-        <?php endif;?>
-      </tbody>
-    </table>
+        <div class="committee-meetings">
+        <?php foreach ($committeemeetingsrow as $mrow):?>
+        <?php $url = ($core->seo) ? SITEURL . '/committee-meetings/' . $mrow->slug . '/' : SITEURL . '/committee-meetings.php?meetingname=' . $mrow->slug;?>
+          <?php echo Filter::dodate("short_date", $mrow->meeting_date);?> - <a href="<?php echo $url;?>"><?php echo $mrow->name;?></a>
+          <p><?php echo cleanSanitize($mrow->description,300);?></p>
+        <?php endforeach;?>
+        <?php unset($mrow);?>
+        </div>
+      <?php endif;?>
+      
     </div>
       
     <div class="screen-30 tablet-40 phone-100">
@@ -106,7 +93,20 @@
       </div>
       
       <div>
-        
+        <h4>Committee Members</h4>
+
+        <?php if(!$committeemembersrow):?>
+        <div><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></div>
+        <?php else:?>
+        <ol class="committee-members">
+        <?php foreach ($committeemembersrow as $row):?>
+        <?php $url = ($core->seo) ? SITEURL . '/leaders/' . $row->slug . '/' : SITEURL . '/leaders.php?leadername=' . $row->slug;?>
+        <li><a href="<?php echo $url;?>"><?php echo $row->name;?></a> / <span class="smallest"><?php echo getCommitteeMemberRole($row->role);?></span></li>
+        <?php endforeach;?>
+        <?php unset($row);?>
+        </ol>
+        <?php endif;?>
+       
       </div>
     </div>
   </div>
