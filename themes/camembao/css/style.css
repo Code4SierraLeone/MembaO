@@ -167,9 +167,11 @@ div#slider figure {
   font-size: 0;
 }  
   
-
+.indented-15 {
+  padding-left: 15px
+}
 .smallest {
-	font-size:.6em
+	font-size:.7em
 }
 
 .small {
@@ -532,6 +534,20 @@ ul.sm li *:after {
 }
 ul.sm {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.committee-meetings {
+  padding: 10px 0;
+  border-bottom: 1px solid #f8f8f8
+}
+
+ol.committee-members {
+  padding-left: 20px
+}
+
+ol.committee-members li {
+  padding:5px 0;
+  border-bottom: 1px solid #f8f8f8; 
 }
 /* Menu box
 ===================*/
