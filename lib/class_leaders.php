@@ -96,7 +96,7 @@
 		  $pager->default_ipp = Registry::get("Core")->perpage;
 		  $pager->paginate();
 		  
-		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, CONCAT(co.name,', ',co.district) as constituency, pa.name as partyname, pa.abbr," 
+		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, CONCAT(co.name) as constituency, pa.name as partyname, pa.abbr as partyabbr," 
 		  . "\n (SELECT COUNT(lid) FROM " . self::saTable . " WHERE lid = l.id) as attendance"
 		  . "\n FROM " . self::lTable . " as l"
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency" 
@@ -406,7 +406,7 @@
 					'leader_id' => $leaderid,		
 				);								
 	
-				//insert record in sitting attendance table
+				//check if MP attendance has been recorded in sitting attendance table
 				$row = self::$db->first("SELECT * FROM " . self::saTable . " WHERE leader_id = " . $leaderid . " AND sitting_id = " . $_POST['sitting_id'] . " LIMIT 1");
 				if($row):
 					//delete record from attendance sheet
