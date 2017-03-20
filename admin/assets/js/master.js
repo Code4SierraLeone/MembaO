@@ -16,7 +16,7 @@
                 clear: "Clear",
 
                 delMsg1: "Are you sure you want to delete this record?",
-                delMsg2: "This action cannot be undone!!!",
+                delMsg2: "This action cannot be undone!",
                 working: "working..."
             }
         };
