@@ -492,10 +492,28 @@
           case 3:
               return "Member";    
       }
+  } 
+
+    /**
+   * getAttendanceStatus()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
+  function getAttendanceStatus($status)
+  {
+      switch ($status) {
+          case 0:
+              return "Absent";
+          case 1:
+              return "Present";
+          case 2:
+              return "Absent with leave";    
+      }
   }  
 
   /**
-   * getSType()
+   * getBillType()
    * 
    * @param mixed $pos
    * @return
@@ -507,6 +525,36 @@
               return "Private Member's Bill";
           case 2:
               return "Govermment Bill";		  
+      }
+  }
+
+  /**
+   * getBillStatus()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
+  function getBillStatus($status)
+  {
+      switch ($status) {
+          case 1:
+              return "1st Reading";
+          case 2:
+              return "Reference to Standing Committee";
+          case 3:
+              return "2nd Reading";
+          case 4:
+              return "3rd Reading";
+          case 5:
+              return "Passed by Parliament";
+          case 6:
+              return "Rejected by Parliament";
+          case 7:
+              return "Submitted for Presidential Ascent";
+          case 8:
+              return "Vetoed by President";                             
+          case 9:
+              return "Became an Act";    
       }
   }
 
@@ -539,7 +587,7 @@
           $age = "Age not given";
         } else {
           $diff = abs(strtotime(date("Y-m-d")) - strtotime($dob));
-          $age = floor($diff / (365*60*60*24));      
+          $age = floor($diff / (365*60*60*24)). " years";      
         }
         
 		    return $age;		 
