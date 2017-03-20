@@ -17,7 +17,7 @@
       redirect_to(SITEURL . '/404.php');
     endif;
   else:
-    $allcommittees = $committee->getCommittees();
+    $allcommittees = $committee->getCommitteesList();
   endif;
 ?>
 <?php require_once (THEMEDIR . "/committees.tpl.php");?>
