@@ -5,11 +5,11 @@ body {
   margin: 0
 }
 body {
-	font-family: "Roboto",sans-serif!important;
+	font-family: "Lato", sans-serif!important;
   	
   	padding: 0px;
     margin: 0 0 50px;
-  	color: #666666;
+  	color: #333;
   	text-rendering: optimizeLegibility;
   	font-weight: 300;
   	background-color: #f8f8f8;
@@ -22,7 +22,7 @@ body {
   max-width: 73.33333em;
   margin: 0 auto;
   background: #fff;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #e8e8e8;
   min-height: 100%
 }
 
@@ -33,14 +33,17 @@ body {
 
 footer {
   text-align: center;
-  color: #fff;
+  color: #ccc;
+  font-size: .9em;
   font-weight: 300;
   padding: 2em 0 3em;
-  background:#545454;
+  border-top: 1px solid #e8e8e8;
+  background:#fff;
   left: 0;
   bottom: 0;
   height: 50px;
   width: 100%;
+  margin-top: 20px
 }
 
 
@@ -48,6 +51,37 @@ footer {
 	display:inline-block;
 	width:70%;
 	vertical-align:middle;
+}
+
+.white {
+  background: #fff;
+  min-height: 650px;
+  padding-right: 2em;
+  padding-bottom: 2em;
+  border-right: 1px solid #e8e8e8
+}
+
+.corporato.tabular.segment.darkergrey {
+  background: #f5f5f5;
+  border-top: 1px solid #e8e8e8
+}
+
+.corporato-grid.home {
+  background: #fff;
+  border-bottom: 1px solid #e8e8e8
+}
+
+.grey {
+  background: #f1f1f1;
+  display: table;
+}
+
+li.bold {
+  font-weight: 700!important
+}
+
+li.bold:last-child {
+  padding-bottom: 20px
 }
 
 .stat-desc {
@@ -292,7 +326,7 @@ h2.h3.h4,
 h3,
 h5,
 h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Lato', sans-serif;
   font-weight:300;
   margin: 1rem 0 0rem;
 }
@@ -536,6 +570,17 @@ ul.sm {
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
+.title {
+  font-size: 1.5rem;
+  padding-bottom: .5em
+}
+
+.date-label, .committee-label {
+  margin-right: 10px;
+  color: #666;
+  font-size:.8em
+}
+
 .committee-meetings {
   padding: 10px 0;
   border-bottom: 1px solid #f8f8f8
@@ -547,8 +592,23 @@ ol.committee-members {
 
 ol.committee-members li {
   padding:5px 0;
-  border-bottom: 1px solid #f8f8f8; 
+  border-bottom: 1px solid #e8e8e8; 
 }
+
+ol.committee-members li:last-child {
+  border-bottom: 0; 
+}
+
+ul.bill-particulars {
+  padding: 0
+}
+
+ul.bill-particulars li {
+  padding: 5px 0;
+  border-bottom: 1px solid #e8e8e8;
+  list-style: none;
+}
+
 /* Menu box
 ===================*/
 .logoset {
@@ -641,12 +701,14 @@ ol.committee-members li {
 }
 
 #listview section {
-  margin-bottom: 2em;
+  margin-bottom: 1em;
+  border-bottom:1px solid #f8f8f8;
   position: relative;
 }
 
 #listview section:last-child {
   margin-bottom: 0;
+  border-bottom: 0
 }
 
 #listview section .corporato.tabular.segment aside.top {
@@ -663,14 +725,6 @@ section.listmode .inner {
 	
 }
 
-.inner img {
-  width: 60px!important;
-  float: left;
-  border: 4px solid #F2A35D;
-  margin-right: 10px;
-  padding: 1px
-}
-
 
 section.gridmode {
   background-color: #fff;
@@ -679,6 +733,7 @@ section.gridmode {
   -moz-backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  min-height: 250px
 }
 
 section.gridmode .gridwrap {
