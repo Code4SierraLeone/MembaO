@@ -202,7 +202,28 @@
 		  endif;
 		  
 		  print json_encode($json);
-		  break;	  	  		  
+		  break;
+
+	  /* == Delete Constituency == */
+	  case "deleteCommitteeMeeting":
+		  		  
+		  $db->delete(Committees::cmaTable, "meeting_id=" . Filter::$id);
+		  $res = $db->delete(Committees::cmsTable, "id=" . Filter::$id);
+		
+		  $name = sanitize($_POST['name']);		  		 		  
+		  
+		  if ($res):
+			  $json['type']    = 'success';
+			  $json['title']   = Lang::$word->SUCCESS;
+			  $json['message'] = str_replace("-ITEM-", $name, "Committee meeting record deleted");
+		  else:
+			  $json['type']    = 'warning';
+			  $json['title']   = Lang::$word->ALERT;
+			  $json['message'] = Lang::$word->NOPROCCESS;
+		  endif;
+		  
+		  print json_encode($json);
+		  break;		  	  	  		  
 	  
 	  /* == Delete Gallery Image == */
 	  case "deleteGalleryImage":
@@ -435,7 +456,12 @@
   /* == Proccess Committee Meeting == */
  	if (isset($_POST['processCommitteeMeeting'])):
     	$committee->processCommitteeMeeting();
-  	endif; 	 		
+  	endif;
+
+  /* == Proccess Committee Meeting Attendance == */
+  if (isset($_POST['processCommitteeMeetingAttendance'])):
+      $committee->processCommitteeMeetingAttendance();
+  endif;	 	 		
 
   /* == Proccess Leader == */
   if (isset($_POST['processLeader'])):
