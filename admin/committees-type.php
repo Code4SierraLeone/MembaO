@@ -32,8 +32,8 @@ if (!defined("_VALID_PHP"))
         
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Update Committee Type Data</button>
-    <a href="index.php?do=committees-type" class="corporato basic button">Cancel Edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update committee type</button>
+    <a href="index.php?do=committees-type" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processCommitteeType" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
@@ -41,26 +41,8 @@ if (!defined("_VALID_PHP"))
 
 <div id="msgholder"></div>
 
-<script type="text/javascript"> 
 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
-<?php break;?>
+s<?php break;?>
 <?php case"add": ?>
 
 <div class="corporato form segment">
@@ -81,32 +63,13 @@ $(document).ready(function () {
     
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Add Committee Type</button>
-    <a href="index.php?do=committees-type" class="corporato basic button">Return to list of committee types</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add committee type</button>
+    <a href="index.php?do=committees-type" class="corporato danger button"><i class="remove icon"></i>back to committee types</a>
     <input name="processCommitteeType" type="hidden" value="1">
   </form>
 </div>
 
 <div id="msgholder"></div>
-
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
 
 <?php break;?>
 
@@ -132,7 +95,9 @@ $(document).ready(function () {
       <?php foreach ($committeestyperow as $row):?>
       <tr>
         <td><?php echo $row->name;?></td>               
-        <td class="push-right"><a href="index.php?do=committees-type&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete committee type" data-option="deleteCommitteeType" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right">
+          <a class="corporato purple button" href="index.php?do=committees-type&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="purple icon pencil"></i>edit</a> 
+          <a class="delete corporato danger button"  data-title="Delete committee type" data-option="deleteCommitteeType" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="danger inverted remove icon"></i>delete</a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>

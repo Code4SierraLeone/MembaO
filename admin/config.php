@@ -80,17 +80,17 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_LOGO;?></label>
+        <label>Application Logo</label>
         <label class="input">
           <input type="file" id="logo" name="logo" class="filefield">
         </label>
       </div>
       <div class="field">
-        <label>Application Logo</label>
+        <label>Show Application Logo</label>
         <div class="inline-group">
           <label class="checkbox">
             <input name="dellogo" type="checkbox" value="1" class="checkbox"/>
-            <i></i><?php echo Lang::$word->YES;?></label>
+            <i></i>Yes</label>
         </div>
       </div>
     </div>
@@ -108,13 +108,13 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_SDATE;?></label>
+        <label>Short Date Format</label>
         <select name="short_date">
           <?php echo $core->getShortDate();?>
         </select>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_LDATE;?></label>
+        <label>Long Date Format</label>
         <select name="long_date">
           <?php echo $core->getLongDate();?>
         </select>
@@ -122,7 +122,7 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_LANG;?></label>
+        <label>Default Language</label>
         <select name="lang">
           <?php foreach(Lang::fetchLanguage() as $langlist):?>
           <option value="<?php echo $langlist;?>"<?php if($core->lang == $langlist) echo ' selected="selected"';?>><?php echo strtoupper($langlist);?></option>
@@ -130,7 +130,7 @@
         </select>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_TDATE;?></label>
+        <label>Time Format</label>
         <select name="time_format">
           <?php echo Core::getTimeFormat($core->time_format);?>
         </select>
@@ -138,10 +138,10 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_TZ;?></label>
+        <label>Default Timezone</label>
         <?php echo $core->getTimezones();?> </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_LOCALES;?></label>
+        <label>Default Locale</label>
         <select name="locale">
           <?php echo $core->getlocaleList();?>
         </select>
@@ -150,14 +150,14 @@
     <div class="corporato divider"></div>
     <div class="four fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_SEO;?></label>
+        <label>Enable SEO</label>
         <div class="inline-group">
           <label class="radio">
             <input type="radio" name="seo" value="1" <?php getChecked($core->seo, 1); ?>>
-            <i></i><?php echo Lang::$word->YES;?></label>
+            <i></i>Yes</label>
           <label class="radio">
             <input type="radio" name="seo" value="0" <?php getChecked($core->seo, 0); ?>>
-            <i></i><?php echo Lang::$word->NO;?></label>
+            <i></i>No</label>
         </div>
       </div>
       
@@ -174,13 +174,13 @@
       </div>
 
       <div class="field">
-        <label><?php echo Lang::$word->CONF_IPP;?></label>
+        <label>Items Per Page</label>
         <label class="input"><i class="icon-append icon asterisk"></i>
           <input type="text" name="perpage" value="<?php echo $core->perpage;?>">
         </label>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_THEME;?></label>
+        <label>Default Theme</label>
         <select name="theme">
           <?php getTemplates(BASEPATH."/themes/", $core->theme)?>
         </select>
@@ -189,40 +189,40 @@
     <div class="corporato divider"></div>
     <div class="four fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_REGVER;?></label>
+        <label>Registration Verification</label>
         <label class="radio">
           <input type="radio" name="reg_verify" value="1" <?php getChecked($core->reg_verify, 1); ?>>
-          <i></i><?php echo Lang::$word->YES;?></label>
+          <i></i>Yes</label>
         <label class="radio">
           <input type="radio" name="reg_verify" value="0" <?php getChecked($core->reg_verify, 0); ?>>
-          <i></i><?php echo Lang::$word->NO;?></label>
+          <i></i>No</label>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_AUTOREG;?></label>
+        <label>Auto Register Users</label>
         <label class="radio">
           <input type="radio" name="auto_verify" value="1" <?php getChecked($core->auto_verify, 1); ?>>
-          <i></i><?php echo Lang::$word->YES;?></label>
+          <i></i>Yes</label>
         <label class="radio">
           <input type="radio" name="auto_verify" value="0" <?php getChecked($core->auto_verify, 0); ?>>
-          <i></i><?php echo Lang::$word->NO;?></label>
+          <i></i>No</label>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_REGYES;?></label>
+        <label>Allow User Registration</label>
         <label class="radio">
           <input type="radio" name="reg_allowed" value="1" <?php getChecked($core->reg_allowed, 1); ?>>
-          <i></i><?php echo Lang::$word->YES;?></label>
+          <i></i>Yes</label>
         <label class="radio">
           <input type="radio" name="reg_allowed" value="0" <?php getChecked($core->reg_allowed, 0); ?>>
-          <i></i><?php echo Lang::$word->NO;?></label>
+          <i></i>No</label>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_NOTE;?></label>
+        <label>User Registration Notification</label>
         <label class="radio">
           <input type="radio" name="notify_admin" value="1" <?php getChecked($core->notify_admin, 1); ?>>
-          <i></i><?php echo Lang::$word->YES;?></label>
+          <i></i>Yes</label>
         <label class="radio">
           <input type="radio" name="notify_admin" value="0" <?php getChecked($core->notify_admin, 0); ?>>
-          <i></i><?php echo Lang::$word->NO;?></label>
+          <i></i>No</label>
       </div>
     </div>
 
@@ -230,13 +230,13 @@
     
     <div class="two fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_FPATH;?></label>
+        <label>Uploads directory</label>
         <label class="input"><i class="icon-append icon asterisk"></i>
           <input type="text" name="file_dir" value="<?php echo $core->file_dir;?>">
         </label>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_FEATURED;?></label>
+        <label>Featured items</label>
         <label class="input">
           <input type="text" class="slrange" name="featured" value="<?php echo $core->featured;?>">
         </label>
@@ -262,7 +262,7 @@
         </div>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_POP;?></label>
+        <label>Popular items</label>
         <label class="input">
           <input type="text" class="slrange" name="popular" value="<?php echo $core->popular;?>">
         </label>
@@ -276,10 +276,10 @@
             <div class="inline-group">
               <label class="radio">
                 <input type="radio" name="hlayout" value="1" <?php getChecked($core->hlayout, 1); ?>>
-                <i></i><?php echo Lang::$word->GRID;?></label>
+                <i></i>Grid</label>
               <label class="radio">
                 <input type="radio" name="hlayout" value="0" <?php getChecked($core->hlayout, 0); ?>>
-                <i></i><?php echo Lang::$word->LIST;?></label>
+                <i></i>List</label>
             </div>
           </div>
           
@@ -297,13 +297,25 @@
         </div>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_FTGRID;?></label>
+        <label>Featured Items Grid</label>
         <label class="input">
           <input type="text" class="slrange" name="homelist" value="<?php echo $core->homelist;?>">
         </label>
       </div>
     </div>
     
+    <div class="corporato divider"></div>
+
+    <div class="field">
+      <label>What is a bill?</label>
+      <textarea class="bodypost" name="bills_description"><?php echo $core->bills_description;?></textarea>
+    </div>
+
+    <div class="field">
+      <label>What is a committee?</label>
+      <textarea class="bodypost" name="committees_description"><?php echo $core->committees_description;?></textarea>
+    </div>
+
     <div class="corporato divider"></div>
       
     <div class="two fields">
@@ -316,7 +328,7 @@
         </select>
       </div>
       <div class="field showsmail">
-        <label><?php echo Lang::$word->CONF_SMAILPATH;?></label>
+        <label>Sendmail Path</label>
         <label class="input"><i class="icon-append icon asterisk"></i>
           <input name="sendmail" value="<?php echo $core->sendmail;?>" type="text">
         </label>
@@ -326,13 +338,13 @@
       <div class="corporato divider"></div>
       <div class="two fields">
         <div class="field">
-          <label><?php echo Lang::$word->CONF_SMTP_HOST;?></label>
+          <label>SMTP Hostname</label>
           <label class="input"><i class="icon-append icon asterisk"></i>
             <input name="smtp_host" value="<?php echo $core->smtp_host;?>" placeholder="<?php echo Lang::$word->CONF_SMTP_HOST;?>" type="text">
           </label>
         </div>
         <div class="field">
-          <label><?php echo Lang::$word->CONF_SMTP_USER;?></label>
+          <label>SMTP Username</label>
           <label class="input"><i class="icon-append icon asterisk"></i>
             <input name="smtp_user" value="<?php echo $core->smtp_user;?>" placeholder="<?php echo Lang::$word->CONF_SMTP_USER;?>" type="text">
           </label>
@@ -340,19 +352,19 @@
       </div>
       <div class="three fields">
         <div class="field">
-          <label><?php echo Lang::$word->CONF_SMTP_PASS;?></label>
+          <label>SMTP Password</label>
           <label class="input"><i class="icon-append icon asterisk"></i>
             <input name="smtp_pass" value="<?php echo $core->smtp_pass;?>" placeholder="<?php echo Lang::$word->CONF_SMTP_PASS;?>" type="text">
           </label>
         </div>
         <div class="field">
-          <label><?php echo Lang::$word->CONF_SMTP_PORT;?></label>
+          <label>SMTP Port</label>
           <label class="input"><i class="icon-append icon asterisk"></i>
             <input name="smtp_port" value="<?php echo $core->smtp_port;?>" placeholder="<?php echo Lang::$word->CONF_SMTP_PORT;?>" type="text">
           </label>
         </div>
         <div class="field">
-          <label><?php echo Lang::$word->CONF_SMTP_SSL;?></label>
+          <label>Requires SSL</label>
           <div class="inline-group">
             <label class="radio">
               <input name="is_ssl" type="radio" value="1" <?php getChecked($core->is_ssl, 1); ?>>
@@ -366,20 +378,20 @@
     </div>
     <div class="two fields">
       <div class="field">
-        <label><?php echo Lang::$word->CONF_METAKEY;?></label>
+        <label>Meta Keywords</label>
         <textarea name="metakeys"><?php echo $core->metakeys;?></textarea>
       </div>
       <div class="field">
-        <label><?php echo Lang::$word->CONF_METADESC;?></label>
+        <label>Meta Description</label>
         <textarea name="metadesc"><?php echo $core->metadesc;?></textarea>
       </div>
     </div>
     <div class="field">
-      <label><?php echo Lang::$word->CONF_GA;?></label>
+      <label>Google Analytics</label>
       <textarea name="analytics"><?php echo $core->analytics;?></textarea>
     </div>
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button"><?php echo Lang::$word->CONF_UPDATE;?></button>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>Update settings</button>
     <input name="processConfig" type="hidden" value="1">
   </form>
 </div>

@@ -31,31 +31,14 @@
     </div>       
         
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button">Update constituency</button>
-    <a href="index.php?do=constituencies" class="corporato basic button">Cancel edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update constituency</button>
+    <a href="index.php?do=constituencies" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processConstituency" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
+
 <?php break;?>
 <?php case"add": ?>
 
@@ -78,30 +61,13 @@ $(document).ready(function () {
     </div>      
     
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button">Add constituency</button>
-    <a href="index.php?do=constituencies" class="corporato basic button">Cancel</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add constituency</button>
+    <a href="index.php?do=constituencies" class="corporato danger button"><i class="remove icon"></i>cancel</a>
+
     <input name="processConstituency" type="hidden" value="1">
   </form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
 <?php break;?>
 
 <?php default: ?>
@@ -109,12 +75,12 @@ $(document).ready(function () {
 <div class="corporato basic segment">
   <div class="header"><a class="corporato button push-right" href="index.php?do=constituencies&amp;action=add"><i class="icon add"></i> Add Constituency</a><span>Viewing Constituencies</span> </div>
 
-  <table class="corporato basic sortable table">
+  <table class="corporato basic table">
     <thead>
       <tr>
-        <th data-sort="string">Name</th>
-        <th data-sort="string">District</th>
-        <th class="disabled"><?php echo Lang::$word->ACTIONS;?></th>
+        <th>Name</th>
+        <th>District</th>
+        <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
     <tbody>
@@ -127,7 +93,11 @@ $(document).ready(function () {
       <tr>
         <td><?php echo $row->name;?></td>
         <td><?php echo $row->district;?></td>
-        <td><a href="index.php?do=constituencies&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete constituency listing" data-option="deleteConstituency" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right">
+          <a class="corporato purple button" href="index.php?do=constituencies&amp;action=edit&amp;id=<?php echo $row->id;?>">
+            <i class="purple pencil icon"></i>edit</a> 
+          <a class="delete corporato danger button" data-title="Delete constituency listing" data-option="deleteConstituency" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="danger inverted remove icon"></i>delete</a>          
+        </td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>

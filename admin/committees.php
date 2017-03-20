@@ -40,14 +40,76 @@ if (!defined("_VALID_PHP"))
         
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Update Committee Data</button>
-    <a href="index.php?do=committees" class="corporato basic button">Cancel Edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update committee data</button>
+    <a href="index.php?do=committees" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processCommittee" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
 </div>
 
 <div id="msgholder"></div>
+<?php break;?>
+
+<?php case"meeting-attendance": ?>
+<?php $cmrow = $core->getRowById(Committees::cmsTable, Filter::$id);?>
+<?php $listrow = $committee->getCommitteeMembers($cmrow->committee);?>
+
+<div class="corporato form segment">
+  <div class="corporato top right attached label">Committee Meeting Attendance Records / <?php echo Filter::dodate("short_date", $cmrow->meeting_date);?></div>
+    <form id="corporato_form" name="corporato_form" method="post">
+      
+      
+        <?php if(!$listrow):?>
+          <tr>
+            <td colspan="3"><?php Filter::msgSingleAlert("Sorry, no committee members listed yet.");?></td>
+          </tr>
+        <?php else:?>
+
+        <table class="corporato basic table celled">
+        <thead>
+          <tr>
+            <th class="disabled"> <label class="checkbox">
+              <input type="checkbox" name="masterCheckbox" id="masterCheckbox">
+              <i></i>Select as present</label>
+            </th>
+            <th>MP</th>
+                    
+          </tr>
+        </thead>
+
+        <tbody>
+          
+        <?php foreach($listrow as $lrow):?>
+          <tr>
+            <td class="hide-tablet"><label class="checkbox">
+              <input name="leader_id[<?php echo $lrow->member;?>]" type="checkbox" value="<?php echo $lrow->member;?>">
+              <i></i></label></td>
+            
+            <td><strong><?php echo $lrow->name;?></strong> <br />              
+            </td>
+                      
+          </tr>
+        <?php endforeach;?>      
+
+        <?php endif;?>
+        </tbody>              
+      </table>              
+      
+      <div class="corporato divider"></div>
+
+      <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update attendance register</button>
+      <button onclick="goBack()" class="corporato danger button"><i class="remove icon"></i>go back to meetings</a>
+      <input name="processCommitteeMeetingAttendance" type="hidden" value="1">
+      <input name="meeting_id" type="hidden" value="<?php echo Filter::$id;?>" />
+    </form>
+</div>
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+<div id="msgholder"></div>
+
 <?php break;?>
 
 <?php case"edit-meeting": ?>
@@ -65,7 +127,7 @@ if (!defined("_VALID_PHP"))
       </div>
       <div class="field">
         <div class="corporato input"> <i class="icon-prepend icon calendar"></i>
-          <input name="meeting_date" type="date" data-datepicker="true" value="<?php echo $row->meeting_date;?>" />
+          <input name="meeting_date" type="text" data-datepicker="true" placeholder="<?php echo Filter::dodate("short_date", $row->meeting_date);?>" />
         </div>
       </div>
       <div class="field">        
@@ -86,8 +148,8 @@ if (!defined("_VALID_PHP"))
         
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Update Committee Meeting Data</button>
-    <a href="index.php?do=committees" class="corporato basic button">Cancel Edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update committee meeting</button>
+    <a href="index.php?do=committees" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processCommitteeMeeting" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
     <input name="committee" type="hidden" value="<?php echo $row->committee;?>" />
@@ -112,7 +174,7 @@ if (!defined("_VALID_PHP"))
       </div>
       <div class="field">
         <div class="corporato input"> <i class="icon-prepend icon calendar"></i>
-          <input name="meeting_date" type="date" data-datepicker="true" placeholder="Select meeting date" />
+          <input name="meeting_date" type="text" data-datepicker="true" placeholder="Select meeting date" />
         </div>
       </div>
       <div class="field">        
@@ -133,8 +195,8 @@ if (!defined("_VALID_PHP"))
         
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Add Committee Meeting</button>
-    <a href="index.php?do=committees" class="corporato basic button">Cancel Edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add committee meeting</button>
+    <a href="index.php?do=committees" class="corporato danger button"><i class="remove icon"></i>back to committees</a>
     <input name="processCommitteeMeeting" type="hidden" value="1">
     <input name="committee" type="hidden" value="<?php echo Filter::$id;?>" />
     
@@ -176,12 +238,12 @@ if (!defined("_VALID_PHP"))
     </form>
 
   </div>
-  <table class="corporato basic sortable table">
+  <table class="corporato basic table">
     <thead>
       <tr>
-        <th data-sort="string">Date</th> 
-        <th data-sort="string">Name</th>
-        <th data-sort="string">Type</th>       
+        <th>Date</th> 
+        <th>Name</th>
+        <th>Type</th>       
         <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
@@ -196,7 +258,12 @@ if (!defined("_VALID_PHP"))
         <td><?php echo Filter::dodate("short_date", $row->meeting_date);?></td>
         <td><?php echo $row->name;?></td>
         <td><?php echo getCommitteeMeetingType($row->meeting_type);?></td>                
-        <td class="push-right"><a href="index.php?do=committees&amp;action=edit-meeting&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete meeting" data-option="deleteCommitteeMeeting" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right">
+          <a class="corporato positive button" href="index.php?do=committees&action=meeting-attendance&id=<?php echo $row->id;?>">
+            <i class="positive checkmark icon"></i>update attendance register</a>
+          <a class="corporato purple button" href="index.php?do=committees&amp;action=edit-meeting&amp;id=<?php echo $row->id;?>">
+            <i class="purple icon pencil"></i>edit</a> 
+          <a class="delete corporato danger button" data-title="Delete meeting" data-option="deleteCommitteeMeeting" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="danger inverted remove icon"></i>delete</a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>
@@ -213,30 +280,6 @@ if (!defined("_VALID_PHP"))
   </div>
 </div>
 
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-    $("#searchfield").on('keyup', function () {
-        var srch_string = $(this).val();
-        var data_string = 'leaderSearch=' + srch_string;
-        if (srch_string.length > 4) {
-            $.ajax({
-                type: "post",
-                url: "controller.php",
-                data: data_string,
-                success: function (res) {
-                    $('#suggestions').html(res).show();
-                    $("input").blur(function () {
-                        $('#suggestions').fadeOut();
-                    });
-                }
-            });
-        }
-        return false;
-    });
-});
-// ]]>
-</script>
 <?php break;?>
 
 <?php case"members": ?>
@@ -247,7 +290,7 @@ $(document).ready(function () {
   <div class="corporato basic segment">
     <div class="header"><a class="corporato button push-right" href="index.php?do=committees&amp;action=update-members&amp;id=<?php echo Filter::$id;?>"><i class="icon add"></i> Update Committee Members</a><span>Viewing Committee Members</span> </div>
 
-    <table class="corporato basic sortable table">
+    <table class="corporato basic table">
       <thead>
         <tr>
           <th>#</th>
@@ -278,8 +321,9 @@ $(document).ready(function () {
 
   <div class="corporato divider"></div>
 
-  <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo Filter::$id;?>" class="corporato info button">Update Committee Members</a>
-  <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
+  <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo Filter::$id;?>" class="corporato positive button">
+    <i class="positive checkmark icon"></i>update committee members</a>
+  <a href="index.php?do=committees" class="corporato danger button"><i class="remove icon"></i>Return to list of committees</a>
 </div>
 
 
@@ -388,33 +432,14 @@ $(document).ready(function () {
     </div>
     
 
-    <button type="button" name="dosubmit" class="corporato button">Update Committee Members</button>
-    <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update committee members</button>
+    <a href="index.php?do=committees" class="corporato danger button"><i class="remove icon"></i>Return to list of committees</a>
     <input name="processCommitteeMembers" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
 </div>
 
 <div id="msgholder"></div>
-
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-  $("#filter").on("keyup", function() {
-    var filter = $(this).val(),
-      count = 0;
-    $("#fsearch .row").each(function() {
-      if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-        $(this).fadeOut();
-      } else {
-        $(this).show();
-        count++;
-      }
-    });
-  });
-});
-// ]]>
-</script>
 
 <?php break;?>
 
@@ -446,32 +471,13 @@ $(document).ready(function () {
     <div class="corporato fitted divider"></div>
     
 
-    <button type="button" name="dosubmit" class="corporato button">Add Committee</button>
-    <a href="index.php?do=committees" class="corporato basic button">Return to list of committees</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add committee</button>
+    <a href="index.php?do=committees" class="corporato danger button"><i class="remove icon"></i>Return to list of committees</a>
     <input name="processCommittee" type="hidden" value="1">
   </form>
 </div>
 
 <div id="msgholder"></div>
-
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
 
 <?php break;?>
 
@@ -479,7 +485,10 @@ $(document).ready(function () {
 <?php $committeesrow = $committee->getCommittees();?>
 
 <div class="corporato basic segment">
-  <div class="header"><a class="corporato button push-right" href="index.php?do=committees&amp;action=add"><i class="icon add"></i> Add Committee</a><span>Viewing Committees</span> </div>
+  <div class="header">
+    <a class="corporato button push-right" href="index.php?do=committees&amp;action=add"><i class="icon add"></i> Add Committee</a> 
+     <a class="corporato button push-right" href="index.php?do=committees-type"><i class="icon add"></i> Committee Types</a>
+    <span>Viewing Committees</span> </div>
   <div class="corporato small segment form">
     <div class="two fields">
       <div class="field">
@@ -498,12 +507,12 @@ $(document).ready(function () {
     </div>
     <div class="content-center"> <?php echo alphaBits('index.php?do=committees', "letter");?> </div>
   </div>
-  <table class="corporato basic sortable table">
+  <table class="corporato basic table">
     <thead>
       <tr>
-        <th data-sort="string">Name</th>
-        <th data-sort="string">Type</th>
-        <th data-sort="string">Created</th>        
+        <th>Name</th>
+        <th>Type</th>
+        <th>Created</th>        
         <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
@@ -518,7 +527,14 @@ $(document).ready(function () {
         <td><?php echo $row->name;?></td>
         <td><?php echo $row->committees_name;?></td>
         <td><?php echo Filter::dodate("short_date", $row->created);?></td>        
-        <td class="push-right"><a href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a href="index.php?do=committees&amp;action=members&amp;id=<?php echo $row->id;?>"><i class="circular inverted info icon user link"></i></a>  <a href="index.php?do=committees&amp;action=meetings&amp;id=<?php echo $row->id;?>"><i class="circular inverted info icon calendar link"></i></a> <a class="delete" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right">        
+          <a class="corporato teal button" href="index.php?do=committees&amp;action=members&amp;id=<?php echo $row->id;?>">
+            <i class="teal inverted icon user"></i>members</a>  
+          <a class="corporato info button" href="index.php?do=committees&amp;action=meetings&amp;id=<?php echo $row->id;?>">
+            <i class="info inverted icon calendar"></i>meetings</a> 
+          <a class="corporato purple button" href="index.php?do=committees&amp;action=edit&amp;id=<?php echo $row->id;?>">
+            <i class="purple icon pencil"></i>edit</a>
+          <a class="delete corporato danger button" data-title="Delete committee" data-option="deleteCommittee" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->name;?>"><i class="danger inverted remove icon"></i>delete</a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>

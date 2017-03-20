@@ -119,8 +119,8 @@
 	</div>
         
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button">Update leader profile</button>
-    <a href="index.php?do=leaders" class="corporato basic button">Cancel edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update leader profile</button>
+    <a href="index.php?do=leaders" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processLeader" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
@@ -226,8 +226,8 @@
         </div>
 	</div>    
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button">Add Leader</button>
-    <a href="index.php?do=leaders" class="corporato basic button">Cancel</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add leader</button>
+    <a href="index.php?do=leaders" class="corporato danger button"><i class="remove icon"></i>cancel</a>
     <input name="processLeader" type="hidden" value="1">
   </form>
 </div>
@@ -258,7 +258,7 @@
         <th data-sort="string">Party</th>
         <th data-sort="string">Gender</th>
         <th>Age</th>
-        <th class="disabled"><?php echo Lang::$word->ACTIONS;?></th>
+        <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
     <tbody>
@@ -284,7 +284,10 @@
         </td>
         <td><?php echo getGender($row->gender);?></td>
         <td><?php echo getAge($row->dob);?></td>                
-        <td><a href="index.php?do=leaders&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete leader listing" data-option="deleteLeader" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right">
+          <a class="corporato purple button" href="index.php?do=leaders&amp;action=edit&amp;id=<?php echo $row->id;?>">
+            <i class="purple icon pencil"></i>edit</a> 
+          <a class="delete corporato danger button" data-title="Delete leader listing" data-option="deleteLeader" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="danger inverted remove icon"></i>delete</a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>

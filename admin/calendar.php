@@ -10,11 +10,11 @@
       die('Direct access to this location is not allowed.');
 ?>
 <?php switch(Filter::$action): case "attendance": ?>
-<?php $row = $core->getRowById(Leaders::scTable, Filter::$id);?>
+<?php $crow = $core->getRowById(Leaders::scTable, Filter::$id);?>
 <?php $listrow = $leader->getLeaderList();?>
 
 <div class="corporato form segment">
-	<div class="corporato top right attached label">Attendance Records / <?php echo Filter::dodate("short_date", $row->date);?></div>
+	<div class="corporato top right attached label">Attendance Records / <?php echo Filter::dodate("short_date", $crow->date);?></div>
   	<form id="corporato_form" name="corporato_form" method="post">
     	
       <table class="corporato basic table celled">
@@ -54,8 +54,8 @@
     	
       <div class="corporato divider"></div>
 
-      <button type="button" name="dosubmit" class="corporato button">Update attendance register</button>
-      <a href="index.php?do=calendar" class="corporato basic button">Go back to Parliamentary Calendar</a>
+      <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update attendance register</button>
+      <a href="index.php?do=calendar" class="corporato danger button"><i class="remove icon"></i>go back to parliamentary calendar</a>
       <input name="processAttendance" type="hidden" value="1">
       <input name="sitting_id" type="hidden" value="<?php echo Filter::$id;?>" />
   	</form>
@@ -92,31 +92,13 @@
     </div>       
         
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button">Update caledar</button>
-    <a href="index.php?do=calendar" class="corporato basic button">Cancel edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update caledar</button>
+    <a href="index.php?do=calendar" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processCalendar" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
 <?php break;?>
 <?php case"add": ?>
 
@@ -149,30 +131,12 @@ $(document).ready(function () {
     </div>      
     
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button">Add sitting date</button>
-    <a href="index.php?do=calendar" class="corporato basic button">Cancel</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add sitting date</button>
+    <a href="index.php?do=calendar" class="corporato danger button"><i class="remove icon"></i>cancel</a>
     <input name="processCalendar" type="hidden" value="1">
   </form>
 </div>
 <div id="msgholder"></div>
-<script type="text/javascript"> 
-// <![CDATA[
-$(document).ready(function () {
-	$("#filter").on("keyup", function() {
-		var filter = $(this).val(),
-			count = 0;
-		$("#fsearch .row").each(function() {
-			if ($(this).text().search(new RegExp(filter, "i")) < 0) {
-				$(this).fadeOut();
-			} else {
-				$(this).show();
-				count++;
-			}
-		});
-	});
-});
-// ]]>
-</script>
 <?php break;?>
 
 <?php default: ?>
@@ -200,7 +164,13 @@ $(document).ready(function () {
         <td><?php echo Filter::dodate("short_date", $row->date);?></td>
         <td><?php echo $row->year;?></td>
         <td><?php echo getSType($row->sitting_type);?></td>
-        <td class="push-right"><a href="index.php?do=calendar&action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="Delete sitting date listing" data-option="deleteSittingDate" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->id;?>"><i class="circular danger inverted remove icon link"></i></a> <a class="corporato basic button" href="index.php?do=calendar&action=attendance&id=<?php echo $row->id;?>">attendance register</a></td>
+        <td class="push-right">                    
+          <a class="corporato positive button" href="index.php?do=calendar&action=attendance&id=<?php echo $row->id;?>">
+            <i class="positive checkmark icon"></i>attendance register</a>
+          <a class="corporato purple button" href="index.php?do=calendar&action=edit&amp;id=<?php echo $row->id;?>">
+            <i class="purple pencil icon"></i>edit</a>
+          <a class="delete corporato danger button" data-title="Delete sitting date listing" data-option="deleteSittingDate" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->id;?>"><i class="danger inverted remove icon"></i>delete</a>
+        </td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>

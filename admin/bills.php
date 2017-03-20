@@ -75,8 +75,8 @@ if (!defined("_VALID_PHP"))
         
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Update Bill Data</button>
-    <a href="index.php?do=bills" class="corporato basic button">Cancel Edit</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update bill data</button>
+    <a href="index.php?do=bills" class="corporato danger button"><i class="remove icon"></i>cancel edit</a>
     <input name="processBill" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
@@ -101,20 +101,23 @@ if (!defined("_VALID_PHP"))
       <label>Bill status</label>        
         <select name="bill_status">
           <option value="0">--- Select bill status ---</option>
-          <option value="1">Reference to Standing Committee</option>
-          <option value="2">2nd Reading</option>
-          <option value="3">3rd Reading</option>
-          <option value="4">Passed by Parliament</option>
-          <option value="5">Rejected by Parliament</option>
-          <option value="6">Submitted for Presidential Ascent</option>
+          <option value="1">1st Reading</option>
+          <option value="2">Reference to Standing Committee</option>
+          <option value="3">2nd Reading</option>
+          <option value="4">3rd Reading</option>
+          <option value="5">Passed by Parliament</option>
+          <option value="6">Rejected by Parliament</option>
+          <option value="7">Submitted for Presidential Ascent</option>
+          <option value="8">Vetoed by the President</option>
+          <option value="9">Became an Act</option>
         </select>
       </div>      
     </div>         
     
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Add Bill Status</button>
-    <a href="index.php?do=bills" class="corporato basic button">Return to list of bills</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add bill status</button>
+    <a href="index.php?do=bills" class="corporato danger button"><i class="remove icon"></i>return to list of bills</a>
     <input name="processBillStatus" type="hidden" value="1">
     <input name="bill" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
@@ -187,8 +190,8 @@ if (!defined("_VALID_PHP"))
     
     <div class="corporato fitted divider"></div>
     
-    <button type="button" name="dosubmit" class="corporato button">Add Bill</button>
-    <a href="index.php?do=bills" class="corporato basic button">Return to list of bills</a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add bill</button>
+    <a href="index.php?do=bills" class="corporato danger button"><i class="remove icon"></i>return to list of bills</a>
     <input name="processBill" type="hidden" value="1">
   </form>
 </div>
@@ -234,14 +237,18 @@ if (!defined("_VALID_PHP"))
         <td><?php echo $row->title;?></td>
         <td>
           <?php if($row->mover): ?>
-            <?php echo $row->mover;?>)
+            <?php echo $row->movername;?>
           <?php else: ?>
-            Goverment official
+            N/A
           <?php endif; ?>                
         </td>
         <td><?php echo Filter::dodate("short_date", $row->date_introduced);?></td>
-        <td><?php echo $row->committee;?></td>
-        <td class="push-right"><a href="index.php?do=bills&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a href="index.php?do=bills&amp;action=status&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon refresh link"></i></a> <a class="delete" data-title="Delete bill" data-option="deleteBill" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td><?php echo $row->committeename;?></td>
+        <td class="push-right">          
+          <a class="corporato positive button" href="index.php?do=bills&amp;action=status&amp;id=<?php echo $row->id;?>">
+            <i class="positive icon refresh"></i>update status</a> 
+          <a class="corporato purple button" href="index.php?do=bills&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="purple icon pencil"></i>edit</a>
+          <a class="delete corporato danger button" data-title="Delete bill" data-option="deleteBill" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="danger inverted remove icon"></i>delete</a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>

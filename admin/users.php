@@ -11,7 +11,6 @@
 ?>
 <?php switch(Filter::$action): case "edit": ?>
 <?php $row = Core::getRowById(Users::uTable, Filter::$id);?>
-<div class="corporato black message"><i class="icon pin"></i> <?php echo Core::langIcon();?><?php echo Lang::$word->USR_INFO;?> <?php echo Lang::$word->REQFIELD1;?> <i class="icon asterisk"></i> <?php echo Lang::$word->REQFIELD2;?></div>
 <div class="corporato form segment">
   <div class="corporato top right attached label"><?php echo Lang::$word->USR_SUB;?> / <?php echo $row->username;?></div>
   <form id="corporato_form" name="corporato_form" method="post">
@@ -140,8 +139,8 @@
       </div>
     </div>
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button"><?php echo Lang::$word->USR_UPDATE;?></button>
-    <a href="index.php?do=users" class="corporato basic button"><?php echo Lang::$word->CANCEL;?></a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>update user</button>
+    <a href="index.php?do=users" class="corporato danger button"><i class="remove icon"></i>cancel</a>
     <input name="processUser" type="hidden" value="1">
     <input name="username" type="hidden" value="<?php echo $row->username;?>" />
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
@@ -150,7 +149,7 @@
 <div id="msgholder"></div>
 <?php break;?>
 <?php case"add": ?>
-<div class="corporato black message"><i class="icon pin"></i> <?php echo Core::langIcon();?><?php echo Lang::$word->USR_INFO1;?> <?php echo Lang::$word->REQFIELD1;?> <i class="icon asterisk"></i> <?php echo Lang::$word->REQFIELD2;?></div>
+
 <div class="corporato form segment">
   <div class="corporato top right attached label"><?php echo Lang::$word->USR_SUB1;?></div>
   <form id="corporato_form" name="corporato_form" method="post">
@@ -257,8 +256,8 @@
       </div>
     </div>
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button"><?php echo Lang::$word->USR_ADD;?></button>
-    <a href="index.php?do=users" class="corporato basic button"><?php echo Lang::$word->CANCEL;?></a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add user</button>
+    <a href="index.php?do=users" class="corporato danger button"><i class="remove icon"></i>cancel</a>
     <input name="processUser" type="hidden" value="1">
   </form>
 </div>
@@ -305,7 +304,7 @@
         <th data-sort="string"><?php echo Lang::$word->USERNAME;?></th>
         <th data-sort="string"><?php echo Lang::$word->USR_FULLNAME;?></th>
         <th data-sort="string"><?php echo Lang::$word->STATUS;?></th>
-        <th class="disabled"><?php echo Lang::$word->ACTIONS;?></th>
+        <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
     <tbody>
@@ -324,11 +323,11 @@
           <a href="index.php?do=newsletter&amp;emailid=<?php echo urlencode($row->email);?>"><?php echo $row->username;?></a></td>
         <td><?php echo $row->name;?></td>
         <td><?php echo userStatus($row->active, $row->id);?></td>      
-        <td><a href="index.php?do=users&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a>
+        <td class="push-right"><a class="corporato purple button" href="index.php?do=users&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="purple icon pencil"></i>edit</a>
           <?php if($row->id == 1):?>
-          <a><i class="circular black inverted remove icon link"></i></a>
+          <a class="delete corporato danger button"><i class="black remove icon"></i>delete</a>
           <?php else:?>
-          <a class="delete" data-title="<?php echo Lang::$word->USR_DELUSER;?>" data-option="deleteUser" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->username;?>"><i class="circular danger inverted remove icon link"></i></a>
+          <a class="delete corporato danger button" data-title="<?php echo Lang::$word->USR_DELUSER;?>" data-option="deleteUser" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->username;?>"><i class="danger inverted remove icon"></i>delete</a>
           <?php endif;?></td>
       </tr>
       <?php endforeach;?>
@@ -338,7 +337,7 @@
   </table>
 </div>
 <div class="corporato divider"></div>
-<div class="two columns horizontal-gutters">
+<div class="two columns">
   <div class="row"> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </div>
   <div class="row">
     <div class="push-right"><?php echo $pager->display_pages();?></div>

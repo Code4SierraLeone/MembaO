@@ -88,8 +88,8 @@
       <textarea class="bodypost" name="body"><?php echo $row->body;?></textarea>
     </div>
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button"><?php echo Lang::$word->PAG_UPDATE;?></button>
-    <a href="index.php?do=pages" class="corporato basic button"><?php echo Lang::$word->CANCEL;?></a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>edit page</button>
+    <a href="index.php?do=pages" class="corporato danger button"><i class="remove icon"></i>cancel</a>
     <input name="processPage" type="hidden" value="1">
     <input name="id" type="hidden" value="<?php echo Filter::$id;?>" />
   </form>
@@ -175,8 +175,8 @@
       <textarea class="bodypost" name="body"></textarea>
     </div>
     <div class="corporato fitted divider"></div>
-    <button type="button" name="dosubmit" class="corporato button"><?php echo Lang::$word->PAG_ADD;?></button>
-    <a href="index.php?do=pages" class="corporato basic button"><?php echo Lang::$word->CANCEL;?></a>
+    <button type="button" name="dosubmit" class="corporato positive button"><i class="positive checkmark icon"></i>add page</button>
+    <a href="index.php?do=pages" class="corporato danger button"><i class="remove icon"></i>cancel</a>
     <input name="processPage" type="hidden" value="1">
   </form>
 </div>
@@ -186,12 +186,12 @@
 <?php $pagerow = $content->getPages();?>
 <div class="corporato basic segment">
   <div class="header"><a class="corporato button push-right" href="index.php?do=pages&amp;action=add"><i class="icon add"></i> <?php echo Lang::$word->PAG_ADD;?></a><span><?php echo Lang::$word->PAG_SUB;?></span> </div>
-  <table class="corporato basic sortable table">
+  <table class="corporato basic table">
     <thead>
       <tr>
-        <th data-sort="string"><?php echo Lang::$word->PAG_NAME;?></th>
-        <th data-sort="int"><?php echo Lang::$word->CREATED;?></th>
-        <th class="disabled"><?php echo Lang::$word->ACTIONS;?></th>
+        <th><?php echo Lang::$word->PAG_NAME;?></th>
+        <th><?php echo Lang::$word->CREATED;?></th>
+        <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
     <tbody>
@@ -204,7 +204,9 @@
       <tr>
         <td><?php echo $row->title;?></td>
         <td data-sort-value="<?php echo strtotime($row->created);?>"><?php echo Filter::dodate("short_date", $row->created);?></td>
-        <td><a href="index.php?do=pages&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="circular inverted success icon pencil link"></i></a> <a class="delete" data-title="<?php echo Lang::$word->PAG_DELETE;?>" data-option="deletePage" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="circular danger inverted remove icon link"></i></a></td>
+        <td class="push-right">
+          <a class="corporato purple button" href="index.php?do=pages&amp;action=edit&amp;id=<?php echo $row->id;?>"><i class="purple icon pencil"></i>edit</a> 
+          <a class="delete corporato danger button" data-title="<?php echo Lang::$word->PAG_DELETE;?>" data-option="deletePage" data-id="<?php echo $row->id;?>" data-name="<?php echo $row->title;?>"><i class="danger inverted remove icon"></i>delete</a></td>
       </tr>
       <?php endforeach;?>
       <?php unset($row);?>
@@ -213,7 +215,7 @@
   </table>
 </div>
 <div class="corporato divider"></div>
-<div class="two columns horizontal-gutters">
+<div class="two columns">
   <div class="row"> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </div>
   <div class="row">
     <div class="push-right"><?php echo $pager->display_pages();?></div>

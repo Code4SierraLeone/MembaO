@@ -1,12 +1,12 @@
 <?php
   /**
-   * System Manager
+  * System
    *
-   * @package Car Dealer Pro
-   * @author wojocms.com
-   * @copyright 2014
-   * @version $Id: system.php,v 1.00 2014-01-10 21:12:05 gewa Exp $
+   * @package Membao
+   * @author Alan Kawamara
+   * @copyright 2017
    */
+
   if (!defined("_VALID_PHP"))
       die('Direct access to this location is not allowed.');
 ?>
