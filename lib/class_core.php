@@ -77,11 +77,10 @@
 		  $this->free_allowed = $row->free_allowed;
 		  $this->logo = $row->logo;
 		  $this->theme = $row->theme;
-		  $this->lang = $row->lang;
-		  $this->tax = $row->tax;
+		  $this->lang = $row->lang;		 
 		  $this->psize = $row->psize;
-		  $this->inv_info = $row->inv_info;
-		  $this->inv_note = $row->inv_note;
+		  $this->bills_description = $row->bills_description;
+		  $this->committees_description = $row->committees_description;
 		  $this->show_home = $row->show_home;
 		  $this->show_slider = $row->show_slider;
 		  $this->currency = $row->currency;
@@ -180,7 +179,9 @@
 					  'offline_d' => sanitize($_POST['offline_d_submit']),
 					  'offline_t' => sanitize($_POST['offline_t_submit']),
 					  'theme' => sanitize($_POST['theme']),
-					  'lang' => sanitize($_POST['lang']),					  					  			 
+					  'lang' => sanitize($_POST['lang']),
+					  'bills_description' => sanitize($_POST['bills_description']),					  					  			 
+					  'committees_description' => sanitize($_POST['committees_description']),					  					  			 
 					  'show_home' => intval($_POST['show_home']),
 					  'show_slider' => intval($_POST['show_slider']),
 					  'featured' => intval($_POST['featured']),
