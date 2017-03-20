@@ -12,14 +12,25 @@
 ?>
 <?php include("header.tpl.php");?>
 
+<div class="corporato-grid crumbs">
+  <div class="crumbs">
+      <div class="corporato breadcrumb">
+          <div class="section"><?php echo Lang::$word->CRB_HERE;?></div>
+          : <a href="<?php echo SITEURL;?>/" class="section"><?php echo Lang::$word->CRB_HOME;?></a>
+          <div class="divider"></div>
+          <?php include_once("crumbs.php");?>
+      </div>
+    </div>
+</div>
+
 <div class="page-container">
 
 <?php if (isset($allleaders)):?>
 
 <div class="corporato-grid">
-  <div class="columns horizontal-gutters">
-    <div class="screen-70 tablet-60 phone-100">
-      <div class="clearfix">
+  <div class="columns">
+    <div class="screen-100 tablet-100 phone-100">
+      <div>
         <h2>All MPs</h2>      
       </div>
     
@@ -28,15 +39,15 @@
       <div id="item-content" class="relative">
       <?php if($allleaders):?>
 
-        <div id="listview" class="clearfix relative">
+        <div id="gridview" class="clearfix relative">
         <?php foreach($allleaders as $lrow):?>
           <?php $url = ($core->seo) ? SITEURL . '/leaders/' . $lrow->slug . '/' : SITEURL . '/item.php?leadername=' . $lrow->slug;?>
-          <section data-id="<?php echo $lrow->lid;?>">                     
+          <section class="gridmode" data-id="<?php echo $lrow->lid;?>">                     
             <div class="inner"> 
               <a href="<?php echo $url;?>"> <img src="thumbmaker.php?src=<?php echo UPLOADURL;?>leaders/<?php echo ($lrow->thumb) ? $lrow->thumb : "blank.jpg";?>&amp;w=<?php echo round($core->thumb_w);?>&amp;h=<?php echo round($core->thumb_h);?>&amp;s=1&amp;a=t1" alt=""/></a>
-              <a href="<?php echo $url;?>"><div class="title"><?php echo $lrow->name;?></div></a>
+              <a href="<?php echo $url;?>"><div class="leader-title"><?php echo $lrow->name;?></div></a>
               <div class="small-details list"><?php echo $lrow->constituency;?></div>
-              <div class="small-details list"><?php echo getAge($lrow->dob);?></div>
+              <div class="small-details list"><?php echo $lrow->partyabbr;?></div>            
             </div>
           </section>
         <?php endforeach;?>
@@ -44,20 +55,54 @@
       <?php endif;?>
       </div>
     </div>
+
+    
+
   </div>
 
-  <div class="corporato divider"></div>
-  <div class="corporato tabular segment pagi">
-    <aside> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </aside>
-    <aside class="right"> <?php echo $pager->display_pages();?> </aside>
-  </div>     
 </div>
+<div class="corporato tabular segment pagi darkergrey">
+  <aside> <span class="corporato label"><?php echo 'Total MPs: ' . $pager->items_total;?> / <?php echo 'Page ' . $pager->current_page . ' of ' . $pager->num_pages;?></span> </aside>
+  <aside class="right"> <?php echo $pager->display_pages();?> </aside>
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+$(window).on("orientationchange", function(e) {
+    $('#gridview').waitForImages(function() {
+        $('#gridview').elasticColumns('refresh');
+    });
+   $('#gridview-series').waitForImages(function() {
+        $('#gridview-series').elasticColumns('refresh');
+    });
+});
+$(document).ready(function() {    
+
+    $('#gridview').waitForImages(function() {
+        $('#gridview').Grid({
+            inner: 28,
+            outer: 0,
+            cols: Math.round(1440 / 8 )
+        });
+    });
+  
+  $('#gridview-series').waitForImages(function() {
+        $('#gridview-series').Grid({
+            inner: 28,
+            outer: 0,
+            cols: Math.round(1440 / 8 )
+        });
+    });
+});
+// ]]>
+</script>     
 
 <?php else:?>
 
-<div class="corporato-grid">
+<div class="corporato-grid grey">
   <div class="columns horizontal-gutters">
-    <div class="screen-70 tablet-60 phone-100">
+    
+    <div class="screen-60 tablet-40 phone-100 white">
       <h2><?php echo $leaderrow->name;?></h2>
       <div>Representing <strong><?php echo $leaderrow->coname;?></strong> on <strong><?php echo $leaderrow->pparty;?></strong> ticket</div>
 
@@ -71,9 +116,8 @@
               </aside>
               <aside>
                 <div class="description">                  
-                  <h5>Attendance overview</h5>
-                  <div class="item">Has been recorded present for <strong><?php echo $leaderrow->attendance;?></strong> sittings out of a possible total of <strong><?php echo $totalSittings;?></strong> this term.</div>
-                  <div class="item">That gives <?php echo getGenderForm($leaderrow->gender);?> an <strong>above-average</strong> attendance rate of <strong><?php echo getLeaderAttendancePc($leaderrow->attendance,$totalSittings);?>%</strong>.</div>
+
+                  
                   <div class="corporato divider"></div>
                   <div class="corporato divided horizontal list">                   
                     <div class="item"><?php echo $leaderrow->attendance;?> sittings</div>
@@ -97,11 +141,15 @@
         </section>
       </div>
     </div>
-    <div class="screen-30 tablet-40 phone-100">
-      <div class="padded-30 pull-right">
-        <button type="submitfollow" class="corporato large black button">Follow this MP for updates</button>
+
+    <div class="screen-40 tablet-40 phone-100">
+      <div class="padded-30">
+      <h4>MP's Attendance Record</h4> 
+      <p class="item">Has been recorded present for <strong><?php echo $leaderrow->attendance;?></strong> parliamentary sittings out of a possible total of <strong><?php echo $totalSittings;?></strong> this term.</p>
+      <p class="item">That gives <?php echo getGenderForm($leaderrow->gender);?> an <strong>above-average</strong> attendance rate of <strong><?php echo getLeaderAttendancePc($leaderrow->attendance,$totalSittings);?>%</strong>.</p> 
       </div>      
     </div>
+
   </div>
 </div>
 <script type="text/javascript">

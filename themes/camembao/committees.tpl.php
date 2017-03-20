@@ -12,13 +12,24 @@
 ?>
 <?php include("header.tpl.php");?>
 
+<div class="corporato-grid crumbs">
+  <div class="crumbs">
+      <div class="corporato breadcrumb">
+          <div class="section"><?php echo Lang::$word->CRB_HERE;?></div>
+          : <a href="<?php echo SITEURL;?>/" class="section"><?php echo Lang::$word->CRB_HOME;?></a>
+          <div class="divider"></div>
+          <?php include_once("crumbs.php");?>
+      </div>
+    </div>
+</div>
+
 <div class="page-container">
 
 <?php if (isset($allcommittees)):?>
 
-<div class="corporato-grid">
+<div class="corporato-grid grey">
   <div class="columns horizontal-gutters">
-    <div class="screen-70 tablet-60 phone-100">
+    <div class="screen-50 tablet-50 phone-100 white">
       <div class="clearfix">
         <h2>All committees</h2>      
       </div>
@@ -28,10 +39,10 @@
       <div id="item-content" class="relative">
       <?php if($allcommittees):?>
 
-        <div id="listview" class="clearfix relative">
+        <div id="listview">
         <?php foreach($allcommittees as $lrow):?>
           <?php $url = ($core->seo) ? SITEURL . '/committees/' . $lrow->slug . '/' : SITEURL . '/item.php?committeename=' . $lrow->slug;?>
-          <section data-id="<?php echo $lrow->cid;?>">                     
+          <section data-id="<?php echo $lrow->id;?>">                     
             <div class="inner"> 
               <a href="<?php echo $url;?>"><div class="title"><?php echo $lrow->name;?></div></a>
             </div>
@@ -40,59 +51,58 @@
         </div>
       <?php endif;?>
       </div>
+
     </div>
 
-    <div class="screen-30 tablet-40 phone-100">
+    <div class="screen-50 tablet-50 phone-100">
       <div class="padded-30">
         <h4>What are committees?</h4>
-        <p>Parliamentary committees investigate specific matters of policy or government administration or performance.</p>
-        <p>Committees provide an opportunity for organisations and individuals to participate in policy making and to have their views placed on the public record and considered as part of the decision-making process.</p>
+        <p><?php echo cleanOut($core->committees_description);?></p>
       </div>
     </div>
 
   </div>
-
-  <div class="corporato divider"></div>
-  <div class="corporato tabular segment pagi">
-    <aside> <span class="corporato label"><?php echo Lang::$word->TOTAL . ': ' . $pager->items_total;?> / <?php echo Lang::$word->CURPAGE . ': ' . $pager->current_page . ' ' . Lang::$word->OF . ' ' . $pager->num_pages;?></span> </aside>
-    <aside class="right"> <?php echo $pager->display_pages();?> </aside>
-  </div> 
     
 </div>
 
 <?php else:?>
 
-<div class="corporato-grid">  
+<div class="corporato-grid grey">  
   <div class="columns horizontal-gutters">
-    <div class="screen-70 tablet-60 phone-100">
+    <div class="screen-70 tablet-60 phone-100 white">
       <h2><?php echo $committeerow->name;?></h2>
       <div>A <strong><?php echo $committeerow->committees_type_name;?></strong></div>
       <div class="corporato divider"></div>
       <div><?php echo cleanOut($committeerow->description);?></div>
       <div class="corporato divider"></div>
-      <h4>Committee Meetings</h4>
+      
+      <h4>Latest Committee Meetings</h4>
 
       <?php if(!$committeemeetingsrow):?>
         <div><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></div>
         <?php else:?>
         <div class="committee-meetings">
         <?php foreach ($committeemeetingsrow as $mrow):?>
-        <?php $url = ($core->seo) ? SITEURL . '/committee-meetings/' . $mrow->slug . '/' : SITEURL . '/committee-meetings.php?meetingname=' . $mrow->slug;?>
-          <?php echo Filter::dodate("short_date", $mrow->meeting_date);?> - <a href="<?php echo $url;?>"><?php echo $mrow->name;?></a>
+          <?php $url = ($core->seo) ? SITEURL . '/meetings/' . $mrow->slug . '/' : SITEURL . '/meetings.php?meetingname=' . $mrow->slug;?>                         
+
+          <div><a href="<?php echo $url;?>"><?php echo $mrow->name;?></a></div>
+          <span class="date-label"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo Filter::dodate("short_date", $mrow->meeting_date);?></span> 
+          <span class="committee-label"><i class="fa fa-eye" aria-hidden="true"></i> <?php echo getCommitteeMeetingType($mrow->meeting_type);?></span>
+          <div class="corporato divider"></div>
           <p><?php echo cleanSanitize($mrow->description,300);?></p>
         <?php endforeach;?>
         <?php unset($mrow);?>
         </div>
       <?php endif;?>
+      <div class="padded-30">
+        <a href="<?php echo SITEURL;?>/meetings" class="corporato large positive button"><i class="fa fa-calendar" aria-hidden="true"></i> View all meetings</a>
+      </div>
       
     </div>
       
     <div class="screen-30 tablet-40 phone-100">
-      <div class="padded-30">
-        <button type="submitfollow" class="corporato large black button">Follow for updates</button>
-      </div>
       
-      <div>
+      <div class="padded-30">
         <h4>Committee Members</h4>
 
         <?php if(!$committeemembersrow):?>

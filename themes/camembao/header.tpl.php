@@ -48,7 +48,7 @@ var SITEURL = "<?php echo SITEURL; ?>";
         		<div class="corporato cell">
         			<div id="searchbar" class="clearfix">
             			<div id="livesearch" class="corporato icon input">
-              				<input id="searchfield" placeholder="Search by MP, Bill or Special Committee" type="text">
+              				<input id="searchfield" placeholder="Search by MP's last name, Bill or Committee" type="text">
               				<i class="search link icon"></i>
               				<div id="suggestions"> </div>
             			</div>                       
@@ -71,7 +71,7 @@ var SITEURL = "<?php echo SITEURL; ?>";
                   <a href="<?php echo $dourl;?>"<?php echo $target;?> class="item menu"><?php echo $mrow->name;?></a>
                   <?php endforeach;?>
 
-                  <a href="#" class="item menu login">Login</a>
+                  
 
                 </div>
               <?php endif;?>
@@ -82,14 +82,3 @@ var SITEURL = "<?php echo SITEURL; ?>";
     	</div>
   	</div>    
 </header>
-
-<div class="corporato-grid crumbs">
-	<div class="crumbs">
-    	<div class="corporato breadcrumb">
-      		<div class="section"><?php echo Lang::$word->CRB_HERE;?></div>
-      		: <a href="<?php echo SITEURL;?>/" class="section"><?php echo Lang::$word->CRB_HOME;?></a>
-      		<div class="divider"></div>
-      		<?php include_once("crumbs.php");?>
-    	</div>
-  	</div>
-</div>

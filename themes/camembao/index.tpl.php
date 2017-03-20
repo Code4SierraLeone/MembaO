@@ -42,7 +42,7 @@
             <?php if($latest):?>    
                 <div id="gridview" class="clearfix relative">
                 <?php foreach($latest as $lrow):?>
-                <?php $url = ($core->seo) ? SITEURL . '/leader/' . $lrow->slug . '/' : SITEURL . '/leader.php?itemname=' . $lrow->slug;?>
+                <?php $url = ($core->seo) ? SITEURL . '/leaders/' . $lrow->slug . '/' : SITEURL . '/leaders.php?itemname=' . $lrow->slug;?>
                 <section class="gridmode">        
                     <div> <a href="<?php echo $url;?>"> <img src="thumbmaker.php?src=<?php echo UPLOADURL;?>leaders/<?php echo ($lrow->thumb) ? $lrow->thumb : "blank.jpg";?>&amp;w=<?php echo round($core->thumb_w);?>&amp;h=<?php echo round($core->thumb_h);?>&amp;s=1&amp;a=t1" alt=""/></a>                        
                     </div>
