@@ -80,7 +80,7 @@
   font-size: 1.3em;
   font-weight: 400;
   overflow: hidden;
-  border-bottom: 1px solid #2a394f;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   background-color: #2B3542;
   height: 45px;
   line-height: 45px;
@@ -88,7 +88,7 @@
 }
 .messi-titlebox .messi-title {
   font-weight: 400;
-  font-family: 'Oswald';
+  font-family: 'Roboto';
   color:#fff
 }
 .messi-closebtn {
@@ -111,9 +111,8 @@
 }
 .messi-content {
   overflow: hidden;
-  background-color: #eff2f8;
+  color: #fff;
   padding: 1em;
-  box-shadow: inset 0px 3px 0 rgba(255, 255, 255, 0.5);
 }
 .messi-content .messi-warning {
   display: table
@@ -127,8 +126,7 @@
 }
 .messi-footbox {
   background-color: #2B3542;;
-  border-top: 1px solid #2a394f;
-  box-shadow: inset 0px 1px 0 rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255,255,255,0.1);
   padding: 0
 }
 .messi-actions {
@@ -137,8 +135,6 @@
 .messi-actions .btnbox {
   display: block;
   float: right;
-  border-left: 1px solid rgba(0,0,0,0.1);
-  box-shadow: inset 1px 0px 0 rgba(255, 255, 255, 0.1);
   padding: 5px
 }
 .messi .mod-button.button {
