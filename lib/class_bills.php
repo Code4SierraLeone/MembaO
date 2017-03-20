@@ -93,12 +93,13 @@
 		  $pager->default_ipp = Registry::get("Core")->perpage;
 		  $pager->paginate();
 		  
-		  $sql = "SELECT b.*, c.name as committee" 
+		  $sql = "SELECT b.*, c.name as committeename, CONCAT(l.first_name,' ',l.last_name) as movername" 
 		  . "\n FROM " . self::bTable . " as b"
 		  . "\n LEFT JOIN " . Committees::cTable . " as c ON c.id = b.committee"
+		  . "\n LEFT JOIN " . Leaders::lTable . " as l ON l.id = b.mover"	  
 		  . "\n $where"
 		  . "\n ORDER BY b.created DESC" . $pager->limit;
-          $row = self::$db->fetch_all($sql);
+          $row = self::$db->fetch_all($sql);          
 		  
            return ($row) ? $row : 0;
 
@@ -187,11 +188,13 @@
 	  public function renderBill()
 	  {
 		  
-		  $sql = "SELECT b.*, b.id as bid," 		  
+		  $sql = "SELECT b.*, b.id as bid, c.name as committeename, c.slug as cslug, CONCAT(l.first_name,' ',l.last_name) as movername, l.slug as mslug," 		  
 		  . "\n (SELECT SUM(hits) FROM " . self::bsTable . " WHERE bid = b.id) as hits"
-		  . "\n FROM " . self::bTable . " as b"		  
+		  . "\n FROM " . self::bTable . " as b"	
+		  . "\n LEFT JOIN " . Committees::cTable . " as c ON c.id = b.committee"
+		  . "\n LEFT JOIN " . Leaders::lTable . " as l ON l.id = b.mover"	  
 		  . "\n WHERE b.slug = '".$this->billslug."'";
-		  //. "\n $is_admin";
+		  
           $row = self::$db->first($sql);
 		  
           if ($row) {
@@ -202,9 +205,29 @@
               return 0;
 
 	  }
-	  
+
+
 	  /**
-       * Leaders::mostPopLeaders()
+       * Bills::getBillHistory()
+       * 
+       * @return
+       */
+      public function getBillHistory($bill_id)
+      {
+		  
+          $sql = "SELECT bt.*, bt.id as bid" 		  
+		  . "\n FROM " . self::btTable . " as bt"
+		  . "\n WHERE bt.bill = ".$bill_id
+		  . "\n ORDER BY id DESC";
+          
+          $row = self::$db->fetch_all($sql);
+          
+          return ($row) ? $row : "0";
+      }
+
+
+	  /**
+       * Bills::mostPopBills()
        * 
        * @return
        */
@@ -222,7 +245,7 @@
       }
 	  
 	  /**
-       * Leaders::featuredLeaders()
+       * Bills::featuredBills()
        * 
        * @return
        */
