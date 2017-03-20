@@ -10,7 +10,8 @@
   require_once("init.php");
     
   if (isset($_GET['billname'])):
-    $billrow = $bill->renderBill();    
+    $billrow = $bill->renderBill();
+    $billhistory = $bill->getBillHistory($billrow->id);    
     if(!$billrow):
       redirect_to(SITEURL . '/404.php');
     endif;
