@@ -16,8 +16,10 @@ class Committees
       	const ctTable = "committees_type";
       	const cmTable = "committees_members";
       	const cmsTable = "committees_meetings";
+      	const cmaTable = "committees_meetings_attendance";
 	  
 	  	public $committeeslug = null;
+	  	public $committeemeetingslug = null;
 	  	private static $db;
       
 	    /**
@@ -30,6 +32,7 @@ class Committees
       		{
         		self::$db = Registry::get("Database");
 		  		$this->getCommitteeSlug();
+		  		$this->getCommitteeMeetingSlug();
 
       		}
 
@@ -191,7 +194,7 @@ class Committees
 	   	*/
 	  	public function getCommitteesList()
 	  		{
-		  		$row = self::$db->fetch_all("SELECT id, name, slug FROM " . self::cTable . " ORDER BY created");
+		  		$row = self::$db->fetch_all("SELECT id, name, slug FROM " . self::cTable . " ORDER BY name");
           		return $row ? $row : 0;
 	  		}
 
@@ -343,15 +346,15 @@ class Committees
 	  		}	
 
 	  			/**
-		* Committee::getCommitteeMeetingsSlug()
+		* Committee::getCommitteeMeetingSlug()
 		* 
 		* @return
 		*/
 	
-		private function getCommitteeMeetingsSlug()
+		private function getCommitteeMeetingSlug()
 	  		{		  
-		  		if (isset($_GET['committeemeetingname'])) {
-				  	$this->committeemeetingslug = sanitize($_GET['committeemeetingname'],100);
+		  		if (isset($_GET['meetingname'])) {
+				  	$this->committeemeetingslug = sanitize($_GET['meetingname'],100);
 				  	return self::$db->escape($this->committeemeetingslug);
 			  	}
 		  	}
@@ -417,7 +420,7 @@ class Committees
 				. "\n FROM " . self::cmsTable . " as cms"
 				. "\n LEFT JOIN " . self::cTable . " as c ON c.id = cms.committee"
 				. "\n $where"
-				. "\n ORDER BY cms.created DESC" . $pager->limit;
+				. "\n ORDER BY cms.meeting_date DESC" . $pager->limit;
 		        
 		         $row = self::$db->fetch_all($sql);
 				  
@@ -432,20 +435,14 @@ class Committees
 	  	public function processCommitteeMeeting()
 	  		{		  
 		  		Filter::checkPost('name', "Enter meeting title");
-		  		Filter::checkPost('description', "Enter committee description");
-		  		Filter::checkPost('meeting_date', "Select meeting date");		
+		  		Filter::checkPost('description', "Enter committee description");		  			
 		    		  
-		  		if (empty(Filter::$msgs)) {
-
-		  			$meeting_date = $_POST['meeting_date'];
-					$fdate = DateTime::createFromFormat('d F, Y', $meeting_date);
-					$fdate = $fdate->format("Y-m-d");
+		  		if (empty(Filter::$msgs)) {		  				
 
 			  		$data = array(
 				  	'name' => sanitize($_POST['name']),				  
 				  	'slug' => doSeo($_POST['name']),
 				  	'description' => $_POST['description'],
-				  	'meeting_date' => $fdate,
 				  	'meeting_type' => $_POST['meeting_type'],
 				  	'committee' => $_POST['committee']
 			  		);	
@@ -453,6 +450,14 @@ class Committees
 				  	if (!Filter::$id) {
 						$data['created'] = "NOW()";
 				  	}
+
+				  	if (!empty($_POST['meeting_date'])) {
+		  				$meeting_date = $_POST['meeting_date'];
+						$fdate = DateTime::createFromFormat('d F, Y', $meeting_date);
+						$fdate = $fdate->format("Y-m-d");
+
+						$data['meeting_date'] = $fdate;
+					}
 
 				  	if (empty($_POST['metakeys' . Lang::$lang]) or empty($_POST['metadesc'])) {
 						include (BASEPATH . 'lib/class_meta.php');
@@ -472,6 +477,21 @@ class Committees
 				  	$message = (Filter::$id) ? "Committee meeting updated" : "Committee meeting added";
 
 				  	if (self::$db->affected()) {
+				  		//create meeting attendance sheet from members
+				  		$cmembers = $this->getCommitteeMembers($_POST['committee']);
+				  		if($cmembers && !Filter::$id):
+					  		foreach ($cmembers as $mrow):
+						  		$adata = array(
+								  	'meeting_id' => $lastid,						  
+								  	'leader_id' => $mrow->member,
+								  	'status' => 0						  	
+							  		);
+
+						  		//add record to attendance sheet
+								self::$db->insert(self::cmaTable, $adata);
+							endforeach;
+						endif;	
+
 						$json['type'] = 'success';
 					  	$json['message'] = Filter::msgOk($message, false);
 				  	} else {
@@ -494,16 +514,32 @@ class Committees
 	   	*/
 	  	
 	  	public function renderCommitteeMeeting()
-	  		{
-		  		$is_admin = Registry::get("Users")->is_Admin();
-		  
+	  		{		  				  
 		  		$sql = "SELECT cms.*, cms.id as cmsid, c.name as committees_name" 		  		
 		  		. "\n FROM " . self::cmsTable . " as cms"	
 		  		. "\n LEFT JOIN " . self::cTable . " as c ON c.id = cms.committee"	  
-		  		. "\n WHERE c.slug = '".$this->committeeslug."'"
-		  		. "\n $is_admin";
-          		$row = self::$db->first($sql);		           
+		  		. "\n WHERE cms.slug = '".$this->committeemeetingslug."'";
+          		$row = self::$db->first($sql);
+          		return $row ? $row : 0;		           
 	  		}
+
+	  	/**
+	   	* Committees::renderCommitteeMeetingAttendance()
+	   	* 
+	   	* @return
+	   	*/
+	  	
+	  	public function renderCommitteeMeetingAttendance($meeting_id)
+	  		{		  				  
+		  		$sql = "SELECT cma.*, CONCAT(l.first_name,' ',l.last_name) as leader_name, l.slug as leader_slug" 		  		
+		  		. "\n FROM " . self::cmaTable . " as cma"	
+		  		. "\n LEFT JOIN " . Leaders::lTable . " as l ON l.id = cma.leader_id"	  
+		  		. "\n WHERE cma.meeting_id = ".$meeting_id
+		  		. "\n ORDER BY cma.status DESC";
+
+          		$row = self::$db->fetch_all($sql);
+          		return $row ? $row : 0;		           
+	  		}	
 	  	  	     	  
 	  
 	  	/**
@@ -515,6 +551,53 @@ class Committees
 	  		{
 		  		$row = self::$db->fetch_all("SELECT * FROM " . self::cmsTable . " WHERE committee = 1 ORDER BY meeting_date");
           		return $row ? $row : 0;
-	  		}	  		
+	  		}	 
+
+	  	/**
+	   * Committees::processCommitteeMeetingAttendance()
+	   * 
+	   * @return
+	   */
+	  	public function processCommitteeMeetingAttendance()
+	  	{
+		  if (!empty($_POST['leader_id'])):
+
+		  	//reset attendance  sheet
+		  	self::$db->query("UPDATE " . self::cmaTable . " SET status = 0 WHERE meeting_id = ".$_POST['meeting_id'].";");
+
+			  foreach ($_POST['leader_id'] as $val):
+				$leaderid = intval($val);
+					  
+				$data = array(	  			
+					'meeting_id' => $_POST['meeting_id'],
+					'leader_id' => $leaderid,
+					'status' => 1,
+				);								
+	
+				//check if MP attendance has been recorded in sitting attendance table
+				$row = self::$db->first("SELECT * FROM " . self::cmaTable . " WHERE leader_id = " . $leaderid . " AND meeting_id = " . $_POST['meeting_id'] . " LIMIT 1");
+				if($row):					
+					//update the status record to present
+					self::$db->query("UPDATE " . self::cmaTable . " SET status = 1 WHERE id = ".$row->id.";");
+				endif;
+				
+				//increment members committee sitting stat
+				self::$db->query("UPDATE " . Leaders::lTable . " SET committee_sittings = committee_sittings + 1 WHERE id = ".$leaderid.";");	
+				$message = "Attendance records updated";
+			  endforeach;		  		  
+			  
+			  if (self::$db->affected()) {
+					  $json['type'] = 'success';
+					  $json['message'] = Filter::msgOk($message, false);
+				  } else {
+					  $json['type'] = 'success';
+					  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
+				  }
+				  print json_encode($json);	    		  		  
+			else:
+				$json['message'] = Filter::msgAlert("No records have been updated.", false);;
+			  	print json_encode($json);
+			endif;
+	  }		 		
   	}
 ?>
