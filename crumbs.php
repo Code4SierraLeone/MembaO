@@ -22,6 +22,7 @@
       'item',
       'login',
       'leaders',
+      'meetings',
       'profile',
       'register',
       'search',
@@ -82,6 +83,14 @@
       case "login":
           $html = Lang::$word->_UA_TITLE;
           break;
+
+      case "meetings":
+          if(isset($allmeetings)):
+            $html = "Meetings";
+          else:
+            $html = ($meetingrow) ? "Leaders  /  ".$meetingrow->name : "";
+          endif;
+          break;     
 
       case "profile":
           $html = Lang::$word->_UA_TITLE4;
