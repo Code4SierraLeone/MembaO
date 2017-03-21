@@ -81,6 +81,7 @@
 		  $this->psize = $row->psize;
 		  $this->bills_description = $row->bills_description;
 		  $this->committees_description = $row->committees_description;
+		  $this->meetings_description = $row->meetings_description;
 		  $this->show_home = $row->show_home;
 		  $this->show_slider = $row->show_slider;
 		  $this->currency = $row->currency;
@@ -181,7 +182,8 @@
 					  'theme' => sanitize($_POST['theme']),
 					  'lang' => sanitize($_POST['lang']),
 					  'bills_description' => sanitize($_POST['bills_description']),					  					  			 
-					  'committees_description' => sanitize($_POST['committees_description']),					  					  			 
+					  'committees_description' => sanitize($_POST['committees_description']),	
+					  'meetings_description' => sanitize($_POST['meetings_description']),					  					  			 
 					  'show_home' => intval($_POST['show_home']),
 					  'show_slider' => intval($_POST['show_slider']),
 					  'featured' => intval($_POST['featured']),
