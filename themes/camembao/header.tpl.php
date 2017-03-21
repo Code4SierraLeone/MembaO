@@ -61,18 +61,7 @@ var SITEURL = "<?php echo SITEURL; ?>";
                 <div class="corporato horizontal divided list"> 
                   <a href="<?php echo SITEURL ?>/leaders" class="item menu">MPs</a>
                   <a href="<?php echo SITEURL ?>/bills" class="item menu">Bills</a>
-                  <a href="<?php echo SITEURL ?>/committees" class="item menu">Committees</a>
-                  
-                  <?php foreach($menu as $mrow):?>
-                  <?php $url = (Registry::get("Core")->seo == 1) ? SITEURL . '/content/' . $mrow->slug . '/' : SITEURL . '/content.php?pagename=' . $mrow->slug;?>
-                  <?php $mainurl = ($mrow->home_page) ?  SITEURL : $url;?>
-                  <?php $dourl = ($mrow->content_type == 'web') ? $mrow->link : $mainurl;?>
-                  <?php $target = ($mrow->content_type == 'web') ? ' target="'.$mrow->target.'"': '' ;?>
-                  <a href="<?php echo $dourl;?>"<?php echo $target;?> class="item menu"><?php echo $mrow->name;?></a>
-                  <?php endforeach;?>
-
-                  
-
+                  <a href="<?php echo SITEURL ?>/committees" class="item menu">Committees</a>                                  
                 </div>
               <?php endif;?>
               <!--/ Menu End -->
