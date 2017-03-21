@@ -104,7 +104,8 @@ $(document).ready(function() {
     
     <div class="screen-60 tablet-40 phone-100 white">
       <h2><?php echo $leaderrow->name;?></h2>
-      <div>Representing <strong><?php echo $leaderrow->coname;?></strong> on <strong><?php echo $leaderrow->pparty;?></strong> ticket</div>
+      <div>Representing <strong><?php echo $leaderrow->coname;?></strong> 
+      <?php if($leaderrow->pparty > 0) { ?>on <strong><?php echo $leaderrow->pparty;?></strong> ticket <?php } else { ?> as a Paramount Chief<?php } ?></div>
 
       <div class="corporato divider"></div>
 
@@ -130,12 +131,7 @@ $(document).ready(function() {
                   <div class="corporato divider"></div>                                    
                 </div>
               </aside>
-            </div>
-
-            <div>
-              <h3>Attendance records</h3>
-
-            </div>
+            </div>            
 
           </div>
         </section>
