@@ -1043,6 +1043,29 @@
   background-color: #57928a;
   color: #FFFFFF;
 }
+
+
+
+/*--- Membao ---*/
+.corporato.membao.buttons .button,
+.corporato.membao.button {
+  background-color: #982420;
+  color: #FFFFFF;
+}
+.corporato.membao.buttons .button:hover,
+.corporato.membao.button:hover,
+.corporato.membao.buttons .active.button,
+.corporato.membao.button.active {
+  background-color: #982420;
+  color: #FFFFFF;
+}
+.corporato.membao.buttons .button:active,
+.corporato.membao.button:active {
+  background-color: #982420;
+  color: #FFFFFF;
+}
+
+
 /*---------------
     Positive
 ----------------*/
