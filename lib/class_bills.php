@@ -260,7 +260,31 @@
           
           return ($row) ? $row : 0;
       }	  
+
+
+	  /**
+       * Bills::totalBills()
+       * 
+       * @return
+      */
+
+      public function totalBills () 
+	  {
+			$totalBills = countEntries(self::bTable, "" ,"");
+		  	return ($totalBills) ? $totalBills : 0;
+	  }
 	  
+	  /**
+       * Bills::totalBillsPassed()
+       * 
+       * @return
+      */
+
+      public function totalBillsPassed () 
+	  {
+			$totalBillsPassed = countEntries(self::bTable, "status" , 9);
+		  	return ($totalBillsPassed) ? $totalBillsPassed : 0;		
+	  }
 
 	  
 	  /**
@@ -323,10 +347,18 @@
 				  	'bill' => $_POST['bill'],
 				  	'status_date' => $sdate,
 				  	'status' => $_POST['bill_status']
-			  		);				  				  					  
+			  		);
+
+			  		$udata = array(				  	
+				  	'status' => $_POST['bill_status']
+			  		);	
+
 			                              
 
+				  	self::$db->update(self::bTable, $udata, "id = " . $_POST['bill']);
 				  	$lastid = self::$db->insert(self::btTable, $data);
+				  	
+
 				  	$message = "Bill status added";
 
 				  	if (self::$db->affected()) {
