@@ -242,7 +242,7 @@
       public function featuredLeaders()
       {
 		  
-          $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as fullname, co.name as coname, pa.name as partyname" 
+          $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, co.name as coname, pa.abbr as partyabbr" 
 		  . "\n FROM " . self::lTable . " as l"	
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency" 
 		  . "\n LEFT JOIN " . self::paTable . " as pa ON pa.id = l.party"	  
@@ -481,7 +481,7 @@
       public function mostAttendances()
       {
 		  
-          $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as fullname, co.name as constituencyname, pa.name as partyname" 
+          $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, co.name as coname, pa.name as partyname" 
 		  . "\n FROM " . self::lTable . " as l"	
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency" 
 		  . "\n LEFT JOIN " . self::paTable . " as pa ON pa.id = l.party"
@@ -500,7 +500,7 @@
       public function leastAttendances()
       {
 		  
-          $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as fullname, co.name as constituencyname, pa.name as partyname" 
+          $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, co.name as coname, pa.name as partyname" 
 		  . "\n FROM " . self::lTable . " as l"	
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency" 
 		  . "\n LEFT JOIN " . self::paTable . " as pa ON pa.id = l.party"
