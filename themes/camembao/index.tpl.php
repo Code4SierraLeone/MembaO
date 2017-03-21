@@ -13,45 +13,48 @@
 <?php include("header.tpl.php");?>
 
 <div class="corporato-grid home">
-        <div class="two columns horizontal-gutters">
-            <div class="screen-50 tablet-50 phone-100">
-                <?php if($home):?>
-                <div class="corporato description">                    
-                    <?php echo cleanOut($home->body);?></div>
-                <?php endif;?>
-                </div>
-                <div class="screen-50 tablet-50 phone-100">
-                    <div class="columns">
-                        <div class="row padded20up">
-                            <?php include(THEMEDIR . "/home_search.tpl.php");?>
-                        </div>
-                    </div>  
+    <div class="two columns horizontal-gutters">
+        <div class="screen-50 tablet-50 phone-100">
+        <?php if($home):?>
+            <div class="corporato description padded-30t">                    
+                <?php echo cleanOut($home->body);?>
+            </div>    
+        <?php endif;?>
+        </div>
+        
+        <div class="screen-50 tablet-50 phone-100">
+            <div class="columns">
+                <div class="row padded20up">
+                    <?php include(THEMEDIR . "/home_search.tpl.php");?>
                 </div>
             </div>  
-        </div>  
-    </div>
+        </div>
+    </div>  
+</div>  
 
 
 <div class="corporato-grid">
-	<div class="columns horizontal-gutters">
-    	<div class="screen-30 tablet-30 phone-100">
-          	
+	<div class="columns horizontal-gutters padded-30t">
+    	<div class="screen-33 tablet-33 phone-100">       	
             
-            <div class="clearfix"><h1 class="corporato header fitted push-left">Featured leader</h1></div>
+            <h4>Featured leader</h4>
+
             <div id="item-content" class="relative">
             <?php if($latest):?>    
-                <div id="gridview" class="clearfix relative">
+                <div id="gridview" class="featured-leader clearfix relative">
                 <?php foreach($latest as $lrow):?>
                 <?php $url = ($core->seo) ? SITEURL . '/leaders/' . $lrow->slug . '/' : SITEURL . '/leaders.php?itemname=' . $lrow->slug;?>
-                <section class="gridmode">        
-                    <div> <a href="<?php echo $url;?>"> <img src="thumbmaker.php?src=<?php echo UPLOADURL;?>leaders/<?php echo ($lrow->thumb) ? $lrow->thumb : "blank.jpg";?>&amp;w=<?php echo round($core->thumb_w);?>&amp;h=<?php echo round($core->thumb_h);?>&amp;s=1&amp;a=t1" alt=""/></a>                        
+                <section class="gridmode" >        
+                    <div class=""> 
+                        <a href="<?php echo $url;?>"> <img src="thumbmaker.php?src=<?php echo UPLOADURL;?>leaders/<?php echo ($lrow->thumb) ? $lrow->thumb : "blank.jpg";?>&amp;w=<?php echo round($core->thumb_w);?>&amp;h=<?php echo round($core->thumb_h);?>&amp;s=1&amp;a=t1" alt=""/></a>  
                     </div>
                 </section>
                 <div>
-                    <div class="small-title list"><?php echo $lrow->fullname;?></div>
-                    <div class="small-details list"><?php echo $lrow->coname;?></div>
-                    <div class="small-details list"><?php echo getAge($lrow->dob);?> years old</div>
-                    <div class="small-button"><a href="<?php echo $url;?>" class="corporato info button">Read profile</a></div>
+                    <div><a href="<?php echo $url;?>"><strong><?php echo $lrow->name;?></strong></a></div>
+                    <div class="small-details list"></div>
+                    <div class="small-details list">Representing <?php echo $lrow->coname;?> on <?php echo $lrow->partyabbr;?> ticket</div>
+                    <div class="small-details list"><?php echo getAge($lrow->dob);?></div>
+                    <div class="small-button"><a href="<?php echo $url;?>" class="corporato membao button">Read profile</a></div>
                 </div>
                 <?php endforeach;?>
                 </div>
@@ -59,42 +62,35 @@
             </div>
             
         </div> 
-        <div class="screen-40 tablet-40 phone-100">        
-			<div class="columns horizontal-gutters">
-  				<div class="screen-50 tablet-50 phone-100">
-	                <h2>Leaderboard</h2>
-                    <div class="corporato list">
-					<?php $i = 0;?>
-                    <?php foreach ($mostattendance as $i => $marow):?>
-                    <?php $i++;?>
-                    <?php $url = ($core->seo) ? SITEURL . '/leader/' . $marow->slug . '/' : SITEURL . '/leader.php?itemname=' . $marow->slug;?>
-                        <div class="item"><span class="corporato circular label">
-                            <?php echo $i;?></span> <a href="<?php echo $url;?>"><?php echo $marow->fullname;?></a> <?php echo $marow->sittings ." ". pluralize($marow->sittings, "sitting");?>
-                        </div>
-                    <?php endforeach;?>
-                  	</div>
-                </div>
-                <div class="screen-50 tablet-50 phone-100">
-	                <h2>Wall of shame</h2>
-                    <div class="corporato list">
-					<?php $i = 0;?>
-                    <?php foreach ($leastattendance as $j => $larow):?>
-                    <?php $j++;?>
-                    <?php $url = ($core->seo) ? SITEURL . '/leader/' . $larow->slug . '/' : SITEURL . '/leader.php?itemname=' . $larow->slug;?>
-                        <div class="item"><span class="corporato circular label">
-                            <?php echo $j;?></span> <a href="<?php echo $url;?>"><?php echo $larow->fullname;?></a> <?php echo $larow->sittings ." ". pluralize($larow->sittings, "sitting");?>
-                        </div>
-                    <?php endforeach;?>
-                  	</div>
-                </div>
-            </div>    
+        <div class="screen-33 tablet-33 phone-100">        
+			
+	        <h4>Leaderboard</h4>        
+            <ol class="ranking">
+            <?php foreach ($mostattendance as $marow):?>
+                <li>
+                    <?php $url = ($core->seo) ? SITEURL . '/leaders/' . $marow->slug . '/' : SITEURL . '/leader.php?leadersname=' . $marow->slug;?>
+                    <a href="<?php echo $url;?>"><strong><?php echo $marow->name;?></strong> <span class="small-details"> representing <?php echo $marow->coname;?></span></a>      <div class="small-details list">Marked <strong>present</strong> for <?php echo $marow->sittings ." ". pluralize($marow->sittings, "sitting");?></div>    
+                </li>
+                <?php endforeach;?>
+            </ol>
+
         </div>
         
-        <div class="screen-30 tablet-30 phone-100">
-			
+        <div class="screen-33 tablet-33 phone-100">
+            <h4>Wall of shame</h4>            
+            <ol class="ranking">
+            <?php foreach ($leastattendance as $j => $larow):?>
+                <li>
+                    <?php $url = ($core->seo) ? SITEURL . '/leaders/' . $larow->slug . '/' : SITEURL . '/leader.php?leadersname=' . $larow->slug;?>
+                    <a href="<?php echo $url;?>"><strong><?php echo $larow->name;?></strong> <span class="small-details"> representing <?php echo $larow->coname;?></span></a>      <div class="small-details list">Marked <strong>present</strong> for <?php echo $larow->sittings ." ". pluralize($larow->sittings, "sitting");?></div>    
+                </li>
+            <?php endforeach;?>
+            </ol>            
+            <div class="smallest">* All MPs not present are marked as absent, even if they had leave of absence.</div>
 		</div>
 	</div>        	
 </div>
+
 <script type="text/javascript">
 // <![CDATA[
 $(window).on("orientationchange", function(e) {
@@ -110,6 +106,17 @@ $(document).ready(function() {
             cols: Math.round(1440 / <?php echo $core->homelist;?> )
         });
     });
+});
+
+$('.count').each(function () {
+  var $this = $(this);
+  jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+    duration: 1000,
+    easing: 'swing',
+    step: function () {
+      $this.text(Math.ceil(this.Counter));
+    }
+  });
 });
 // ]]>
 </script>
