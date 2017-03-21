@@ -39,12 +39,12 @@
       <div id="item-content" class="relative">
       <?php if($allmeetings):?>
 
-        <div id="listview meetings" class="clearfix relative">
+        <div id="listview" class="meetings clearfix relative">
         <?php foreach($allmeetings as $lrow):?>
           <?php $url = ($core->seo) ? SITEURL . '/meetings/' . $lrow->slug . '/' : SITEURL . '/item.php?meetingname=' . $lrow->slug;?>
           <section data-id="<?php echo $lrow->id;?>">                     
             <div class="inner">               
-              <a href="<?php echo $url;?>"><div class="title"><?php echo $lrow->name;?></div></a>
+              <a href="<?php echo $url;?>"><div class="meeting-title"><?php echo $lrow->name;?></div></a>
               <span class="date-label"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo Filter::dodate("short_date", $lrow->meeting_date);?></span> 
               <span class="committee-label"><i class="fa fa-users" aria-hidden="true"></i> <?php echo $lrow->committees_name;?></span>
             </div>
@@ -57,9 +57,8 @@
 
     <div class="screen-30 tablet-40 phone-100">
       <div class="padded-30">
-        <h4>What are committees?</h4>
-        <p>Parliamentary committees investigate specific matters of policy or government administration or performance.</p>
-        <p>Committees provide an opportunity for organisations and individuals to participate in policy making and to have their views placed on the public record and considered as part of the decision-making process.</p>
+        <h4>On committee meetings</h4>
+        <p><?php echo cleanOut($core->meetings_description);?></p>
       </div>
     </div>
 
