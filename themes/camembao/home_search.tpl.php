@@ -40,7 +40,7 @@
       
         <div class="screen-25 tablet-25 phone-100 padded10">
           <div class="stat-title"><span class="count"><?php echo $totalcommitteemeetings;?></span><span class="smallest"></span></div>
-          <div class="stat-desc">Number of Committee hearings have been scheduled</div>
+          <div class="stat-desc">Number of Committee hearings that were scheduled</div>
         </div>
 
       </div>
