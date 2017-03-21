@@ -12,28 +12,18 @@
   
   class Content
   {
-	  const cTable = "categories";
-	  const rTable = "categories_related";
 	  const muTable = "menus";
-	  const gTable = "gateways";
 	  const pTable = "pages";
 	  const fqTable = "faq";
 	  const nTable = "news";
 	  const eTable = "email_templates";
-	  const cpTable = "coupons";
-	  const cmTable = "comments";
-	  const crTable = "cart";
 	  const exTable = "extras";
 	  const slTable = "slider";
 	  const slcTable = "slider_config";
 	  const cnTable = "countries";
-	  const inTable = "invoices";
 	  
-	  private $cattree = array();
-	  private $catlist = array();
 	  public static $gfileext = array("jpg","jpeg","png");
 	  
-	  public $catslug = null;
 	  public $pageslug = null;
 	  public $tag = null;
 	  
@@ -47,26 +37,11 @@
       function __construct()
       {
 		  self::$db = Registry::get("Database");
-		  $this->cattree = $this->getCatTree();
 		  $this->getContentSlug();
-		  $this->getCategorySlug();
 		  $this->getTag();
 
       }
 
-	  /**
-	   * Content::getCategorySlug()
-	   * 
-	   * @return
-	   */
-	  private function getCategorySlug()
-	  {
-		  if (isset($_GET['catname'])) {
-			  $this->catslug = sanitize($_GET['catname'],100);
-			  //$this->catslug = rtrim($this->catslug,"/");
-			  return self::$db->escape($this->catslug);
-		  }
-	  }
 	  
 	  /**
 	   * Content::getContentSlug()
@@ -231,330 +206,7 @@
 			  print json_encode($json);
 		  }
 	  }
-
-      /**
-       * Content::getSingleCategory()
-       * 
-       * @return
-       */
-      public function getSingleCategory()
-      {
-		
-          $sql = "SELECT *"
-		  . "\n FROM " . self::cTable
-		  . "\n WHERE slug = '" . sanitize($this->catslug) . "'";
-          
-          $row = self::$db->first($sql);
-          
-          return ($row) ? $row : 0;
-      }
-	  	  
-      /**
-       * Content::getCatTree()
-       * 
-       * @return
-       */
-      protected function getCatTree()
-	  {
-		  $query = self::$db->query("SELECT * FROM " . self::cTable . " ORDER BY parent_id, position");
-		  
-		  while ($row = self::$db->fetch($query, true)) {
-			  $this->cattree[$row['id']] = array(
-			        'id' => $row['id'],
-					'name' => $row['name'], 
-					'parent_id' => $row['parent_id']
-			  );
-		  }
-		  return $this->cattree;
-	  }
-
-      /**
-       * Content::getCatList()
-       * 
-       * @return
-       */
-      public function getCatList()
-	  {
-	
-		  $query = self::$db->query("SELECT * FROM " . self::cTable
-		  . "\n WHERE active = 1"
-		  . "\n ORDER BY parent_id, position");
-
-		  while ($row = self::$db->fetch($query, true)) {
-			  $catlist[$row['id']] = array(
-			        'id' => $row['id'],
-					'name' => $row['name'], 
-					'parent_id' => $row['parent_id'],
-					'active' => $row['active'],
-					'slug' => $row['slug']
-			  );
-		  }
-		  return $catlist;
-	  }
-
-      /**
-       * Content::getSortCatList()
-       * 
-	   * @param integer $parent_id
-       * @return
-       */
-      public function getSortCatList($parent_id = 0)
-	  {
-		  
-		  $subcat = false;
-		  $class = ($parent_id == 0) ? "parent" : "child";
-
-		  foreach ($this->cattree as $key => $row) {
-			  if ($row['parent_id'] == $parent_id) {
-				  if ($subcat === false) {
-					  $subcat = true;
-					  print "<ul class=\"sortMenu\">\n";
-				  }
-				  
-				  print '<li class="dd-item" id="list_' . $row['id'] . '">'
-				  .'<div class="dd-handle"><a data-id="' . $row['id'] . '" data-name="' . $row['name'] . '" data-title="' . Lang::$word->CAT_DELETE . '" data-option="deleteCategory" class="delete">'
-				  . '<i class="icon red remove sign"></i></a><i class="icon reorder"></i>' 
-				  .'<a href="index.php?do=categories&amp;action=edit&amp;id=' . $row['id'] . '" class="'.$class.'">' . $row['name'] . '</a></div>';
-				  $this->getSortCatList($key);
-				  print "</li>\n";
-			  }
-		  }
-		  unset($row);
-		  
-		  if ($subcat === true)
-			  print "</ul>\n";
-	  }
-
-      /**
-       * Content::getCatCheckList()
-       * 
-	   * @param mixed $parent_id
-	   * @param integer $level
-	   * @param mixed $spacer
-	   * @param bool $selected
-       * @return
-       */
-	  public function getCatCheckList($parent_id, $level = 0, $spacer, $selected = false)
-	  {
-		  
-		  if($this->cattree) {
-			  $class = 'odd';
-
-			  if($selected) {
-				$arr = explode(",",$selected);
-				reset($arr);
-			  }
-
-			  foreach ($this->cattree as $key => $row) {
-				  if($selected) {
-					$sel =  (in_array($row['id'], $arr))  ? " checked=\"checked\"" : "";
-					$hsel = (in_array($row['id'], $arr)) ? " active" : "";
-				  } else {
-					  $sel = '';
-					  $hsel = '';
-				  }
-				  $class = ($class == 'even' ? 'odd' : 'even');
-				  
-				  if ($parent_id == $row['parent_id']) {
-					  print "<div class=\"" . $class . $hsel . "\"> <label class=\"checkbox\"><input type=\"checkbox\" name=\"cid[]\" class=\"checkbox\" value=\"" . $row['id'] . "\"".$sel." />";
-					  for ($i = 0; $i < $level; $i++)
-						  print $spacer;
-						  
-					  print "<i></i>".$row['name'] . "</label></div>\n";
-					  $level++;
-					  $this->getCatCheckList($key, $level, $spacer, $selected);
-					  $level--;
-				  }
-			  }
-			  unset($row);
-		  }
-	  }
-
-	  /**
-	   * Content::fetchProductCategories()
-	   * 
-	   * @return
-	   */
-	  public function fetchProductCategories()
-	  {
-
-		  if ($result = self::$db->fetch_all("SELECT cid FROM " . self::rTable . " WHERE pid = ".Filter::$id)) {
-			  $cids = array();
-			  foreach ($result as $row) {
-				  $cids[] = $row->cid;
-			  }
-			  unset($row);
-			  $cids = implode(",", $cids);
-		  } else {
-			  $cids = "";
-		  }
-		  return $cids;
-
-	  }
-	  
-      /**
-       * Content::getCategories()
-       * 
-	   * @param mixed $array
-	   * @param integer $parent_id
-       * @return
-       */
-	  public function getCategories($array, $parent_id = 0, $menuid = 'main-menu', $class = 'top-menu')
-	  {
-		  
-		  $subcat = false;
-		  $attr = (!$parent_id) ? ' class="' . $class . '" id="' . $menuid . '"' : ' class="menu-submenu"';
-		  $attr2 = (!$parent_id) ? ' class="nav-item"' : ' class="nav-submenu-item"';
-		  
-		  foreach ($array as $key => $row) {
-			  if ($row['parent_id'] == $parent_id) {
-				  if ($subcat === false) {
-					  $subcat = true;
-					  
-					  print "<ul" . $attr . ">\n";
-				  }
-                  $active = ($row['slug'] == $this->catslug) ? " class=\"active\"" : "";
-				  $url = (Registry::get('Core')->seo == 1) ? SITEURL . '/category/' . sanitize($row['slug']) . '/' :  SITEURL . '/category.php?catname=' . sanitize($row['slug']);
-
-				  $link = '<a href="'.$url.'"' . $active . '>' . $row['name'] . '</a>';
-				  print '<li' . $attr2 . '>';
-				  print $link;
-				  $this->getCategories($array, $key);
-				  print "</li>\n";
-			  }
-		  }
-		  unset($row);
-		  
-		  if ($subcat === true)
-			  print "</ul>\n";
-	  }
-	  
-      /**
-       * Content::getCatDropList()
-       * 
-	   * @param mixed $parent_id
-	   * @param integer $level
-	   * @param mixed $spacer
-	   * @param bool $selected
-       * @return
-       */
-	  public function getCatDropList($parent_id, $level = 0, $spacer, $selected = false)
-	  {
-		  if($this->cattree) {
-			  foreach ($this->cattree as $key => $row) {
-				  $sel = ($row['id'] == $selected) ? " selected=\"selected\"" : "" ;
-				  if ($parent_id == $row['parent_id']) {
-					  print "<option value=\"" . $row['id'] . "\"".$sel.">";
-					  
-					  for ($i = 0; $i < $level; $i++)
-						  print $spacer;
-					  
-					  print $row['name'] . "</option>\n";
-					  $level++;
-					  $this->getCatDropList($key, $level, $spacer, $selected);
-					  $level--;
-				  }
-			  }
-			  unset($row);
-		  }
-	  }
-
-	  /**
-	   * Content::processCategory()
-	   * 
-	   * @return
-	   */
-	  public function processCategory()
-	  {
-		  
-		  Filter::checkPost('name', Lang::$word->CAT_NAME);
-		  
-		  if (empty(Filter::$msgs)) {
-			  $data = array(
-				  'name' => sanitize($_POST['name']), 
-				  'parent_id' => intval($_POST['parent_id']), 
-				  'slug' => (empty($_POST['slug'])) ? doSeo($_POST['name']) : doSeo($_POST['slug']),
-				  'description' => sanitize($_POST['description']),
-				  'metakeys' => sanitize($_POST['metakeys']),
-				  'metadesc' => sanitize($_POST['metadesc']),
-				  'active' => intval($_POST['active'])
-			  );
-
-              if (empty($_POST['metakeys']) or empty($_POST['metadesc'])) {
-                  include (BASEPATH . 'lib/class_meta.php');
-                  parseMeta::instance($_POST['description']);
-                  if (empty($_POST['metakeys'])) {
-                      $data['metakeys'] = parseMeta::get_keywords();
-                  }
-                  if (empty($_POST['metadesc'])) {
-                      $data['metadesc'] = parseMeta::metaText($_POST['description']);
-                  }
-              }
-			  
-			  (Filter::$id) ? self::$db->update(self::cTable, $data, "id=" . Filter::$id) : self::$db->insert(self::cTable, $data);
-			  $message = (Filter::$id) ? Lang::$word->CAT_UPDATED : Lang::$word->CAT_ADDED;
-			  
-			  if (self::$db->affected()) {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgOk($message, false);
-			  } else {
-				  $json['type'] = 'info';
-				  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-			  }
-			  print json_encode($json);
-			  
-		  } else {
-			  $json['message'] = Filter::msgStatus();
-			  print json_encode($json);
-		  }
-	  }
-      /**
-       * Content::rendertCategories()
-       * 
-       * @return
-       */
-      public function rendertCategories($catname, $cid)
-      {
-		  
-		  $pager = Paginator::instance();
-		  
-		  $counter = countEntries(Products::pTable, "cid" ,$cid);
-		  $pager->path = (Registry::get("Core")->seo) ? SITEURL . '/category/' . $catname . '/' : false;
-		  $pager->items_total = $counter;
-		  $pager->default_ipp = Registry::get("Core")->perpage;
-		  $pager->paginate();
-
-		  if (isset($_GET['sort'])) {
-			  $val = explode("-", $_GET['sort']);
-			  if (count($val) == 2) {
-				  $sort = sanitize($val[0]);
-				  $order = sanitize($val[1]);
-				  if (in_array($sort, array("title", "price", "rating", "created"))) {
-					  $ord = ($order == 'DESC') ? " DESC" : " ASC";
-					  $sorting = "p." . $sort . $ord;
-				  } else {
-					  $sorting = " p.created DESC";
-				  }
-			  } else {
-				  $sorting = " p.created DESC";
-			  }
-		  } else {
-			  $sorting = " p.created DESC";
-		  }
-		  
-		  $sql = "SELECT p.*, p.id as pid,"
-		  . "\n (SELECT COUNT(pid) FROM " . self::cmTable . " WHERE pid = p.id) as comments,"
-		  . "\n (SELECT SUM(hits) FROM " . Products::sTable . " WHERE pid = p.id) as hits"
-		  . "\n FROM " . Products::pTable . " as p" 
-		  . "\n INNER JOIN " . self::rTable . " rc ON p.id = rc.pid" 
-		  . "\n WHERE rc.cid = " . (int)$cid
-		  . "\n AND p.active = '1'"
-		  . "\n ORDER BY $sorting " . $pager->limit;
-		  
-		  $row = self::$db->fetch_all($sql);
-		  
-		  return ($row) ? $row : 0;
-      }
+	  	 
 	  
       /**
        * Content::getFileTree()
@@ -569,63 +221,10 @@
           $row = $db->fetch_all($sql);
           
 		  return ($row) ? $row : 0;
-	  }
-	  	  	  	  	  	  	  
-      /**
-       * Content::getGateways()
-       * 
-       * @return
-       */
-      public function getGateways($active = false)
-      {
-          global $db;
-		  
-		  $where = ($active) ? "WHERE active = '1'" : null ;
-          $sql = "SELECT * FROM " . self::gTable
-		  . "\n " . $where
-		  . "\n ORDER BY name";
-          $row = self::$db->fetch_all($sql);
-          
-          return ($row) ? $row : 0;
-      }
+	  }	  	  	  	  	  	  	       
 
 	  
-	  /**
-	   * Content::processGateway()
-	   * 
-	   * @return
-	   */
-	  public function processGateway()
-	  {
-		  
-		  Filter::checkPost('displayname', Lang::$word->GTW_NAME);
-			  			  		  
-		  if (empty(Filter::$msgs)) {
-			  $data = array(
-					  'displayname' => sanitize($_POST['displayname']), 
-					  'extra' => sanitize($_POST['extra']),
-					  'extra2' => sanitize($_POST['extra2']),
-					  'extra3' => sanitize($_POST['extra3']),
-					  'demo' => intval($_POST['demo']),
-					  'active' => intval($_POST['active'])
-			  );
-
-			  self::$db->update(self::gTable, $data, "id=" . Filter::$id);
-			  
-			  if(self::$db->affected()) {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgOk(Lang::$word->GTW_UPDATED, false);
-			  } else {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-			  }
-			  print json_encode($json); 
-			  
-          } else {
-              $json['message'] = Filter::msgStatus();
-              print json_encode($json);
-          }
-      }
+	  
 
 	  /**
 	   * Content::createSiteMap()
@@ -640,9 +239,6 @@
 
 		  $sql2 = "SELECT id, slug, created FROM products ORDER BY created DESC";
 		  $items = self::$db->query($sql2);
-
-		  $sql3 = "SELECT id, slug FROM categories";
-		  $cats = self::$db->query($sql3);
 		  
 		  $smap = "";
 		  
@@ -671,19 +267,6 @@
 				  $url = SITEURL . '/product/' . $row->slug . '/';
 			  } else
 				  $url = SITEURL . '/item.php?itemname=' . $row->slug;
-			  
-			  $smap .= "<url>\r\n";
-			  $smap .= "<loc>" . $url . "</loc>\r\n";
-			  $smap .= "<lastmod>" . date('Y-m-d') . "</lastmod>\r\n";
-			  $smap .= "<changefreq>weekly</changefreq>\r\n";
-			  $smap .= "</url>\r\n";
-		  }
-
-		  while ($row = self::$db->fetch($cats)) {
-			  if (Registry::get("Core")->seo == 1) {
-				  $url = SITEURL . '/category/' . $row->slug . '/';
-			  } else
-				  $url = SITEURL . '/category.php?catname=' . $row->slug;
 			  
 			  $smap .= "<url>\r\n";
 			  $smap .= "<loc>" . $url . "</loc>\r\n";
@@ -1118,102 +701,7 @@
 			  print json_encode($json);
 		  }
 	  }	 
-	  	  
-	  /**
-	   * Content::getCommentsConfig()
-	   * 
-	   * @return
-	   */
-	  public function getCommentsConfig()
-	  {
-		  
-		  $sql = "SELECT * FROM comments_config";
-          return $row = self::$db->first($sql);
-	  }
 
-	  /**
-	   * Comments::processCommentConfig()
-	   * 
-	   * @return
-	   */
-	  public function processCommentConfig()
-	  {
-		  
-		  Filter::checkPost('dateformat', Lang::$word->CMT_DATEF);
-		  
-		  if (empty(Filter::$msgs)) {
-			  $data = array(
-					'username_req' => intval($_POST['username_req']), 
-					'email_req' => intval($_POST['email_req']),
-					'show_captcha' => intval($_POST['show_captcha']),
-					'show_www' => intval($_POST['show_www']),
-					'show_username' => intval($_POST['show_username']),
-					'show_email' => intval($_POST['show_email']),
-					'auto_approve' => intval($_POST['auto_approve']),
-					'notify_new' => intval($_POST['notify_new']),
-					'public_access' => intval($_POST['public_access']),
-					'sorting' => sanitize($_POST['sorting'],4),
-					'blacklist_words' => trim($_POST['blacklist_words']),
-					'char_limit' => intval($_POST['char_limit']),
-					'perpage' => intval($_POST['perpage']),
-					'dateformat' => sanitize($_POST['dateformat'])
-			  );
-			  
-			  self::$db->update("comments_config", $data);
-			  
-			  if (self::$db->affected()) {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgOk(Lang::$word->CMT_UPDATEDC, false);
-			  } else {
-				  $json['type'] = 'info';
-				  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-			  }
-			  print json_encode($json);
-			  
-		  } else {
-			  $json['message'] = Filter::msgStatus();
-			  print json_encode($json);
-		  }
-	  }	  
-	  /**
-	   * Content::getComments()
-	   *
-	   * @param bool $sort
-	   * @return
-	   */
-	  public function getComments($from = false)
-	  {
-		  $pager = Paginator::instance();
-		  $comconfig = $this->getCommentsConfig();
-		  $total = (Filter::$id) ? countEntries(self::cmTable, "id", Filter::$id) : countEntries(self::cmTable);
-		  $counter = $total;
-		  $pager->items_total = $counter;
-		  $pager->default_ipp = Registry::get("Core")->perpage;
-		  $pager->paginate();
-
-		  
-          if (isset($_POST['fromdate_submit']) && $_POST['fromdate_submit'] <> "" || isset($from) && $from != '') {
-              $enddate = date("Y-m-d");
-              $fromdate = (empty($from)) ? $_POST['fromdate_submit'] : $from;
-              if (isset($_POST['enddate_submit']) && $_POST['enddate_submit'] <> "") {
-                  $enddate = $_POST['enddate_submit'];
-              }
-			  $where = (Filter::$id) ? " WHERE c.created BETWEEN '" . trim($fromdate) . "' AND '" . trim($enddate) . " 23:59:59' AND p.id = '" . Filter::$id . "'" : " WHERE c.created BETWEEN '" . trim($fromdate) . "' AND '" . trim($enddate) . " 23:59:59'";
-          } 
-		  if (Filter::$id) {
-			  $where = " WHERE p.id = " . Filter::$id;
-		  } else
-			  $where = (isset($where)) ? $where : null;
-
-		  $sql = "SELECT c.*, c.id as cid, p.id as id, p.title" 
-		  . "\n FROM " . self::cmTable . " as c" 
-		  . "\n LEFT JOIN " . Products::pTable . " AS p ON p.id = c.pid" 
-		  . "\n $where"
-		  . "\n ORDER BY c.created DESC" . $pager->limit;
-		  $row = self::$db->fetch_all($sql);
-	
-		  return ($row) ? $row : 0;
-	  } 
 
 	  /**
 	   * Content::keepTags()
@@ -1256,64 +744,7 @@
 		  return $string;
 	  }
 	  	  	  
-	  /**
-	   * Content::getDiscounts()
-	   * 
-	   * @return
-	   */
-	  public function getDiscounts()
-	  {
-		  
-		  $sql = "SELECT * FROM " . self::cpTable;
-          $row = self::$db->fetch_all($sql);
-          
-		   return ($row) ? $row : 0;
-	  }
-
-	  /**
-	   * Content::processDiscount()
-	   * 
-	   * @return
-	   */
-	  public function processDiscount()
-	  {
-		  
-		  Filter::checkPost('title', Lang::$word->CPN_NAME);
-		  Filter::checkPost('code', Lang::$word->CPN_CODE);
-		  Filter::checkPost('discount', Lang::$word->CPN_DISC);
-			  		  		  
-		  if (empty(Filter::$msgs)) {
-			  $data = array(
-				  'title' => sanitize($_POST['title']), 
-				  'code' => sanitize($_POST['code']), 
-				  'discount' => intval($_POST['discount']),
-				  'type' => intval($_POST['type']),
-				  'validuntil' => (empty($_POST['validuntil_submit'])) ? "0000-00-00" : sanitize($_POST['validuntil_submit']),
-				  'minval' => (empty($_POST['minval'])) ? 0.00 : floatval($_POST['minval']),
-				  'active' => intval($_POST['active'])
-			  );
-			  
-			  if(!Filter::$id) {
-				  $data['created'] = "NOW()";
-			  }
-			  
-			  (Filter::$id) ? self::$db->update(self::cpTable, $data, "id=" . Filter::$id) : self::$db->insert(self::cpTable, $data);
-			  $message = (Filter::$id) ? Lang::$word->CPN_UPDATED : Lang::$word->CPN_ADDED;
-			  
-			  if(self::$db->affected()) {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgOk($message, false);
-			  } else {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-			  }
-			  print json_encode($json);
-			  
-		  } else {
-			  $json['message'] = Filter::msgStatus();
-			  print json_encode($json);
-		  }
-      }
+	  
 
 	  /**
 	   * Content::sliderConfiguration()
@@ -1626,125 +1057,7 @@
 		  return ($row) ? $row : 0;
 	  }
 	  	  	  
-      /**
-       * Content::getCartCounter()
-       * 
-       * @return
-       */ 	  
-	  public function getCartCounter()
-	  {
-		  if ($row = self::$db->first("SELECT sum(price) as ptotal, COUNT(*) as itotal FROM " . self::crTable . " WHERE user_id = '" . Registry::get("Users")->sesid . "' GROUP BY user_id")) {
-			  $itotal = ($row->itotal == 0) ? '/' : $row->itotal;
-			  $ptotal = ($row->ptotal == 0) ? '/' : Registry::get("Core")->formatMoney($row->ptotal);
-			  print $itotal . ' item(s) / ' . $ptotal;
-		  } else {
-			  print '0 ' . Lang::$word->ITEMS . ' / ' . Registry::get("Core")->cur_symbol . '0.00';
-		  }
-	  }
-
-      /**
-       * Content::getCartContent()
-       * 
-       * @param mixed $sesid
-       * @return
-       */
-      public function getCartContent($sesid = false)
-      {
-		  
-		  $uid = ($sesid) ? $sesid : Registry::get("Users")->sesid;
-		  
-		  $sql = "SELECT c.*, p.id as pid, p.title, p.price, p.thumb, COUNT(c.pid) as total" 
-		  . "\n FROM " . self::crTable . " as c" 
-		  . "\n LEFT JOIN " . Products::pTable . " as p ON p.id = c.pid" 
-		  . "\n WHERE c.user_id = '" . self::$db->escape($uid) . "' AND p.price = c.price" 
-		  . "\n GROUP BY c.pid ORDER BY c.id DESC";
-          $row = self::$db->fetch_all($sql);
-          
-          return ($row) ? $row : 0;
-      }
-
-      /**
-       * Content::getCartTotal()
-       * 
-       * @param mixed $sesid
-       * @return
-       */
-      public function getCartTotal($sesid = false)
-      {
-          global $db, $user;
-		  
-		  $uid = ($sesid) ? $sesid : $user->sesid;
-		  
-		  $sql = "SELECT sum(c.price) as total, COUNT(c.pid) as titems, e.coupon, sum(p.price) as ptotal" 
-		  . "\n FROM cart as c" 
-		  . "\n LEFT JOIN extras as e ON e.user_id = c.user_id" 
-		  . "\n LEFT JOIN products as p ON p.id = c.pid" 
-		  . "\n WHERE c.user_id = '" . $db->escape($uid) . "' AND p.price = c.price"
-		  . "\n GROUP BY c.user_id";
-
-          $row = $db->first($sql);
-          
-          return ($row) ? $row : 0;
-      }
-
-      /**
-       * Content::getCart()
-       * 
-	   * @param bool $uid
-       * @return
-       */
-	  public static function getCart($uid = false)
-	  {
-		  $id = ($uid) ? sanitize($uid) : Registry::get("Users")->sesid;
-		  $row = Registry::get("Database")->first("SELECT * FROM " . Content::exTable . " WHERE user_id = '" . $id . "'");
-		  
-		  return ($row) ? $row : 0; 
-	  }
-	  
-      /**
-       * Content::renderCart()
-       * 
-       * @return
-       */
-	  public function renderCart()
-	  {
-		  $sql = "SELECT p.id as pid, p.title, p.slug, p.price, p.thumb," 
-		  . "\n COUNT(c.pid) as total" 
-		  . "\n FROM " . Products::pTable . " as p" 
-		  . "\n LEFT JOIN " . self::crTable . " as c ON p.id = c.pid" 
-		  . "\n WHERE c.user_id = '" . self::$db->escape(Registry::get("Users")->sesid) . "' AND p.price = c.price"
-		  . "\n GROUP BY c.pid ORDER BY c.id DESC";
-		  
-		  $row = self::$db->fetch_all($sql);
-		  
-		  if($row) {
-			  return $row;
-		  } else {
-			  return 0;
-		  }
-	  }
-	  
-      /**
-       * Content::calculateTax()
-       * 
-	   * @param bool $uid
-       * @return
-       */
-	  public static function calculateTax($uid = false)
-	  {
-		  if(Registry::get("Core")->tax and Registry::get("Users")->logged_in) {
-			  if ($uid) {
-				  $cnt = Registry::get("Database")->first("SELECT country FROM " . Users::uTable . " WHERE id = " . $uid);
-				  $row = Registry::get("Database")->first("SELECT vat FROM " . Content::cnTable . " WHERE abbr = '" . $cnt->country . "'");
-			  } else {
-				  $row = Registry::get("Database")->first("SELECT vat FROM " . Content::cnTable . " WHERE abbr = '" . Registry::get("Users")->country . "'");
-			  }
-		
-			  return ($row->vat / 100);
-		  } else {
-			  return 0.00;
-		  }
-	  }
+      
 	  
       /**
        * Content::getSearchResults()
@@ -1754,11 +1067,10 @@
       public function getSearchResults($keyword)
       {
           
-          $row = self::$db->fetch_all("SELECT * ,MATCH(title, body) AGAINST('$keyword') AS score, id as pid," 
-		  . "\n (SELECT COUNT(pid) FROM " . Content::cmTable . " WHERE pid = id) as comments,"
-		  . "\n (SELECT SUM(hits) FROM " . Products::sTable . " WHERE pid = id) as hits"
-		  . "\n FROM " . Products::pTable
-		  . "\n WHERE MATCH(title, body) AGAINST('$keyword)' IN BOOLEAN MODE) AND active = 1"
+          $row = self::$db->fetch_all("SELECT * ,MATCH(first_name, last_name) AGAINST('$keyword') AS score, id as lid," 		  
+		  . "\n (SELECT SUM(hits) FROM " . Leaders::lTable . " WHERE lid = id) as hits"
+		  . "\n FROM " . Leaders::lTable
+		  . "\n WHERE MATCH(first_name, last_name) AGAINST('$keyword)' IN BOOLEAN MODE) AND active = 1"
 		  . "\n ORDER BY score ASC" 
 		  . "\n LIMIT 20");
           
@@ -1778,9 +1090,7 @@
 		  $meta = "<meta charset=\"utf-8\">\n";
 		  $meta .= "<title>" . Registry::get("Core")->site_name;
 		  
-		  if ($this->catslug and $row) {
-			  $meta .= $sep . $row->name;
-		  } elseif (Registry::get("Leaders")->leaderslug and $row) {
+		  if (Registry::get("Leaders")->leaderslug and $row) {
 			  $meta .= $sep . $row->first_name .' '.$row->last_name;
 		  } elseif ($this->pageslug and $row) {
 			  $meta .= $sep . $row->title;
@@ -1789,14 +1099,7 @@
 		  }
 		  $meta .= "</title>\n";
 		  $meta .= "<meta name=\"keywords\" content=\"";
-		  if ($this->catslug and $row) {
-			  if ($row->metakeys) {
-				  $meta .= $row->metakeys;
-			  } else {
-				  $meta .= Registry::get("Core")->metakeys;
-			  }
-				  
-		  } elseif (Registry::get("Leaders")->leaderslug and $row) {
+		  if (Registry::get("Leaders")->leaderslug and $row) {
 			  if ($row->metakeys) {
 				  $meta .= $row->metakeys;
 			  } else {
@@ -1807,28 +1110,20 @@
 		  }
 		  $meta .= "\" />\n";
 		  $meta .= "<meta name=\"description\" content=\"";
-		  if ($this->catslug and $row) {
-			  if ($row->metadesc) {
-				  $meta .= $row->metadesc;
-			  } else {
-				  $meta .= Registry::get("Core")->metakeys;
-			  }
-				  
-		  } elseif (Registry::get("Leaders")->leaderslug and $row) {
+		  if (Registry::get("Leaders")->leaderslug and $row) {
 			  if ($row->metadesc and $row) {
 				  $meta .= $row->metadesc;
 			  } else {
-				  $meta .= Registry::get("Core")->metakeys;
+				  $meta .= Registry::get("Core")->metadesc;
 			  }
 		  } else{
-			  $meta .= Registry::get("Core")->metakeys;
+			  $meta .= Registry::get("Core")->metadesc;
 		  }
 		  $meta .= "\" />\n";
 		  $meta .= "<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"" .SITEURL ."/assets/favicon.ico\" />\n";
 		  $meta .= "<meta name=\"dcterms.rights\" content=\"" . Registry::get("Core")->company . " &copy; All Rights Reserved\" >\n";
 		  $meta .= "<meta name=\"robots\" content=\"index, follow\" />\n";
 		  $meta .= "<meta name=\"revisit-after\" content=\"1 day\" />\n";
-		  $meta .= "<meta name=\"generator\" content=\"Powered by DDP v" . Registry::get("Core")->version . "\" />\n";
 		  $meta .= "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, maximum-scale=1\" />\n";
 		  return $meta;
 	  }
