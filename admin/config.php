@@ -316,6 +316,11 @@
       <textarea class="bodypost" name="committees_description"><?php echo $core->committees_description;?></textarea>
     </div>
 
+    <div class="field">
+      <label>About committee meetings</label>
+      <textarea class="bodypost" name="meetings_description"><?php echo $core->meetings_description;?></textarea>
+    </div>
+
     <div class="corporato divider"></div>
       
     <div class="two fields">
