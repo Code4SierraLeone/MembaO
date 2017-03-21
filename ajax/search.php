@@ -17,7 +17,7 @@
 	  $sql = "(SELECT CONCAT(first_name,' ',last_name) as name, slug, 'leader' as type" 
 	  . "\n FROM " . Leaders::lTable
 	  . "\n WHERE MATCH (last_name) AGAINST ('" . $db->escape($string) . "*' IN BOOLEAN MODE))" 
-	  . "\n UNION (SELECT title, slug, 'bill' as type" 
+	  . "\n UNION (SELECT title as name, slug, 'bill' as type" 
 	  . "\n FROM " . Bills::bTable
 	  . "\n WHERE MATCH (title) AGAINST ('" . $db->escape($string) . "*' IN BOOLEAN MODE))" 	 
 	  . "\n UNION (SELECT name, slug, 'committee' as type" 
@@ -34,7 +34,7 @@
 			   $html .= '<a href="' . $link . '">' . $row->name . '</a>';
 			elseif ($row->type == 'bill'):
   			   $link = ($core->seo == 1) ? SITEURL . '/bills/' . $row->slug . '/' : SITEURL . '/item.php?billname=' . $row->slug;
-			   $html .= '<a href="' . $link . '">' . $row->title . '</a>';
+			   $html .= '<a href="' . $link . '">' . $row->name . '</a>';
 			elseif ($row->type == 'committee'):
  			   $link = ($core->seo == 1) ? SITEURL . '/committees/' . $row->slug . '/' : SITEURL . '/item.php?committeename=' . $row->slug;
 			   $html .= '<a href="' . $link . '">' . $row->name . '</a>';
