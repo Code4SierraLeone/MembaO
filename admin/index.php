@@ -63,25 +63,16 @@ if (!$user->is_Admin())
           <img src="<?php echo UPLOADURL;?>avatars/blank.jpg" alt="<?php echo $user->username;?>">
           <?php endif;?>
         </div>
-        <p class="hide-phone"><?php echo Lang::$word->WELCOME;?>, <?php echo $user->username;?>!</p>  </div>
+        <p class="hide-phone">Karibu, <?php echo $user->username;?></p>  </div>
           <div class="screen-60 tablet-70 phone-100">
-            <div class="corporato secondary menu"> <a class="item" href="../"> <i class="home icon"></i> <?php echo Lang::$word->ADM_M_FRONT;?> </a> <a class="item" href="index.php?do=users&amp;action=edit&amp;id=<?php echo $user->uid;?>"> <i class="user icon"></i> <?php echo Lang::$word->ADM_PROFILE;?> </a>
-              <div class="corporato dropdown item"> <i class="language icon"></i> <?php echo Lang::$word->ADM_M_LANG;?> <i class="dropdown icon"></i>
-                <div class="inverted menu">
-                  <?php foreach(Lang::fetchLanguage() as $lang):?>
-                  <?php if(Core::$language == $lang):?>
-                  <a class="item active">
-                  <div class="corporato label"><?php echo strtoupper($lang);?></div>
-                  <?php echo Lang::$word->ADM_M_LANG;?></a>
-                  <?php else:?>
-                  <a class="item langchange" href="index.php?<?php echo $_SERVER['QUERY_STRING'];?>" data-lang="<?php echo $lang;?>">
-                  <div class="corporato label"><?php echo strtoupper($lang);?></div>
-                  <?php echo Lang::$word->ADM_M_LANG_C;?></a>
-                  <?php endif?>
-                  <?php endforeach;?>
-                </div>
+            <div class="corporato secondary menu"> 
+              
+              <div class="right menu"> 
+                <a class="item" href="../" target="_blank"> <i class="home icon"></i> Go to website </a> 
+                <a class="item" href="index.php?do=users&amp;action=edit&amp;id=<?php echo $user->uid;?>"> <i class="user icon"></i> Account</a>
+                <a class="corporato item" href="logout.php"> <i class="sign out icon"></i> Logout </a> 
               </div>
-              <div class="right menu"> <a class="corporato item" href="logout.php"> <i class="sign out icon"></i> <?php echo Lang::$word->LOGOUT;?> </a> </div>
+
             </div>
           </div>
         </div>
