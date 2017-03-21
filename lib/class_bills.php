@@ -16,6 +16,7 @@
       const brTable = "bills_recent";
       const bsTable = "bills_stats";
       const btTable = "bills_status";
+      const tagTable = "tags";
 	  
 	  public $billslug = null;
 	  private static $db;
