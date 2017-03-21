@@ -524,6 +524,18 @@ class Committees
 	  		}
 
 	  	/**
+       	* Committees::totalCommitteeMeetings()
+       	* 
+       	* @return
+      	*/
+
+	    public function totalCommitteeMeetings () 
+			{
+				$totalcommitteemeetings = countEntries(self::cmsTable, "" ,"");
+			  	return $totalcommitteemeetings;
+		  	}	
+
+	  	/**
 	   	* Committees::renderCommitteeMeetingAttendance()
 	   	* 
 	   	* @return
