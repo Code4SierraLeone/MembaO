@@ -277,7 +277,7 @@
           <?php echo $row->name;?></td>
         <td><?php echo $row->constituency;?></td>
         <td><?php if($row->partyname): ?>
-          <?php echo $row->partyname.' ('. $row->abbr;?>)
+          <?php echo $row->partyname.' ('. $row->partyabbr;?>)
           <?php else: ?>
             N/A
           <?php endif; ?>  
