@@ -15,6 +15,9 @@
   $attendanceperc = $leader->calculateGeneralAttendance();
   $mps = $leader->totalLeaders();
   $sittings = $leader->totalSittings();
+  $totalbills = $bill->totalBills();
+  $totalbillspassed = $bill->totalBillsPassed();
+  $totalcommitteemeetings = $committee->totalCommitteeMeetings();
   $mostattendance = $leader->mostAttendances();
   $leastattendance = $leader->leastAttendances();
 ?>
