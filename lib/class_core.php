@@ -681,9 +681,9 @@
 	  public static function layoutSwitchList($mode)
 	  {
 		  $active = '';
-		  if (isset($_COOKIE[$mode . 'VIEW_DDP']) && $_COOKIE[$mode . 'VIEW_DDP'] == 'list') {
+		  if (isset($_COOKIE[$mode . 'VIEW_M']) && $_COOKIE[$mode . 'VIEW_M'] == 'list') {
 			  $active = ' active';
-		  } elseif(Registry::get('Core')->hlayout == 0 && !isset($_COOKIE[$mode . 'VIEW_DDP'])) {
+		  } elseif(Registry::get('Core')->hlayout == 0 && !isset($_COOKIE[$mode . 'VIEW_M'])) {
 			  $active = ' active';
 		  }
 		  
@@ -698,9 +698,9 @@
 	  public static function layoutSwitchGrid($mode)
 	  {
 		  $active = '';
-		  if (isset($_COOKIE[$mode . 'VIEW_DDP']) && $_COOKIE[$mode . 'VIEW_DDP'] == 'grid') {
+		  if (isset($_COOKIE[$mode . 'VIEW_M']) && $_COOKIE[$mode . 'VIEW_M'] == 'grid') {
 			  $active = ' active';
-		  } elseif(Registry::get('Core')->hlayout == 1 && !isset($_COOKIE[$mode . 'VIEW_DDP'])) {
+		  } elseif(Registry::get('Core')->hlayout == 1 && !isset($_COOKIE[$mode . 'VIEW_M'])) {
 			  $active = ' active';
 		  }
 		  

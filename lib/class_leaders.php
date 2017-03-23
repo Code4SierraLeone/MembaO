@@ -595,8 +595,8 @@
 	   */
 	  public static function getLeaderRating($id, $ratingt, $ratingc)
 	  {
-		  if (isset($_COOKIE['RATE_DDP_'])) {
-			  if($_COOKIE['RATE_DDP_'] == $id) {
+		  if (isset($_COOKIE['RATE_M_'])) {
+			  if($_COOKIE['RATE_M_'] == $id) {
 				  self::getLeaderRatingRead($ratingt, $ratingc);
 			  } else {
 				  self::getLeaderRatingWrite($id, $ratingt, $ratingc);
@@ -736,8 +736,8 @@
 		  }
 		  
 		  $vInfo['ip'] = str_replace("[^0-9\.]", "", $vInfo['ip']);
-		  setcookie("DDP_hitcookie", time(), time() + 3600);
-		  $vCookie['is_cookie'] = (isset($_COOKIE['DDP_hitcookie'])) ? 1 : 0;
+		  setcookie("M_hitcookie", time(), time() + 3600);
+		  $vCookie['is_cookie'] = (isset($_COOKIE['M_hitcookie'])) ? 1 : 0;
 		  $date = date('Y-m-d');
 		  
 		  $sql = "SELECT * FROM " . self::sTable . " WHERE day='" . $date . "' AND lid = $lid";
@@ -747,8 +747,8 @@
 			  $stats['hits'] = "INC(1)";
 			  self::$db->update(self::sTable, $stats, "id='" . $hid . "'");
 			  
-			  if (!isset($_COOKIE['DDP_unique']) && $vCookie['is_cookie']) {
-				  setcookie("DDP_unique", time(), time() + 3600);
+			  if (!isset($_COOKIE['M_unique']) && $vCookie['is_cookie']) {
+				  setcookie("M_unique", time(), time() + 3600);
 				  $stats['uhits'] = "INC(1)";
 				  self::$db->update(self::sTable, $stats, "id='" . $hid . "'");
 			  }

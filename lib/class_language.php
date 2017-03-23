@@ -35,8 +35,8 @@
        */
 	  private static function get()
 	  {
-		  if (isset($_COOKIE['LANG_DDP'])) {
-			  $sel_lang = sanitize($_COOKIE['LANG_DDP'], 2);
+		  if (isset($_COOKIE['LANG_M'])) {
+			  $sel_lang = sanitize($_COOKIE['LANG_M'], 2);
 			  $vlang = self::fetchLanguage($sel_lang);
 			  if(in_array($sel_lang, $vlang)) {
 				  Core::$language = $sel_lang;
