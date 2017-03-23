@@ -593,8 +593,27 @@
 		    return $age;		 
       }
 
+      /**
+       * getAttendanceAverage($leaderav, $generalav)
+       * 
+       * @return
+       */
+      function getAttendanceAverage($leaderav, $generalav)
+      {              
+        if($leaderav > $generalav){
+          $av = "an above-average";
+        } elseif ($leaderav == $generalav) {          
+          $av = "an average";      
+        }
+        else {
+          $av = "a below-average";
+        }
+        
+        return $av;     
+      }      
+
   /**
-       * getAge()
+       * getLeaderAttendancePc()
        * 
        * @return
        */
