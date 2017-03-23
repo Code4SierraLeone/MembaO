@@ -57,7 +57,7 @@
       /* == Language Switcher == */
       $('#langmenu').on('click', 'a', function () {
           var target = $(this).attr('href');
-          $.cookie("LANG_DDP", $(this).data('lang'), {
+          $.cookie("LANG_M", $(this).data('lang'), {
               expires: 120,
               path: '/'
           });
