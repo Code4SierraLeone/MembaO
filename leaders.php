@@ -11,7 +11,9 @@
   
   if (isset($_GET['leadername'])):
     $leaderrow = $leader->renderLeader();
-    $totalSittings = $leader->totalSittings();    
+    $totalSittings = $leader->totalSittings();
+    $generalAPc = $leader->calculateGeneralAttendance();  
+    $leaderAPc = getLeaderAttendancePc($leaderrow->attendance,$totalSittings);  
     if(!$leaderrow):
       redirect_to(SITEURL . '/404.php');
     endif;
