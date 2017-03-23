@@ -105,7 +105,7 @@ $(document).ready(function() {
     <div class="screen-60 tablet-40 phone-100 white">
       <h2><?php echo $leaderrow->name;?></h2>
       <div>Representing <strong><?php echo $leaderrow->coname;?></strong> 
-      <?php if($leaderrow->pparty > 0) { ?>on <strong><?php echo $leaderrow->pparty;?></strong> ticket <?php } else { ?> as a Paramount Chief<?php } ?></div>
+      <?php if($leaderrow->party == 0) { ?>as a Paramount Chief <?php } else { ?> on <strong><?php echo $leaderrow->pparty;?></strong> ticket <?php } ?></div>
 
       <div class="corporato divider"></div>
 
@@ -121,12 +121,12 @@ $(document).ready(function() {
                   
                   <div class="corporato divider"></div>
                   <div class="corporato divided horizontal list">                   
-                    <div class="item"><?php echo $leaderrow->attendance;?> sittings</div>
-                    <div class="item"><i class="icon bullseye"></i> <?php echo $leaderrow->hits;?></div>
-                    <div class="item">
+                    <div class="item" data-content="Attendance"><?php echo $leaderrow->attendance;?> sittings</div>
+                    <div class="item" data-content="Profile views"><i class="icon eye"></i> <?php echo $leaderrow->hits;?></div>
+                    <div class="item" data-content="Rate">
                       <?php Leaders::getLeaderRating($leaderrow->lid, $leaderrow->rating, $leaderrow->ratingc);?>
                     </div>
-                    <div class="item"> <a class="like toggle" data-content="<?php echo Lang::$word->LIKE;?>" data-total="<?php echo $leaderrow->vote_up;?>" data-id="<?php echo $leaderrow->lid;?>"><i class="icon danger heart"></i> <small><?php echo $leaderrow->vote_up;?></small></a></div>
+                    <div class="item"> <a class="like toggle" data-content="Like" data-total="<?php echo $leaderrow->vote_up;?>" data-id="<?php echo $leaderrow->lid;?>"><i class="icon danger heart"></i> <small><?php echo $leaderrow->vote_up;?></small></a></div>
                   </div>
                   <div class="corporato divider"></div>                                    
                 </div>
@@ -142,7 +142,7 @@ $(document).ready(function() {
       <div class="padded-30">
       <h4>MP's Attendance Record</h4> 
       <p class="item">Has been recorded present for <strong><?php echo $leaderrow->attendance;?></strong> parliamentary sittings out of a possible total of <strong><?php echo $totalSittings;?></strong> this term.</p>
-      <p class="item">That gives <?php echo getGenderForm($leaderrow->gender);?> an <strong>above-average</strong> attendance rate of <strong><?php echo getLeaderAttendancePc($leaderrow->attendance,$totalSittings);?>%</strong>.</p> 
+      <p class="item">That gives <?php echo getGenderForm($leaderrow->gender);?> <strong><?php echo getAttendanceAverage($leaderAPc, $generalAPc);?></strong> attendance rate of <strong><?php echo $leaderAPc;?>%</strong>. General parliament sitting average currently stands at <strong><?php echo $generalAPc;?>%</strong>.</p> 
       </div>      
     </div>
 
@@ -165,7 +165,7 @@ $(document).ready(function () {
 				id: id
 			},
             success: function (data) {
-				$.cookie("LIKE_DDP_", id, {
+				$.cookie("LIKE_M_", id, {
 					expires: 120,
 					path: '/'
 				});
@@ -187,7 +187,7 @@ $(document).ready(function () {
 			},
             success: function (msg) {
                 $(".rating-vote i").html(msg);
-				$.cookie("RATE_DDP_", id, {
+				$.cookie("RATE_M_", id, {
 					expires: 120,
 					path: '/'
 				});
