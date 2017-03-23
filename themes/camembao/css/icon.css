@@ -365,6 +365,11 @@ i.icon.eraser:before {
 i.icon.euro:before {
   content: "\f153"
 }
+
+i.icon.eye:before {
+  content: "\f06e"
+}
+
 i.icon.exchange:before {
   content: "\f0ec"
 }
