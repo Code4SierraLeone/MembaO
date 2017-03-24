@@ -117,11 +117,13 @@ $(document).ready(function() {
               </aside>
               <aside>
                 <div class="description">                  
-
                   
+                  <div><?php echo getAge($leaderrow->dob);?></div>
+
                   <div class="corporato divider"></div>
+
                   <div class="corporato divided horizontal list">                   
-                    <div class="item" data-content="Attendance"><?php echo $leaderrow->attendance;?> sittings</div>
+                    <div class="item" data-content="Attendance"><?php echo $leaderrow->sittings;?> sittings</div>
                     <div class="item" data-content="Profile views"><i class="icon eye"></i> <?php echo $leaderrow->hits;?></div>
                     <div class="item" data-content="Rate">
                       <?php Leaders::getLeaderRating($leaderrow->lid, $leaderrow->rating, $leaderrow->ratingc);?>
@@ -131,6 +133,23 @@ $(document).ready(function() {
                   <div class="corporato divider"></div>                                    
                 </div>
               </aside>
+            </div>
+
+            <div class="padded-30">
+            	<h4>Committee Membership</h4>
+
+		        <?php if(!$leadercommittees):?>
+		        <div class="padded-30"><?php echo Filter::msgSingleAlert("Not currently a member of any committee yet.");?></div>
+		        <?php else:?>
+		        <ol class="committee-members">
+		        <?php foreach ($leadercommittees as $crow):?>
+		        <?php $url = ($core->seo) ? SITEURL . '/committees/' . $crow->slug . '/' : SITEURL . '/committees.php?committeename=' . $crow->slug;?>
+		        <li><a href="<?php echo $url;?>"><?php echo $crow->committeename;?></a> / <span class="smallest"><?php echo getCommitteeMemberRole($crow->role);?></span></li>
+		        <?php endforeach;?>
+		        <?php unset($crow);?>
+		        </ol>
+		        <?php endif;?>
+
             </div>            
 
           </div>
@@ -141,9 +160,22 @@ $(document).ready(function() {
     <div class="screen-40 tablet-40 phone-100">
       <div class="padded-30">
       <h4>MP's Attendance Record</h4> 
-      <p class="item">Has been recorded present for <strong><?php echo $leaderrow->attendance;?></strong> parliamentary sittings out of a possible total of <strong><?php echo $totalSittings;?></strong> this term.</p>
+      <p class="item"><?php echo $leaderrow->first_name;?> has been recorded present for <strong><?php echo $leaderrow->sittings;?></strong> parliamentary <?php echo pluralize($leaderrow->sittings, " sitting")?> out of a possible total of <strong><?php echo $totalSittings;?></strong> this term.</p>
       <p class="item">That gives <?php echo getGenderForm($leaderrow->gender);?> <strong><?php echo getAttendanceAverage($leaderAPc, $generalAPc);?></strong> attendance rate of <strong><?php echo $leaderAPc;?>%</strong>. General parliament sitting average currently stands at <strong><?php echo $generalAPc;?>%</strong>.</p> 
-      </div>      
+      </div> 
+
+      <?php if($leadercommittees):?>
+
+      <div class="corporato divider darkgrey"></div>     
+      
+      <h5>Committee work</h5> 
+      <p class="item">As a member of <strong><?php echo $leaderrow->totalcommitteesmembership; echo pluralize($leaderrow->totalcommitteesmembership, " committee")?></strong>, <?php echo $leaderrow->first_name;?> has been recorded present for <strong><?php echo $leaderrow->committee_sittings;?></strong> committee <?php echo pluralize($leaderrow->committee_sittings, " meeting")?>.</p> 
+      <?php endif;?>
+
+      <div class="smallest">
+      	<strong>Note.</strong> All MPs not present during an attendance recording are treated as absent, even if they had leave of absence.
+      </div>
+
     </div>
 
   </div>
