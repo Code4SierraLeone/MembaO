@@ -12,7 +12,8 @@
   if (isset($_GET['leadername'])):
     $leaderrow = $leader->renderLeader();
     $totalSittings = $leader->totalSittings();
-    $generalAPc = $leader->calculateGeneralAttendance();  
+    $generalAPc = $leader->calculateGeneralAttendance(); 
+    $leadercommittees = $committee->getMembersCommittees($leaderrow->id); 
     $leaderAPc = getLeaderAttendancePc($leaderrow->attendance,$totalSittings);  
     if(!$leaderrow):
       redirect_to(SITEURL . '/404.php');
