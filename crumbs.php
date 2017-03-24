@@ -48,7 +48,7 @@
           if(isset($allbills)):
             $html = "Bills";
           else:
-            $html = ($billrow) ? "Bills  /  ".$billrow->title : "";
+            $html = ($billrow) ? "<a href='" . SITEURL . "/bills'>Bills</a><div class='divider'></div>".$billrow->title : "";
           endif;
           break;    
 
@@ -60,7 +60,7 @@
           if(isset($allcommittees)):
             $html = "Committees";
           else:
-            $html = ($committeerow) ? "Committees  /  ".$committeerow->name : "";
+            $html = ($committeerow) ? "<a href='" . SITEURL . "/committees'>Committees</a><div class='divider'></div>".$committeerow->name : "";
           endif;
           break;     
 
@@ -76,7 +76,7 @@
           if(isset($allleaders)):
             $html = "Leaders";
           else:
-            $html = ($leaderrow) ? "Leaders  /  ".$leaderrow->name : "";
+            $html = ($leaderrow) ? "<a href='" . SITEURL . "/leaders'>Leaders</a><div class='divider'></div>".$leaderrow->name : "";
           endif;
           break;          
 
@@ -88,7 +88,7 @@
           if(isset($allmeetings)):
             $html = "Meetings";
           else:
-            $html = ($meetingrow) ? "Leaders  /  ".$meetingrow->name : "";
+            $html = ($meetingrow) ? "<a href='" . SITEURL . "/meetings'>Meetings</a><div class='divider'></div>".$meetingrow->name : "";
           endif;
           break;     
 
