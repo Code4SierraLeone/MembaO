@@ -199,6 +199,7 @@
 		  
 		  $sql = "SELECT l.*, l.id as lid, CONCAT(l.first_name,' ',l.last_name) as name, co.id as coid,co.name as coname, pa.name as pparty," 
 		  . "\n (SELECT COUNT(leader_id) FROM " . self::saTable . " WHERE leader_id = l.id) as attendance,"
+		  . "\n (SELECT COUNT(id) FROM " . Committees::cmTable . " WHERE member = l.id) as totalcommitteesmembership,"
 		  . "\n (SELECT SUM(hits) FROM " . self::sTable . " WHERE lid = l.id) as hits"
 		  . "\n FROM " . self::lTable . " as l"
 		  . "\n LEFT JOIN " . self::coTable . " as co ON co.id = l.constituency"

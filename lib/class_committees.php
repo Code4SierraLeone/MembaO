@@ -343,7 +343,29 @@ class Committees
 		         $row = self::$db->fetch_all($sql);
 				  
 		        return ($row) ? $row : 0;
-	  		}	
+	  		}
+
+
+		/**
+	   	* Committees::getMembersCommittees($leader)
+	  	* 
+	   	* @param bool $sort
+	   	* @return
+	   	*/
+	  
+	  	public function getMembersCommittees($leader)
+	  		{		  		
+				  
+				$sql = "SELECT cm.*, COUNT(c.id) as committeenumber, c.name as committeename, c.slug as slug" 				
+				. "\n FROM " . self::cmTable . " as cm"
+				. "\n LEFT JOIN " . self::cTable . " as c ON c.id = cm.committee"
+				. "\n WHERE cm.member = " . $leader
+				. "\n ORDER BY cm.role ASC";
+		        
+		         $row = self::$db->fetch_all($sql);
+				  
+		        return ($row) ? $row : 0;
+	  		}	  			
 
 	  			/**
 		* Committee::getCommitteeMeetingSlug()
@@ -533,7 +555,8 @@ class Committees
 			{
 				$totalcommitteemeetings = countEntries(self::cmsTable, "" ,"");
 			  	return $totalcommitteemeetings;
-		  	}	
+		  	}		
+		  	
 
 	  	/**
 	   	* Committees::renderCommitteeMeetingAttendance()
@@ -561,7 +584,7 @@ class Committees
 	   	*/
 	  	public function getCommitteeMeetingsList($committee)
 	  		{
-		  		$row = self::$db->fetch_all("SELECT * FROM " . self::cmsTable . " WHERE committee = 1 ORDER BY meeting_date");
+		  		$row = self::$db->fetch_all("SELECT * FROM " . self::cmsTable . " WHERE committee = " . $committee . " ORDER BY meeting_date");
           		return $row ? $row : 0;
 	  		}	 
 
@@ -596,7 +619,10 @@ class Committees
 				//increment members committee sitting stat
 				self::$db->query("UPDATE " . Leaders::lTable . " SET committee_sittings = committee_sittings + 1 WHERE id = ".$leaderid.";");	
 				$message = "Attendance records updated";
-			  endforeach;		  		  
+			  endforeach;
+
+			  // mark meeting as having completed an attendance check
+			  	self::$db->query("UPDATE " . self::cmsTable . " SET attendance_status = 1 WHERE id = ".$_POST['meeting_id'].";");		  		  
 			  
 			  if (self::$db->affected()) {
 					  $json['type'] = 'success';
