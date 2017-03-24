@@ -95,7 +95,7 @@
       <h4>Committee Members Attendance</h4>  
 
         <?php if(!$attendancerow):?>
-        <div><?php echo Filter::msgSingleAlert("No attendance records for this meeting updated.");?></div>
+        <div class="padded-30"><?php echo Filter::msgSingleAlert("No attendance records for this meeting updated.");?></div>
         <?php else:?>
         <ol class="committee-members">
         <?php foreach ($attendancerow as $arow):?>
@@ -112,7 +112,11 @@
         <?php unset($arow);?>
         </ol>
         <?php endif;?>
-       <div class="smallest">* All MPs not present marked as absent, even if they had leave of absence.</div>
+        
+        <div class="smallest">
+          <strong>Note.</strong> All MPs not present during an attendance recording are treated as absent, even if they had leave of absence.
+        </div>
+
       </div>
     </div>
   </div>
