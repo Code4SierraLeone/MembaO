@@ -79,7 +79,7 @@
       <h4>Latest Committee Meetings</h4>
 
       <?php if(!$committeemeetingsrow):?>
-        <div><?php echo Filter::msgSingleAlert("No committees members listed on the platform yet.");?></div>
+        <div class="padded-30t"><?php echo Filter::msgSingleAlert("No committee meetings listed on the platform yet.");?></div>
         <?php else:?>
         <div class="committee-meetings">
         <?php foreach ($committeemeetingsrow as $mrow):?>
