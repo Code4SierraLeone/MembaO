@@ -122,8 +122,7 @@ $(document).ready(function() {
 
                   <div class="corporato divider"></div>
 
-                  <div class="corporato divided horizontal list">                   
-                    <div class="item" data-content="Attendance"><?php echo $leaderrow->sittings;?> sittings</div>
+                  <div class="corporato divided horizontal list">                                       
                     <div class="item" data-content="Profile views"><i class="icon eye"></i> <?php echo $leaderrow->hits;?></div>
                     <div class="item" data-content="Rate">
                       <?php Leaders::getLeaderRating($leaderrow->lid, $leaderrow->rating, $leaderrow->ratingc);?>
@@ -169,7 +168,8 @@ $(document).ready(function() {
       <div class="corporato divider darkgrey"></div>     
       
       <h5>Committee work</h5> 
-      <p class="item">As a member of <strong><?php echo $leaderrow->totalcommitteesmembership; echo pluralize($leaderrow->totalcommitteesmembership, " committee")?></strong>, <?php echo $leaderrow->first_name;?> has been recorded present for <strong><?php echo $leaderrow->committee_sittings;?></strong> committee <?php echo pluralize($leaderrow->committee_sittings, " meeting")?>.</p> 
+      <p class="item">As a member of <strong><?php echo $leaderrow->totalcommitteesmembership; echo pluralize($leaderrow->totalcommitteesmembership, " committee")?></strong>, <?php echo $leaderrow->first_name;?> has been recorded present for <strong><?php echo $presentcount;?></strong> committee <?php echo pluralize($presentcount, " meeting")?> out of a possible total of <strong><?php echo $meetingscount;?></strong> this term.</p>
+     
       <?php endif;?>
 
       <div class="smallest">
