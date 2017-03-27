@@ -334,7 +334,7 @@ class Committees
 	  	public function getCommitteeMembers($committee)
 	  		{		  		
 				  
-				$sql = "SELECT cm.*, CONCAT(l.first_name,' ',l.last_name) as name, l.constituency as constituencyid, l.slug as slug" 
+				$sql = "SELECT cm.*, CONCAT(l.first_name,' ',l.last_name) as name, l.constituency as constituencyid, l.slug as slug"
 				. "\n FROM " . self::cmTable . " as cm"
 				. "\n LEFT JOIN " . Leaders::lTable . " as l ON l.id = cm.member"
 				. "\n WHERE cm.committee = " . $committee
@@ -356,7 +356,7 @@ class Committees
 	  	public function getMembersCommittees($leader)
 	  		{		  		
 				  
-				$sql = "SELECT cm.*, COUNT(c.id) as committeenumber, c.name as committeename, c.slug as slug" 				
+				$sql = "SELECT cm.*, c.name as committeename, c.slug as slug" 				
 				. "\n FROM " . self::cmTable . " as cm"
 				. "\n LEFT JOIN " . self::cTable . " as c ON c.id = cm.committee"
 				. "\n WHERE cm.member = " . $leader
@@ -555,7 +555,45 @@ class Committees
 			{
 				$totalcommitteemeetings = countEntries(self::cmsTable, "" ,"");
 			  	return $totalcommitteemeetings;
-		  	}		
+		  	}
+
+		/**
+       	* Committees::totalLeadersCommitteeMeetings()
+       	* 
+       	* @return
+      	*/
+
+	    public function totalLeadersCommitteeMeetings ($leader) 
+			{		  				  
+		  		$sql = "SELECT COUNT(cma.id) as totalmeetingsdone" 		  		
+		  		. "\n FROM " . self::cmaTable . " as cma"	
+		  		. "\n LEFT JOIN " . self::cmsTable . " as cms ON cms.id = cma.meeting_id"		  			 
+		  		. "\n WHERE cma.leader_id = " . $leader . " AND cms.attendance_status = 1";
+          		$row = self::$db->first($sql);
+
+          		$meetingscount = $row->totalmeetingsdone;
+          		return $meetingscount ? $meetingscount : 0;	           
+	  		} 
+
+	  	/**
+       	* Committees::totalLeadersCommitteeMeetingsPresent()
+       	* 
+       	* @return
+      	*/
+
+	    public function totalLeadersCommitteeMeetingsPresent ($leader) 
+			{		  				  
+		  		$sql = "SELECT COUNT(cma.id) as totalmeetingspresent" 		  		
+		  		. "\n FROM " . self::cmaTable . " as cma"	
+		  		. "\n LEFT JOIN " . self::cmsTable . " as cms ON cms.id = cma.meeting_id"		  			 
+		  		. "\n WHERE cma.leader_id = " . $leader . " AND cma.status = 1 AND cms.attendance_status = 1";
+          		$row = self::$db->first($sql);
+
+          		$presentcount = $row->totalmeetingspresent;
+          		return $presentcount ? $presentcount : 0;		           
+	  		}
+
+	  	 	 			
 		  	
 
 	  	/**
@@ -615,9 +653,7 @@ class Committees
 					//update the status record to present
 					self::$db->query("UPDATE " . self::cmaTable . " SET status = 1 WHERE id = ".$row->id.";");
 				endif;
-				
-				//increment members committee sitting stat
-				self::$db->query("UPDATE " . Leaders::lTable . " SET committee_sittings = committee_sittings + 1 WHERE id = ".$leaderid.";");	
+								
 				$message = "Attendance records updated";
 			  endforeach;
 
