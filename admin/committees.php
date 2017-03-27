@@ -243,7 +243,8 @@ function goBack() {
       <tr>
         <th>Date</th> 
         <th>Name</th>
-        <th>Type</th>       
+        <th>Type</th>
+        <th>Attendance taken?</th>       
         <th class="disabled push-right"><?php echo Lang::$word->ACTIONS;?></th>
       </tr>
     </thead>
@@ -257,7 +258,8 @@ function goBack() {
       <tr>
         <td><?php echo Filter::dodate("short_date", $row->meeting_date);?></td>
         <td><?php echo $row->name;?></td>
-        <td><?php echo getCommitteeMeetingType($row->meeting_type);?></td>                
+        <td><?php echo getCommitteeMeetingType($row->meeting_type);?></td>
+        <td><?php echo yesOrNo($row->attendance_status);?></td>                
         <td class="push-right">
           <a class="corporato positive button" href="index.php?do=committees&action=meeting-attendance&id=<?php echo $row->id;?>">
             <i class="positive checkmark icon"></i>update attendance register</a>
