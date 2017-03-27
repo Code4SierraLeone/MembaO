@@ -427,6 +427,22 @@
       ;
   }
   
+/**
+   * yesOrNo()
+   * 
+   * @param mixed $pos
+   * @return
+   */  
+  function yesOrNo($type)
+  {
+      switch ($type) {
+          case 0:
+              return "No";
+          case 1:
+              return "Yes";
+      }
+  }
+
   /**
    * getGender()
    * 
