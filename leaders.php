@@ -13,8 +13,12 @@
     $leaderrow = $leader->renderLeader();
     $totalSittings = $leader->totalSittings();
     $generalAPc = $leader->calculateGeneralAttendance(); 
-    $leadercommittees = $committee->getMembersCommittees($leaderrow->id); 
-    $leaderAPc = getLeaderAttendancePc($leaderrow->attendance,$totalSittings);  
+    $leadercommittees = $committee->getMembersCommittees($leaderrow->id);
+    $meetingscount = $committee->totalLeadersCommitteeMeetings($leaderrow->id);
+    $presentcount = $committee->totalLeadersCommitteeMeetingsPresent($leaderrow->id); 
+    $leaderAPc = getLeaderAttendancePc($leaderrow->attendance,$totalSittings);
+
+
     if(!$leaderrow):
       redirect_to(SITEURL . '/404.php');
     endif;
