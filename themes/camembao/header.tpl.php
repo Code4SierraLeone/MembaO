@@ -43,7 +43,9 @@ var SITEURL = "<?php echo SITEURL; ?>";
         		
             <div class="corporato cell logoset">
           			<div class="logo"><a href="<?php echo SITEURL; ?>/"><?php echo ($core->logo) ? '<img src="'.UPLOADURL . $core->logo.'" alt="'.$core->company.'" />': $core->company;?></a></div>
+
         		</div>        		
+            <div class="menu-trigger"><a><i class="icon reorder"></i></a></div>
         
         		<div class="corporato cell">
         			<div id="searchbar" class="clearfix">
@@ -56,15 +58,18 @@ var SITEURL = "<?php echo SITEURL; ?>";
         		</div>
 
             <div class="corporato cell right">
+
             <!-- Menu Start -->
+            <nav>
               <?php if($menu):?>
-                <div class="corporato horizontal divided list"> 
+                <div class="corporato horizontal divided list menux"> 
                   <a href="<?php echo SITEURL ?>/leaders" class="item menu">MPs</a>
                   <a href="<?php echo SITEURL ?>/bills" class="item menu">Bills</a>
                   <a href="<?php echo SITEURL ?>/committees" class="item menu">Committees</a>                                  
                 </div>
               <?php endif;?>
-              <!--/ Menu End -->
+            </nav>
+            <!--/ Menu End -->
             </div>
 
       		</div>
