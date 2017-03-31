@@ -94,7 +94,7 @@
         <?php unset($mrow);?>
         </div>
       <?php endif;?>
-      <div class="padded-30">
+      <div class="padded-30t">
         <a href="<?php echo SITEURL;?>/meetings" class="corporato large positive button"><i class="fa fa-calendar" aria-hidden="true"></i> View all meetings</a>
       </div>
       
