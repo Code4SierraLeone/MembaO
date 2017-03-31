@@ -32,7 +32,7 @@ body {
 
 footer {
   text-align: center;
-  color: #ccc;
+  color: #982420;
   font-size: .9em;
   font-weight: 300;
   padding: 2em 0 3em;
@@ -357,6 +357,10 @@ h5,
 h6 {
   font-family: 'Lato', sans-serif;
   margin: 1rem 0 0rem;
+}
+
+h4 {
+  padding-bottom: .5em
 }
 
 h5 {
@@ -1007,8 +1011,8 @@ section.listmode .footer div.price {
 }
 .rating-vote b,
 .rating-vote.small b {
-  font-size: 16px;
-  margin-right: 0.3em
+  font-size: 14px;
+  margin-right: 0.2em
 }
 .rating-vote.small b {
   font-size: 1.2em;
@@ -1381,6 +1385,18 @@ section.listmode .footer div.price {
     padding-top: 80px;  
 }
 
+.page-container {
+    max-width: 73.33333em;
+    margin: 0 auto;
+    background: #fff;
+    border: none;
+    min-height: 100%;
+}
+
+#listview section .corporato.tabular.segment aside.top.small {
+  width: auto;
+}
+
 #livesearch {
   float: none;
 }
@@ -1388,7 +1404,8 @@ section.listmode .footer div.price {
   display:block
 }
 header {
-  margin-top: 1em;
+  margin-top: 0;
+  padding-bottom:10px 
 }
 header .logo {
   float: none;
@@ -1396,9 +1413,53 @@ header .logo {
   display:block;
 }
 
+.columns.horizontal-gutters > [class*=phone-], .columns.horizontal-gutters > [class*=all-] {
+  padding-left: 0
+}
+
+.corporato.description p {
+  font-size: 1.3em;
+  line-height: 1.2em;
+  text-align: center;
+}
+
+.corporato.buttons .button, .corporato.button, .corporato.form input[type=text] {
+  font-size: .8em
+}
+
+.corporato.description {
+  padding: 0 0 20px!important
+}
+
+.corporato.tabular.segment .corporato.cell.logoset {
+    width: 50%;
+    display: inline-block;
+}
+
+.corporato.input input {
+  font-size: .8rem
+}
+
+.columns.horizontal-gutters {
+  margin-left: 0;
+  margin-top: 1em
+}
+
+h2.corporato.header, h2 {
+  font-size: 1.5em
+}
+
+.title, h4 {
+  font-size: 1.2em
+}
+
+.corporato-grid.crumbs {
+  display: none;
+}
+
 header .logo img {
-	height:100px;
-	width:100px
+	height:auto;
+	width:100%
 }
 
 #topside {
@@ -1425,6 +1486,7 @@ header .submenu {}
 
 nav {
   display: none;
+  padding-top: 1em
 }
 .padded {
   padding-left: .5em;
@@ -1549,6 +1611,18 @@ ul.topmenu iframe {
   padding-right: .75em;
   line-height: 0.6;
 }
+
+.corporato.divided.horizontal.list.menux > .item {
+  border-top: none;
+  border-bottom:1px solid rgba(0,0,0,0.1);
+  border-left: 0;
+  margin: 0;
+  padding-left: .75em;
+  padding-right: .75em;
+  line-height: 0.6;
+}
+
+
 
 .corporato.horizontal.divided.list > .item:first-child {
   padding-left: .75em;
