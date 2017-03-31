@@ -23,22 +23,22 @@
 
     <div class="home-lower">
       <div class="four columns horizontal-gutters">
-        <div class="screen-25 tablet-25 phone-100 padded10">
+        <div class="screen-25 tablet-25 phone-50 padded10">
           <div class="stat-title"><span class="count"><?php echo $attendanceperc;?></span><span class="smallest pc">%</span></div>
           <div class="stat-desc">The average attendance for Parliamentary sittings</div>
         </div>
     
-        <div class="screen-25 tablet-25 phone-100 padded10">
+        <div class="screen-25 tablet-25 phone-50 padded10">
           <div class="stat-title"><span class="count"><?php echo $totalbills;?></span><span class="smallest"></span></div>
           <div class="stat-desc">Number of bills introduced during this parliament</div>
         </div>
     
-        <div class="screen-25 tablet-25 phone-100 padded10">
+        <div class="screen-25 tablet-25 phone-50 padded10">
           <div class="stat-title"><span class="count"><?php echo $totalbillspassed;?></span><span class="smallest"></span></div>
           <div class="stat-desc">Number of bills passed into law by this parliament</div>
         </div>
       
-        <div class="screen-25 tablet-25 phone-100 padded10">
+        <div class="screen-25 tablet-25 phone-50 padded10">
           <div class="stat-title"><span class="count"><?php echo $totalcommitteemeetings;?></span><span class="smallest"></span></div>
           <div class="stat-desc">Number of Committee hearings that were scheduled</div>
         </div>
