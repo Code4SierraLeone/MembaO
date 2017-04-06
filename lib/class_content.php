@@ -1065,14 +1065,22 @@
        * @return
        */
       public function getSearchResults($keyword)
-      {
-          
-          $row = self::$db->fetch_all("SELECT * ,MATCH(first_name, last_name) AGAINST('$keyword') AS score, id as lid," 		  
-		  . "\n (SELECT SUM(hits) FROM " . Leaders::lTable . " WHERE lid = id) as hits"
-		  . "\n FROM " . Leaders::lTable
-		  . "\n WHERE MATCH(first_name, last_name) AGAINST('$keyword)' IN BOOLEAN MODE) AND active = 1"
-		  . "\n ORDER BY score ASC" 
-		  . "\n LIMIT 20");
+      {                  
+
+		  $sql = "(SELECT CONCAT(first_name,' ',last_name) as name, slug, description, 'leader' as type" 
+	  		. "\n FROM " . Leaders::lTable
+	  		. "\n WHERE MATCH (last_name) AGAINST ('" . self::$db->escape($keyword) . "*' IN BOOLEAN MODE) LIMIT 20)" 
+	  		. "\n UNION (SELECT title as name, slug, description, 'bill' as type" 
+	  		. "\n FROM " . Bills::bTable
+	  		. "\n WHERE MATCH (title, description) AGAINST ('" . self::$db->escape($keyword) . "*' IN BOOLEAN MODE) LIMIT 20)" 	 
+	  		. "\n UNION (SELECT name, slug, description, 'committee' as type" 
+	  		. "\n FROM " . Committees::cTable
+	  		. "\n WHERE MATCH (name, description) AGAINST ('" . self::$db->escape($keyword) . "*' IN BOOLEAN MODE) LIMIT 20)"
+	  		. "\n UNION (SELECT name, slug, description, 'meeting' as type" 
+	  		. "\n FROM " . Committees::cmsTable
+	  		. "\n WHERE MATCH (name, description) AGAINST ('" . self::$db->escape($keyword) . "*' IN BOOLEAN MODE) LIMIT 20)";	  		
+
+	  	  $row = self::$db->fetch_all($sql);	  	  
           
           return ($row) ? $row : 0;
       }
