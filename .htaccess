@@ -57,6 +57,9 @@ RewriteRule ^meetings/([^/]+)/?$ meetings.php?meetingname=$1 [L]
 RewriteRule ^leaders$ leaders.php [L]
 RewriteRule ^leaders/([^/]+)/?$ leaders.php?leadername=$1 [L]
 
+RewriteRule ^search$ search.php [L]
+RewriteRule ^search/([^/]+)/?$ search.php?keywords=$1 [L]
+
 RewriteRule ^category/([^/]+)/([^/]+) category.php?catname=$1&pg=$2 [L]
 RewriteRule ^category/([^/]+)/?$ category.php?catname=$1  [L]
 
