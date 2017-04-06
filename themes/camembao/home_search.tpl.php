@@ -11,12 +11,12 @@
 <div class="corporato secondary segment">
   <h4 class="corporato shadow header">Find Parliamentary Data</h4>
   <div class="corporato form">
-     <form id="corporato_form_s" name="corporato_form_s" action="<?php echo SITEURL;?>/search/" method="get">                        
+     <form id="corporato_form_s" name="corporato_form_s" action="<?php echo SITEURL;?>/search" method="get">                        
 
       <div class="field">
         <div class="corporato action input"> 
-          <input name="search-home" type="text" placeholder="Search the Memba O database" id="seach-home" />
-          <a type="submitsearch" class="corporato membao button">Find</a> </div>
+          <input name="keywords" type="text" placeholder="Search the Memba O database" id="seach-home" />
+          <a href="javascript:{}" onclick="document.getElementById('corporato_form_s').submit();" id="doSearch" name="dosearch" class="corporato membao button">Find</a> </div>
       </div>
       
     </form>
