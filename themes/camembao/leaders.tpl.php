@@ -1,6 +1,6 @@
 <?php
   /**
-   * Leader
+   * Leaders
    *
    * @package Membao
    * @author Alan Kawamara
