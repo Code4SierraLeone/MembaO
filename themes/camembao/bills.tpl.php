@@ -42,7 +42,7 @@
         <div id="listview" class="clearfix relative">
         <?php foreach($allbills as $lrow):?>
           <?php $url = ($core->seo) ? SITEURL . '/bills/' . $lrow->slug . '/' : SITEURL . '/item.php?itemname=' . $lrow->slug;?>
-          <section data-id="<?php echo $lrow->bid;?>">                     
+          <section>                     
             <div class="inner"> 
               <a href="<?php echo $url;?>"><div class="title"><?php echo $lrow->title;?></div></a>
               <span class="date-label"><i class="fa fa-calendar" aria-hidden="true"></i> <?php echo Filter::dodate("short_date", $lrow->date_introduced);?></span> 
