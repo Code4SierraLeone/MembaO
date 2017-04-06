@@ -54,7 +54,7 @@ footer {
 
 .white {
   background: #fff;
-  min-height: 650px;
+  min-height: 670px;
   padding-right: 2em;
   padding-bottom: 2em;
   border-right: 1px solid #e8e8e8
@@ -225,6 +225,18 @@ div#slider figure {
 .indented-15 {
   padding-left: 15px
 }
+
+.smallest-box {
+  font-size:.5em;
+  
+  padding:1px 5px 2px; 
+  background: #ccc;
+  margin-left: 1em;
+  color: #222;
+  font-weight: 700;
+  vertical-align: top;
+}
+
 .smallest {
 	font-size:.7em
 }
