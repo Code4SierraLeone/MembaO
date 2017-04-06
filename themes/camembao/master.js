@@ -143,7 +143,7 @@
     });
 	$("#livesearch").on('click', 'i.search', function () {
 		keywords = $("#searchfield").val();
-		window.location.href = SITEURL + "/search.php?keywords=" + keywords;
+		window.location.href = SITEURL + "/search?keywords=" + keywords;
 		
     });
 
