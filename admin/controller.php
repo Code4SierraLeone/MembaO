@@ -847,5 +847,33 @@
        $item->exportTransactionsPDF();
    
   endif;
+
+  /* == Latest Leader Stats == */
+  if (isset($_GET['getLeaderStats'])):
+
+      $data = array();
+      $data['hits'] = array();
+      $data['xaxis'] = array();
+      $data['hits']['label'] = Lang::$word->ADM_PVIEWS;
+      $data['uhits']['label'] = Lang::$word->ADM_UVIEWS;
+
+      $and = (Filter::$id) ? "AND lid = " . Filter::$id : null;
+
+      for ($i = 1; $i <= 12; $i++):
+          $row = $db->first("SELECT SUM(hits) AS hits," 
+		  . "\n SUM(uhits) as uhits" 
+		  . "\n FROM stats" 
+		  . "\n WHERE YEAR(day) = '" . date('Y') . "'" 
+		  . "\n AND MONTH(day) = '" . $i . "'" 
+		  . "\n $and" 
+		  . "\n GROUP BY MONTH(day)");
+
+          $data['hits']['data'][] = ($row) ? array($i, (int)$row->hits) : array($i, 0);
+          $data['uhits']['data'][] = ($row) ? array($i, (int)$row->uhits) : array($i, 0);
+          $data['xaxis'][] = array($i, date('M', mktime(0, 0, 0, $i, 1, date('Y'))));
+      endfor;
+
+      print json_encode($data);
+  endif;
   
 ?>
