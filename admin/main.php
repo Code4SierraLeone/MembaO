@@ -9,33 +9,33 @@
   if (!defined("_VALID_PHP"))
       die('Direct access to this location is not allowed.');
 	  
-  $prodrow = $leader->getLeaderList(); 
+  $leaderrow = $leader->getLeaderList(); 
 
   $color = array("5AB1EF","B6A2DE","2EC7C9","D87A80","F5994E");
   $number = array(90,80,70,60,50);
 ?>
 <div class="corporato basic segment">
-  <div class="header"><span>Welcome to the admin section</span> </div>
+  <div class="header"><span>Dashboard</span> </div>
   <div class="corporato segment">
     <div class="four columns small-gutters">
       <div class="row">
-        <div class="corporato info message content-center"><?php echo Lang::$word->REGD . ' ' . Lang::$word->USERS;?>
-          <p class="corporato big font"> <?php echo countEntries(Users::uTable);?></p>
+        <div class="corporato info message content-center">MPs on platform
+          <p class="corporato big font"> <?php echo countEntries(Leaders::lTable);?></p>
         </div>
       </div>
       <div class="row">
-        <div class="corporato warning message content-center"><?php echo Lang::$word->ACTIVE . ' ' . Lang::$word->USERS;?>
-          <p class="corporato big font"> <?php echo countEntries(Users::uTable, "active", "y");?></p>
+        <div class="corporato warning message content-center">Number of committees
+          <p class="corporato big font"> <?php echo countEntries(Committees::cTable);?></p>
         </div>
       </div>
       <div class="row">
-        <div class="corporato success message content-center"><?php echo Lang::$word->PENDING . ' ' . Lang::$word->USERS;?>
-          <p class="corporato big font"> <?php echo countEntries(Users::uTable, "active", "t");?></p>
+        <div class="corporato success message content-center">Number of bills registered
+          <p class="corporato big font"> <?php echo countEntries(Bills::bTable);?></p>
         </div>
       </div>
       <div class="row">
-        <div class="corporato negative message content-center"><?php echo Lang::$word->BANNED . ' ' . Lang::$word->USERS;?>
-          <p class="corporato big font"> <?php echo countEntries(Users::uTable, "active", "b");?></p>
+        <div class="corporato negative message content-center">Number of sittings
+          <p class="corporato big font"> <?php echo countEntries(Leaders::scTable);?></p>
         </div>
       </div>
     </div>
@@ -48,11 +48,11 @@
       <div class="row">
         <select name="pid" onchange="getHitsChart(this.value)"  id="pfilter">
           <option value="0">--- Reset Leader  ---</option>
-          <?php if($prodrow):?>
-          <?php foreach($prodrow as $prow):?>
-          <option value="<?php echo $prow->id;?>"><?php echo $prow->name;?></option>
+          <?php if($leaderrow):?>
+          <?php foreach($leaderrow as $lrow):?>
+          <option value="<?php echo $lrow->id;?>"><?php echo $lrow->name;?></option>
           <?php endforeach;?>
-          <?php unset($prow);?>
+          <?php unset($lrow);?>
           <?php endif;?>
         </select>
       </div>
@@ -66,11 +66,11 @@
 <script type="text/javascript" src="../assets/excanvas.min.js"></script> 
 <script type="text/javascript">
 // <![CDATA[
-function getHitsChart(product_id) {
-    var pid = (product_id > 0) ? 'id=' + product_id : null;
+function getHitsChart(leader_id) {
+    var pid = (leader_id > 0) ? 'id=' + leader_id : null;
     $.ajax({
         type: 'GET',
-        url: 'controller.php?getProductStats=1',
+        url: 'controller.php?getLeaderStats=1',
         dataType: 'json',
         data: pid,
         async: false,
