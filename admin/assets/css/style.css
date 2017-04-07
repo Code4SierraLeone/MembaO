@@ -79,13 +79,27 @@ h6 {
   position: fixed;
   min-height: 100%;
   width: 200px;
-  background-color: #FBE2CC;
+  background-color: #333;
 }
+
+#leftpanel a {
+  color: #fff
+}
+
+#leftpanel nav li, #leftpanel nav ul {
+  border-bottom-color: #555
+}
+
+#leftpanel .copyright {
+  color: #fff
+}
+
 #rightpanel {
   float: right;
   margin-right: -200px;
   width: 100%;
   background-color: #fff;
+  border-left: 10px solid #e8e8e8
 }
 header {
   background-color: #fff;

@@ -895,17 +895,17 @@ body.pushed.scrolling.corporato.dimmable {
   content: '';
   width: 100%;
   height: 100%;
-  background: #364760 url(../images/loader-sidebar.gif) no-repeat 50% 50%;
+  background: #333 url(../images/loader-sidebar.gif) no-repeat 50% 50%;
   visibility: visible
 }
 /* == Custom Help == */
 .corporato.sidebar.info {
-  background-color: #364760;
+  background-color: #333;
   color: #fff
 }
 .corporato.info.sidebar .header {
   background-color: #2a394f;
-  font-family: 'Oswald';
+  font-family: 'Roboto';
   font-weight: 400;
   font-size: 1.2rem;
   position: fixed;
@@ -964,7 +964,7 @@ body.pushed.scrolling.corporato.dimmable {
   z-index: 2;
   font-size: 2em;
   font-weight: 300;
-  font-family: 'Oswald'
+  font-family: 'Roboto'
 }
 .percent:after {
 }

@@ -374,6 +374,8 @@ body.animated *[class*="row"] {
 padding-left:2em;
 margin-bottom:2em
 }
+.corporato-content .columns.small-gutters>[class*="screen-"],
+.corporato-content .columns.small-gutters>[class*="row"],
 .corporato-grid .columns.small-gutters>[class*="screen-"],
 .corporato-grid .columns.small-gutters>[class*="row"] {
 padding-left:1em;
