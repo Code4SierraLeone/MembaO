@@ -74,7 +74,7 @@
        */
 	  public function getDatabaseFiles()
 	  {
-		  if ($sql = ("SELECT * FROM " . Products::fTable . " ORDER BY alias")) {
+		  if ($sql = ("SELECT * FROM " . Content::fTable . " ORDER BY alias")) {
 			  $result = Registry::get("Database")->query($sql);
 			  $var = array();
 			  while ($row = Registry::get("Database")->fetch($result, true)) {
@@ -123,7 +123,7 @@
        */
 	  private function getDatabaseDiffFiles()
 	  {
-		  if ($sql = ("SELECT name FROM " . Products::fTable)) {
+		  if ($sql = ("SELECT name FROM " . Content::fTable)) {
 			  $result = Registry::get("Database")->query($sql);
 			  $var = array();
 	
@@ -235,7 +235,7 @@
 			  $data['created'] = "NOW()";
 				  
 			  if (move_uploaded_file($_FILES[$filename]['tmp_name'], $fullname)) {
-				  $last_id = Registry::get("Database")->insert(Products::fTable, $data);
+				  $last_id = Registry::get("Database")->insert(Content::fTable, $data);
 				  $html = '
 					<div data-id="' . $last_id . '" class="item content-center" data-name="' . $data['alias'] . '"> <img src="assets/images/mime/' . self::getFileType($data['name']) . '" alt="" />
 					  <p class="filetitle"> ' . $data['alias'] . ' </p>

@@ -622,8 +622,7 @@
 	  public function getLatestLeaders()
 	  {
 
-		  $sql = "SELECT l.*, l.id as lid, co.name, co.id as coid," 
-		  . "\n (SELECT COUNT(lid) FROM " . Content::cmTable . " WHERE lid = l.id) as comments,"
+		  $sql = "SELECT l.*, l.id as lid, co.name, co.id as coid,"
 		  . "\n (SELECT SUM(hits) FROM " . self::sTable . " WHERE lid = l.id) as hits"
 		  . "\n FROM " . self::lTable . " as l"
 		  . "\n LEFT JOIN constituencies as co ON co.id = l.cid" 

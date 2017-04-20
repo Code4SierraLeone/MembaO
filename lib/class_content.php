@@ -18,9 +18,8 @@
 	  const nTable = "news";
 	  const eTable = "email_templates";
 	  const exTable = "extras";
-	  const slTable = "slider";
-	  const slcTable = "slider_config";
 	  const cnTable = "countries";
+	  const fTable = "files";
 	  
 	  public static $gfileext = array("jpg","jpeg","png");
 	  
@@ -149,6 +148,40 @@
 		  print "</ul>\n";
 		  
 	  }
+
+	  /**
+       * Content::addTempFiles()
+       * 
+       * @return
+       */
+	   public function addTempFiles()
+	  {
+		  $i = 0;
+          foreach ($_POST['tempfiles'] as $file) {
+			  $i++;
+			  $data = array(
+				  'alias' => $file, 
+				  'name' => $file,
+				  'filesize' => filesize(Registry::get("Core")->file_dir . $file),
+				  'created' => "NOW()"
+			  ); 
+			  self::$db->insert(self::fTable, $data);
+		  }
+
+		  if (self::$db->affected()):
+			  $json['type']    = 'success';
+			  $json['title']   = Lang::$word->SUCCESS;
+			  $json['message'] = str_replace("FILES", $i, Lang::$word->FLM_UADDED_OK);
+		  else:
+			  $json['type']    = 'warning';
+			  $json['title']   = Lang::$word->ALERT;
+			  $json['message'] = Lang::$word->NOPROCCESS;
+		  endif;
+		  
+		  print json_encode($json);
+		  
+	  }
+
 
       /**
        * Content::getMenu()
@@ -746,237 +779,7 @@
 	  	  	  
 	  
 
-	  /**
-	   * Content::sliderConfiguration()
-	   * 
-	   * @return
-	   */
-	  public function sliderConfiguration()
-	  {
-		  
-		  $sql = "SELECT * FROM " . self::slcTable;
-          $row = self::$db->first($sql);
-          
-		   return ($row) ? $row : 0;
-	  }
 
-	  /**
-	   * Content::processSliderConfiguration()
-	   * 
-	   * @return
-	   */
-	  public function processSliderConfiguration()
-	  {
-		  
-		  Filter::checkPost('slideTransition', Lang::$word->SLM_TRANS);
-			  		  		  
-		  if (empty(Filter::$msgs)) {
-			  $data = array(
-				  'sliderHeight' => intval($_POST['sliderHeight']),
-				  'sliderHeightAdaptable' => intval($_POST['sliderHeightAdaptable']),
-				  'sliderAutoPlay' => intval($_POST['sliderAutoPlay']),
-				  'waitForLoad' => intval($_POST['waitForLoad']),
-				  'slideTransition' => sanitize($_POST['slideTransition']),
-				  'slideTransitionDirection' => sanitize($_POST['slideTransitionDirection']),
-				  'slideTransitionSpeed' => intval($_POST['slideTransitionSpeed']),
-				  'slideTransitionDelay' => intval($_POST['slideTransitionDelay']),
-				  'slideTransitionEasing' => sanitize($_POST['slideTransitionEasing']),
-				  'slideImageScaleMode' => sanitize($_POST['slideImageScaleMode']),
-				  'slideShuffle' => intval($_POST['slideShuffle']),
-				  'slideReverse' => intval($_POST['slideReverse']),
-				  'showFilmstrip' => intval($_POST['showFilmstrip']),
-				  'showCaptions' => intval($_POST['showCaptions']),
-				  'simultaneousCaptions' => intval($_POST['simultaneousCaptions']),
-				  'showTimer' => intval($_POST['showTimer']),
-				  'showPause' => intval($_POST['showPause']),
-				  'showArrows' => intval($_POST['showArrows']),
-				  'showDots' => intval($_POST['showDots']),
-			  );
-			  
-			  self::$db->update(self::slcTable, $data);
-			  
-			  if (self::$db->affected()) {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgOk(Lang::$word->SLM_CONF_UPDATED, false);
-			  } else {
-				  $json['type'] = 'info';
-				  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-			  }
-			  print json_encode($json);
-	
-		  } else {
-			  $json['message'] = Filter::msgStatus();
-			  print json_encode($json);
-		  }
-	  }
-	  
-      /**
-       * Content::getSlides()
-       * 
-       * @return
-       */
-	   public function getSlides()
-	  {
-		  
-          $sql = "SELECT * FROM " . self::slTable
-		  . "\n ORDER BY sorting";
-          $row = self::$db->fetch_all($sql);
-		  
-		  return ($row) ? $row : 0;
-	  }
-
-      /**
-       * Content::getImageInfo()
-       * 
-       * @return
-       */
-      public function getImageInfo()
-      {
-		  $row = Core::getRowById(self::slTable, Filter::$id);
-          if(file_exists($file = UPLOADS . 'slider/' . $row->thumb)) {
-			  $link = UPLOADURL . 'slider/' . $row->thumb;
-			  
-			  print "
-			  <div id=\"filedetails\">
-				<form class=\"xform modal\" id=\"admin_form\" method=\"post\">
-				  <div class=\"row\">
-					<section class=\"col col-4\">
-					  <figure>";
-						list($w, $h) = @getimagesize(UPLOADS . 'slider/' . $row->thumb);
-						$resolution = "<li>Resolution: " . $w . " x " . $h . "</li>";
-						print "<a href=\"" . $link . "\"  class=\"fancybox\" title=\"" . $row->caption . "\"> <img src=\"" . $link . "\" alt=\"\" style=\"max-width:100%\"/></a>";
-						print " 
-					  </figure>
-					  <figcaption>
-						<ul>
-						  " . $resolution . "
-						  <li>" . Lang::$word->GAL_SIZE . ": " . getSize(filesize(UPLOADS . 'slider/' . $row->thumb)) . "</li>
-						  <li>" . Lang::$word->GAL_TYPE . ": " . getMIMEtype($row->thumb) . "</li>
-						  <li>" . Lang::$word->GAL_FILELM . ": " . date('d-m-Y', filemtime(UPLOADS . 'slider/' . $row->thumb)) . "</li>
-						</ul>
-					  </figcaption>
-					</section>
-					<section class=\"col col-8\">
-					  <div class=\"row\">
-						<section class=\"col col-12\">
-						  <label class=\"input\">
-							<input type=\"text\" name=\"filename\" value=\"" . $row->caption . "\"> </label>
-						  <div class=\"note\">" . Lang::$word->GAL_NAME . "</div>
-						</section>
-					  </div>
-					  <div class=\"row\">
-						<section class=\"col col-12\">
-						  <label class=\"input state-disabled\">
-							<input type=\"text\" name=\"filepath\" value=\"" . UPLOADS . 'slider/' . $row->thumb . "\" readonly=\"readonly\"> </label>
-						  <div class=\"note\">" . Lang::$word->GAL_PATH . "</div>
-						</section>
-					  </div>
-					  <div class=\"row\">
-						<section class=\"col col-12\">
-						  <label class=\"input state-disabled\">
-							<input type=\"text\" name=\"fileurl\" value=\"" . $link . "\" readonly=\"readonly\">
-						  </label>
-						  <div class=\"note\">" . Lang::$word->GAL_URL . "</div>
-						</section>
-					  </div>
-					  <div class=\"row\">
-						<section class=\"col col-12\">
-						  <label class=\"checkbox\">
-							<input name=\"delfile_yes\" type=\"checkbox\" value=\"1\" class=\"checkbox\"/>
-							<i></i>" . Lang::$word->GAL_DELIMG . "</label>
-						  <div class=\"note note-error\">" . Lang::$word->GAL_DELIMG_T . "</div>
-						</section>
-					  </div>
-					</section>
-				  </div>
-				  <input name=\"id\" type=\"hidden\" value=\"" . Filter::$id . "\" />
-				  <input name=\"doSliderImage\" type=\"hidden\" value=\"1\" />
-				</form>
-			  </div>
-			  ";
-		  } else {
-			  Filter::msgError(Lang::$word->GAL_IMGERROR);
-		  }
-		  
-      }
-
-	  /**
-	   * Slider::processSlide()
-	   * 
-	   * @return
-	   */
-	  public function processSlide()
-	  {
-	
-		  Filter::checkPost('caption', Lang::$word->SLM_NAME);
-	
-		  if (!Filter::$id) {
-			  if (empty($_FILES['thumb']['name']))
-				  Filter::$msgs['thumb'] = Lang::$word->SLM_IMG_SEL;
-		  }
-	
-		  if (!empty($_FILES['thumb']['name'])) {
-			  if (!preg_match("/(\.jpg|\.png)$/i", $_FILES['thumb']['name'])) {
-				  Filter::$msgs['thumb'] = Lang::$word->CONF_LOGO_R;
-			  }
-			  $file_info = getimagesize($_FILES['thumb']['tmp_name']);
-			  if (empty($file_info))
-				  Filter::$msgs['thumb'] = Lang::$word->CONF_LOGO_R;
-		  }
-	
-		  if (empty(Filter::$msgs)) {
-			  $data['caption'] = sanitize($_POST['caption']);
-			  $data['body'] = sanitize($_POST['body']);
-	
-			  if (isset($_POST['urltype']) && $_POST['urltype'] == "int" && isset($_POST['page_id'])) {
-				  $slug = getValueByID("slug", Products::pTable, (int)$_POST['page_id']);
-				  $data['url'] = $slug;
-				  $data['urltype'] = "int";
-				  $data['page_id'] = intval($_POST['page_id']);
-			  } elseif (isset($_POST['urltype']) && $_POST['urltype'] == "ext" && isset($_POST['url'])) {
-				  $data['url'] = sanitize($_POST['url']);
-				  $data['urltype'] = "ext";
-				  $data['page_id'] = "DEFAULT(page_id)";
-			  } else {
-				  $data['url'] = "#";
-				  $data['urltype'] = "nourl";
-				  $data['page_id'] = "DEFAULT(page_id)";
-			  }
-	
-			  // Procces Image
-			  if (!empty($_FILES['thumb']['name'])) {
-				  $filedir = UPLOADS . "slider/";
-				  $newName = "IMG_" . randName();
-				  $ext = substr($_FILES['thumb']['name'], strrpos($_FILES['thumb']['name'], '.') + 1);
-				  $fullname = $filedir . $newName . "." . strtolower($ext);
-	
-				  if (Filter::$id and $file = getValueById("thumb", self::slTable, Filter::$id)) {
-					  @unlink($filedir . $file);
-				  }
-	
-				  if (!move_uploaded_file($_FILES['thumb']['tmp_name'], $fullname)) {
-					  die(Filter::msgError(Lang::$word->SLM_FILE_ERR, false));
-				  }
-				  $data['thumb'] = $newName . "." . strtolower($ext);
-			  }
-	
-			  (Filter::$id) ? self::$db->update(self::slTable, $data, "id=" . Filter::$id) : $lastid = self::$db->insert(self::slTable, $data);
-			  $message = (Filter::$id) ? Lang::$word->SLM_UPDATED : Lang::$word->SLM_ADDED;
-	
-			  if (self::$db->affected()) {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgOk($message, false);
-			  } else {
-				  $json['type'] = 'success';
-				  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-			  }
-			  print json_encode($json);
-	
-		  } else {
-			  $json['message'] = Filter::msgStatus();
-			  print json_encode($json);
-		  }
-	  }
 	  
       /**
        * Content::getContentType()

@@ -285,8 +285,7 @@
 		  $pager->default_ipp = Registry::get("Core")->perpage;
 		  $pager->paginate();
 		  
-          $sql = "SELECT *, CONCAT(fname,' ',lname) as name,"
-		  . "\n (SELECT COUNT(transactions.uid) FROM transactions WHERE transactions.uid = users.id) as totalitems"
+          $sql = "SELECT *, CONCAT(fname,' ',lname) as name"		  
 		  . "\n FROM " . self::uTable
 		  . "\n $where"
 		  . "\n ORDER BY created DESC" . $pager->limit;

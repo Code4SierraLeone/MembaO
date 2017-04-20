@@ -647,31 +647,6 @@
           }
       }
 
-      /**
-       * Core::renderCartButton()
-       * 
-       * @param mixed $txn_id
-       * @return
-       */
-	  public static function renderCartButton($price, $pid, $ext, $class = false, $fluid = false)
-	  {
-		  $full = ($fluid) ? " fluid" : null;
-		  $is_class = ($class) ? $class : "circular inverted";
-		  if ($price == 0) {
-			  if (Registry::get("Core")->free_allowed == 0 && !Registry::get("Users")->logged_in) {
-				  print '<a href="' . SITEURL . '/login.php"><i class="icon ' . $is_class . ' lock"></i> ' . Lang::$word->LOGDOWN . '</a>';
-			  } else {
-				  print '<a href="' . SITEURL . '/download.php?fid=' . $pid . '"><i class="icon ' . $is_class . ' download alt"></i> ' . Lang::$word->DOWNLOAD . '</a>';
-			  }
-		  } else {
-	
-			  if ($ext) {
-				  print '<a target="_blank" href="' . $ext . '"><i class="icon ' . $is_class . ' sign out"></i> ' . Lang::$word->VSITE . '</a>';
-			  } else {
-				  print '<a data-cart-item="true" data-id="' . $pid . '" rel="nofollow"><i class="icon ' . $is_class . ' shopping cart"></i> ' . Lang::$word->ADDCART . '</a>';
-			  }
-		  }
-	  }
 
 	  /**
 	   * Core::layoutSwitchList()
