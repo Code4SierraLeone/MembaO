@@ -71,26 +71,6 @@
 		  print json_encode($json);
 		  break;
 	  
-	  /* == Delete Slide == */
-	  case "deleteSlide":
-		  if ($thumb = getValueById("thumb", Content::slTable, Filter::$id)):
-			  unlink(UPLOADS . "slider/" . $thumb);
-		  endif;
-		  
-		  $res   = $db->delete(Content::slTable, "id=" . Filter::$id);
-		  $title = sanitize($_POST['title']);
-		  if ($res):
-			  $json['type']    = 'success';
-			  $json['title']   = Lang::$word->SUCCESS;
-			  $json['message'] = str_replace("-ITEM-", $title, Lang::$word->SLM_DELETED);
-		  else:
-			  $json['type']    = 'warning';
-			  $json['title']   = Lang::$word->ALERT;
-			  $json['message'] = Lang::$word->NOPROCCESS;
-		  endif;
-		  
-		  print json_encode($json);
-		  break;
 	  
 	  /* == Delete User == */
 	  case "deleteUser":
@@ -225,26 +205,6 @@
 		  print json_encode($json);
 		  break;		  	  	  		  
 	  
-	  /* == Delete Gallery Image == */
-	  case "deleteGalleryImage":
-		  if ($thumb = getValueById("thumb", Products::phTable, Filter::$id)):
-			  unlink(UPLOADS . "prod_gallery/" . $thumb);
-		  endif;
-		  
-		  $res   = $db->delete(Products::phTable, "id=" . Filter::$id);
-		  $title = sanitize($_POST['title']);
-		  if ($res):
-			  $json['type']    = 'success';
-			  $json['title']   = Lang::$word->SUCCESS;
-			  $json['message'] = str_replace("-ITEM-", $title, Lang::$word->GAL_DELETED);
-		  else:
-			  $json['type']    = 'warning';
-			  $json['title']   = Lang::$word->ALERT;
-			  $json['message'] = Lang::$word->NOPROCCESS;
-		  endif;
-		  
-		  print json_encode($json);
-		  break;
 	  	  
 	  
 	  /* == Delete File == */
@@ -255,8 +215,8 @@
 			  @unlink(Registry::get("Core")->file_dir . $title);
 			  $action = true;
 		  elseif ($_POST['extra'] == "live"):
-			  $thumb = getValueByID("name", Products::fTable, Filter::$id);
-			  $db->delete(Products::fTable, "id=" . Filter::$id);
+			  $thumb = getValueByID("name", Content::fTable, Filter::$id);
+			  $db->delete(Content::fTable, "id=" . Filter::$id);
 			  @unlink(Registry::get("Core")->file_dir . $thumb);
 			  $action = true;
 		  endif;
@@ -529,7 +489,7 @@
 			  
           if($_POST['key'] == "title"):
 		    $data['alias'] = $title;
-		    $db->update(Products::fTable, $data, "id = " . Filter::$id);
+		    $db->update(Content::fTable, $data, "id = " . Filter::$id);
 		  endif;
 		  
 	  print $title;
@@ -545,29 +505,6 @@
       Registry::get('FM')->filesUpload('mainfile');
   endif;
   
-
-  /* == Upload Gallery Image == */
-  if (isset($_POST['uploadGalleryImages'])):
-      $item->galleryUpload('mainfile');
-  endif;
-
-  /* == Edit Gallery == */
-  if (isset($_POST['quickedit']) and $_POST['type'] == "gallery"):
-          if (empty($_POST['title'])):
-              print '-/-';
-              exit;
-          endif;
-		  
-		  $title = cleanOut($_POST['title']);
-		  $title = strip_tags($title);
-			  
-          if($_POST['key'] == "title"):
-		    $data['caption'] = $title;
-		    $db->update(Products::phTable, $data, "id = " . Filter::$id);
-		  endif;
-		  
-	  print $title;
-  endif;
 
   /* == Rename File Alias == */
   if (isset($_POST['quickedit']) and $_POST['type'] == "language"):
@@ -651,99 +588,6 @@
       $content->processNews();
   endif;
 
-  /* == Proccess Comment Configuration == */
-  if (isset($_POST['processCommentConfig'])):
-      $content->processCommentConfig();
-  endif;
-
-  /* == Comments Actions == */
-  if (isset($_POST['comproccess']) && intval($_POST['comproccess']) == 1):
-      $action = '';
-      if (empty($_POST['comid'])):
-          $json['type'] = 'warning';
-          $json['message'] = Filter::msgAlert(Lang::$word->CMT_ACT_1, false);
-      endif;
-
-      if (!empty($_POST['comid'])):
-          foreach ($_POST['comid'] as $val):
-              $id = intval($val);
-              if (isset($_POST['action']) && $_POST['action'] == "disapprove"):
-                  $data['active'] = 0;
-                  $action = Lang::$word->CMT_ACT_2;
-              elseif (isset($_POST['action']) && $_POST['action'] == "approve"):
-                  $data['active'] = 1;
-                  $action = Lang::$word->CMT_ACT_3;
-              endif;
-
-              if (isset($_POST['action']) && $_POST['action'] == "delete"): 
-                  $db->delete(Content::cmTable, "id=" . $id);
-                  $action = Lang::$word->CMT_ACT_4;
-              else: 
-                  $db->update(Content::cmTable, $data, "id=" . $id);
-              endif;
-              endforeach;
-
-		  if ($db->affected()):
-			  $json['type'] = 'success';
-			  $json['message'] = Filter::msgOk($action, false);
-		  else:
-			  $json['type'] = 'warning';
-			  $json['message'] = Filter::msgAlert(Lang::$word->NOPROCCESS, false);
-		  endif;
-		  
-      endif;
-	  print json_encode($json);
-  endif;
-
-  /* == Load Comment For Edit == */
-  if (isset($_POST['loadComment'])):
-      $row = Core::getRowById(Content::cmTable, Filter::$id);
-      if ($row):
-          $html =  '<div class="corporato small form" style="width:400px">';
-          $html .= '<div class="field"><textarea name="body" class="altpost" id="bodyid">' . $row->body . '</textarea></div>';
-          $html .= '<p class="corporato info">' . $row->www . '</p>';
-          $html .= '<p class="corporato info">IP: ' . $row->ip . '</p>';
-          $html .= '</div>';
-          print $html;
-      endif;
-  endif;
-
-  /* == Update Comment == */
-  if (isset($_POST['processComment'])):
-      $data['body'] = cleanOut($_POST['content']);
-      $result = $db->update(Content::cmTable, $data, "id=" . Filter::$id);
-
-      if ($result):
-          $json['type'] = 'success';
-          $json['title'] = Lang::$word->SUCCESS;
-          $json['message'] = Lang::$word->CMT_UPDATED;
-      else:
-          $json['type'] = 'warning';
-          $json['title'] = Lang::$word->ALERT;
-          $json['message'] = Lang::$word->NOPROCCESS;
-      endif;
-      print json_encode($json);
-  endif;
-
-
-  /* == Proccess Slider Configuration == */
-  if (isset($_POST['processSliderConfiguration'])):
-      $content->processSliderConfiguration();
-  endif;
-
-  /* == Proccess Slider == */
-  if (isset($_POST['processSlide'])):
-      $content->processSlide();
-  endif;
-  
-  /* == Update Slide order == */
-  if (isset($_GET['sortslides'])):
-      foreach ($_POST['node'] as $k => $v):
-          $p = $k + 1;
-          $data['sorting'] = $p;
-          $db->update(Content::slTable, $data, "id=" . intval($v));
-      endforeach;
-  endif;
 
   
   /* == Proccess User == */
