@@ -3,7 +3,7 @@
    * Leader
    *
    * @package Membao
-   * @author Alan Kawamara
+   * @author Alan Kawamaraa
    * @copyright 2017
    */
   define("_VALID_PHP", true);

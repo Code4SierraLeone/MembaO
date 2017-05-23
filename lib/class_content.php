@@ -17,14 +17,12 @@
 	  const fqTable = "faq";
 	  const nTable = "news";
 	  const eTable = "email_templates";
-	  const exTable = "extras";
 	  const cnTable = "countries";
 	  const fTable = "files";
 	  
 	  public static $gfileext = array("jpg","jpeg","png");
 	  
 	  public $pageslug = null;
-	  public $tag = null;
 	  
 	  private static $db;
 	  
@@ -37,7 +35,6 @@
       {
 		  self::$db = Registry::get("Database");
 		  $this->getContentSlug();
-		  $this->getTag();
 
       }
 
@@ -56,19 +53,6 @@
 		  }
 	  }
 	  
-	  /**
-	   * Content::getTag()
-	   * 
-	   * @return
-	   */
-	  private function getTag()
-	  {
-		  
-		  if (isset($_GET['tagname'])) {
-			  $this->tag = sanitize($_GET['tagname'],60,false);
-			  return self::$db->escape($this->tag);
-		  }
-	  }
 
       /**
        * Content::getCountryList()
@@ -270,7 +254,7 @@
 		  $sql1 = "SELECT id, slug, created FROM pages ORDER BY created DESC";
 		  $pages = self::$db->query($sql1);
 
-		  $sql2 = "SELECT id, slug, created FROM products ORDER BY created DESC";
+		  $sql2 = "SELECT id, slug, created FROM leaders ORDER BY created DESC";
 		  $items = self::$db->query($sql2);
 		  
 		  $smap = "";
@@ -297,9 +281,9 @@
 
 		  while ($row = self::$db->fetch($items)) {
 			  if (Registry::get("Core")->seo == 1) {
-				  $url = SITEURL . '/product/' . $row->slug . '/';
+				  $url = SITEURL . '/leader/' . $row->slug . '/';
 			  } else
-				  $url = SITEURL . '/item.php?itemname=' . $row->slug;
+				  $url = SITEURL . '/item.php?leadername=' . $row->slug;
 			  
 			  $smap .= "<url>\r\n";
 			  $smap .= "<loc>" . $url . "</loc>\r\n";
@@ -737,28 +721,6 @@
 
 
 	  /**
-	   * Content::keepTags()
-	   *
-	   * @param mixed $str
-	   * @param mixed $tags
-	   * @return
-	   */
-	  public function keepTags($string, $allowtags = null, $allowattributes = null)
-	  {
-		  $string = strip_tags($string, $allowtags);
-		  if (!is_null($allowattributes)) {
-			  if (!is_array($allowattributes))
-				  $allowattributes = explode(",", $allowattributes);
-			  if (is_array($allowattributes))
-				  $allowattributes = implode(")(?<!", $allowattributes);
-			  if (strlen($allowattributes) > 0)
-				  $allowattributes = "(?<!" . $allowattributes . ")";
-			  $string = preg_replace_callback("/<[^>]*>/i", create_function('$matches', 'return preg_replace("/ [^ =]*' . $allowattributes . '=(\"[^\"]*\"|\'[^\']*\')/i", "", $matches[0]);'), $string);
-		  }
-		  return $string;
-	  }
-
-	  /**
 	   * Content::censored()
 	   *
 	   * @param mixed $string
@@ -804,45 +766,7 @@
           unset($val);
           return $html;
       } 
-
-
-      /**
-       * Content::getTagName()
-       * 
-       * @return
-       */
-      public function getTagName()
-      {
-		  $sql = "SELECT tag FROM " . Products::tagTable . " WHERE tag = '" . self::$db->escape($this->tag) . "'";
-		  $row = self::$db->first($sql);
-		  
-		  return ($row) ? $row : 0;
-      }
-
-	  /**
-	   * Content::getProductList()
-	   * 
-	   * @return
-	   */
-	  public static function getProductList($id, $selected = false)
-	  {
-	
-		  $sql = "SELECT id, slug, title FROM " . Products::pTable;
-		  $result = self::$db->fetch_all($sql);
-	
-		  $display = '';
-		  if ($result) {
-			  $display .= "<select name=\"page_id\">";
-			  foreach ($result as $row) {
-				  $sel = ($row->$id == $selected) ? ' selected="selected"' : null;
-				  $display .= "<option value=\"" . $row->$id . "\"" . $sel . ">" . $row->title . "</option>\n";
-			  }
-	
-			  $display .= "</select>\n";
-		  }
-		  return $display;
-	
-	  }  
+ 
 	  
 	  /**
 	   * Content::renderPages()
@@ -905,9 +829,7 @@
 			  $meta .= $sep . $row->first_name .' '.$row->last_name;
 		  } elseif ($this->pageslug and $row) {
 			  $meta .= $sep . $row->title;
-		  } elseif ($this->tag and $row) {
-			  $meta .= $sep . $row->tag;
-		  }
+		  } 
 		  $meta .= "</title>\n";
 		  $meta .= "<meta name=\"keywords\" content=\"";
 		  if (Registry::get("Leaders")->leaderslug and $row) {
