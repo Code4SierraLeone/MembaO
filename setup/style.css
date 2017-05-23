@@ -1,0 +1,253 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,700);
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #fff;
+    text-rendering: optimizeLegibility;
+    font-weight: 400;
+    background: #333;
+    display: table;
+    margin: 0 auto;
+}
+div.field {
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px
+}
+.logo {
+  width: 820px;
+  margin: 20px auto;
+  text-align: center;
+  height:50px;
+  background-image: url(img/logo.png);
+  background-repeat: no-repeat;
+}
+a.no {
+  text-decoration: none
+}
+img {
+  border: none
+}
+.all {
+  background-image: none;
+  font-weight: 700
+}
+.nav {
+  background: #4a1916;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.1), 0 1px 0 0 rgba(255,255,255,0.1);
+  font-weight: 300;
+  padding: 15px
+}
+input,
+textarea,
+select,
+.inputbox-sml {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  border: 2px solid #4a1916;
+  border-radius: 3px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 8px 5px
+}
+input:focus,
+textarea:focus {
+  background: rgba(0, 0, 0, 0.2)
+}
+select {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  padding: 4px 8px
+}
+a:active {
+  color: #000
+}
+p {
+  font-size: 12px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.2), 0 1px 0 0 rgba(255,255,255,0.2);
+  margin: 5px 0 10px;
+  padding:10px
+}
+div#installation {
+  width: 800px;
+  background-color: #982420;
+  margin-right: auto;
+  margin-bottom: 20px;
+  margin-left: auto;
+  border-radius: 5px;
+  padding: 15px
+}
+table.inner-content {
+  background-color: #982420;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.2), 0 1px 0 0 rgba(255,255,255,0.2);
+  width: 100%;
+  border: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+table.inner-content.data tr td:first-child {
+  width: 200px
+}
+table.inner-content thead tr th,
+table.inner-content tbody tr td {
+  font-size: 14px;
+  font-weight: 300;
+  text-align: left;
+  background: #5e1f1c;
+  box-shadow: inset 0 1px 0 0 rgba(0,0,0,0.2), 0 1px 0 0 rgba(255,255,255,0.2);
+  padding: 10px 5px
+}
+table.inner-content thead tr th:first-child{
+  border-radius: 3px 0 0 0;
+}
+table.inner-content thead tr th:last-child{
+  border-radius: 0 3px 0 0;
+}
+table.inner-content tbody tr td {
+  background: none;
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.1);
+  font-size: 12px
+}
+table.inner-content tbody tr td img {
+  vertical-align: middle
+}
+.lgn {
+  text-align: right;
+  margin: 0 10px 10px 0
+}
+#copyright {
+  line-height: 16px;
+  text-align: center;
+  width: 492px;
+  margin: 0 auto 10px
+}
+div.error {
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 300;
+  line-height: 20px;
+  background-color: #DA4141;
+  padding: 10px
+}
+.err {
+  color: #DA4141;
+  display: none;
+  font-size: 11px;
+  line-height: 16px;
+  white-space: nowrap;
+  padding: 0 0 0 20px
+}
+h2#install {
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: lighter;
+  display: block;
+  height: 32px;
+  margin: 10px 0;
+  padding: 0
+}
+h2#install img {
+  float: left;
+  margin-right: 10px
+}
+h3 {
+  font-size: 16px;
+  font-weight: 300;
+  box-shadow: 0 3px 0 0 rgba(255,255,255,0.1), 0 1px 0 0 rgba(0,0,0,0.2);
+  margin: 20px 0 10px;
+  padding: 0 0 5px
+}
+span.no {
+  color: #DA4141;
+  font-weight: 400
+}
+span.yes {
+  color: #8BC31B;
+  font-weight: 400
+}
+td.elem {
+  font-weight: 700;
+  vertical-align: top;
+  width: 150px
+}
+.license {
+  background-color: #FFF;
+  height: 400px;
+  width: 780px;
+  margin: 10px
+}
+td.item-desc {
+  padding-left: 15px
+}
+div.query {
+  border: 1px dotted #222;
+  color: #777;
+  font-size: 10px;
+  margin: 0 0 10px
+}
+div.qerror {
+  color: red;
+  font-size: 10px;
+  margin: 0 0 5px
+}
+div.db_errors {
+  border: 1px solid #777;
+  height: 300px;
+  overflow: scroll;
+  width: 300px;
+  margin: 10px 0 0;
+  padding: 5px
+}
+div.remove_install {
+  background-color: #4a1916;
+  border: 1px solid #333;
+  color: #fff;
+  font-weight: 300;
+  text-align: center;
+  padding: 5px 0
+}
+.btn {
+  margin-top: 10px
+}
+form {
+  display: inline-block;
+  margin: 0;
+  padding: 0
+}
+.btn button {
+  border: 2px solid #9f322d;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: #FFF;
+  background-color: #4a1916;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 400;
+  -webkit-transition: all .35s ease;
+  -moz-transition: all .35s ease;
+  -o-transition: all .35s ease;
+  transition: all .35s ease;
+  outline: none;
+  margin: 0;
+  padding: 5px 20px
+}
+.btn button:hover {
+  background-color: #9f322d;
+  -webkit-transition: all .55s ease;
+  -moz-transition: all .55s ease;
+  -o-transition: all .35s ease;
+  transition: all .55s ease;
+  outline: none
+}
+.nav b,
+a:link,
+a:visited {
+  color: #8BC31B
+}
