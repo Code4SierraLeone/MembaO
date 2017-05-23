@@ -13,7 +13,7 @@ Options -MultiViews -Indexes +FollowSymlinks
 	SecFilterScanPOST Off
 </IfModule>
 
-ErrorDocument 404 /code4africa/membao/404.php
+ErrorDocument 404 /404.php
 
 <IfModule mod_php5.c>
 	php_value register_globals 0
@@ -32,7 +32,7 @@ ErrorDocument 404 /code4africa/membao/404.php
 <IfModule mod_rewrite.c>
 
 	RewriteEngine On
-        RewriteBase /code4africa/membao/
+        RewriteBase /
 
  
 
